@@ -1,0 +1,4 @@
+target_quarter,ticker,guidance_total_production,guidance_oil_production,filing_date,source,method,raw_text
+2017Q4,DVN,140.0,,2017-10-31,2017-10-31:EX-99.1:d485563dex991.htm,prose_guidance,"For the fourth quarter of 2017, net production in Canada is forecasted to increase to a range of 137,000 to 143,000 Boe per day"
+2025Q2,DVN,815.0,,2025-02-18,2025-02-18:EX-99.1:d931030dex991.htm,prose_guidance,"in the second quarter of 2025. Devon will serve as operator and is responsible for capital allocation and project timing subject to the agreement. 2025 OUTLOOK For the full-year 2025, Devon expects production to be in the range of 805,000 to 825,000 Boe per day"
+2026Q3,DVN,1675.0,,2026-08-04,2026-08-04:EX-99.1:d359332dex991.htm,prose_guidance,"In the third quarter of 2026, total production is expected to average between 1,660,000 and 1,690,000 Boe per day"

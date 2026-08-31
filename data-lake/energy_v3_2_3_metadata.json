@@ -1,0 +1,33 @@
+{
+  "version": "3.2.3",
+  "tickers": [
+    "COP",
+    "EOG",
+    "FANG",
+    "DVN"
+  ],
+  "production_qc": {
+    "max_organic_qoq_log_growth": 35.0,
+    "max_qoq_threshold": 55.0,
+    "regime_confirmation_log_growth": 20.0,
+    "max_regime_confirmation_gap": 2,
+    "total_oil_ratio_min": 1.15,
+    "total_oil_ratio_max": 5.0
+  },
+  "field_qc_rule": "Bad total/oil ratio rejects oil field only; total production is validated independently.",
+  "mna_rule": "Large production changes are accepted when ma_window > 0.",
+  "regime_rule": "First suspicious production jump is not accepted. If a subsequent observation confirms the same new production level, only the subsequent quarter is accepted as NEW_REGIME_CONFIRMED. No retrospective correction is performed.",
+  "production_source_priority": [
+    "GUIDANCE_VS_ACTUAL",
+    "GUIDANCE_VS_GUIDANCE",
+    "ACTUAL_VS_ACTUAL",
+    "INDUSTRY_FALLBACK"
+  ],
+  "source_quality": {
+    "GUIDANCE_VS_ACTUAL": 1.0,
+    "GUIDANCE_VS_GUIDANCE": 0.8,
+    "ACTUAL_VS_ACTUAL": 0.9,
+    "INDUSTRY_FALLBACK": 0.35
+  },
+  "guardrail": "Structural model is disabled when its historical MAE is not better than V2.1."
+}

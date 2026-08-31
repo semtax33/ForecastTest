@@ -1,0 +1,19 @@
+ticker,target_quarter,filing_date,guidance_total_production,guidance_oil_production,score,source,raw_text
+EOG,2021Q1,2021-02-25,762.9,1310.0,160,2021-02-25:EX-99.1:exh99-1022521.htm,EOG dedicated guidance table parser
+EOG,2020Q4,2020-11-05,781.5,1230.0,160,2020-11-05:EX-99.1:exh99-1110520.htm,EOG dedicated guidance table parser
+EOG,2020Q3,2020-08-06,676.1,1125.0,160,2020-08-06:EX-99.1:exh99-1080620.htm,EOG dedicated guidance table parser
+EOG,2020Q2,2020-05-07,550.0,1095.0,160,2020-05-07:EX-99.1:exh99-1050720.htm,EOG dedicated guidance table parser
+EOG,2020Q1,2020-02-27,845.2,1375.0,160,2020-02-27:EX-99.1:exh99-1022720.htm,EOG dedicated guidance table parser
+EOG,2019Q4,2019-11-06,790.3,1391.0,160,2019-11-06:EX-99.1:exh99-1110619.htm,EOG dedicated guidance table parser
+EOG,2019Q3,2019-08-01,745.0,1310.0,160,2019-08-01:EX-99.1:exh99-1080119.htm,EOG dedicated guidance table parser
+EOG,2019Q2,2019-05-02,734.3,1310.0,160,2019-05-02:EX-99.1:exh99-1050219.htm,EOG dedicated guidance table parser
+EOG,2019Q1,2019-02-26,712.9,1270.0,160,2019-02-26:EX-99:exh99-1022619.htm,EOG dedicated guidance table parser
+EOG,2018Q4,2018-11-01,714.15,1270.0,160,2018-11-01:EX-99.1:exh99-1110118.htm,EOG dedicated guidance table parser
+EOG,2018Q3,2018-08-02,684.15,1275.0,160,2018-08-02:EX-99.1:exh99-1080218.htm,EOG dedicated guidance table parser
+EOG,2018Q2,2018-05-03,637.0,1178.0,160,2018-05-03:EX-99.1:exh99-1050318.htm,EOG dedicated guidance table parser
+EOG,2018Q1,2018-02-27,593.85,1178.0,160,2018-02-27:EX-99.1:exh99-1022718.htm,EOG dedicated guidance table parser
+EOG,2017Q4,2017-11-02,588.35,1137.5,160,2017-11-02:EX-99.1:exh99-1110217.htm,EOG dedicated guidance table parser
+EOG,2017Q3,2017-08-01,533.7,1046.0,160,2017-08-01:EX-99.1:exh99-1080117.htm,EOG dedicated guidance table parser
+EOG,2017Q2,2017-05-08,512.8,1025.0,160,2017-05-08:EX-99.1:exh99-1050817.htm,EOG dedicated guidance table parser
+EOG,2017Q1,2017-02-27,495.0,1025.0,160,2017-02-27:EX-99.1:exh99-1022717.htm,EOG dedicated guidance table parser
+EOG,2016Q3,2016-11-03,513.5,1172.0,160,2016-11-03:EX-99.1:exh99-1110316.htm,EOG dedicated guidance table parser

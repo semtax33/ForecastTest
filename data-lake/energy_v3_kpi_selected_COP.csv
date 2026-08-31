@@ -1,0 +1,7 @@
+ticker,quarter,kpi,score,concept,label,unit,numeric_value,period_start,period_end,period_days,filing_date,accession,concept_frequency,final_score,standard_value
+COP,2020Q1,total_production,120.0,srt:ProductionBarrelsOfOilEquivalents1,Operating Segments,,15.0,2020-01-01,2020-03-31,91.0,2020-05-05,0001562762-20-000162,1,126.0,
+COP,2022Q1,realized_gas_price,65.0,us-gaap:DerivativeNonmonetaryNotionalAmountVolume,"Natural Gas and Power, Fixed Price",,7.0,2022-01-01,2022-03-31,90.0,2022-05-05,0001163165-22-000006,5,95.0,7.0
+COP,2023Q1,realized_gas_price,65.0,us-gaap:DerivativeNonmonetaryNotionalAmountVolume,"Natural Gas and Power, Fixed Price",,16.0,2023-01-01,2023-03-31,90.0,2023-05-04,0001163165-23-000011,5,95.0,16.0
+COP,2024Q1,realized_gas_price,65.0,us-gaap:DerivativeNonmonetaryNotionalAmountVolume,"Natural Gas and Power, Fixed Price",,14.0,2024-01-01,2024-03-31,91.0,2024-05-02,0001163165-24-000023,5,95.0,14.0
+COP,2025Q1,realized_gas_price,65.0,us-gaap:DerivativeNonmonetaryNotionalAmountVolume,"Natural Gas and Power, Fixed Price",,15.0,2025-01-01,2025-03-31,90.0,2025-05-08,0001163165-25-000025,5,95.0,15.0
+COP,2026Q1,realized_gas_price,65.0,us-gaap:DerivativeNonmonetaryNotionalAmountVolume,"Natural Gas and Power, Fixed Price",,20.0,2026-01-01,2026-03-31,90.0,2026-04-30,0001163165-26-000018,5,95.0,20.0

@@ -1,0 +1,22 @@
+{
+  "version": "3.2.5",
+  "eog_parser": "row-level exact parser with ACTUAL/GUIDANCE mode switching",
+  "eog_exact_components": [
+    "Crude Oil and Condensate (MBod)",
+    "Natural Gas Liquids (MBbld)",
+    "Natural Gas (MMcfd)",
+    "Crude Oil Equivalent (MBoed)"
+  ],
+  "eog_reconstruction_formula": "Oil MBod + NGL MBbld + Gas MMcfd / 6 = Total MBoed",
+  "eog_max_reconstruction_error_pct": 5.0,
+  "production_source_priority": [
+    "GUIDANCE_VS_ACTUAL",
+    "GUIDANCE_VS_GUIDANCE",
+    "ACTUAL_VS_ACTUAL",
+    "INDUSTRY_FALLBACK"
+  ],
+  "metrics": [
+    "MAE_log_points",
+    "MAE_yoy_pct_points"
+  ]
+}

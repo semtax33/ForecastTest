@@ -1,0 +1,8 @@
+target_quarter,guidance_oil_production,guidance_ngl_production,guidance_gas_production,guidance_reported_total,guidance_reconstructed_total,guidance_reconstruction_error_pct,guidance_total_production,guidance_component_qc_flag,guidance_data_quality_score,source_url
+2022Q4,459.9,197.5,1550.0,903.3,915.7333333333333,1.376434554780626,903.3,REPORTED_RECON_MATCH,1.0,https://investors.eogresources.com/image/4Q22-Guidance-Website-Final.pdf
+2023Q2,472.6,212.0,1635.0,957.1,957.1,0.0,957.1,REPORTED_RECON_MATCH,1.0,https://investors.eogresources.com/image/2Q23-Guidance-Website-Final.pdf
+2023Q4,483.5,234.0,1785.0,1015.0,1015.0,0.0,1015.0,REPORTED_RECON_MATCH,1.0,https://investors.eogresources.com/image/4Q23_Guidance-Website_Final.pdf
+2024Q1,486.3,228.0,1835.0,1020.1,1020.1333333333332,0.003267653498008953,1020.1,REPORTED_RECON_MATCH,1.0,https://investors.eogresources.com/image/1Q24_Guidance_Website_Final.pdf
+2024Q2,488.0,232.0,1860.0,1030.1,1030.0,0.009707795359664989,1030.1,REPORTED_RECON_MATCH,1.0,https://investors.eogresources.com/image/2Q24_Guidance-Website_Final.pdf
+2025Q4,,,,1102.1,,,1102.1,REPORTED_ONLY,0.7,https://investors.eogresources.com/image/4Q25+Guidance.pdf
+2026Q3,548.5,347.0,3100.0,1412.2,1412.1666666666665,0.002360383326266137,1412.2,REPORTED_RECON_MATCH,1.0,https://investors.eogresources.com/image/3Q26_Guidance-Website.pdf

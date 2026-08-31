@@ -1,0 +1,226 @@
+ticker,quarter,kpi,value,score,filing_date,source,method,raw_text
+DVN,2026Q2,total_production,1359.0,100,2026-08-04,2026-08-04:EX-99.1:d359332dex991.htm,prose,"Production averaged 1,359,000 Boe per day"
+DVN,2026Q2,oil_production,503.0,100,2026-08-04,2026-08-04:EX-99.1:d359332dex991.htm,prose,"Oil totaled 503,000 barrels per day"
+DVN,2026Q2,realized_oil_price,88.09,95,2026-08-04,2026-08-04:EX-99.1:d359332dex991.htm,prose,"realized price during the period, including commodity hedges, was $88.09 per barrel of oil"
+DVN,2026Q2,realized_oil_price,92.47,80,2026-08-04,2026-08-04:EX-99.2:d359332dex992.htm:table15,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 92.47 | | | $ | 72.10 | | | $ | 59.09 | | | $ | 64.92 | | | $ | 63.95 |
+DVN,2026Q2,realized_gas_price,2.9,80,2026-08-04,2026-08-04:EX-99.2:d359332dex992.htm:table15,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.90 | | | $ | 5.05 | | | $ | 3.55 | | | $ | 3.07 | | | $ | 3.44 |
+DVN,2026Q2,realized_oil_price,92.47,80,2026-08-04,2026-08-04:EX-99.2:d359332dex992.htm:table17,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 92.47 | | | $ | 72.10 | | | $ | 59.09 | | | $ | 64.92 | | | $ | 63.95 |
+DVN,2026Q2,realized_gas_price,2.9,80,2026-08-04,2026-08-04:EX-99.2:d359332dex992.htm:table17,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.90 | | | $ | 5.05 | | | $ | 3.55 | | | $ | 3.07 | | | $ | 3.44 |
+DVN,2026Q2,total_production,1660.0,80,2026-08-04,2026-08-04:EX-99.2:d359332dex992.htm:table31,table,Total oil equivalent (MBoe/d) | | | 1660 | | | | 1690 | | | | 1364 | | | | 1398 |
+DVN,2026Q1,total_production,833.0,100,2026-05-05,2026-05-05:EX-99.1:d947371dex991.htm,prose,"Production averaged 833,000 Boe per day"
+DVN,2026Q1,oil_production,387.0,100,2026-05-05,2026-05-05:EX-99.1:d947371dex991.htm,prose,"Oil totaled 387,000 barrels per day"
+DVN,2026Q1,realized_oil_price,72.1,80,2026-05-05,2026-05-05:EX-99.2:d947371dex992.htm:table12,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 72.10 | | | $ | 59.09 | | | $ | 64.92 | | | $ | 63.95 | | | $ | 71.50 |
+DVN,2026Q1,realized_gas_price,5.05,80,2026-05-05,2026-05-05:EX-99.2:d947371dex992.htm:table12,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 5.05 | | | $ | 3.55 | | | $ | 3.07 | | | $ | 3.44 | | | $ | 3.65 |
+DVN,2026Q1,realized_oil_price,72.1,80,2026-05-05,2026-05-05:EX-99.2:d947371dex992.htm:table13,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 72.10 | | | $ | 59.09 | | | $ | 64.92 | | | $ | 63.95 | | | $ | 71.50 |
+DVN,2026Q1,realized_gas_price,5.05,80,2026-05-05,2026-05-05:EX-99.2:d947371dex992.htm:table13,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 5.05 | | | $ | 3.55 | | | $ | 3.07 | | | $ | 3.44 | | | $ | 3.65 |
+DVN,2026Q1,total_production,851.0,80,2026-05-05,2026-05-05:EX-99.2:d947371dex992.htm:table22,table,Total oil equivalent (MBoe/d) | | | 851 | | | | 868 |
+DVN,2025Q1,total_production,851.0,100,2026-02-17,2026-02-17:EX-99.1:d111666dex991.htm,prose,"Production averaged 851,000 Boe per day"
+DVN,2025Q1,oil_production,390.0,100,2026-02-17,2026-02-17:EX-99.1:d111666dex991.htm,prose,"Oil totaled 390,000 barrels per day"
+DVN,2025Q4,realized_oil_price,64.87,80,2026-02-17,2026-02-17:EX-99.2:d111666dex992.htm:table10,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 64.87 | | | $ | 59.09 | | | $ | 64.92 | | | $ | 63.95 | | | $ | 71.50 | | | $ | 70.32 |
+DVN,2025Q4,realized_gas_price,3.43,80,2026-02-17,2026-02-17:EX-99.2:d111666dex992.htm:table10,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.43 | | | $ | 3.55 | | | $ | 3.07 | | | $ | 3.44 | | | $ | 3.65 | | | $ | 2.79 |
+DVN,2025Q4,realized_oil_price,64.87,80,2026-02-17,2026-02-17:EX-99.2:d111666dex992.htm:table11,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 64.87 | | | $ | 59.09 | | | $ | 64.92 | | | $ | 63.95 | | | $ | 71.50 | | | $ | 70.32 |
+DVN,2025Q4,realized_gas_price,3.43,80,2026-02-17,2026-02-17:EX-99.2:d111666dex992.htm:table11,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.43 | | | $ | 3.55 | | | $ | 3.07 | | | $ | 3.44 | | | $ | 3.65 | | | $ | 2.79 |
+DVN,2025Q4,total_production,823.0,80,2026-02-17,2026-02-17:EX-99.2:d111666dex992.htm:table20,table,Total oil equivalent (MBoe/d) | | | 823 | | | | 843 | | | | 835 | | | | 855 |
+DVN,2025Q3,total_production,853.0,100,2025-11-05,2025-11-05:EX-99.1:d45994dex991.htm,prose,"Production averaged 853,000 Boe per day"
+DVN,2025Q3,oil_production,390.0,100,2025-11-05,2025-11-05:EX-99.1:d45994dex991.htm,prose,"Oil totaled 390,000 barrels per day"
+DVN,2025Q3,realized_combined_price,36.46,95,2025-11-05,2025-11-05:EX-99.1:d45994dex991.htm,prose,"realized price during the period, including commodity hedges, was $36.46 per Boe"
+DVN,2025Q3,realized_oil_price,64.92,80,2025-11-05,2025-11-05:EX-99.2:d45994dex992.htm:table15,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 64.92 | | | $ | 63.95 | | | $ | 71.50 | | | $ | 70.32 | | | $ | 75.20 |
+DVN,2025Q3,realized_gas_price,3.07,80,2025-11-05,2025-11-05:EX-99.2:d45994dex992.htm:table15,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.07 | | | $ | 3.44 | | | $ | 3.65 | | | $ | 2.79 | | | $ | 2.15 |
+DVN,2025Q3,realized_oil_price,64.92,80,2025-11-05,2025-11-05:EX-99.2:d45994dex992.htm:table16,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 64.92 | | | $ | 63.95 | | | $ | 71.50 | | | $ | 70.32 | | | $ | 75.20 |
+DVN,2025Q3,realized_gas_price,3.07,80,2025-11-05,2025-11-05:EX-99.2:d45994dex992.htm:table16,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.07 | | | $ | 3.44 | | | $ | 3.65 | | | $ | 2.79 | | | $ | 2.15 |
+DVN,2025Q3,total_production,828.0,80,2025-11-05,2025-11-05:EX-99.2:d45994dex992.htm:table26,table,Total oil equivalent (MBoe/d) | | | 828 | | | | 844 |
+DVN,2025Q2,total_production,841.0,100,2025-08-05,2025-08-05:EX-99.1:d27924dex991.htm,prose,"Production averaged 841,000 Boe per day"
+DVN,2025Q2,oil_production,387.0,100,2025-08-05,2025-08-05:EX-99.1:d27924dex991.htm,prose,"Oil totaled 387,000 barrels per day"
+DVN,2025Q2,realized_combined_price,36.3,95,2025-08-05,2025-08-05:EX-99.1:d27924dex991.htm,prose,"realized price during the period, including commodity hedges, was $36.30 per Boe"
+DVN,2025Q2,realized_oil_price,63.95,80,2025-08-05,2025-08-05:EX-99.2:d27924dex992.htm:table9,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 63.95 | | | $ | 71.50 | | | $ | 70.32 | | | $ | 75.20 | | | $ | 80.62 |
+DVN,2025Q2,realized_gas_price,3.44,80,2025-08-05,2025-08-05:EX-99.2:d27924dex992.htm:table9,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.44 | | | $ | 3.65 | | | $ | 2.79 | | | $ | 2.15 | | | $ | 1.89 |
+DVN,2025Q2,realized_oil_price,63.95,80,2025-08-05,2025-08-05:EX-99.2:d27924dex992.htm:table11,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 63.95 | | | $ | 71.50 | | | $ | 70.32 | | | $ | 75.20 | | | $ | 80.62 |
+DVN,2025Q2,realized_gas_price,3.44,80,2025-08-05,2025-08-05:EX-99.2:d27924dex992.htm:table11,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.44 | | | $ | 3.65 | | | $ | 2.79 | | | $ | 2.15 | | | $ | 1.89 |
+DVN,2025Q2,total_production,829.0,80,2025-08-05,2025-08-05:EX-99.2:d27924dex992.htm:table26,table,Total oil equivalent (MBoe/d) | | | 829 | | | | 847 | | | | 825 | | | | 842 |
+DVN,2025Q1,oil_production,388.0,100,2025-05-06,2025-05-06:EX-99.1:d774185dex991.htm,prose,"oil production in the first quarter reached 388,000 barrels per day"
+DVN,2025Q1,realized_combined_price,42.45,95,2025-05-06,2025-05-06:EX-99.1:d774185dex991.htm,prose,"realized price during the period, including commodity hedges, was $42.45 per Boe"
+DVN,2025Q1,realized_oil_price,71.5,80,2025-05-06,2025-05-06:EX-99.2:d774185dex992.htm:table9,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 71.50 | | | $ | 70.32 | | | $ | 75.20 | | | $ | 80.62 | | | $ | 77.01 |
+DVN,2025Q1,realized_gas_price,3.65,80,2025-05-06,2025-05-06:EX-99.2:d774185dex992.htm:table9,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.65 | | | $ | 2.79 | | | $ | 2.15 | | | $ | 1.89 | | | $ | 2.25 |
+DVN,2025Q1,realized_oil_price,71.5,80,2025-05-06,2025-05-06:EX-99.2:d774185dex992.htm:table11,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 71.50 | | | $ | 70.32 | | | $ | 75.20 | | | $ | 80.62 | | | $ | 77.01 |
+DVN,2025Q1,realized_gas_price,3.65,80,2025-05-06,2025-05-06:EX-99.2:d774185dex992.htm:table11,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.65 | | | $ | 2.79 | | | $ | 2.15 | | | $ | 1.89 | | | $ | 2.25 |
+DVN,2025Q1,total_production,810.0,80,2025-05-06,2025-05-06:EX-99.2:d774185dex992.htm:table21,table,Total oil equivalent (MBoe/d) | | | 810 | | | | 828 | | | | 810 | | | | 828 |
+DVN,2025Q1,oil_production,386.0,100,2025-02-18,2025-02-18:EX-99.1:d931030dex991.htm,prose,"oil production to average 380,000 to 386,000 barrels per day"
+DVN,2025Q1,realized_combined_price,40.32,95,2025-02-18,2025-02-18:EX-99.1:d931030dex991.htm,prose,"realized price during the period, including commodity hedges, was $40.32 per Boe"
+DVN,2024Q4,realized_oil_price,75.79,80,2025-02-18,2025-02-18:EX-99.2:d931030dex992.htm:table11,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 75.79 | | | $ | 70.32 | | | $ | 75.20 | | | $ | 80.62 | | | $ | 77.01 | | | $ | 78.48 |
+DVN,2024Q4,realized_gas_price,2.27,80,2025-02-18,2025-02-18:EX-99.2:d931030dex992.htm:table11,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.27 | | | $ | 2.79 | | | $ | 2.15 | | | $ | 1.89 | | | $ | 2.25 | | | $ | 2.88 |
+DVN,2024Q4,realized_oil_price,75.79,80,2025-02-18,2025-02-18:EX-99.2:d931030dex992.htm:table12,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 75.79 | | | $ | 70.32 | | | $ | 75.20 | | | $ | 80.62 | | | $ | 77.01 | | | $ | 78.48 |
+DVN,2024Q4,realized_gas_price,2.27,80,2025-02-18,2025-02-18:EX-99.2:d931030dex992.htm:table12,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.27 | | | $ | 2.79 | | | $ | 2.15 | | | $ | 1.89 | | | $ | 2.25 | | | $ | 2.88 |
+DVN,2024Q4,total_production,805.0,80,2025-02-18,2025-02-18:EX-99.2:d931030dex992.htm:table24,table,Total oil equivalent (MBoe/d) | | | 805 | | | | 825 | | | | 805 | | | | 825 |
+DVN,2024Q3,oil_production,335.0,100,2024-11-05,2024-11-05:EX-99.1:d824691dex991.htm,prose,"oil production in the third quarter reached 335,000 barrels per day"
+DVN,2024Q3,realized_combined_price,40.71,95,2024-11-05,2024-11-05:EX-99.1:d824691dex991.htm,prose,"realized price during the period, including commodity hedges, was $40.71 per Boe"
+DVN,2024Q3,realized_oil_price,75.2,80,2024-11-05,2024-11-05:EX-99.2:d824691dex992.htm:table8,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 75.20 | | | $ | 80.62 | | | $ | 77.01 | | | $ | 78.48 | | | $ | 82.06 |
+DVN,2024Q3,realized_gas_price,2.15,80,2024-11-05,2024-11-05:EX-99.2:d824691dex992.htm:table8,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.15 | | | $ | 1.89 | | | $ | 2.25 | | | $ | 2.88 | | | $ | 2.54 |
+DVN,2024Q3,realized_oil_price,75.2,80,2024-11-05,2024-11-05:EX-99.2:d824691dex992.htm:table9,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 75.20 | | | $ | 80.62 | | | $ | 77.01 | | | $ | 78.48 | | | $ | 82.06 |
+DVN,2024Q3,realized_gas_price,2.15,80,2024-11-05,2024-11-05:EX-99.2:d824691dex992.htm:table9,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.15 | | | $ | 1.89 | | | $ | 2.25 | | | $ | 2.88 | | | $ | 2.54 |
+DVN,2024Q3,total_production,811.0,80,2024-11-05,2024-11-05:EX-99.2:d824691dex992.htm:table15,table,Total oil equivalent (MBoe/d) | | | 811 | | | | 830 |
+DVN,2024Q2,oil_production,335.0,100,2024-08-06,2024-08-06:EX-99.1:d816697dex991.htm,prose,"oil production reached an all-time high of 335,000 barrels per day"
+DVN,2024Q2,realized_oil_price,80.62,80,2024-08-06,2024-08-06:EX-99.2:d816697dex992.htm:table14,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 80.62 | | | $ | 77.01 | | | $ | 78.48 | | | $ | 82.06 | | | $ | 73.76 |
+DVN,2024Q2,realized_gas_price,1.89,80,2024-08-06,2024-08-06:EX-99.2:d816697dex992.htm:table14,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 1.89 | | | $ | 2.25 | | | $ | 2.88 | | | $ | 2.54 | | | $ | 2.09 |
+DVN,2024Q2,realized_oil_price,80.62,80,2024-08-06,2024-08-06:EX-99.2:d816697dex992.htm:table15,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 80.62 | | | $ | 77.01 | | | $ | 78.48 | | | $ | 82.06 | | | $ | 73.76 |
+DVN,2024Q2,realized_gas_price,1.89,80,2024-08-06,2024-08-06:EX-99.2:d816697dex992.htm:table15,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 1.89 | | | $ | 2.25 | | | $ | 2.88 | | | $ | 2.54 | | | $ | 2.09 |
+DVN,2024Q2,total_production,670.0,80,2024-08-06,2024-08-06:EX-99.2:d816697dex992.htm:table25,table,Total oil equivalent (MBoe/d) | | | 670 | | | | 690 | | | | 677 | | | | 688 |
+DVN,2024Q1,oil_production,319.0,100,2024-05-01,2024-05-01:EX-99.1:d804489dex991.htm,prose,"oil production totaled 319,000 barrels per day"
+DVN,2024Q1,realized_oil_price,77.01,80,2024-05-01,2024-05-01:EX-99.2:d804489dex992.htm:table14,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 77.01 | | | $ | 78.48 | | | $ | 82.06 | | | $ | 73.76 | | | $ | 76.17 |
+DVN,2024Q1,realized_gas_price,2.25,80,2024-05-01,2024-05-01:EX-99.2:d804489dex992.htm:table14,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.25 | | | $ | 2.88 | | | $ | 2.54 | | | $ | 2.09 | | | $ | 3.44 |
+DVN,2024Q1,realized_oil_price,77.01,80,2024-05-01,2024-05-01:EX-99.2:d804489dex992.htm:table15,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 77.01 | | | $ | 78.48 | | | $ | 82.06 | | | $ | 73.76 | | | $ | 76.17 |
+DVN,2024Q1,realized_gas_price,2.25,80,2024-05-01,2024-05-01:EX-99.2:d804489dex992.htm:table15,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.25 | | | $ | 2.88 | | | $ | 2.54 | | | $ | 2.09 | | | $ | 3.44 |
+DVN,2024Q1,total_production,670.0,80,2024-05-01,2024-05-01:EX-99.2:d804489dex992.htm:table26,table,Total oil equivalent (MBoe/d) | | | 670 | | | | 690 | | | | 655 | | | | 675 |
+DVN,2023Q4,oil_production,315.0,100,2024-02-27,2024-02-27:EX-99.1:d746925dex991.htm,prose,"oil production at around 315,000 barrels per day"
+DVN,2023Q4,realized_oil_price,78.48,80,2024-02-27,2024-02-27:EX-99.2:d746925dex992.htm:table16,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 78.48 | | | $ | 82.06 | | | $ | 73.76 | | | $ | 76.17 | | | $ | 82.53 |
+DVN,2023Q4,realized_gas_price,2.88,80,2024-02-27,2024-02-27:EX-99.2:d746925dex992.htm:table16,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.88 | | | $ | 2.54 | | | $ | 2.09 | | | $ | 3.44 | | | $ | 6.26 |
+DVN,2023Q4,realized_oil_price,78.48,80,2024-02-27,2024-02-27:EX-99.2:d746925dex992.htm:table17,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 78.48 | | | $ | 82.06 | | | $ | 73.76 | | | $ | 76.17 | | | $ | 82.53 |
+DVN,2023Q4,realized_gas_price,2.88,80,2024-02-27,2024-02-27:EX-99.2:d746925dex992.htm:table17,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.88 | | | $ | 2.54 | | | $ | 2.09 | | | $ | 3.44 | | | $ | 6.26 |
+DVN,2023Q4,total_production,630.0,80,2024-02-27,2024-02-27:EX-99.2:d746925dex992.htm:table29,table,Total oil equivalent (MBoe/d) (1) | | | 630 | | | | 650 | | | | 640 | | | | 660 |
+DVN,2023Q3,oil_production,321.0,100,2023-11-07,2023-11-07:EX-99.1:d564312dex991.htm,prose,"Oil totaled 321,000 barrels per day"
+DVN,2023Q3,realized_oil_price,82.06,80,2023-11-07,2023-11-07:EX-99.2:d564312dex992.htm:table9,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 82.06 | | | $ | 73.76 | | | $ | 76.17 | | | $ | 82.53 | | | $ | 91.87 |
+DVN,2023Q3,realized_gas_price,2.54,80,2023-11-07,2023-11-07:EX-99.2:d564312dex992.htm:table9,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.54 | | | $ | 2.09 | | | $ | 3.44 | | | $ | 6.26 | | | $ | 8.20 |
+DVN,2023Q3,realized_oil_price,82.06,80,2023-11-07,2023-11-07:EX-99.2:d564312dex992.htm:table10,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 82.06 | | | $ | 73.76 | | | $ | 76.17 | | | $ | 82.53 | | | $ | 91.87 |
+DVN,2023Q3,realized_gas_price,2.54,80,2023-11-07,2023-11-07:EX-99.2:d564312dex992.htm:table10,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.54 | | | $ | 2.09 | | | $ | 3.44 | | | $ | 6.26 | | | $ | 8.20 |
+DVN,2023Q3,total_production,640.0,80,2023-11-07,2023-11-07:EX-99.2:d564312dex992.htm:table20,table,Total oil equivalent (MBoe/d) | | | 640 | | | | 660 |
+DVN,2023Q2,total_production,420.0,100,2023-08-01,2023-08-01:EX-99.1:d514590dex991.htm,prose,"Production averaged 420,000 Boe per day"
+DVN,2023Q2,oil_production,323.0,100,2023-08-01,2023-08-01:EX-99.1:d514590dex991.htm,prose,"Oil production reached an all-time high of 323,000 barrels per day"
+DVN,2023Q2,realized_oil_price,73.76,80,2023-08-01,2023-08-01:EX-99.2:d514590dex992.htm:table9,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 73.76 | | | $ | 76.17 | | | $ | 82.53 | | | $ | 91.87 | | | $ | 108.70 |
+DVN,2023Q2,realized_gas_price,2.09,80,2023-08-01,2023-08-01:EX-99.2:d514590dex992.htm:table9,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.09 | | | $ | 3.44 | | | $ | 6.26 | | | $ | 8.20 | | | $ | 7.17 |
+DVN,2023Q2,realized_oil_price,73.76,80,2023-08-01,2023-08-01:EX-99.2:d514590dex992.htm:table10,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 73.76 | | | $ | 76.17 | | | $ | 82.53 | | | $ | 91.87 | | | $ | 108.70 |
+DVN,2023Q2,realized_gas_price,2.09,80,2023-08-01,2023-08-01:EX-99.2:d514590dex992.htm:table10,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.09 | | | $ | 3.44 | | | $ | 6.26 | | | $ | 8.20 | | | $ | 7.17 |
+DVN,2023Q2,total_production,658.0,80,2023-08-01,2023-08-01:EX-99.2:d514590dex992.htm:table20,table,Total oil equivalent (MBoe/d) | | | 658 | | | | 680 | | | | 643 | | | | 663 |
+DVN,2023Q1,total_production,68.0,100,2023-05-08,2023-05-08:EX-99.1:d263170dex991.htm,prose,"Production averaged 68,000 Boe per day"
+DVN,2023Q1,oil_production,320.0,100,2023-05-08,2023-05-08:EX-99.1:d263170dex991.htm,prose,"Oil production reached an all-time high of 320,000 barrels per day"
+DVN,2023Q1,realized_oil_price,76.17,80,2023-05-08,2023-05-08:EX-99.2:d263170dex992.htm:table11,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 76.17 | | | $ | 82.53 | | | $ | 91.87 | | | $ | 108.70 | | | $ | 94.45 |
+DVN,2023Q1,realized_gas_price,3.44,80,2023-05-08,2023-05-08:EX-99.2:d263170dex992.htm:table11,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.44 | | | $ | 6.26 | | | $ | 8.20 | | | $ | 7.17 | | | $ | 4.96 |
+DVN,2023Q1,realized_oil_price,76.17,80,2023-05-08,2023-05-08:EX-99.2:d263170dex992.htm:table13,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 76.17 | | | $ | 82.53 | | | $ | 91.87 | | | $ | 108.70 | | | $ | 94.45 |
+DVN,2023Q1,realized_gas_price,3.44,80,2023-05-08,2023-05-08:EX-99.2:d263170dex992.htm:table13,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.44 | | | $ | 6.26 | | | $ | 8.20 | | | $ | 7.17 | | | $ | 4.96 |
+DVN,2023Q1,total_production,643.0,80,2023-05-08,2023-05-08:EX-99.2:d263170dex992.htm:table24,table,Total oil equivalent (MBoe/d) | | | 643 | | | | 664 | | | | 643 | | | | 663 |
+DVN,2022Q4,total_production,407.0,100,2023-02-14,2023-02-14:EX-99.1:d453066dex991.htm,prose,"Production averaged 407,000 Boe per day"
+DVN,2022Q4,oil_production,316.0,100,2023-02-14,2023-02-14:EX-99.1:d453066dex991.htm,prose,"Oil production reached all-time high of 316,000 barrels per day"
+DVN,2022Q4,realized_oil_price,82.53,80,2023-02-14,2023-02-14:EX-99.2:d453066dex992.htm:table17,table,Oil ($/Bbl)West Texas Intermediate (Cushing) | | $ | 82.53 | | | $ | 91.87 | | | $ | 108.70 | | | $ | 94.45 | | | $ | 76.91 |
+DVN,2022Q4,realized_gas_price,6.26,80,2023-02-14,2023-02-14:EX-99.2:d453066dex992.htm:table17,table,Natural Gas ($/Mcf)Henry Hub | | $ | 6.26 | | | $ | 8.20 | | | $ | 7.17 | | | $ | 4.96 | | | $ | 5.84 |
+DVN,2022Q4,realized_oil_price,82.53,80,2023-02-14,2023-02-14:EX-99.2:d453066dex992.htm:table19,table,Oil ($/Bbl)West Texas Intermediate (Cushing) | | $ | 82.53 | | | $ | 91.87 | | | $ | 108.70 | | | $ | 94.45 | | | $ | 76.91 |
+DVN,2022Q4,realized_gas_price,6.26,80,2023-02-14,2023-02-14:EX-99.2:d453066dex992.htm:table19,table,Natural Gas ($/Mcf)Henry Hub | | $ | 6.26 | | | $ | 8.20 | | | $ | 7.17 | | | $ | 4.96 | | | $ | 5.84 |
+DVN,2022Q4,total_production,625.0,80,2023-02-14,2023-02-14:EX-99.2:d453066dex992.htm:table34,table,Total oil equivalent (MBoe/d) (1) | | | 625 | | | | 645 | | | | 643 | | | | 663 |
+DVN,2022Q4,total_production,421.0,100,2022-11-01,2022-11-01:EX-99.1:dvn-ex99_1.htm,prose,"Production averaged 421,000 Boe per day"
+DVN,2022Q3,realized_oil_price,91.87,80,2022-11-01,2022-11-01:EX-99.2:dvn-ex99_2.htm:table13,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 91.87 | | | $ | 108.70 | | | $ | 94.45 | | | $ | 76.91 | | | $ | 70.64 | |
+DVN,2022Q3,realized_gas_price,8.2,80,2022-11-01,2022-11-01:EX-99.2:dvn-ex99_2.htm:table13,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 8.20 | | | $ | 7.17 | | | $ | 4.96 | | | $ | 5.84 | | | $ | 4.02 | |
+DVN,2022Q3,realized_oil_price,91.87,80,2022-11-01,2022-11-01:EX-99.2:dvn-ex99_2.htm:table14,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 91.87 | | | $ | 108.70 | | | $ | 94.45 | | | $ | 76.91 | | | $ | 70.64 |
+DVN,2022Q3,realized_gas_price,8.2,80,2022-11-01,2022-11-01:EX-99.2:dvn-ex99_2.htm:table14,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 8.20 | | | $ | 7.17 | | | $ | 4.96 | | | $ | 5.84 | | | $ | 4.02 |
+DVN,2022Q3,total_production,640.0,80,2022-11-01,2022-11-01:EX-99.2:dvn-ex99_2.htm:table23,table,Total oil equivalent (MBoe/d) | | | 640 | | | | 660 |
+DVN,2022Q2,total_production,74.0,100,2022-08-01,2022-08-01:EX-99.1:d727187dex991.htm,prose,"Production averaged 74,000 Boe per day"
+DVN,2022Q2,realized_oil_price,108.7,80,2022-08-01,2022-08-01:EX-99.2:d727187dex992.htm:table23,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 108.70 | | | $ | 94.45 | | | $ | 76.91 | | | $ | 70.64 | | | $ | 66.04 |
+DVN,2022Q2,realized_gas_price,7.17,80,2022-08-01,2022-08-01:EX-99.2:d727187dex992.htm:table23,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 7.17 | | | $ | 4.96 | | | $ | 5.84 | | | $ | 4.02 | | | $ | 2.83 |
+DVN,2022Q2,realized_oil_price,108.7,80,2022-08-01,2022-08-01:EX-99.2:d727187dex992.htm:table26,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 108.70 | | | $ | 94.45 | | | $ | 76.91 | | | $ | 70.64 | | | $ | 66.04 |
+DVN,2022Q2,realized_gas_price,7.17,80,2022-08-01,2022-08-01:EX-99.2:d727187dex992.htm:table26,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 7.17 | | | $ | 4.96 | | | $ | 5.84 | | | $ | 4.02 | | | $ | 2.83 |
+DVN,2022Q2,total_production,593.0,80,2022-08-01,2022-08-01:EX-99.2:d727187dex992.htm:table42,table,Total oil equivalent (MBoe/d) | | | 593 | | | | 613 | | | | 600 | | | | 610 |
+DVN,2022Q1,total_production,394.0,100,2022-05-02,2022-05-02:EX-99.1:d228641dex991.htm,prose,"Production averaged 394,000 Boe per day"
+DVN,2022Q1,realized_oil_price,94.45,80,2022-05-02,2022-05-02:EX-99.2:d228641dex992.htm:table14,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 94.45 | | | $ | 76.91 | | | $ | 70.64 | | | $ | 66.04 | | | $ | 57.87 |
+DVN,2022Q1,realized_gas_price,4.96,80,2022-05-02,2022-05-02:EX-99.2:d228641dex992.htm:table14,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 4.96 | | | $ | 5.84 | | | $ | 4.02 | | | $ | 2.83 | | | $ | 2.71 |
+DVN,2022Q1,realized_oil_price,94.45,80,2022-05-02,2022-05-02:EX-99.2:d228641dex992.htm:table16,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 94.45 | | | $ | 76.91 | | | $ | 70.64 | | | $ | 66.04 | | | $ | 57.87 |
+DVN,2022Q1,realized_gas_price,4.96,80,2022-05-02,2022-05-02:EX-99.2:d228641dex992.htm:table16,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 4.96 | | | $ | 5.84 | | | $ | 4.02 | | | $ | 2.83 | | | $ | 2.71 |
+DVN,2022Q1,total_production,585.0,80,2022-05-02,2022-05-02:EX-99.2:d228641dex992.htm:table29,table,Total oil equivalent (MBoe/d) | | | 585 | | | | 604 | | | | 570 | | | | 600 |
+DVN,2021Q4,total_production,416.0,100,2022-02-15,2022-02-15:EX-99.1:d312748dex991.htm,prose,"Production averaged 416,000 Boe per day"
+DVN,2021Q4,realized_oil_price,76.91,80,2022-02-15,2022-02-15:EX-99.2:d312748dex992.htm:table12,table,Oil ($/Bbl)  West Texas Intermediate (Cushing) | | $ | 76.91 | | | $ | 70.64 | | | $ | 66.04 | | | $ | 57.87 | | | $ | 42.65 |
+DVN,2021Q4,realized_gas_price,5.84,80,2022-02-15,2022-02-15:EX-99.2:d312748dex992.htm:table12,table,Natural Gas ($/Mcf)  Henry Hub | | $ | 5.84 | | | $ | 4.02 | | | $ | 2.83 | | | $ | 2.71 | | | $ | 2.67 |
+DVN,2021Q4,realized_oil_price,76.91,80,2022-02-15,2022-02-15:EX-99.2:d312748dex992.htm:table13,table,Oil ($/Bbl)  West Texas Intermediate (Cushing) | | $ | 76.91 | | | $ | 70.64 | | | $ | 66.04 | | | $ | 57.87 | | | $ | 42.65 |
+DVN,2021Q4,realized_gas_price,5.84,80,2022-02-15,2022-02-15:EX-99.2:d312748dex992.htm:table13,table,Natural Gas ($/Mcf)  Henry Hub | | $ | 5.84 | | | $ | 4.02 | | | $ | 2.83 | | | $ | 2.71 | | | $ | 2.67 |
+DVN,2021Q4,total_production,560.0,80,2022-02-15,2022-02-15:EX-99.2:d312748dex992.htm:table24,table,Total oil equivalent (MBoe/d) | | | 560 | | | | 580 | | | | 570 | | | | 600 |
+DVN,2020Q4,total_production,409.0,100,2021-11-02,2021-11-02:EX-99.1:d202323dex991.htm,prose,"Production averaged 409,000 Boe per day"
+DVN,2021Q3,realized_oil_price,70.64,80,2021-11-02,2021-11-02:EX-99.2:d202323dex992.htm:table12,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 70.64 | | | $ | 66.04 | | | $ | 57.87 | | | $ | 42.65 | | | $ | 40.86 |
+DVN,2021Q3,realized_gas_price,4.02,80,2021-11-02,2021-11-02:EX-99.2:d202323dex992.htm:table12,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 4.02 | | | $ | 2.83 | | | $ | 2.71 | | | $ | 2.67 | | | $ | 1.98 |
+DVN,2021Q3,realized_oil_price,70.64,80,2021-11-02,2021-11-02:EX-99.2:d202323dex992.htm:table14,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 70.64 | | | $ | 66.04 | | | $ | 57.87 | | | $ | 42.65 | | | $ | 40.86 |
+DVN,2021Q3,realized_gas_price,4.02,80,2021-11-02,2021-11-02:EX-99.2:d202323dex992.htm:table14,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 4.02 | | | $ | 2.83 | | | $ | 2.71 | | | $ | 2.67 | | | $ | 1.98 |
+DVN,2021Q3,total_production,583.0,80,2021-11-02,2021-11-02:EX-99.2:d202323dex992.htm:table23,table,Total oil equivalent (MBoe/d) | | | 583 | | | | 601 |
+DVN,2021Q2,total_production,358.0,100,2021-08-03,2021-08-03:EX-99.1:d197325dex991.htm,prose,"Production averaged 358,000 Boe per day"
+DVN,2021Q2,oil_production,291.0,100,2021-08-03,2021-08-03:EX-99.1:d197325dex991.htm,prose,"Oil production averaged 291,000 barrels per day"
+DVN,2021Q2,realized_oil_price,66.04,80,2021-08-03,2021-08-03:EX-99.2:d197325dex992.htm:table7,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 66.04 | | | $ | 57.87 | | | $ | 42.65 | | | $ | 40.86 | | | $ | 28.42 |
+DVN,2021Q2,realized_gas_price,2.83,80,2021-08-03,2021-08-03:EX-99.2:d197325dex992.htm:table7,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.83 | | | $ | 2.71 | | | $ | 2.67 | | | $ | 1.98 | | | $ | 1.71 |
+DVN,2021Q2,realized_oil_price,66.04,80,2021-08-03,2021-08-03:EX-99.2:d197325dex992.htm:table8,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 66.04 | | | $ | 57.87 | | | $ | 42.65 | | | $ | 40.86 | | | $ | 28.42 |
+DVN,2021Q2,realized_gas_price,2.83,80,2021-08-03,2021-08-03:EX-99.2:d197325dex992.htm:table8,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.83 | | | $ | 2.71 | | | $ | 2.67 | | | $ | 1.98 | | | $ | 1.71 |
+DVN,2021Q2,total_production,566.0,80,2021-08-03,2021-08-03:EX-99.2:d197325dex992.htm:table16,table,Total oil equivalent (MBoe/d) | | | 566 | | | | 594 | | | | 539 | | | | 569 |
+DVN,2020Q4,total_production,68.0,100,2021-05-04,2021-05-04:EX-99.1:d175063dex991.htm,prose,"Production averaged 68,000 Boe per day"
+DVN,2020Q4,oil_production,268.0,100,2021-05-04,2021-05-04:EX-99.1:d175063dex991.htm,prose,"oil production totaled 268,000 barrels per day"
+DVN,2021Q1,realized_oil_price,57.87,80,2021-05-04,2021-05-04:EX-99.2:d175063dex992.htm:table18,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 57.87 | | | $ | 42.65 | | | $ | 40.86 | | | $ | 28.42 | | | $ | 46.44 |
+DVN,2021Q1,realized_gas_price,2.71,80,2021-05-04,2021-05-04:EX-99.2:d175063dex992.htm:table18,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.71 | | | $ | 2.67 | | | $ | 1.98 | | | $ | 1.71 | | | $ | 1.95 |
+DVN,2021Q1,realized_oil_price,57.87,80,2021-05-04,2021-05-04:EX-99.2:d175063dex992.htm:table20,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 57.87 | | | $ | 42.65 | | | $ | 40.86 | | | $ | 28.42 | | | $ | 46.44 |
+DVN,2021Q1,realized_gas_price,2.71,80,2021-05-04,2021-05-04:EX-99.2:d175063dex992.htm:table20,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.71 | | | $ | 2.67 | | | $ | 1.98 | | | $ | 1.71 | | | $ | 1.95 |
+DVN,2021Q1,total_production,538.0,80,2021-05-04,2021-05-04:EX-99.2:d175063dex992.htm:table34,table,Total oil equivalent (MBoe/d) | | | 538 | | | | 561 | | | | 529 | | | | 559 |
+DVN,2019Q4,total_production,584.0,100,2021-02-17,2021-02-17:EX-99.1:d107839dex991.htm,prose,"production averaged 584,000 Boe per day"
+DVN,2019Q4,oil_production,156.0,100,2021-02-17,2021-02-17:EX-99.1:d107839dex991.htm,prose,"Oil production averaged 156,000 barrels per day"
+DVN,2020Q4,realized_oil_price,42.65,80,2021-02-17,2021-02-17:EX-99.3:d107839dex993.htm:table14,table,Oil ($/Bbl)West Texas Intermediate (Cushing) | | $ | 42.65 | | | $ | 40.86 | | | $ | 28.42 | | | $ | 46.44 | | | $ | 57.02 |
+DVN,2020Q4,realized_gas_price,2.67,80,2021-02-17,2021-02-17:EX-99.3:d107839dex993.htm:table14,table,Natural Gas ($/Mcf)Henry Hub | | $ | 2.67 | | | $ | 1.98 | | | $ | 1.71 | | | $ | 1.95 | | | $ | 2.50 |
+DVN,2020Q4,realized_oil_price,42.65,80,2021-02-17,2021-02-17:EX-99.3:d107839dex993.htm:table15,table,Oil ($/Bbl)West Texas Intermediate (Cushing) | | $ | 42.65 | | | $ | 40.86 | | | $ | 28.42 | | | $ | 46.44 | | | $ | 57.02 |
+DVN,2020Q4,realized_gas_price,2.67,80,2021-02-17,2021-02-17:EX-99.3:d107839dex993.htm:table15,table,Natural Gas ($/Mcf)Henry Hub | | $ | 2.67 | | | $ | 1.98 | | | $ | 1.71 | | | $ | 1.95 | | | $ | 2.50 |
+DVN,2020Q4,total_production,584.0,80,2021-02-17,2021-02-17:EX-99.3:d107839dex993.htm:table26,table,Total oil equivalent (Mboe/d) | | | 584 | | | | 333 | | | | 251 |
+DVN,2020Q4,total_production,543.0,80,2021-02-17,2021-02-17:EX-99.3:d107839dex993.htm:table28,table,Total oil equivalent (MBoe/d) | | | 543 | | | | 580 |
+DVN,2019Q3,total_production,155.0,100,2020-10-29,2020-10-29:EX-99.1:d95802dex991.htm,prose,"production averaged 155,000 Boe per day"
+DVN,2019Q3,oil_production,146.0,100,2020-10-29,2020-10-29:EX-99.1:d95802dex991.htm,prose,"oil production totaled 146,000 barrels per day"
+DVN,2020Q3,total_production,93.0,80,2020-10-29,2020-10-29:EX-99.3:d95802dex993.htm:table4,table,Total oil equivalent (MBoe/d) | | | 93 | | | | 95 | | | | 99 | | | | 98 | | | | 100 |
+DVN,2020Q3,realized_oil_price,40.86,80,2020-10-29,2020-10-29:EX-99.3:d95802dex993.htm:table6,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 40.86 | | | $ | 28.42 | | | $ | 46.44 | | | $ | 57.02 | | | $ | 56.34 |
+DVN,2020Q3,realized_gas_price,1.98,80,2020-10-29,2020-10-29:EX-99.3:d95802dex993.htm:table6,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 1.98 | | | $ | 1.71 | | | $ | 1.95 | | | $ | 2.50 | | | $ | 2.23 |
+DVN,2020Q3,realized_oil_price,40.86,80,2020-10-29,2020-10-29:EX-99.3:d95802dex993.htm:table7,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 40.86 | | | $ | 28.42 | | | $ | 46.44 | | | $ | 57.02 | | | $ | 56.34 |
+DVN,2020Q3,realized_gas_price,1.98,80,2020-10-29,2020-10-29:EX-99.3:d95802dex993.htm:table7,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 1.98 | | | $ | 1.71 | | | $ | 1.95 | | | $ | 2.50 | | | $ | 2.23 |
+DVN,2020Q3,total_production,318.0,80,2020-10-29,2020-10-29:EX-99.3:d95802dex993.htm:table13,table,Total oil equivalent (MBoe/d) | | | 318 | | | | 334 |
+DVN,2019Q2,total_production,149.0,100,2020-08-04,2020-08-04:EX-99.1:d942475dex991.htm,prose,"production averaged 149,000 Boe per day"
+DVN,2019Q2,oil_production,153.0,100,2020-08-04,2020-08-04:EX-99.1:d942475dex991.htm,prose,"oil production totaled 153,000 barrels per day"
+DVN,2020Q2,total_production,24.0,100,2020-08-04,2020-08-04:EX-99.2:d942475dex992.htm,prose,production averaged 24 MBOED
+DVN,2020Q2,total_production,95.0,80,2020-08-04,2020-08-04:EX-99.3:d942475dex993.htm:table7,table,Total oil equivalent (MBoe/d) | | | 95 | | | | 99 | | | | 98 | | | | 100 | | | | 100 |
+DVN,2020Q2,realized_oil_price,28.42,80,2020-08-04,2020-08-04:EX-99.3:d942475dex993.htm:table13,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 28.42 | | | $ | 46.44 | | | $ | 57.02 | | | $ | 56.34 | | | $ | 59.85 |
+DVN,2020Q2,realized_gas_price,1.71,80,2020-08-04,2020-08-04:EX-99.3:d942475dex993.htm:table13,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 1.71 | | | $ | 1.95 | | | $ | 2.50 | | | $ | 2.23 | | | $ | 2.64 |
+DVN,2020Q2,realized_oil_price,28.42,80,2020-08-04,2020-08-04:EX-99.3:d942475dex993.htm:table15,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 28.42 | | | $ | 46.44 | | | $ | 57.02 | | | $ | 56.34 | | | $ | 59.85 |
+DVN,2020Q2,realized_gas_price,1.71,80,2020-08-04,2020-08-04:EX-99.3:d942475dex993.htm:table15,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 1.71 | | | $ | 1.95 | | | $ | 2.50 | | | $ | 2.23 | | | $ | 2.64 |
+DVN,2020Q2,total_production,301.0,80,2020-08-04,2020-08-04:EX-99.3:d942475dex993.htm:table21,table,Total oil equivalent (MBoe/d) | | | 301 | | | | 318 | | | | 314 | | | | 331 |
+DVN,2019Q1,total_production,162.0,100,2020-05-05,2020-05-05:EX-99.1:dvn-ex991_7.htm,prose,"production averaged 162,000 Boe per day"
+DVN,2020Q1,total_production,162.0,100,2020-05-05,2020-05-05:EX-99.2:dvn-ex992_8.htm,prose,production averaged 162 MBOED
+DVN,2020Q1,total_production,99.0,80,2020-05-05,2020-05-05:EX-99.3:dvn-ex993_6.htm:table7,table,Total oil equivalent (MBoe/d) | | | 99 | | | | 98 | | | | 100 | | | | 100 | | | | 103 |
+DVN,2020Q1,realized_oil_price,46.44,80,2020-05-05,2020-05-05:EX-99.3:dvn-ex993_6.htm:table13,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 46.44 | | | $ | 57.02 | | | $ | 56.34 | | | $ | 59.85 | | | $ | 54.88 |
+DVN,2020Q1,realized_gas_price,1.95,80,2020-05-05,2020-05-05:EX-99.3:dvn-ex993_6.htm:table13,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 1.95 | | | $ | 2.50 | | | $ | 2.23 | | | $ | 2.64 | | | $ | 3.15 |
+DVN,2020Q1,realized_oil_price,46.44,80,2020-05-05,2020-05-05:EX-99.3:dvn-ex993_6.htm:table14,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 46.44 | | | $ | 57.02 | | | $ | 56.34 | | | $ | 59.85 | | | $ | 54.88 |
+DVN,2020Q1,realized_gas_price,1.95,80,2020-05-05,2020-05-05:EX-99.3:dvn-ex993_6.htm:table14,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 1.95 | | | $ | 2.50 | | | $ | 2.23 | | | $ | 2.64 | | | $ | 3.15 |
+DVN,2020Q1,total_production,302.0,80,2020-05-05,2020-05-05:EX-99.3:dvn-ex993_6.htm:table20,table,Total oil equivalent (MBoe/d) | | | 302 | | | | 328 | | | | 300 | | | | 319 |
+DVN,2019Q3,total_production,154.0,100,2020-02-18,2020-02-18:EX-99.1:d890216dex991.htm,prose,"production averaged 154,000 Boe per day"
+DVN,2019Q3,oil_production,160.0,100,2020-02-18,2020-02-18:EX-99.1:d890216dex991.htm,prose,"Oil production averaged 160,000 barrels per day"
+DVN,2019Q4,total_production,98.0,80,2020-02-18,2020-02-18:EX-99.3:d890216dex993.htm:table7,table,Total oil equivalent (MBoe/d) | | | 98 | | | | 100 | | | | 100 | | | | 103 | | | | 105 |
+DVN,2019Q4,realized_oil_price,57.02,80,2020-02-18,2020-02-18:EX-99.3:d890216dex993.htm:table15,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 57.02 | | | $ | 56.34 | | | $ | 59.85 | | | $ | 54.88 | | | $ | 58.80 |
+DVN,2019Q4,realized_gas_price,2.5,80,2020-02-18,2020-02-18:EX-99.3:d890216dex993.htm:table15,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.50 | | | $ | 2.23 | | | $ | 2.64 | | | $ | 3.15 | | | $ | 3.65 |
+DVN,2019Q4,realized_oil_price,57.02,80,2020-02-18,2020-02-18:EX-99.3:d890216dex993.htm:table17,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 57.02 | | | $ | 56.34 | | | $ | 59.85 | | | $ | 54.88 | | | $ | 58.80 |
+DVN,2019Q4,realized_gas_price,2.5,80,2020-02-18,2020-02-18:EX-99.3:d890216dex993.htm:table17,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.50 | | | $ | 2.23 | | | $ | 2.64 | | | $ | 3.15 | | | $ | 3.65 |
+DVN,2019Q4,total_production,328.0,80,2020-02-18,2020-02-18:EX-99.3:d890216dex993.htm:table23,table,Total oil equivalent (MBoe/d) | | | 328 | | | | 342 | | | | 328 | | | | 339 |
+DVN,2019Q3,total_production,25.0,100,2019-11-05,2019-11-05:EX-99.1:d821713dex991.htm,prose,"production averaged 25,000 Boe per day"
+DVN,2019Q3,oil_production,148.0,100,2019-11-05,2019-11-05:EX-99.1:d821713dex991.htm,prose,"Oil production averaged 148,000 barrels per day"
+DVN,2019Q3,realized_combined_price,27.73,95,2019-11-05,2019-11-05:EX-99.1:d821713dex991.htm,prose,"realized price during the period, including commodity hedges, was $27.73 per Boe"
+DVN,2019Q3,realized_oil_price,56.34,80,2019-11-05,2019-11-05:EX-99.3:d821713dex993.htm:table6,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 56.34 | | | $ | 59.85 | | | $ | 54.88 | | | $ | 58.80 | | | $ | 69.60 |
+DVN,2019Q3,realized_gas_price,2.23,80,2019-11-05,2019-11-05:EX-99.3:d821713dex993.htm:table6,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.23 | | | $ | 2.64 | | | $ | 3.15 | | | $ | 3.65 | | | $ | 2.91 |
+DVN,2019Q3,realized_oil_price,56.34,80,2019-11-05,2019-11-05:EX-99.3:d821713dex993.htm:table7,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 56.34 | | | $ | 59.85 | | | $ | 54.88 | | | $ | 58.80 | | | $ | 69.60 |
+DVN,2019Q3,realized_gas_price,2.23,80,2019-11-05,2019-11-05:EX-99.3:d821713dex993.htm:table7,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.23 | | | $ | 2.64 | | | $ | 3.15 | | | $ | 3.65 | | | $ | 2.91 |
+DVN,2019Q2,total_production,49.0,100,2019-08-06,2019-08-06:EX-99.2:d786062dex992.htm,prose,production averaged 49 MBOED
+DVN,2019Q2,realized_oil_price,59.85,80,2019-08-06,2019-08-06:EX-99.3:d786062dex993.htm:table2,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 59.85 | | | $ | 67.83 | | | $ | 57.36 | | | $ | 65.38 |
+DVN,2019Q2,realized_gas_price,2.64,80,2019-08-06,2019-08-06:EX-99.3:d786062dex993.htm:table2,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.64 | | | $ | 2.80 | | | $ | 2.90 | | | $ | 2.90 |
+DVN,2019Q1,total_production,123.0,100,2019-04-30,2019-04-30:EX-99.2:d734548dex992.htm,prose,production averaged 123 MBOED
+DVN,2019Q1,realized_oil_price,54.88,80,2019-04-30,2019-04-30:EX-99.3:d734548dex993.htm:table2,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 54.88 | | | $ | 62.93 |
+DVN,2019Q1,realized_gas_price,3.15,80,2019-04-30,2019-04-30:EX-99.3:d734548dex993.htm:table2,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.15 | | | $ | 3.01 |
+DVN,2019Q2,total_production,532.0,100,2019-02-19,2019-02-19:EX-99.2:d702577dex992.htm,prose,"production averaged 532,000 Boe per day"
+DVN,2019Q2,oil_production,120.0,100,2019-02-19,2019-02-19:EX-99.2:d702577dex992.htm,prose,"oil production averaged 120,000 barrels per day"
+DVN,2018Q4,total_production,61.0,100,2019-02-19,2019-02-19:EX-99.3:d702577dex993.htm,prose,production averaged 61 MBOED
+DVN,2018Q4,realized_oil_price,58.8,80,2019-02-19,2019-02-19:EX-99.4:d702577dex994.htm:table2,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 58.80 | | | $ | 55.49 | | | $ | 64.79 | | | $ | 50.99 |
+DVN,2018Q4,realized_gas_price,3.65,80,2019-02-19,2019-02-19:EX-99.4:d702577dex994.htm:table2,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.65 | | | $ | 2.93 | | | $ | 3.09 | | | $ | 3.11 |
+DVN,2018Q3,total_production,418.0,100,2018-11-06,2018-11-06:EX-99.1:d573072dex991.htm,prose,"production averaged 418,000 Boe per day"
+DVN,2018Q3,realized_oil_price,69.6,80,2018-11-06,2018-11-06:EX-99.1:d573072dex991.htm:table8,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 69.60 | | | $ | 48.14 | | | $ | 66.79 | | | $ | 49.48 |
+DVN,2018Q3,realized_gas_price,2.91,80,2018-11-06,2018-11-06:EX-99.1:d573072dex991.htm:table8,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.91 | | | $ | 2.99 | | | $ | 2.90 | | | $ | 3.17 |
+DVN,2018Q3,total_production,60.0,100,2018-11-06,2018-11-06:EX-99.2:d573072dex992.htm,prose,production averaged 60 MBOED
+DVN,2018Q2,total_production,541.0,100,2018-07-31,2018-07-31:EX-99.1:d572260dex991.htm,prose,"production averaged 541,000 Boe per day"
+DVN,2018Q2,oil_production,109.0,100,2018-07-31,2018-07-31:EX-99.1:d572260dex991.htm,prose,"oil production averaged 109,000 barrels per day"
+DVN,2018Q2,realized_oil_price,67.83,80,2018-07-31,2018-07-31:EX-99.1:d572260dex991.htm:table10,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 67.83 | | | $ | 48.32 | | | $ | 65.38 | | | $ | 50.16 |
+DVN,2018Q2,realized_gas_price,2.8,80,2018-07-31,2018-07-31:EX-99.1:d572260dex991.htm:table10,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.80 | | | $ | 3.19 | | | $ | 2.90 | | | $ | 3.25 |
+DVN,2018Q1,realized_oil_price,62.93,80,2018-05-01,2018-05-01:EX-99.1:d580771dex991.htm:table10,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 62.93 | | | $ | 52.00 |
+DVN,2018Q1,realized_gas_price,3.01,80,2018-05-01,2018-05-01:EX-99.1:d580771dex991.htm:table10,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 3.01 | | | $ | 3.32 |
+DVN,2017Q4,total_production,548.0,100,2018-02-20,2018-02-20:EX-99.1:d541284dex991.htm,prose,"production averaged 548,000 Boe per day"
+DVN,2017Q4,oil_production,246.0,100,2018-02-20,2018-02-20:EX-99.1:d541284dex991.htm,prose,"oil production in the quarter totaled 246,000 barrels per day"
+DVN,2017Q4,realized_oil_price,55.49,80,2018-02-20,2018-02-20:EX-99.1:d541284dex991.htm:table10,table,Oil ($/Bbl) - West Texas Intermediate (Cushing) | | $ | 55.49 | | | $ | 49.21 | | | $ | 50.99 | | | $ | 43.36 |
+DVN,2017Q4,realized_gas_price,2.93,80,2018-02-20,2018-02-20:EX-99.1:d541284dex991.htm:table10,table,Natural Gas ($/Mcf) - Henry Hub | | $ | 2.93 | | | $ | 2.98 | | | $ | 3.11 | | | $ | 2.46 |
+DVN,2017Q4,total_production,548.0,100,2018-02-20,2018-02-20:EX-99.2:d541284dex992.htm,prose,"production averaged 548,000 Boe per day"
+DVN,2017Q4,oil_production,246.0,100,2018-02-20,2018-02-20:EX-99.2:d541284dex992.htm,prose,"oil production totaled 246,000 barrels per day"
+DVN,2017Q3,realized_oil_price,48.14,80,2017-10-31,2017-10-31:EX-99.1:d485563dex991.htm:table15,table,Oil ($/Bbl)West Texas Intermediate (Cushing) | | $ | 48.14 | | | $ | 45.02 | | | $ | 49.48 | | | $ | 41.41 |
+DVN,2017Q3,realized_gas_price,2.99,80,2017-10-31,2017-10-31:EX-99.1:d485563dex991.htm:table15,table,Natural Gas ($/Mcf)Henry Hub | | $ | 2.99 | | | $ | 2.81 | | | $ | 3.17 | | | $ | 2.28 |

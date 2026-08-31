@@ -1,0 +1,19 @@
+{
+  "version": "3.1",
+  "as_of_date": "2026-08-31",
+  "tickers": [
+    "COP",
+    "EOG",
+    "FANG",
+    "DVN"
+  ],
+  "refresh_kpi": false,
+  "earnings_lookback_filings": 50,
+  "structural_model": "Price Mix YoY + Company Production YoY Proxy",
+  "production_proxy_priority": [
+    "current-quarter company guidance",
+    "previous-quarter company total production YoY",
+    "previous-quarter company oil production YoY",
+    "EIA industry production"
+  ]
+}

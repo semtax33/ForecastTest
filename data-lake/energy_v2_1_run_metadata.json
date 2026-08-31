@@ -1,0 +1,8 @@
+{
+  "as_of_date": "2026-08-31",
+  "start_year": 2014,
+  "tickers": "COP,EOG,FANG,DVN",
+  "test_quarters": 12,
+  "min_train_quarters": 16,
+  "data_lake": "/mnt/c/Users/semtax/Desktop/python_example/MLExample/data-lake"
+}

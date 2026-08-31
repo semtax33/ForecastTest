@@ -1,0 +1,18 @@
+{
+  "version": "3.2.6",
+  "structural_base_file": "data-lake/energy_v3_2_3_structural_panel.csv",
+  "eog_data_source": "Official EOG Investor Relations Statistics XLS + Guidance PDF",
+  "eog_ir_start_year": 2022,
+  "eog_reconstruction_formula": "Oil MBod + NGL MBbld + Gas MMcfd / 6 = Total MBoed",
+  "eog_max_reconstruction_error_pct": 5.0,
+  "production_source_priority": [
+    "GUIDANCE_VS_ACTUAL",
+    "GUIDANCE_VS_GUIDANCE",
+    "ACTUAL_VS_ACTUAL",
+    "INDUSTRY_FALLBACK"
+  ],
+  "metrics": [
+    "MAE_log_points",
+    "MAE_yoy_pct_points"
+  ]
+}

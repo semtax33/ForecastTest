@@ -1,0 +1,28 @@
+ticker,quarter,filing_date,total_production,oil_production,score,source,raw_text
+FANG,2019Q4,2020-02-18,301.3,195.0,150,2020-02-18:EX-99.1:diamondbackex991-2x18x.htm,195.0 MBO/d ( 301.3 MBOE/d
+FANG,2020Q1,2020-05-04,321.1,201.4,150,2020-05-04:EX-99.1:diamondbackex991-5x4x20.htm,201.4 MBO/d ( 321.1 MBOE/d
+FANG,2020Q2,2020-08-03,294.1,176.3,150,2020-08-03:EX-99.1:diamondbackex991-8x3x20.htm,176.3 MBO/d (294.1 MBOE/d
+FANG,2020Q3,2020-11-02,287.3,170.0,150,2020-11-02:EX-99.1:diamondbackex991-11x2x.htm,170.0 MBO/d (287.3 MBOE/d
+FANG,2020Q4,2021-02-22,325.0,185.0,150,2021-02-22:EX-99.1:diamondbackex991-2x22x21.htm,oil production guidance of 178 - 185 MBO/d (308 - 325 MBOE/d
+FANG,2021Q1,2021-05-04,307.4,184.2,150,2021-05-04:EX-99.1:diamondbackex991-5x3x21.htm,184.2 MBO/d (307.4 MBOE/d
+FANG,2021Q2,2021-08-02,370.0,222.0,150,2021-08-02:EX-99.1:diamondbackex991-8x2x21.htm,oil production guidance to 219 - 222 MBO/d (363 - 370 MBOE/d
+FANG,2021Q3,2021-11-01,372.0,223.0,150,2021-11-01:EX-99.1:diamondbackex991-11x1x21.htm,oil production guidance of 222 - 223 MBO/d (370 - 372 MBOE/d
+FANG,2021Q4,2022-02-22,376.0,222.0,150,2022-02-22:EX-99.1:d302272dex991.htm,oil production guidance of 218-222 MBO/d (369-376 MBOE/d
+FANG,2022Q1,2022-05-02,381.4,222.8,150,2022-05-02:EX-99.1:diamondbackex991-5x2x22.htm,222.8 MBO/d (381.4 MBOE/d
+FANG,2022Q2,2022-08-01,380.5,221.1,150,2022-08-01:EX-99.1:diamondbackex991-8x1x22.htm,221.1 MBO/d (380.5 MBOE/d
+FANG,2022Q3,2022-11-21,50.0,37.0,150,2022-11-21:EX-99.1:diamondbackex991-11x21x22.htm,37 MBo/d (50 MBoe/d
+FANG,2022Q4,2023-02-21,440.0,262.0,150,2023-02-21:EX-99.1:diamondbackex991-2x21x23.htm,oil production guidance of 256 - 262 MBO/d (430 - 440 MBOE/d
+FANG,2023Q1,2023-05-01,425.0,251.4,150,2023-05-01:EX-99.1:diamondbackex991-5x1x23.htm,251.4 MBO/d (425.0 MBOE/d
+FANG,2023Q2,2023-07-31,449.9,263.1,150,2023-07-31:EX-99.1:diamondbackex991-7x31x23.htm,263.1 MBO/d (449.9 MBOE/d
+FANG,2023Q3,2023-11-06,452.8,266.1,150,2023-11-06:EX-99.1:diamondbackex991-11x6x23.htm,266.1 MBO/d (452.8 MBOE/d
+FANG,2023Q4,2024-02-20,466.0,275.0,150,2024-02-20:EX-99.1:diamondbackex991-2x20x24.htm,oil production guidance of 270 - 275 MBO/d (458 - 466 MBOE/d
+FANG,2024Q1,2024-04-30,461.1,273.3,150,2024-04-30:EX-99.1:diamondbackex991-4x30x24.htm,273.3 MBO/d (461.1 MBOE/d
+FANG,2024Q2,2024-08-05,474.7,276.1,150,2024-08-05:EX-99.1:diamondbackex991-8x5x24.htm,276.1 MBO/d (474.7 MBOE/d
+FANG,2024Q3,2024-11-04,571.1,321.1,150,2024-11-04:EX-99.1:diamondbackex991-11x4x24.htm,321.1 MBO/d (571.1 MBOE/d
+FANG,2024Q4,2025-02-24,909.0,498.0,150,2025-02-24:EX-99.1:diamondbackex991-2x24x25.htm,oil production guidance of 485 - 498 MBO/d (883 - 909 MBOE/d
+FANG,2025Q1,2025-05-05,850.7,475.9,150,2025-05-05:EX-99.1:diamondbackex991-5x5x25.htm,Average oil production of 475.9 MBO/d (850.7 MBOE/d
+FANG,2025Q2,2025-08-04,919.9,495.7,150,2025-08-04:EX-99.1:diamondbackex991-8x4x25.htm,Average oil production of 495.7 MBO/d (919.9 MBOE/d
+FANG,2025Q3,2025-11-03,942.9,503.8,150,2025-11-03:EX-99.1:diamondbackex991-11x3x25.htm,Average oil production of 503.8 MBO/d (942.9 MBOE/d
+FANG,2025Q4,2026-02-23,969.1,512.8,150,2026-02-23:EX-99.1:diamondbackex991-2x23x26.htm,Average oil production of 512.8 MBO/d (969.1 MBOE/d
+FANG,2026Q1,2026-05-04,979.4,521.0,150,2026-05-04:EX-99.1:diamondbackex991-5x4x26.htm,Average oil production of 521.0 MBO/d (979.4 MBOE/d
+FANG,2026Q2,2026-08-03,1018.0,525.0,150,2026-08-03:EX-99.1:diamondbackex991-8x3x26.htm,"Average oil production of 525 MBO/d • Production of 1,018 MBOE/d"

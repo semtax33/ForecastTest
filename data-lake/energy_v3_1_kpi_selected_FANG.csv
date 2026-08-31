@@ -1,0 +1,121 @@
+ticker,quarter,kpi,value,score,filing_date,source,method,raw_text
+FANG,2020Q3,oil_production,178.0,80,2020-11-02,2020-11-02:EX-99.1:diamondbackex991-11x2x.htm:table2,table,Oil production - MBO/d | Oil production - MBO/d | Oil production - MBO/d | 178.0 - 182.0 | 178.0 - 182.0 | 178.0 - 182.0 | 15.75 - 16.00 | 15.75 - 16.00 | 15.75 - 16.00
+FANG,2020Q3,realized_combined_price,26.75,80,2020-11-02,2020-11-02:EX-99.1:diamondbackex991-11x2x.htm:table6,table,Combined ($ per BOE) | Combined ($ per BOE) | Combined ($ per BOE) | $ | 26.75 | | | | | $ | 15.39 | | | | | $ | 36.20 |
+FANG,2020Q3,realized_gas_price,1.11,95,2020-11-02,2020-11-02:EX-99.1:diamondbackex991-11x2x.htm,prose,"realized prices were $38.75 per barrel of oil, $1.11 per Mcf of natural gas"
+FANG,2020Q3,realized_oil_price,38.75,95,2020-11-02,2020-11-02:EX-99.1:diamondbackex991-11x2x.htm,prose,average unhedged realized prices were $38.75 per barrel of oil
+FANG,2020Q3,total_production,290.0,80,2020-11-02,2020-11-02:EX-99.1:diamondbackex991-11x2x.htm:table2,table,Total net production - MBOE/d | Total net production - MBOE/d | Total net production - MBOE/d | 290.0 - 305.0 | 290.0 - 305.0 | 290.0 - 305.0 | 26.00 - 26.50 | 26.00 - 26.50 | 26.00 - 26.50
+FANG,2020Q4,oil_production,185.0,100,2021-02-22,2021-02-22:EX-99.1:diamondbackex991-2x22x21.htm,prose,oil production guidance of 178 - 185 MBO/d
+FANG,2020Q4,realized_combined_price,27.41,80,2021-02-22,2021-02-22:EX-99.1:diamondbackex991-2x22x21.htm:table8,table,Combined ($ per BOE) | Combined ($ per BOE) | Combined ($ per BOE) | $ | 27.41 | | | | | $ | 39.28 | | | | | $ | 25.07 | | | | | $ | 37.63 |
+FANG,2020Q4,realized_gas_price,1.35,95,2021-02-22,2021-02-22:EX-99.1:diamondbackex991-2x22x21.htm,prose,"realized prices were $38.64 per barrel of oil, $1.35 per Mcf of natural gas"
+FANG,2020Q4,realized_oil_price,38.64,95,2021-02-22,2021-02-22:EX-99.1:diamondbackex991-2x22x21.htm,prose,average unhedged realized prices were $38.64 per barrel of oil
+FANG,2020Q4,total_production,308.0,80,2021-02-22,2021-02-22:EX-99.1:diamondbackex991-2x22x21.htm:table4,table,Total net production - MBOE/d | Total net production - MBOE/d | Total net production - MBOE/d | 308.0 - 325.0 | 308.0 - 325.0 | 308.0 - 325.0 | 24.50 - 26.50 | 24.50 - 26.50 | 24.50 - 26.50
+FANG,2021Q1,oil_production,222.0,100,2021-04-16,2021-04-16:EX-99.1:diamondbackex991-4x12x21.htm,prose,oil production guidance of 218 - 222 MBO/d
+FANG,2021Q1,realized_combined_price,42.36,80,2021-05-04,2021-05-04:EX-99.1:diamondbackex991-5x3x21.htm:table6,table,Combined ($ per BOE) | Combined ($ per BOE) | Combined ($ per BOE) | $ | 42.36 | | | | | $ | 30.23 |
+FANG,2021Q1,realized_gas_price,3.05,95,2021-05-04,2021-05-04:EX-99.1:diamondbackex991-5x3x21.htm,prose,"realized prices were $56.94 per barrel of oil, $3.05 per Mcf of natural gas"
+FANG,2021Q1,realized_oil_price,56.94,95,2021-05-04,2021-05-04:EX-99.1:diamondbackex991-5x3x21.htm,prose,average unhedged realized prices were $56.94 per barrel of oil
+FANG,2021Q1,total_production,350.0,80,2021-05-04,2021-05-04:EX-99.1:diamondbackex991-5x3x21.htm:table2,table,Total net production - MBOE/d(a) | Total net production - MBOE/d(a) | Total net production - MBOE/d(a) | 350.0 - 360.0 | 350.0 - 360.0 | 350.0 - 360.0 | 25.00 - 27.00 | 25.00 - 27.00 | 25.00 - 27.00
+FANG,2021Q2,oil_production,222.0,100,2021-08-02,2021-08-02:EX-99.1:diamondbackex991-8x2x21.htm,prose,oil production guidance to 219 - 222 MBO/d
+FANG,2021Q2,realized_combined_price,45.63,80,2021-08-02,2021-08-02:EX-99.1:diamondbackex991-8x2x21.htm:table7,table,Combined ($ per BOE) | Combined ($ per BOE) | Combined ($ per BOE) | $ | 45.63 | | | | | $ | 42.36 | | | | | $ | 15.39 |
+FANG,2021Q2,realized_gas_price,2.4,95,2021-08-02,2021-08-02:EX-99.1:diamondbackex991-8x2x21.htm,prose,"realized prices were $63.22 per barrel of oil, $2.40 per Mcf of natural gas"
+FANG,2021Q2,realized_oil_price,63.22,95,2021-08-02,2021-08-02:EX-99.1:diamondbackex991-8x2x21.htm,prose,average unhedged realized prices were $63.22 per barrel of oil
+FANG,2021Q2,total_production,363.0,80,2021-08-02,2021-08-02:EX-99.1:diamondbackex991-8x2x21.htm:table2,table,Total net production - MBOE/d(a) | Total net production - MBOE/d(a) | Total net production - MBOE/d(a) | 363 - 370 | 363 - 370 | 363 - 370 | 26.25 - 27.00 | 26.25 - 27.00 | 26.25 - 27.00
+FANG,2021Q3,oil_production,223.0,100,2021-11-01,2021-11-01:EX-99.1:diamondbackex991-11x1x21.htm,prose,oil production guidance of 222 - 223 MBO/d
+FANG,2021Q3,realized_combined_price,51.0,80,2021-11-01,2021-11-01:EX-99.1:diamondbackex991-11x1x21.htm:table7,table,Combined ($ per BOE) | Combined ($ per BOE) | Combined ($ per BOE) | $ | 51.00 | | | | | $ | 45.63 | | | | | $ | 26.75 |
+FANG,2021Q3,realized_gas_price,3.34,95,2021-11-01,2021-11-01:EX-99.1:diamondbackex991-11x1x21.htm,prose,"realized prices were $68.27 per barrel of oil, $3.34 per Mcf of natural gas"
+FANG,2021Q3,realized_oil_price,68.27,95,2021-11-01,2021-11-01:EX-99.1:diamondbackex991-11x1x21.htm,prose,average unhedged realized prices were $68.27 per barrel of oil
+FANG,2021Q3,total_production,370.0,80,2021-11-01,2021-11-01:EX-99.1:diamondbackex991-11x1x21.htm:table2,table,Total net production - MBOE/d(a) | Total net production - MBOE/d(a) | Total net production - MBOE/d(a) | 370 - 372 | 370 - 372 | 370 - 372 | 27.25 - 27.75 | 27.25 - 27.75 | 27.25 - 27.75
+FANG,2021Q4,oil_production,222.0,100,2022-02-22,2022-02-22:EX-99.1:d302272dex991.htm,prose,oil production guidance of 218222 MBO/d
+FANG,2021Q4,realized_combined_price,56.47,95,2022-02-22,2022-02-22:EX-99.1:d302272dex991.htm,prose,realized price of $56.47 per BOE
+FANG,2021Q4,realized_gas_price,4.56,95,2022-02-22,2022-02-22:EX-99.1:d302272dex991.htm,prose,"realized prices were $74.50 per barrel of oil, $4.56 per Mcf of natural gas"
+FANG,2021Q4,realized_oil_price,74.5,95,2022-02-22,2022-02-22:EX-99.1:d302272dex991.htm,prose,average unhedged realized prices were $74.50 per barrel of oil
+FANG,2021Q4,total_production,369.0,80,2022-02-22,2022-02-22:EX-99.1:d302272dex991.htm:table28,table,Total net production  MBOE/d | | 369 - 376 | | | 29.50 - 31.50 |
+FANG,2022Q1,oil_production,218.0,80,2022-05-02,2022-05-02:EX-99.1:diamondbackex991-5x2x22.htm:table2,table,Oil production - MBO/d | Oil production - MBO/d | Oil production - MBO/d | 218 - 222 | 218 - 222 | 218 - 222 | 18.00 - 19.25 | 18.00 - 19.25 | 18.00 - 19.25
+FANG,2022Q1,realized_combined_price,69.6,95,2022-05-02,2022-05-02:EX-99.1:diamondbackex991-5x2x22.htm,prose,realized price of $69.60 per BOE
+FANG,2022Q1,realized_gas_price,3.61,95,2022-05-02,2022-05-02:EX-99.1:diamondbackex991-5x2x22.htm,prose,"realized prices were $97.03 per barrel of oil, $3.61 per Mcf of natural gas"
+FANG,2022Q1,realized_oil_price,97.03,95,2022-05-02,2022-05-02:EX-99.1:diamondbackex991-5x2x22.htm,prose,average unhedged realized prices were $97.03 per barrel of oil
+FANG,2022Q1,total_production,369.0,80,2022-05-02,2022-05-02:EX-99.1:diamondbackex991-5x2x22.htm:table2,table,Total net production - MBOE/d | Total net production - MBOE/d | Total net production - MBOE/d | 369 - 376 | 369 - 376 | 369 - 376 | 30.50 - 32.75 | 30.50 - 32.75 | 30.50 - 32.75
+FANG,2022Q2,oil_production,220.0,80,2022-08-01,2022-08-01:EX-99.1:diamondbackex991-8x1x22.htm:table2,table,Oil production - MBO/d | Oil production - MBO/d | Oil production - MBO/d | 220 - 222 | 220 - 222 | 220 - 222 | 19.00 - 19.75 | 19.00 - 19.75 | 19.00 - 19.75
+FANG,2022Q2,realized_combined_price,79.49,95,2022-08-01,2022-08-01:EX-99.1:diamondbackex991-8x1x22.htm,prose,realized price of $79.49 per BOE
+FANG,2022Q2,realized_gas_price,6.15,95,2022-08-01,2022-08-01:EX-99.1:diamondbackex991-8x1x22.htm,prose,"realized prices were $108.80 per barrel of oil, $6.15 per Mcf of natural gas"
+FANG,2022Q2,realized_oil_price,108.8,95,2022-08-01,2022-08-01:EX-99.1:diamondbackex991-8x1x22.htm,prose,average unhedged realized prices were $108.80 per barrel of oil
+FANG,2022Q2,total_production,374.0,80,2022-08-01,2022-08-01:EX-99.1:diamondbackex991-8x1x22.htm:table2,table,Total net production - MBOE/d | Total net production - MBOE/d | Total net production - MBOE/d | 374 - 380 | 374 - 380 | 374 - 380 | 32.50 - 33.75 | 32.50 - 33.75 | 32.50 - 33.75
+FANG,2022Q3,oil_production,223.0,80,2022-11-07,2022-11-07:EX-99.1:diamondbackex991-11x7x22.htm:table2,table,Oil production - MBO/d | Oil production - MBO/d | Oil production - MBO/d | 223 - 224 | 223 - 224 | 223 - 224 | 19.25 - 19.50 | 19.25 - 19.50 | 19.25 - 19.50
+FANG,2022Q3,realized_combined_price,67.25,95,2022-11-07,2022-11-07:EX-99.1:diamondbackex991-11x7x22.htm,prose,realized price of $67.25 per BOE
+FANG,2022Q3,realized_gas_price,6.46,95,2022-11-07,2022-11-07:EX-99.1:diamondbackex991-11x7x22.htm,prose,"realized prices were $89.79 per barrel of oil, $6.46 per Mcf of natural gas"
+FANG,2022Q3,realized_oil_price,89.79,95,2022-11-07,2022-11-07:EX-99.1:diamondbackex991-11x7x22.htm,prose,average unhedged realized prices were $89.79 per barrel of oil
+FANG,2022Q3,total_production,385.0,80,2022-11-07,2022-11-07:EX-99.1:diamondbackex991-11x7x22.htm:table2,table,Net production - MBOE/d | Net production - MBOE/d | Net production - MBOE/d | 385 - 386 | 385 - 386 | 385 - 386 | 33.25 - 33.75 | 33.25 - 33.75 | 33.25 - 33.75
+FANG,2022Q4,oil_production,262.0,100,2023-02-21,2023-02-21:EX-99.1:diamondbackex991-2x21x23.htm,prose,oil production guidance of 256 - 262 MBO/d
+FANG,2022Q4,realized_combined_price,55.76,95,2023-02-21,2023-02-21:EX-99.1:diamondbackex991-2x21x23.htm,prose,realized price of $55.76 per BOE
+FANG,2022Q4,realized_gas_price,3.2,95,2023-02-21,2023-02-21:EX-99.1:diamondbackex991-2x21x23.htm,prose,"realized prices were $80.37 per barrel of oil, $3.20 per Mcf of natural gas"
+FANG,2022Q4,realized_oil_price,80.37,95,2023-02-21,2023-02-21:EX-99.1:diamondbackex991-2x21x23.htm,prose,average unhedged realized prices were $80.37 per barrel of oil
+FANG,2022Q4,total_production,430.0,80,2023-02-21,2023-02-21:EX-99.1:diamondbackex991-2x21x23.htm:table4,table,Net production - MBOE/d | Net production - MBOE/d | Net production - MBOE/d | 430 - 440 | 430 - 440 | 430 - 440 | 34.50 - 38.00 | 34.50 - 38.00 | 34.50 - 38.00
+FANG,2023Q1,oil_production,256.0,80,2023-05-01,2023-05-01:EX-99.1:diamondbackex991-5x1x23.htm:table2,table,Oil production - MBO/d | Oil production - MBO/d | Oil production - MBO/d | 256 - 262 | 256 - 262 | 256 - 262 | 20.50 - 22.50 | 20.50 - 22.50 | 20.50 - 22.50
+FANG,2023Q1,realized_combined_price,49.72,95,2023-05-01,2023-05-01:EX-99.1:diamondbackex991-5x1x23.htm,prose,realized price of $49.72 per BOE
+FANG,2023Q1,realized_gas_price,1.46,95,2023-05-01,2023-05-01:EX-99.1:diamondbackex991-5x1x23.htm,prose,"realized prices were $73.11 per barrel of oil, $1.46 per Mcf of natural gas"
+FANG,2023Q1,realized_oil_price,73.11,95,2023-05-01,2023-05-01:EX-99.1:diamondbackex991-5x1x23.htm,prose,average unhedged realized prices were $73.11 per barrel of oil
+FANG,2023Q1,total_production,430.0,80,2023-05-01,2023-05-01:EX-99.1:diamondbackex991-5x1x23.htm:table2,table,Net production - MBOE/d | Net production - MBOE/d | Net production - MBOE/d | 430 - 440 | 430 - 440 | 430 - 440 | 35.25 - 38.75 | 35.25 - 38.75 | 35.25 - 38.75
+FANG,2023Q2,oil_production,261.0,100,2023-07-31,2023-07-31:EX-99.2:diamondbackex992-7x31x23.htm,prose,oil production moves to 261 MBO/d
+FANG,2023Q2,realized_combined_price,46.31,95,2023-07-31,2023-07-31:EX-99.1:diamondbackex991-7x31x23.htm,prose,realized price of $46.31 per BOE
+FANG,2023Q2,realized_gas_price,0.94,95,2023-07-31,2023-07-31:EX-99.1:diamondbackex991-7x31x23.htm,prose,"realized prices were $71.33 per barrel of oil, $0.94 per Mcf of natural gas"
+FANG,2023Q2,realized_oil_price,71.33,95,2023-07-31,2023-07-31:EX-99.1:diamondbackex991-7x31x23.htm,prose,average unhedged realized prices were $71.33 per barrel of oil
+FANG,2023Q2,total_production,435.0,80,2023-07-31,2023-07-31:EX-99.1:diamondbackex991-7x31x23.htm:table2,table,Net production - MBOE/d | Net production - MBOE/d | Net production - MBOE/d | 435 - 445 (from 430 - 440) | 435 - 445 (from 430 - 440) | 435 - 445 (from 430 - 440) | 36.50 - 37.50 | 36.50 - 37.50 | 36.50 - 37.50
+FANG,2023Q3,oil_production,263.0,100,2023-11-06,2023-11-06:EX-99.2:diamondbackex992-11x6x23.htm,prose,oil production moves to approximately 263 MBO/d
+FANG,2023Q3,realized_combined_price,54.37,95,2023-11-06,2023-11-06:EX-99.1:diamondbackex991-11x6x23.htm,prose,realized price of $54.37 per BOE
+FANG,2023Q3,realized_gas_price,1.62,95,2023-11-06,2023-11-06:EX-99.1:diamondbackex991-11x6x23.htm,prose,"realized prices were $81.57 per barrel of oil, $1.62 per Mcf of natural gas"
+FANG,2023Q3,realized_oil_price,81.57,95,2023-11-06,2023-11-06:EX-99.1:diamondbackex991-11x6x23.htm,prose,average unhedged realized prices were $81.57 per barrel of oil
+FANG,2023Q3,total_production,452.8,100,2023-11-06,2023-11-06:EX-99.2:diamondbackex992-11x6x23.htm,prose,"total production, at 266.1 MBO/d and 452.8 MBOE/d"
+FANG,2023Q4,oil_production,276.1,100,2024-08-05,2024-08-05:EX-99.2:diamondbackex992-8x5x24.htm,prose,oil production was 276.1 MBO/d
+FANG,2023Q4,realized_combined_price,50.87,95,2024-02-20,2024-02-20:EX-99.1:diamondbackex991-2x20x24.htm,prose,realized price of $50.87 per BOE
+FANG,2023Q4,realized_gas_price,1.29,95,2024-02-20,2024-02-20:EX-99.1:diamondbackex991-2x20x24.htm,prose,"realized prices were $76.42 per barrel of oil, $1.29 per Mcf of natural gas"
+FANG,2023Q4,realized_oil_price,76.42,95,2024-02-20,2024-02-20:EX-99.1:diamondbackex991-2x20x24.htm,prose,average unhedged realized prices were $76.42 per barrel of oil
+FANG,2023Q4,total_production,462.6,100,2024-02-20,2024-02-20:EX-99.2:diamondbackex992-2x20x24.htm,prose,"total production, at 273.1 MBO/d and 462.6 MBOE/d"
+FANG,2024Q1,oil_production,273.3,100,2024-04-30,2024-04-30:EX-99.2:diamondbackex992-4x30x24.htm,prose,oil production of 273.3 MBO/d
+FANG,2024Q1,realized_combined_price,50.07,95,2024-04-30,2024-04-30:EX-99.1:diamondbackex991-4x30x24.htm,prose,realized price of $50.07 per BOE
+FANG,2024Q1,realized_gas_price,0.99,95,2024-04-30,2024-04-30:EX-99.1:diamondbackex991-4x30x24.htm,prose,"realized prices were $75.06 per barrel of oil, $0.99 per Mcf of natural gas"
+FANG,2024Q1,realized_oil_price,75.06,95,2024-04-30,2024-04-30:EX-99.1:diamondbackex991-4x30x24.htm,prose,average unhedged realized prices were $75.06 per barrel of oil
+FANG,2024Q1,total_production,458.0,80,2024-04-30,2024-04-30:EX-99.1:diamondbackex991-4x30x24.htm:table2,table,Net production - MBOE/d | Net production - MBOE/d | Net production - MBOE/d | 458 - 466 | 458 - 466 | 458 - 466 | 46.00 - 48.00 | 46.00 - 48.00 | 46.00 - 48.00
+FANG,2024Q2,oil_production,273.0,80,2024-08-05,2024-08-05:EX-99.1:diamondbackex991-8x5x24.htm:table2,table,Oil production - MBO/d | Oil production - MBO/d | Oil production - MBO/d | 273 - 276 (from 270 - 275) | 273 - 276 (from 270 - 275) | 273 - 276 (from 270 - 275) | 26.00 - 26.75 | 26.00 - 26.75 | 26.00 - 26.75
+FANG,2024Q2,realized_combined_price,50.33,95,2024-08-05,2024-08-05:EX-99.1:diamondbackex991-8x5x24.htm,prose,realized price of $50.33 per BOE
+FANG,2024Q2,realized_gas_price,0.1,95,2024-08-05,2024-08-05:EX-99.1:diamondbackex991-8x5x24.htm,prose,"realized prices were $79.51 per barrel of oil, $0.10 per Mcf of natural gas"
+FANG,2024Q2,realized_oil_price,79.51,95,2024-08-05,2024-08-05:EX-99.1:diamondbackex991-8x5x24.htm,prose,average unhedged realized prices were $79.51 per barrel of oil
+FANG,2024Q2,total_production,462.0,80,2024-08-05,2024-08-05:EX-99.1:diamondbackex991-8x5x24.htm:table2,table,Net production - MBOE/d | Net production - MBOE/d | Net production - MBOE/d | 462 - 470 (from 458 - 466) | 462 - 470 (from 458 - 466) | 462 - 470 (from 458 - 466) | 46.75 - 48.25 | 46.75 - 48.25 | 46.75 - 48.25
+FANG,2024Q3,oil_production,321.0,100,2024-10-01,2024-10-01:EX-99.1:diamondbackex991-10x1x24.htm,prose,oil production guidance of 319 - 321 MBO/d
+FANG,2024Q3,realized_combined_price,44.8,95,2024-11-04,2024-11-04:EX-99.1:diamondbackex991-11x4x24.htm,prose,realized price of $44.80 per BOE
+FANG,2024Q3,realized_gas_price,-0.26,80,2024-11-04,2024-11-04:EX-99.1:diamondbackex991-11x4x24.htm:table6,table,Natural gas ($ per Mcf) | Natural gas ($ per Mcf) | Natural gas ($ per Mcf) | $ | (0.26) | | | | | $ | 0.10 | | | | | $ | 1.62 |
+FANG,2024Q3,realized_oil_price,73.13,95,2024-11-04,2024-11-04:EX-99.1:diamondbackex991-11x4x24.htm,prose,average unhedged realized prices were $73.13 per barrel of oil
+FANG,2024Q3,total_production,587.0,80,2024-11-04,2024-11-04:EX-99.1:diamondbackex991-11x4x24.htm:table2,table,2024 Net production - MBOE/d | 2024 Net production - MBOE/d | 2024 Net production - MBOE/d | 587 - 590 (from 462 - 470) | 587 - 590 (from 462 - 470) | 587 - 590 (from 462 - 470) | 48.75 - 49.25 | 48.75 - 49.25 | 48.75 - 49.25
+FANG,2024Q4,oil_production,498.0,100,2025-02-24,2025-02-24:EX-99.1:diamondbackex991-2x24x25.htm,prose,oil production guidance of 485 - 498 MBO/d
+FANG,2024Q4,realized_combined_price,42.71,95,2025-02-24,2025-02-24:EX-99.1:diamondbackex991-2x24x25.htm,prose,realized price of $42.71 per BOE
+FANG,2024Q4,realized_gas_price,0.48,95,2025-02-24,2025-02-24:EX-99.1:diamondbackex991-2x24x25.htm,prose,"realized prices were $69.48 per barrel of oil, $0.48 per Mcf of natural gas"
+FANG,2024Q4,realized_oil_price,69.48,95,2025-02-24,2025-02-24:EX-99.1:diamondbackex991-2x24x25.htm,prose,average unhedged realized prices were $69.48 per barrel of oil
+FANG,2024Q4,total_production,598.0,100,2025-02-24,2025-02-24:EX-99.2:diamondbackex992-2x24x25.htm,prose,production was 598 MBOE/d
+FANG,2025Q1,oil_production,475.9,100,2025-05-05,2025-05-05:EX-99.1:diamondbackex991-5x5x25.htm,prose,Average oil production of 475.9 MBO/d
+FANG,2025Q1,realized_combined_price,47.77,95,2025-05-05,2025-05-05:EX-99.1:diamondbackex991-5x5x25.htm,prose,realized price of $47.77 per BOE
+FANG,2025Q1,realized_gas_price,2.11,95,2025-05-05,2025-05-05:EX-99.1:diamondbackex991-5x5x25.htm,prose,"realized prices were $70.95 per barrel of oil, $2.11 per Mcf of natural gas"
+FANG,2025Q1,realized_oil_price,70.95,95,2025-05-05,2025-05-05:EX-99.1:diamondbackex991-5x5x25.htm,prose,average unhedged realized prices were $70.95 per barrel of oil
+FANG,2025Q1,total_production,857.0,80,2025-05-05,2025-05-05:EX-99.1:diamondbackex991-5x5x25.htm:table2,table,2025 Net production - MBOE/d | 2025 Net production - MBOE/d | 2025 Net production - MBOE/d | 857 - 900 (from 883 - 909) | 857 - 900 (from 883 - 909) | 857 - 900 (from 883 - 909) | 74.5 - 79.0 | 74.5 - 79.0 | 74.5 - 79.0
+FANG,2025Q2,oil_production,495.7,100,2025-08-04,2025-08-04:EX-99.1:diamondbackex991-8x4x25.htm,prose,Average oil production of 495.7 MBO/d
+FANG,2025Q2,realized_combined_price,39.61,95,2025-08-04,2025-08-04:EX-99.1:diamondbackex991-8x4x25.htm,prose,realized price of $39.61 per BOE
+FANG,2025Q2,realized_gas_price,0.88,95,2025-08-04,2025-08-04:EX-99.1:diamondbackex991-8x4x25.htm,prose,"realized prices were $63.23 per barrel of oil, $0.88 per Mcf of natural gas"
+FANG,2025Q2,realized_oil_price,63.23,95,2025-08-04,2025-08-04:EX-99.1:diamondbackex991-8x4x25.htm,prose,average unhedged realized prices were $63.23 per barrel of oil
+FANG,2025Q2,total_production,890.0,80,2025-08-04,2025-08-04:EX-99.1:diamondbackex991-8x4x25.htm:table2,table,2025 Net production - MBOE/d | 2025 Net production - MBOE/d | 2025 Net production - MBOE/d | 890 - 910 (from 857 - 900) | 890 - 910 (from 857 - 900) | 890 - 910 (from 857 - 900) | 76.5 - 81.5 | 76.5 - 81.5 | 76.5 - 81.5
+FANG,2025Q3,oil_production,503.8,100,2025-11-03,2025-11-03:EX-99.1:diamondbackex991-11x3x25.htm,prose,Average oil production of 503.8 MBO/d
+FANG,2025Q3,realized_combined_price,39.73,80,2025-11-03,2025-11-03:EX-99.1:diamondbackex991-11x3x25.htm:table2,table,Combined ($ per BOE) | Combined ($ per BOE) | Combined ($ per BOE) | $ | 39.73 | | | | | $ | 39.61 | | | | | $ | 44.80 |
+FANG,2025Q3,realized_gas_price,0.75,95,2025-10-09,2025-10-09:8-K:fang-20251009.htm,prose,"realized prices were $64.60 per barrel of oil, $0.75 per Mcf of natural gas"
+FANG,2025Q3,realized_oil_price,64.6,95,2025-10-09,2025-10-09:8-K:fang-20251009.htm,prose,average unhedged realized prices were $64.60 per barrel of oil
+FANG,2025Q3,total_production,910.0,80,2025-11-03,2025-11-03:EX-99.1:diamondbackex991-11x3x25.htm:table9,table,2025 Net production - MBOE/d | 2025 Net production - MBOE/d | 2025 Net production - MBOE/d | 910 - 920 (from 890 - 910) | 910 - 920 (from 890 - 910) | 910 - 920 (from 890 - 910) | 92.8 - 93.5 | 92.8 - 93.5 | 92.8 - 93.5
+FANG,2025Q4,oil_production,512.8,100,2026-02-23,2026-02-23:EX-99.1:diamondbackex991-2x23x26.htm,prose,Average oil production of 512.8 MBO/d
+FANG,2025Q4,realized_combined_price,34.02,80,2026-02-23,2026-02-23:EX-99.1:diamondbackex991-2x23x26.htm:table2,table,Combined ($ per BOE) | Combined ($ per BOE) | Combined ($ per BOE) | $ | 34.02 | | | | | $ | 42.71 | | | | | $ | 40.02 | | | | | $ | 46.12 |
+FANG,2025Q4,realized_gas_price,0.03,95,2026-01-12,2026-01-12:8-K:fang-20260112.htm,prose,"realized prices were $58.00 per barrel of oil, $0.03 per Mcf of natural gas"
+FANG,2025Q4,realized_oil_price,58.0,95,2026-01-12,2026-01-12:8-K:fang-20260112.htm,prose,average unhedged realized prices were $58.00 per barrel of oil
+FANG,2025Q4,total_production,926.0,80,2026-02-23,2026-02-23:EX-99.1:diamondbackex991-2x23x26.htm:table14,table,2026 Net production - MBOE/d | 2026 Net production - MBOE/d | 2026 Net production - MBOE/d | 926 - 962 | 926 - 962 | 926 - 962 | 120.0 - 132.0 | 120.0 - 132.0 | 120.0 - 132.0
+FANG,2026Q1,oil_production,521.0,100,2026-05-04,2026-05-04:EX-99.1:diamondbackex991-5x4x26.htm,prose,Average oil production of 521.0 MBO/d
+FANG,2026Q1,realized_combined_price,43.4,80,2026-05-04,2026-05-04:EX-99.1:diamondbackex991-5x4x26.htm:table2,table,Combined ($ per BOE) | Combined ($ per BOE) | Combined ($ per BOE) | $ | 43.40 | | | | | $ | 34.02 | | | | | $ | 47.77 |
+FANG,2026Q1,realized_gas_price,0.18,95,2026-04-13,2026-04-13:8-K:fang-20260413.htm,prose,"realized prices were $73.47 per barrel of oil, $0.18 per Mcf of natural gas"
+FANG,2026Q1,realized_oil_price,73.47,95,2026-04-13,2026-04-13:8-K:fang-20260413.htm,prose,average unhedged realized prices were $73.47 per barrel of oil
+FANG,2026Q1,total_production,972.0,80,2026-05-04,2026-05-04:EX-99.1:diamondbackex991-5x4x26.htm:table9,table,2026 Net production - MBOE/d | 2026 Net production - MBOE/d | 2026 Net production - MBOE/d | 972+ (from 926 - 962) | 972+ (from 926 - 962) | 972+ (from 926 - 962) | 126.0 - 130.0 | 126.0 - 130.0 | 126.0 - 130.0
+FANG,2026Q2,oil_production,525.0,100,2026-08-03,2026-08-03:EX-99.1:diamondbackex991-8x3x26.htm,prose,Average oil production of 525 MBO/d
+FANG,2026Q2,realized_combined_price,51.68,80,2026-08-03,2026-08-03:EX-99.1:diamondbackex991-8x3x26.htm:table2,table,Combined ($ per BOE) | Combined ($ per BOE) | Combined ($ per BOE) | $ | 51.68 | | | | | $ | 43.40 | | | | | $ | 39.61 |
+FANG,2026Q2,realized_gas_price,-2.15,80,2026-08-03,2026-08-03:EX-99.1:diamondbackex991-8x3x26.htm:table2,table,Natural gas ($ per Mcf) | Natural gas ($ per Mcf) | Natural gas ($ per Mcf) | $ | (2.15) | | | | | $ | 0.18 | | | | | $ | 0.88 |
+FANG,2026Q2,realized_oil_price,96.82,95,2026-07-13,2026-07-13:8-K:fang-20260713.htm,prose,average unhedged realized prices were $96.82 per barrel of oil
+FANG,2026Q2,total_production,1018.0,100,2026-08-03,2026-08-03:EX-99.1:diamondbackex991-8x3x26.htm,prose,"Production of 1,018 MBOE/d"

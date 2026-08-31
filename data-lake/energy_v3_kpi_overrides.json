@@ -1,0 +1,34 @@
+{
+  "COP": {
+    "total_production": null,
+    "oil_production": null,
+    "ngl_production": null,
+    "gas_production": null,
+    "realized_oil_price": null,
+    "realized_gas_price": null
+  },
+  "EOG": {
+    "total_production": null,
+    "oil_production": null,
+    "ngl_production": null,
+    "gas_production": null,
+    "realized_oil_price": null,
+    "realized_gas_price": null
+  },
+  "FANG": {
+    "total_production": null,
+    "oil_production": null,
+    "ngl_production": null,
+    "gas_production": null,
+    "realized_oil_price": null,
+    "realized_gas_price": null
+  },
+  "DVN": {
+    "total_production": null,
+    "oil_production": null,
+    "ngl_production": null,
+    "gas_production": null,
+    "realized_oil_price": null,
+    "realized_gas_price": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "version": "3.3",
+  "as_of_date": "2026-08-31",
+  "price_window_mode": "SAME_DAY_OF_QUARTER",
+  "day_of_quarter": 61,
+  "eia_series": {
+    "wti": "PET.RWTC.D",
+    "henry": "NG.RNGWHHD.D",
+    "propane": "PET.EER_EPLLPA_PF4_Y44MB_DPG.D"
+  },
+  "eog_component_model": "Oil volume * WTI + NGL volume * Mont Belvieu Propane * 42 + Gas volume * Henry Hub",
+  "current_volume_source": "Target-quarter company guidance",
+  "comparison_volume_source": "Prior-year actual production",
+  "ngl_price_proxy": "Mont Belvieu TX Propane Spot Price FOB",
+  "non_eog_model": "V3.2.7 structural model",
+  "metrics": [
+    "MAE_log_points",
+    "MAE_yoy_pct_points"
+  ]
+}

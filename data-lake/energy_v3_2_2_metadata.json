@@ -1,0 +1,30 @@
+{
+  "version": "3.2.2",
+  "tickers": [
+    "COP",
+    "EOG",
+    "FANG",
+    "DVN"
+  ],
+  "production_qc": {
+    "max_organic_qoq_log_growth": 35.0,
+    "max_qoq_threshold": 55.0,
+    "total_oil_ratio_min": 1.15,
+    "total_oil_ratio_max": 5.0,
+    "mna_jump_exception": "ma_event quarter and immediately following quarter"
+  },
+  "source_quality": {
+    "GUIDANCE_VS_ACTUAL": 1.0,
+    "ACTUAL_VS_ACTUAL": 0.9,
+    "GUIDANCE_VS_GUIDANCE": 0.75,
+    "INDUSTRY_FALLBACK": 0.35
+  },
+  "production_source_priority": [
+    "GUIDANCE_VS_ACTUAL",
+    "ACTUAL_VS_ACTUAL",
+    "GUIDANCE_VS_GUIDANCE",
+    "INDUSTRY_FALLBACK"
+  ],
+  "blend_rule": "historical structural weight x current production source quality",
+  "guardrail": "Structural disabled when its historical MAE is not better than V2.1"
+}
