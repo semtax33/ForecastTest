@@ -1,0 +1,9 @@
+[project]
+name = "energy-nowcast"
+version = "3.4.0"
+requires-python = ">=3.11"
+dependencies = ["numpy", "pandas"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
