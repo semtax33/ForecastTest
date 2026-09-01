@@ -1,5 +1,8 @@
 __pycache__/
 .pytest_cache/
 *.py[cod]
+*.sqlite-shm
+*.sqlite-wal
+output/operations/archive/
 *.csv
 *.json

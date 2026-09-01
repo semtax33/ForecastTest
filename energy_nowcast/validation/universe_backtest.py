@@ -93,7 +93,10 @@ def load_e_and_p_panel(
         ("propane_price_bbl", "propane_log_yoy"),
     ):
         lagged = panel.groupby("ticker")[column].shift(4)
-        panel[output] = 100.0 * np.log(panel[column] / lagged)
+        positive_ratio = (panel[column] / lagged).where(
+            panel[column].gt(0) & lagged.gt(0)
+        )
+        panel[output] = 100.0 * np.log(positive_ratio)
     panel["basket_price_log_yoy"] = (
         0.55 * panel["wti_log_yoy"]
         + 0.25 * panel["henry_log_yoy"]
@@ -105,6 +108,7 @@ def load_e_and_p_panel(
     panel["lag_report_date"] = panel.groupby("ticker")["report_date"].shift(1)
     panel["forecast_cutoff_date"] = panel["quarter"].map(_cutoff_date)
     panel["pit_feature_available"] = panel["lag_report_date"].le(panel["forecast_cutoff_date"])
+    panel = panel.replace([np.inf, -np.inf], np.nan)
     required = ["revenue", "actual_log_yoy", *CANDIDATE_FEATURES]
     panel = panel.loc[
         panel[required].notna().all(axis=1)
@@ -214,4 +218,3 @@ class UniverseBacktester:
         if not outputs:
             return pd.DataFrame()
         return pd.concat(outputs, ignore_index=True).sort_values(["quarter_ordinal", "ticker"]).reset_index(drop=True)
-

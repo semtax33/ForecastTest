@@ -2,7 +2,7 @@
 name = "energy-nowcast"
 version = "3.4.0"
 requires-python = ">=3.11"
-dependencies = ["numpy", "pandas"]
+dependencies = ["lxml", "numpy", "pandas", "pyarrow"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
