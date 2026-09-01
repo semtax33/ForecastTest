@@ -15,10 +15,14 @@ from ...data.cutoff import quarter_cutoff_date
 
 
 FRED_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}"
-EIA_INVENTORY_URL = (
+EIA_WEEKLY_SERIES_URL = (
     "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?"
-    "f=W&n=PET&s=WCESTUS1"
+    "f=W&n=PET&s={series}"
 )
+EIA_CRUDE_INVENTORY = "WCESTUS1"
+EIA_GASOLINE_INVENTORY = "WGTSTUS1"
+EIA_DISTILLATE_INVENTORY = "WDISTUS1"
+EIA_REFINERY_UTILIZATION = "WPULEUS3"
 EIA_CURVE_1_URL = "https://www.eia.gov/dnav/pet/hist/rclc1D.htm"
 EIA_CURVE_2_URL = "https://www.eia.gov/dnav/pet/hist/rclc2D.htm"
 EIA_RIG_URL = "https://www.eia.gov/dnav/ng/hist/e_ertrro_xr0_nus_cm.htm"
@@ -65,8 +69,9 @@ def _fred_series(series: str, availability_lag_days: int) -> pd.DataFrame:
     return frame[["series", "date", "availability_date", "value", "source_url"]]
 
 
-def _inventory_series() -> pd.DataFrame:
-    tables = pd.read_html(StringIO(_get_text(EIA_INVENTORY_URL)))
+def _weekly_eia_series(series_id: str, series_name: str) -> pd.DataFrame:
+    source_url = EIA_WEEKLY_SERIES_URL.format(series=series_id)
+    tables = pd.read_html(StringIO(_get_text(source_url)))
     table = next(frame for frame in tables if frame.shape[1] == 13 and len(frame) > 100)
     rows: list[dict[str, object]] = []
     for _, row in table.iterrows():
@@ -84,14 +89,20 @@ def _inventory_series() -> pd.DataFrame:
             if pd.isna(date) or not np.isfinite(value):
                 continue
             rows.append({
-                "series": "EIA_CRUDE_INVENTORY_EX_SPR",
+                "series": series_name,
                 "date": date,
                 # Friday reference week is published in the following WPSR.
                 "availability_date": date + pd.Timedelta(days=5),
                 "value": float(value),
-                "source_url": EIA_INVENTORY_URL,
+                "source_url": source_url,
             })
     return pd.DataFrame(rows).drop_duplicates("date").sort_values("date")
+
+
+def _inventory_series() -> pd.DataFrame:
+    return _weekly_eia_series(
+        EIA_CRUDE_INVENTORY, "EIA_CRUDE_INVENTORY_EX_SPR"
+    )
 
 
 def _daily_eia_table(url: str, series: str) -> pd.DataFrame:
@@ -186,6 +197,15 @@ def refresh_macro_snapshot(snapshot_dir: Path, local_price_path: Path) -> pd.Dat
         _fred_series("OVXCLS", availability_lag_days=1),
         _fred_series("DTWEXBGS", availability_lag_days=7),
         _inventory_series(),
+        _weekly_eia_series(
+            EIA_GASOLINE_INVENTORY, "EIA_TOTAL_GASOLINE_INVENTORY"
+        ),
+        _weekly_eia_series(
+            EIA_DISTILLATE_INVENTORY, "EIA_DISTILLATE_INVENTORY"
+        ),
+        _weekly_eia_series(
+            EIA_REFINERY_UTILIZATION, "EIA_REFINERY_UTILIZATION_PCT"
+        ),
         _rig_series(),
         cl1,
         cl2,
@@ -211,6 +231,9 @@ def refresh_macro_snapshot(snapshot_dir: Path, local_price_path: Path) -> pd.Dat
             "OVXCLS": "observation_date_plus_1_day",
             "DTWEXBGS": "observation_date_plus_7_days",
             "EIA_CRUDE_INVENTORY_EX_SPR": "week_end_plus_5_days",
+            "EIA_TOTAL_GASOLINE_INVENTORY": "week_end_plus_5_days",
+            "EIA_DISTILLATE_INVENTORY": "week_end_plus_5_days",
+            "EIA_REFINERY_UTILIZATION_PCT": "week_end_plus_5_days",
             "EIA_US_CRUDE_OIL_RIGS": "next_month_end",
             "EIA_WTI_FUTURES_1_2": "observation_date_plus_7_days",
             "EIA_WTI_HENRY_SPOT": "observation_date_plus_7_days",
@@ -312,6 +335,15 @@ def build_macro_feature_panel(
         "ovx_regime_z": ("OVXCLS", 756, 252, 20, 45),
         "dxy_regime_z": ("DTWEXBGS", 756, 252, 20, 45),
         "crude_inventory_z": ("EIA_CRUDE_INVENTORY_EX_SPR", 260, 104, 1, 21),
+        "gasoline_inventory_z": (
+            "EIA_TOTAL_GASOLINE_INVENTORY", 260, 104, 1, 21
+        ),
+        "distillate_inventory_z": (
+            "EIA_DISTILLATE_INVENTORY", 260, 104, 1, 21
+        ),
+        "refinery_utilization_z": (
+            "EIA_REFINERY_UTILIZATION_PCT", 260, 104, 4, 21
+        ),
         "oil_rig_z": ("EIA_US_CRUDE_OIL_RIGS", 60, 24, 1, 75),
         "wti_regime_z": ("EIA_WTI_SPOT", 756, 252, 20, 45),
         "henry_regime_z": ("EIA_HENRY_SPOT", 756, 252, 20, 45),
@@ -351,7 +383,12 @@ def build_macro_feature_panel(
         )
         rows.append(row)
     result = pd.DataFrame(rows)
-    for feature in (*OIL_FEATURES, *MIXED_FEATURES):
+    audited_features = (
+        *specs,
+        "wti_curve_slope_pct",
+        "oil_gas_regime_spread",
+    )
+    for feature in audited_features:
         available_column = f"{feature}_availability_date"
         if available_column not in result:
             continue

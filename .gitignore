@@ -6,3 +6,6 @@ __pycache__/
 output/operations/archive/
 *.csv
 *.json
+*.html
+*.htm
+*.parquet

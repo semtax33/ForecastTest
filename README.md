@@ -209,3 +209,157 @@ gates. TIME is the decision split; LOCO is reported separately as a cold-start
 diagnostic. No V3.6 candidate currently passes, so no combination is formed and
 V3.5.3 remains the research benchmark. V3.4 remains the production champion at
 0/20 matched live observations.
+
+## Energy platform Phase 2-4 structural research
+
+```powershell
+python run_phase2_4_structural_research.py --refresh-free-data
+python run_phase2_4_structural_research.py
+```
+
+Phase 2 separates Integrated (`XOM`, `CVX`) from pure Refining (`VLO`, `MPC`,
+`PSX`). Integrated uses an upstream + downstream + chemicals sum-of-parts
+driver. Refining revenue uses point-in-time forecast product prices multiplied
+by refinery crude input; the 3-2-1 crack is retained as a margin signal and is
+not misused as a revenue driver.
+
+Phase 3 models Midstream (`KMI`, `WMB`, `ET`, `EPD`) with explicit fee-based
+shares, crude/gas volume exposure, and a fixed tariff escalator. Phase 4 models
+Oilfield Services (`SLB`, `HAL`, `BKR`) with rig/activity, international liquid
+production, and capped commodity-led CapEx/pricing signals. Every raw structural
+forecast is preserved, while one reliability weight is learned only from the
+pre-holdout subindustry history.
+
+All forward energy inputs come from free EIA STEO Excel vintages selected under
+`available_at <= day-61 cutoff`. Rig counts come from EIA's free republication
+of Baker Hughes monthly history and SEC Companyfacts supplies the audited
+revenue labels. Paid CME, CMA, and CME DataMine data are explicitly forbidden
+and unused.
+
+Analyst-consensus plumbing reads only Arcana's local `alpha-vantage`, `fmp`,
+and `finnworlds` folders. Alpha Vantage and FMP revenue estimates must pass the
+same point-in-time cutoff before they can enter a comparison. Finnworlds has
+ratings rather than revenue estimates, so it is coverage-only. The current
+July 2026 snapshots are later than the 2026Q2 cutoff and are therefore emitted
+as a labelled post-cutoff diagnostic, never as backtest or promotion evidence.
+
+The operating-KPI coverage artifact also distinguishes company disclosures
+from macro proxies. Fixed segment, contract, and geographic weights are
+explicitly marked as research priors. Macro residual overlays remain off until
+the pure structural point-model gate passes.
+
+Each subindustry receives eight-quarter TIME and time-safe LOCO results, 80/95%
+prediction intervals, revenue WAPE and median APE, and the same strict research
+gate. A failed gate leaves the lag-revenue baseline selected; no Phase 2-4
+research result changes the frozen V3.4 production champion or the V3.5.3 E&P
+research benchmark.
+
+## Phase 2-4 company KPI and uncertainty refinement
+
+```powershell
+python run_phase2_4_company_kpi_research.py --refresh-company-kpis
+python run_kpi_parser_gold_audit.py
+python run_phase2_4_company_kpi_research.py
+```
+
+The original Phase 2-4 structural proxy is frozen under
+`benchmarks/phase2_4_structural_proxy/manifest.toml` and verified before and
+after every run. The refresh command downloads official SEC 8-K Item 2.02
+earnings exhibits, stores immutable source files and SHA-256 provenance, and
+standardizes only metrics that can be parsed consistently. KPI availability is
+set to the SEC submission `acceptanceDateTime`; filing date plus one calendar
+day is used only if that timestamp is unavailable. A verified official IR
+publication timestamp can tighten this to the earlier of the two, but no IR
+timestamp is inferred from a page date. A forecast may use only the immediately
+preceding report quarter and only when its availability time is no later than
+the day-61 cutoff; unavailable fields fail closed to the frozen proxy.
+`requested_kpi_coverage.csv` separately discloses requested fields that are not
+yet standardized.
+
+Parser changes are independently gated by `KPI_PARSER_GOLD_AUDIT_V1`. The
+frozen pre-audit parser snapshot is stored under
+`benchmarks/phase2_4_kpi_parser_pre_audit/`. Its 75-row manual gold sample spans
+Integrated (18), Refining (15), Midstream (27), and Services (15), early/middle/
+recent filings, and both direct and transformation-required source rows. The
+gate requires numeric accuracy >=95%, unit accuracy 100%, period accuracy 100%,
+and semantic accuracy >=95% for every subindustry. The audited parser reaches
+100% on all four dimensions in the sample, versus pre-audit overall accuracy of
+86.67%, 94.67%, 93.33%, and 92.00%, respectively. A missing or stale audit fails
+closed and prevents every company-KPI candidate from being selected.
+
+The main parsing corrections are quarterly/YTD and annual-column selection for
+Services, duplicate/region aggregation for MPC throughput, historical crude
+component labels for ET liquids transportation, and EPD `MBPD` unit semantics.
+Each TIME prediction emits whether KPI data was used, whether proxy fallback was
+used, KPI age, rule confidence, and quality score. Quality-bucket forecast-error
+diagnostics are written to `output/kpi_parser_gold_audit/`.
+
+The four independent candidates are `P2.1_INTEGRATED_COMPANY_KPI`,
+`P2.1_REFINING_COMPANY_KPI`, `P3.1_MIDSTREAM_COMPANY_KPI`, and
+`P4.1_SERVICES_COMPANY_KPI`. Company effects are learned incrementally on top
+of the proxy using pre-forecast history and reliability shrinkage. TIME and
+LOCO retain the same eight-quarter definitions as the frozen benchmark.
+
+Prediction intervals are recalibrated independently from point forecasts with
+rolling, time-safe conformal residual quantiles and ticker/subindustry partial
+pooling. The point-model gate controls whether later macro research is unlocked;
+the uncertainty gate evaluates PI80, PI95, and interval score. Research
+selection requires both gates, while production additionally requires 20
+matched live-forward observations. Current backtests accept the company KPI
+candidate only for Refining. Parser correction reduces Services median MASE from
+0.7358 to 0.7015, but the proxy remains slightly better at 0.6949 and the
+uncertainty gate still fails. Refining improves from proxy median MASE 0.5371 to
+0.5310 and revenue WAPE from 4.3417% to 4.3011%. Integrated and Midstream also
+retain the recalibrated frozen proxy, and all production selections remain the
+lag-revenue baseline because live-forward coverage is still 0/20.
+
+The main outputs are written to `output/phase2_4_company_kpi_research/`, with
+the concise decision record in `report.md`, current forecasts in
+`latest_research_predictions.csv`, and all model/data boundary assertions in
+`metadata.json`.
+
+## Phase 2.5 target-aligned research and Phase 5 router
+
+```powershell
+python run_phase2_5_target_aligned_research.py --refresh-macro-data
+python run_phase2_5_target_aligned_research.py
+```
+
+The accepted P2.1 Refining result is frozen independently under
+`benchmarks/phase2_1_refining_kpi/manifest.toml`. Each run verifies all ten
+frozen files plus the Phase 2-4 proxy, V3.4 production champion, and V3.5.3 E&P
+research champion before and after the experiment.
+
+Refining tests crack spread, gasoline inventory, distillate inventory,
+refinery utilization, Brent-WTI spread, and product demand as residual features
+on top of P2.1. Services tests OVX, WTI, Henry Hub, and oil-rig regimes on top
+of the accepted proxy. All source observations obey release-date and freshness
+cutoffs. A pair can be evaluated only after both single features pass the full
+TIME gate. No single currently passes every performance and interval check, so
+no pair is formed and both frozen benchmarks remain selected. BKR orders are
+reported at explicit t+1 and t+2 lags, but remain diagnostic because coverage is
+only one of three Services companies and LOCO cannot learn a held-out company's
+orders effect.
+
+Integrated historical KPI expansion is disabled. The forward scanner records
+numeric target-quarter production, maintenance, refinery, and chemicals text,
+but candidates remain locked until their meaning and target quarter are
+manually gold-labelled for at least eight quarters per ticker. The current
+scanner finds sufficient raw numeric-candidate quarters for XOM and CVX but no
+manual-gold quarters, so the proxy remains selected.
+
+Midstream keeps its GAAP-revenue proxy and adds a separate non-GAAP Adjusted
+EBITDA target. Official SEC earnings exhibits provide 132 quarterly values
+across KMI, WMB, ET, and EPD; the 20-row manual parser audit is 100% accurate on
+number, unit, period, and semantics. The volume-times-fee candidate reaches a
+median TIME MASE of 0.573, but fails the minimum-observation, no-regression, and
+PI80 gates. It therefore remains research-only and the Adjusted EBITDA route
+falls back to its lag baseline.
+
+Phase 5 is a static taxonomy router, not a trained meta-model. It emits a common
+schema for GAAP Revenue and Adjusted EBITDA, preserving each child model's
+forecast, intervals, validation label, target, and production status. The
+target registry explicitly keeps E&P CapEx/margin, Integrated segment margin,
+Refining margin/EBITDA, and Services margin/orders locked until standardized
+point-in-time labels and the required eight-quarter evidence exist. Production
+remains the lag-revenue baseline at 0/20 matched live observations.

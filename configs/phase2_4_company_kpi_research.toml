@@ -1,0 +1,36 @@
+version = "PHASE2_4_COMPANY_KPI_RESEARCH_V2_PARSER_AUDITED"
+forecast_cutoff_day_of_quarter = 61
+time_holdout_quarters = 8
+live_promotion_minimum = 20
+
+[point_gate]
+median_mase_below = 0.80
+mean_mase_below = 0.90
+mase_below_one_share_at_least = 0.70
+baseline_no_regression_share_at_least = 0.80
+severe_regression_count = 0
+directional_hit_at_least = 0.65
+
+[uncertainty_gate]
+pi80_min = 0.75
+pi80_max = 0.85
+pi95_min = 0.90
+pi95_max = 1.00
+method = "ROLLING_TIME_SAFE_CONFORMAL_PARTIAL_POOLING"
+
+[data_policy]
+company_kpi_source = "OFFICIAL_SEC_EDGAR_8K_EARNINGS_EXHIBITS"
+availability = "SEC_ACCEPTANCE_DATETIME_WITH_FILING_PLUS_ONE_FALLBACK"
+paid_market_data_used = false
+cme_used = false
+cma_used = false
+post_cutoff_consensus_used = false
+
+[parser_quality_gate]
+manual_gold_rows_min = 60
+manual_gold_rows_max = 80
+numeric_near_match_at_least = 0.95
+unit_match = 1.00
+quarter_period_match = 1.00
+semantic_category_match_at_least = 0.95
+required_for_company_kpi_selection = true

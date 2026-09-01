@@ -1,0 +1,113 @@
+version = "PHASE2_5_TARGET_ALIGNED_RESEARCH_V1"
+status = "RESEARCH_ONLY"
+forecast_cutoff_day_of_quarter = 61
+time_holdout_quarters = 8
+production_live_minimum = 20
+
+[macro_model]
+ridge_alpha = 8.0
+minimum_training_observations = 20
+overlay_clip_log_points = 8.0
+standardize_with_training_only = true
+single_feature_first = true
+pairwise_only_after_single_pass = true
+
+[refining]
+benchmark = "P2.1_REFINING_COMPANY_KPI_RESEARCH_CHAMPION_V1"
+features = [
+  "crack_spread_log_yoy",
+  "gasoline_inventory_z",
+  "distillate_inventory_z",
+  "refinery_utilization_z",
+  "brent_wti_spread_pct",
+  "product_demand_log_yoy",
+]
+
+[services]
+benchmark = "STRUCTURAL_PROXY_RECALIBRATED"
+features = [
+  "ovx_regime_z",
+  "wti_regime_z",
+  "henry_regime_z",
+  "oil_rig_z",
+]
+orders_lags_to_test = [1, 2]
+unavailable_forward_features = [
+  "ep_capex_guidance",
+  "international_activity_forward",
+  "company_backlog_standardized",
+]
+
+[integrated]
+historical_kpi_expansion_allowed = false
+forward_candidate_minimum_quarters_per_ticker = 8
+manual_gold_required = true
+
+[midstream]
+gaap_revenue_route = "STRUCTURAL_PROXY_RECALIBRATED"
+secondary_target = "ADJUSTED_EBITDA_NON_GAAP"
+historical_feature_expansion_allowed = false
+
+[candidate_gate]
+median_mase_improves = true
+mean_mase_no_worse = true
+baseline_no_regression_share_at_least = 0.80
+severe_regression_log_points = 2.0
+severe_regression_count = 0
+pi80_min = 0.75
+pi80_max = 0.85
+direction_no_worse = true
+minimum_forecasts_per_ticker = 8
+parser_quality_required = true
+
+[router]
+meta_model_training_allowed = false
+common_schema_required = true
+ep_route = "V3.5.3_GROUPED_RESEARCH_CHAMPION"
+integrated_route = "STRUCTURAL_PROXY_RECALIBRATED"
+refining_fallback_route = "P2.1_REFINING_COMPANY_KPI"
+midstream_revenue_route = "STRUCTURAL_PROXY_RECALIBRATED"
+services_fallback_route = "STRUCTURAL_PROXY_RECALIBRATED"
+production_route = "FROZEN_EXISTING_PRODUCTION_MODELS"
+
+[[target_registry]]
+subindustry = "ep"
+forecast_target = "CAPEX"
+status = "LOCKED_NO_STANDARDIZED_TARGET"
+unlock_requirement = "PIT quarterly target labels plus 8Q per ticker"
+
+[[target_registry]]
+subindustry = "ep"
+forecast_target = "OPERATING_MARGIN"
+status = "LOCKED_NO_STANDARDIZED_TARGET"
+unlock_requirement = "PIT quarterly target labels plus 8Q per ticker"
+
+[[target_registry]]
+subindustry = "integrated"
+forecast_target = "SEGMENT_OPERATING_EARNINGS_MARGIN"
+status = "LOCKED_FORWARD_GUIDANCE_REQUIRED"
+unlock_requirement = "manual-gold target-quarter guidance plus 8Q per ticker"
+
+[[target_registry]]
+subindustry = "refining"
+forecast_target = "REFINING_MARGIN_OR_EBITDA"
+status = "LOCKED_NO_STANDARDIZED_TARGET"
+unlock_requirement = "audited quarterly target labels before crack residual study"
+
+[[target_registry]]
+subindustry = "midstream"
+forecast_target = "ADJUSTED_EBITDA_NON_GAAP"
+status = "ACTIVE_RESEARCH_GATE_FAILED"
+unlock_requirement = "pass parser, 8Q TIME, performance, and interval gates"
+
+[[target_registry]]
+subindustry = "services"
+forecast_target = "OPERATING_MARGIN"
+status = "LOCKED_NO_STANDARDIZED_TARGET"
+unlock_requirement = "PIT quarterly target labels plus 8Q per ticker"
+
+[[target_registry]]
+subindustry = "services"
+forecast_target = "ORDERS_OR_BACKLOG"
+status = "DIAGNOSTIC_ONLY_BKR_1_OF_3"
+unlock_requirement = "standardized cross-sectional coverage beyond BKR"

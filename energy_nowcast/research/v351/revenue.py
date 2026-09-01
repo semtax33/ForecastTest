@@ -23,6 +23,19 @@ CIKS = {
     "PR": 1658566,
     "RRC": 315852,
     "SM": 893538,
+    # Phase 2-4 energy-platform universes.
+    "XOM": 34088,
+    "CVX": 93410,
+    "VLO": 1035002,
+    "MPC": 1510295,
+    "PSX": 1534701,
+    "KMI": 1506307,
+    "WMB": 107263,
+    "ET": 1276187,
+    "EPD": 1061219,
+    "SLB": 87347,
+    "HAL": 45012,
+    "BKR": 1701605,
 }
 
 
@@ -43,6 +56,18 @@ REVENUE_FACT_TAGS = {
     "PR": "RevenueFromContractWithCustomerExcludingAssessedTax",
     "RRC": "RevenueFromContractWithCustomerExcludingAssessedTax",
     "SM": "RevenueFromContractWithCustomerIncludingAssessedTax",
+    "XOM": "Revenues",
+    "CVX": "Revenues",
+    "VLO": "RevenueFromContractWithCustomerIncludingAssessedTax",
+    "MPC": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "PSX": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "KMI": "Revenues",
+    "WMB": "Revenues",
+    "ET": "Revenues",
+    "EPD": "Revenues",
+    "SLB": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "HAL": "RevenueFromContractWithCustomerIncludingAssessedTax",
+    "BKR": "RevenueFromContractWithCustomerExcludingAssessedTax",
 }
 
 
