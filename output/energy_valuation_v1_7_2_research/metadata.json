@@ -1,0 +1,21 @@
+{
+  "version": "E&P_ACQUIREE_NOPAT_CYCLE_NORMALIZED_COHORT_V1_7_2_RESEARCH",
+  "generated_at_utc": "2026-09-02T09:28:15.647992+00:00",
+  "v1_6_1_manifest_sha256": "d1578c3c6ae33993abd161133a4899fbcb03ca68a3242cf059d189087274f268",
+  "v1_7_1_parent_snapshot_sha256": "cf8d86e12c40109aba19f5ab27c41fcb1b31f3f6b13b04236bca9897ea7e134e",
+  "frozen_v1_6_1_mutated": false,
+  "v1_7_1_parent_mutated": false,
+  "direct_acquiree_nopat_events": 0,
+  "bridged_acquiree_nopat_events": 2,
+  "complete_3y_reported_nopat_cohort_tickers": 1,
+  "cycle_normalized_annual_tickers": 3,
+  "complete_3y_cycle_normalized_cohort_tickers": 1,
+  "validated_organic_roic_tickers": 0,
+  "research_gate": true,
+  "research_freeze_eligible": false,
+  "development_status": "RESEARCH_GATE_PASSED_FREEZE_DEFERRED",
+  "terminal_anchor_replacement_allowed": false,
+  "wacc_recalibrated": false,
+  "production_promoted": false,
+  "live_matched_observations": "0/20"
+}

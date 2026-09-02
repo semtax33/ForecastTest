@@ -1,0 +1,32 @@
+{
+  "monitoring_version": "ENERGY_VALUATION_V1_1_LIVE_MONITORING_V1",
+  "as_of_date": "2026-09-02",
+  "benchmark_status": "SANITY_AUDITED_RESEARCH_FROZEN",
+  "benchmark_manifest_sha256": "671b5b5af4d8ac3de7c7098cb6238eab687124724f41146fad57625b8d092601",
+  "parent_manifest_sha256": "c3a548d82c98c8cb0d6ef9e758465f8c7c4d755b8468af49aad7b58476c8426a",
+  "benchmark_verified_before_and_after": true,
+  "frozen_benchmark_mutated": false,
+  "live_matched_observations": 0,
+  "minimum_live_observations": 20,
+  "model_change_lock": "LOCKED",
+  "production_promoted": false,
+  "consensus_sources": {
+    "alpha_vantage": "D:\\Programming\\python_example\\Arcana\\data-lake\\bronze\\consensus\\alpha-vantage",
+    "fmp": "D:\\Programming\\python_example\\Arcana\\data-lake\\bronze\\consensus\\fmp",
+    "finnworlds": "D:\\Programming\\python_example\\Arcana\\data-lake\\bronze\\consensus\\finnworlds",
+    "finnworlds_treatment": "RATINGS_ONLY_NOT_REVENUE_CONSENSUS"
+  },
+  "snapshot_status": {
+    "inserted": 0,
+    "unchanged": 26
+  },
+  "attribution_status": {
+    "inserted": 0,
+    "unchanged": 26
+  },
+  "settlement_status": {
+    "inserted": 0,
+    "unchanged": 0
+  },
+  "policy": "V1.1_READ_ONLY; PROVEN_BUG_TO_V1.1.1; NEW_ECONOMIC_IDEA_TO_V1.2"
+}

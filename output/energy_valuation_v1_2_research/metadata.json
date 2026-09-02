@@ -1,0 +1,18 @@
+{
+  "version": "E&P_EXPECTATIONS_SURFACE_V1_2_RESEARCH_ONLY",
+  "generated_at_utc": "2026-09-02T01:01:08.010346+00:00",
+  "v1_0_manifest_sha256": "c3a548d82c98c8cb0d6ef9e758465f8c7c4d755b8468af49aad7b58476c8426a",
+  "v1_1_manifest_sha256": "671b5b5af4d8ac3de7c7098cb6238eab687124724f41146fad57625b8d092601",
+  "frozen_v1_1_mutated": false,
+  "maximum_frozen_reproduction_error_per_share": 2.842170943040401e-14,
+  "ticker_count": 14,
+  "surface_dimensions": [
+    "TERMINAL_MARGIN_X_WACC",
+    "GROWTH_X_OPERATING_MARGIN",
+    "GROWTH_X_NORMALIZED_ROIC"
+  ],
+  "single_point_market_implied_claim_allowed": false,
+  "hormuz_treatment": "DEFERRED_REGIME_SCENARIO_OVERLAY",
+  "production_promoted": false,
+  "live_matched_observations": "0/20"
+}

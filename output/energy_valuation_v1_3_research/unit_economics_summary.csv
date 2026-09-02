@@ -1,0 +1,2 @@
+ep_tickers,price_volume_proxy_ready,core_reserve_replacement_cross_check,partial_price_volume_only,fully_locked,strict_realized_gas_tickers,common_cross_commodity_realized_basis_ready,terminal_anchor_ready,directionally_consistent_margin_cross_checks,roic_proxy_above_100pct_flags,production_eligible
+14,13,3,10,1,4,0,0,2,2,False

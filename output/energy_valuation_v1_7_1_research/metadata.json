@@ -1,0 +1,21 @@
+{
+  "version": "E&P_MNA_NUMERATOR_PURCHASE_ACCOUNTING_V1_7_1_RESEARCH",
+  "generated_at_utc": "2026-09-02T08:12:18.595652+00:00",
+  "v1_6_1_manifest_sha256": "d1578c3c6ae33993abd161133a4899fbcb03ca68a3242cf059d189087274f268",
+  "v1_7_parent_snapshot_sha256": "2987c67dbee0b21f605f1e7218d6714749d5117825620920af23ec2639ea9b65",
+  "frozen_v1_6_1_mutated": false,
+  "v1_7_parent_mutated": false,
+  "acquiree_numerator_normalized_events": 4,
+  "purchase_accounting_step_up_proven_events": 2,
+  "divestiture_capital_and_earnings_proxy_proven_events": 1,
+  "material_mna_fully_bridged_company_years": 2,
+  "validated_organic_roic_tickers": 0,
+  "complete_multi_year_roic_cohort_tickers": 1,
+  "research_gate": true,
+  "research_freeze_eligible": false,
+  "development_status": "RESEARCH_GATE_PASSED_FREEZE_DEFERRED",
+  "terminal_anchor_replacement_allowed": false,
+  "wacc_recalibrated": false,
+  "production_promoted": false,
+  "live_matched_observations": "0/20"
+}

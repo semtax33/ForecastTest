@@ -1,0 +1,16 @@
+subindustry,scenario,tickers,median_terminal_value_share_pct,high_terminal_dependence_tickers,unstable_terminal_value_tickers
+ep,BASE,14,84.07115139983048,8,1
+ep,BEAR,14,71.10490879282031,2,7
+ep,BULL,14,90.03426091699828,14,0
+integrated,BASE,2,81.21100707336696,2,0
+integrated,BEAR,2,72.78124166199343,0,0
+integrated,BULL,2,90.028634572698,2,0
+midstream,BASE,4,87.37623625315487,4,0
+midstream,BEAR,4,76.88599808804508,0,0
+midstream,BULL,4,95.04683713144259,4,0
+refining,BASE,3,79.78206273458146,0,0
+refining,BEAR,3,69.68856365523172,0,0
+refining,BULL,3,89.46219617907568,3,0
+services,BASE,3,80.77438909401172,3,0
+services,BEAR,3,73.26031518341497,0,0
+services,BULL,3,87.54035767171551,3,0

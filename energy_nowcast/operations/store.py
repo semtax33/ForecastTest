@@ -13,7 +13,7 @@ import pandas as pd
 from .champion import sha256_file
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 
 def _utc_now() -> str:
@@ -97,6 +97,73 @@ def initialize_store(connection: sqlite3.Connection) -> None:
             ingested_at TEXT NOT NULL,
             PRIMARY KEY (ticker, quarter)
         );
+        CREATE TABLE IF NOT EXISTS valuation_snapshots (
+            as_of_date TEXT NOT NULL,
+            ticker TEXT NOT NULL,
+            target_quarter TEXT NOT NULL,
+            model_version TEXT NOT NULL,
+            subindustry TEXT NOT NULL,
+            fair_value REAL NOT NULL,
+            market_price REAL NOT NULL,
+            market_data_date TEXT NOT NULL,
+            market_price_source TEXT NOT NULL,
+            value_gap_pct REAL NOT NULL,
+            base_year1_revenue_usd REAL NOT NULL,
+            base_year1_nopat_usd REAL NOT NULL,
+            base_year1_reinvestment_usd REAL NOT NULL,
+            base_year1_fcff_usd REAL NOT NULL,
+            base_terminal_value_share_pct REAL NOT NULL,
+            terminal_dependence_status TEXT NOT NULL,
+            expectations_monitor_status TEXT NOT NULL,
+            benchmark_manifest_sha256 TEXT NOT NULL,
+            valuation_artifact_sha256 TEXT NOT NULL,
+            production_eligible INTEGER NOT NULL,
+            created_at TEXT NOT NULL,
+            PRIMARY KEY (as_of_date, ticker, target_quarter, model_version)
+        );
+        CREATE TABLE IF NOT EXISTS fcff_attributions (
+            as_of_date TEXT NOT NULL,
+            ticker TEXT NOT NULL,
+            quarter TEXT NOT NULL,
+            model_version TEXT NOT NULL,
+            subindustry TEXT NOT NULL,
+            financial_available_at TEXT NOT NULL,
+            nopat_usd REAL NOT NULL,
+            depreciation_amortization_usd REAL,
+            depreciation_amortization_method TEXT NOT NULL,
+            delta_operating_nwc_usd REAL,
+            operating_nwc_method TEXT NOT NULL,
+            other_cash_conversion_usd REAL,
+            combined_cash_conversion_adjustment_usd REAL NOT NULL,
+            cash_capex_usd REAL NOT NULL,
+            reported_fcff_usd REAL NOT NULL,
+            reconstructed_fcff_usd REAL,
+            combined_reconstructed_fcff_usd REAL NOT NULL,
+            detailed_identity_error_usd REAL,
+            combined_identity_error_usd REAL NOT NULL,
+            capex_imputed INTEGER NOT NULL,
+            capex_method TEXT NOT NULL,
+            capex_monitor_status TEXT NOT NULL,
+            attribution_status TEXT NOT NULL,
+            diagnostic_only INTEGER NOT NULL,
+            created_at TEXT NOT NULL,
+            PRIMARY KEY (as_of_date, ticker, quarter, model_version)
+        );
+        CREATE TABLE IF NOT EXISTS valuation_settlements (
+            snapshot_as_of_date TEXT NOT NULL,
+            ticker TEXT NOT NULL,
+            target_quarter TEXT NOT NULL,
+            model_version TEXT NOT NULL,
+            actual_ttm_fcff_usd REAL NOT NULL,
+            settlement_market_price REAL NOT NULL,
+            release_date TEXT NOT NULL,
+            source_path TEXT NOT NULL,
+            source_sha256 TEXT,
+            ingested_at TEXT NOT NULL,
+            PRIMARY KEY (
+                snapshot_as_of_date, ticker, target_quarter, model_version
+            )
+        );
         """
     )
     connection.execute(
@@ -106,8 +173,16 @@ def initialize_store(connection: sqlite3.Connection) -> None:
 
 
 def _clean(value: Any) -> Any:
-    if value is None or (isinstance(value, (float, np.floating)) and not np.isfinite(value)):
+    if value is None or (
+        isinstance(value, (float, np.floating)) and not np.isfinite(value)
+    ):
         return None
+    if not isinstance(value, (str, bytes, list, tuple, dict)):
+        try:
+            if bool(pd.isna(value)):
+                return None
+        except (TypeError, ValueError):
+            pass
     if isinstance(value, (np.integer, np.floating)):
         return value.item()
     if isinstance(value, (pd.Timestamp, datetime)):
@@ -212,9 +287,56 @@ def insert_actual_release(connection: sqlite3.Connection, row: dict[str, Any]) -
     )
 
 
+def insert_valuation_snapshot(
+    connection: sqlite3.Connection,
+    row: dict[str, Any],
+) -> str:
+    return _immutable_insert(
+        connection,
+        "valuation_snapshots",
+        {**row, "created_at": row.get("created_at", _utc_now())},
+        ("as_of_date", "ticker", "target_quarter", "model_version"),
+    )
+
+
+def insert_fcff_attribution(
+    connection: sqlite3.Connection,
+    row: dict[str, Any],
+) -> str:
+    return _immutable_insert(
+        connection,
+        "fcff_attributions",
+        {**row, "created_at": row.get("created_at", _utc_now())},
+        ("as_of_date", "ticker", "quarter", "model_version"),
+    )
+
+
+def insert_valuation_settlement(
+    connection: sqlite3.Connection,
+    row: dict[str, Any],
+) -> str:
+    source_path = Path(str(row["source_path"]))
+    return _immutable_insert(
+        connection,
+        "valuation_settlements",
+        {
+            **row,
+            "source_sha256": (
+                sha256_file(source_path)
+                if source_path.exists()
+                else row.get("source_sha256")
+            ),
+            "ingested_at": row.get("ingested_at", _utc_now()),
+        },
+        ("snapshot_as_of_date", "ticker", "target_quarter", "model_version"),
+    )
+
+
 def read_table(connection: sqlite3.Connection, table: str) -> pd.DataFrame:
     allowed = {
-        "consensus_vintages", "consensus_source_coverage", "forecast_snapshots", "actual_releases"
+        "consensus_vintages", "consensus_source_coverage", "forecast_snapshots",
+        "actual_releases", "valuation_snapshots", "fcff_attributions",
+        "valuation_settlements",
     }
     if table not in allowed:
         raise ValueError(f"Unsupported table: {table}")
@@ -226,4 +348,3 @@ def write_store_metadata(connection: sqlite3.Connection, key: str, value: Any) -
         "INSERT OR REPLACE INTO metadata(key, value) VALUES(?, ?)",
         (key, json.dumps(value, ensure_ascii=False, sort_keys=True)),
     )
-

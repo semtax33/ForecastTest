@@ -1,0 +1,4 @@
+normalization_confidence_grade,definition,sector_inference_weight,sector_inference_eligible
+A,INDEPENDENT_COMPLETE_COST_AND_PRODUCTION_EVIDENCE,1.0,True
+B,ACCOUNTING_PROVEN_PARTIAL_COST_SCOPE,0.5,True
+C,HIERARCHICAL_MARGIN_IMPLIED_NOT_INDEPENDENT,0.0,False

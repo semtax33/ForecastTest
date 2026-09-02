@@ -1,0 +1,2 @@
+tickers,range_available_tickers,v1_1_base_wacc_median_pct,symmetric_return_wacc_median_pct,downside_return_wacc_median_pct,return_based_low_median_pct,return_based_high_median_pct,single_appropriate_wacc_claim_allowed
+14,13,6.565589944856866,8.457220931245802,10.401374357468187,8.457220931245802,10.401374357468187,False

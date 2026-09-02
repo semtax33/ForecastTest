@@ -1,0 +1,15 @@
+ticker,basis_years,audited_all_component_mix_years,single_residual_component_years,group_prior_allocated_mix_years,actual_mix_ready
+AR,5,5,0,0,True
+CNX,5,0,5,0,False
+COP,0,0,0,0,False
+DVN,0,0,0,0,False
+EOG,4,4,0,0,True
+EQT,5,0,0,5,False
+FANG,4,0,0,4,False
+MGY,5,5,0,0,True
+MTDR,5,0,5,0,False
+NOG,1,0,1,0,False
+OVV,0,0,0,0,False
+PR,5,5,0,0,True
+RRC,5,0,0,5,False
+SM,1,0,1,0,False

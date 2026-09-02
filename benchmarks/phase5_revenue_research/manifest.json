@@ -1,0 +1,22 @@
+{
+  "name": "PHASE5_REVENUE_RESEARCH_CHAMPION",
+  "version": "PHASE5_REVENUE_RESEARCH_FREEZE_V1",
+  "frozen_as_of": "2026-09-02",
+  "immutable": true,
+  "scope": "Revenue routes, validation outputs, and upstream benchmark manifests",
+  "policy": "Revenue research is live-forward only; financial-target work cannot mutate these files.",
+  "production_champion": "V3.4_FROZEN",
+  "live_model_change_matches": "0/20",
+  "files": {
+    "benchmarks/v3_4/manifest.json": "7939db0a4d94d78d1c91c83e19721a98d75147819b6d3eb1c66a667e02f07b40",
+    "benchmarks/v3_5_3_research/manifest.json": "52936c1f9a3c53b782a05bf622ccf765317bba6f308f3c67a9a3484aca8bb707",
+    "benchmarks/phase2_4_structural_proxy/manifest.toml": "912898d15772a81a3de6a568566849fee213e33a95a60862fda7cb1b1d27ed92",
+    "benchmarks/phase2_1_refining_kpi/manifest.toml": "e9342608e32d7c8cb6a6868da405da94b3a63e27912dd7dc0150213500749411",
+    "output/phase2_5_target_aligned_research/phase5_routing_table.csv": "2254e6cc261dd8fcd1e8132935318f3574d8890067b5658b882006cbc406aff4",
+    "output/phase2_5_target_aligned_research/phase5_common_forecast_schema_time.csv": "521232b66118d37984ed329b770ceab3ba43635b7a1ebf203b58f1aaae15f573",
+    "output/phase2_5_target_aligned_research/phase5_common_forecast_schema_loco.csv": "256b1370816f7e65ee41c444cb416a0babce9c4da0b8a4c71d96aa0d209f5154",
+    "output/phase2_5_target_aligned_research/phase5_sector_scorecard.csv": "b9c4d00c17fccd05cfb6c782fe117377ff9dfb23cc72cc5b6d683c82af65917b",
+    "output/phase2_5_target_aligned_research/macro_research_decisions.csv": "47c27140beb7e078f7e04f698c9abb077f707a58cff606dbf1f524b5b8b62cc0",
+    "output/phase2_5_target_aligned_research/metadata.json": "9c2eca35c10d6673bd41d0d0903c38610fbce7679e82657535bde3faaca5096f"
+  }
+}

@@ -1,0 +1,15 @@
+ticker,complete_production_years_5y,exact_realized_basis_years_5y,transport_cost_per_boe_years_5y,production_tax_per_boe_years_5y,g_and_a_per_boe_years_5y,hedge_gain_loss_per_boe_years_5y,upstream_revenue_per_boe_years_5y,standardized_complete_cost_scope,tag_g_and_a_usd_years_5y,tag_hedge_gain_loss_usd_years_5y,tag_production_tax_usd_years_5y,tag_transport_cost_usd_years_5y,tag_upstream_revenue_usd_years_5y
+AR,5,5,0,0,5,5,5,False,5,5,0,0,5
+CNX,5,5,5,5,5,5,5,True,5,5,5,5,5
+COP,0,0,0,0,0,0,0,False,5,0,0,0,0
+DVN,0,0,0,0,0,0,0,False,5,5,2,0,5
+EOG,4,0,2,0,4,4,0,False,5,4,0,3,1
+EQT,5,0,0,0,5,5,0,False,5,5,0,0,0
+FANG,4,4,0,4,4,4,4,False,5,5,5,0,5
+MGY,5,0,0,0,5,3,0,False,5,3,0,0,0
+MTDR,5,0,0,0,5,0,0,False,5,0,0,0,0
+NOG,1,0,0,1,1,1,0,False,5,5,5,0,0
+OVV,0,0,0,0,0,0,0,False,5,5,0,5,5
+PR,5,0,0,5,5,5,0,False,5,5,5,0,0
+RRC,5,0,0,1,5,5,0,False,5,5,1,0,0
+SM,1,0,0,0,1,1,0,False,5,5,0,0,0

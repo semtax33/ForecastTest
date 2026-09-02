@@ -1,0 +1,20 @@
+{
+  "version": "E&P_NORMALIZED_UNIT_ECONOMICS_V1_3_RESEARCH_ONLY",
+  "generated_at_utc": "2026-09-02T02:23:19.808861+00:00",
+  "v1_manifest_sha256": "c3a548d82c98c8cb0d6ef9e758465f8c7c4d755b8468af49aad7b58476c8426a",
+  "v1_1_manifest_sha256": "671b5b5af4d8ac3de7c7098cb6238eab687124724f41146fad57625b8d092601",
+  "v1_2_manifest_sha256": "b90b31752cd72f3ef147f671e044499b34a42ec8fb3219de02f6023249d0c522",
+  "frozen_parent_mutated": false,
+  "ep_ticker_count": 14,
+  "price_volume_proxy_ready": 13,
+  "core_reserve_replacement_cross_check": 3,
+  "terminal_anchor_ready": 0,
+  "directionally_consistent_margin_cross_checks": 2,
+  "common_cross_commodity_realized_basis_ready": 0,
+  "single_appropriate_wacc_claim_allowed": false,
+  "market_price_calibration_used": false,
+  "hormuz_treatment": "DEFERRED_CASH_FLOW_REGIME_SCENARIO_NO_WACC_PREMIUM",
+  "double_count_gate": true,
+  "production_promoted": false,
+  "live_matched_observations": "0/20"
+}

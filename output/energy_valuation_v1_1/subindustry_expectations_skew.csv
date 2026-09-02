@@ -1,0 +1,6 @@
+subindustry,tickers,median_probability_weighted_value_gap_pct,outlier_tickers,systematic_sector_skew_flag,systematic_skew_status
+ep,14,90.66707198700433,8,True,SYSTEMATIC_SKEW_REQUIRES_REVIEW
+integrated,2,-7.105888763508106,0,False,WITHIN_REVIEW_RANGE
+midstream,4,-9.855671847060115,2,False,WITHIN_REVIEW_RANGE
+refining,3,10.694511816659924,0,False,WITHIN_REVIEW_RANGE
+services,3,-0.8500661984285229,0,False,WITHIN_REVIEW_RANGE

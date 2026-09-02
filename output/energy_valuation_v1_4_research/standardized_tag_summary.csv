@@ -1,0 +1,6 @@
+concept,tickers_with_any_standardized_year,tickers_with_at_least_3_years,total_standardized_years
+g_and_a_usd,14,14,70
+hedge_gain_loss_usd,12,12,57
+production_tax_usd,6,4,23
+transport_cost_usd,3,3,13
+upstream_revenue_usd,6,5,26

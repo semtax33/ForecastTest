@@ -1,0 +1,20 @@
+{
+  "version": "ENERGY_VALUATION_PLATFORM_V1_1_RC1",
+  "parent_version": "ENERGY_VALUATION_PLATFORM_V1",
+  "generated_at_utc": "2026-09-01T23:20:52.071464+00:00",
+  "parent_v1_0_manifest_verified": true,
+  "parent_v1_0_manifest_sha256": "c3a548d82c98c8cb0d6ef9e758465f8c7c4d755b8468af49aad7b58476c8426a",
+  "v1_1_code_complete": true,
+  "v1_1_research_complete": true,
+  "v1_1_production_promoted": false,
+  "live_matched_observations": "0/20",
+  "freeze_eligible": true,
+  "failed_sanity_gates": [],
+  "config_sha256": "0b9a6be6878cb5e5c689d390a8a9dbb77d794a6eedcc905e2288f1e90d1a4edb",
+  "scenario_weight_interpretation": "DEFAULT_SCENARIO_WEIGHT_NOT_EMPIRICAL_PROBABILITY",
+  "roic_semantics": {
+    "historical_incremental_roic": "DELTA_TTM_NOPAT_OVER_DELTA_INVESTED_CAPITAL_DIAGNOSTIC",
+    "forecast_normalized_roic": "NORMALIZED_FORWARD_RETURN_USED_FOR_REINVESTMENT_BRIDGE"
+  },
+  "valuation_perimeter": "OPERATING_EV_MINUS_ADJUSTED_DEBT_MINUS_NCI_MINUS_PREFERRED_PLUS_CASH_PLUS_STANDARDIZED_NONOPERATING_ASSETS"
+}

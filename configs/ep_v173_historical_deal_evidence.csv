@@ -1,0 +1,2 @@
+ticker,fiscal_year,event_name,event_type,event_close_date,buyer_fnsd_folder,buyer_adsh,operating_dimh,direct_cost_dimh,ppa_dimh,classification_text_tag,classification_phrase,target_cik,target_balance_date,target_accession
+FANG,2018,Energen Corporation,business_combination,2018-11-29,2019q1_notes,0001539838-19-000008,0x60fb8d05b4665296cc4a43f1dd3ddd7e,0x7267a08d83fc1781fe1baf5dc141d562,0x00000000,MergersAcquisitionsAndDispositionsDisclosuresTextBlock,accounted for as a business combination,0000277595,2018-09-30,0000277595-18-000084

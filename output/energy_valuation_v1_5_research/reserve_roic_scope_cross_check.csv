@@ -1,0 +1,15 @@
+ticker,observed_all_in_reserve_cost_years,project_development_cost_per_added_boe,observed_all_in_cost_per_gross_added_boe,project_development_roic_proxy_q50_pct,company_scope_all_in_reserve_roic_proxy_q50_pct,roic_reduction_from_project_to_company_scope_pct_points,roic_scope_status,project_roic_equals_company_incremental_roic,company_incremental_roic_validated,terminal_anchor_ready,research_only
+AR,5,3.02884236453202,3.477093596059113,30.213649009639354,26.31864158365348,3.895007425985874,OBSERVED_DEV_EXPLORATION_ACQUISITION_SCOPE_NOT_FULL_COMPANY_INCREMENTAL_ROIC,False,False,False,True
+CNX,5,2.769777124401571,3.1596183241465563,85.3771796812329,74.84314083754909,10.534038843683817,OBSERVED_DEV_EXPLORATION_ACQUISITION_SCOPE_NOT_FULL_COMPANY_INCREMENTAL_ROIC,False,False,False,True
+COP,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True
+DVN,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True
+EOG,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True
+EQT,5,,5.186477414136313,,,,LOCKED_NO_COMPLETE_UNIT_MARGIN_OR_PROJECT_ROIC,False,False,False,True
+FANG,3,6.240942169802684,17.79609343242201,119.4054075444966,41.874484761316744,77.53092278317985,OBSERVED_DEV_EXPLORATION_ACQUISITION_SCOPE_NOT_FULL_COMPANY_INCREMENTAL_ROIC,False,False,False,True
+MGY,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True
+MTDR,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True
+NOG,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True
+OVV,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True
+PR,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True
+RRC,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True
+SM,0,,,,,,LOCKED_FEWER_THAN_3_ALL_IN_COST_YEARS,False,False,False,True

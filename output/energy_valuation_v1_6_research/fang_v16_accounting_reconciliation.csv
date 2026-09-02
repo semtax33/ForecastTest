@@ -1,0 +1,4 @@
+ticker,year,v15_raw_margin_gap_pct_points,v16_transport_cost_per_boe,v16_production_tax_per_boe,v16_unit_reconstructed_operating_margin_pct,consolidated_operating_margin_pct,v16_margin_gap_pct_points,v16_absolute_margin_gap_pct_points,transport_supplement_applied,hedge_adjustment_applied,research_only
+FANG,2023,-3.5412703593379438,1.76,3.21,47.28383854797805,54.32715168806467,-7.043313140086617,7.043313140086617,True,False,True
+FANG,2024,1.201150579111555,1.63,2.91,37.3545242447147,39.72528465570216,-2.370760410987458,2.370760410987458,True,False,True
+FANG,2025,22.348427192597477,1.53,2.53,26.950496130602893,8.425395980300813,18.52510015030208,18.52510015030208,True,False,True

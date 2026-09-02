@@ -1,0 +1,2 @@
+ep_tickers,reserve_chain_ready_tickers,sector_target_tickers,sector_target_met,group_targets_met,coverage_completion_gate,oil_heavy_ready,gas_heavy_ready,mixed_ready,production_eligible,terminal_anchor_replacement_allowed
+14,9,8,True,True,True,3,4,2,False,False

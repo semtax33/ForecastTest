@@ -1,0 +1,15 @@
+ticker,year,production_mboe,production_independently_verified,source_file,production_source_semantics,production_evidence_proven,source_record_sha256,research_only
+DVN,2020,122000.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\financial-statement-and-notes-data-set\2022q1_notes\txt.tsv,SEC_RESERVE_TABLE_ROUNDED_COMBINED_PRODUCTION,True,8ad94c281cab4fd6cfe8e2f36d7af13b557d001c0550d0c2971740bbe3ec73c3,True
+DVN,2021,209000.0,False,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\DVN\2022-02-15_0001193125-22-043405_EX-99.2_d312748dex992.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+DVN,2022,223000.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\DVN\2023-02-14_0001193125-23-039127_EX-99.2_d453066dex992.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+DVN,2023,240000.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\DVN\2024-02-27_0001193125-24-047938_EX-99.2_d746925dex992.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+DVN,2024,270000.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\DVN\2025-02-18_0001193125-25-028614_EX-99.2_d931030dex992.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+DVN,2025,307000.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\DVN\2026-02-17_0001193125-26-054657_EX-99.2_d111666dex992.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+EOG,2021,309000.0,False,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\EOG\2022-02-24_0000821189-22-000015_EX-99.1_exh99-1022422.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+EOG,2022,333000.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\EOG\2023-02-23_0000821189-23-000014_EX-99.1_exh99-1022323.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+EOG,2023,361000.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\EOG\2024-02-22_0000821189-24-000009_EX-99.1_exh99-1022224.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+EOG,2024,391000.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\EOG\2025-02-27_0000821189-25-000010_EX-99.1_exh99-1022725.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+EOG,2025,452000.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\EOG\2026-02-24_0000821189-26-000052_EX-99.1_exh99-1022426.htm,SEC_RESERVE_ROLLFORWARD_PRODUCTION,True,,True
+FANG,2023,163413.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\FANG\2024-02-20_0001539838-24-000013_EX-99.1_diamondbackex991-2x20x24.htm,IR_SELECTED_OPERATING_DATA_ACTUAL_COMPONENT_IDENTITY,True,,True
+FANG,2024,218972.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\FANG\2025-02-24_0001539838-25-000016_EX-99.1_diamondbackex991-2x24x25.htm,IR_SELECTED_OPERATING_DATA_ACTUAL_COMPONENT_IDENTITY,True,,True
+FANG,2025,336178.0,True,D:\Programming\python_example\Arcana\data-lake\bronze\sec\fillings\ir\FANG\2026-02-23_0001539838-26-000006_EX-99.1_diamondbackex991-2x23x26.htm,IR_SELECTED_OPERATING_DATA_ACTUAL_COMPONENT_IDENTITY,True,,True

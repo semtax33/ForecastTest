@@ -1,4 +1,4 @@
-# Energy revenue nowcast
+# Energy driver forecasting and valuation platform
 
 The active code is the modular `energy_nowcast` package. The historical
 `energy_revenue_regression_v*.py` scripts remain untouched as research records;
@@ -363,3 +363,361 @@ target registry explicitly keeps E&P CapEx/margin, Integrated segment margin,
 Refining margin/EBITDA, and Services margin/orders locked until standardized
 point-in-time labels and the required eight-quarter evidence exist. Production
 remains the lag-revenue baseline at 0/20 matched live observations.
+
+## Phase 6 value-driver targets and conditional bridges
+
+```powershell
+python run_phase6_value_driver_research.py
+```
+
+Phase 6 renames the working architecture to **Subindustry Driver Forecast →
+Financial Bridge → Valuation**. Revenue models are frozen under
+`benchmarks/phase5_revenue_research/manifest.json`; every run verifies all ten
+frozen Phase-5 artifacts and upstream benchmark manifests before and after the
+new target research. V3.4 remains production and live changes remain 0/20.
+
+The hierarchy is economic rather than accounting-order driven. E&P starts from
+production and realized prices; Refining from throughput and refining margin;
+Midstream from volume, fees, and Adjusted EBITDA; Services from activity,
+pricing, and operating margin; Integrated from segment earnings. Revenue,
+earnings, cash flow, FCFF, and ROIC are secondary or validation targets. The
+machine-readable registry is `output/phase6_value_driver_research/target_hierarchy.csv`.
+
+XOM and CVX Integrated consolidated-revenue tuning is stopped. The new parser
+extracts 131 quarterly GAAP segment-earnings rows and passes a 20-row manual
+gold audit at 100% for number, unit, period, and semantics. Eight-quarter TIME
+tests are segment-specific: Downstream passes the strict gate at MASE 0.780 and
+1.378 percentage-point MAE; Upstream fails at MASE 3.622; Chemicals remains on
+the prior-year zero-change baseline because its candidate lacks sufficient
+training history. Since the disclosures are segment earnings rather than EBIT,
+the first consolidation bridge targets net-income margin and labels EBIT/FCFF
+as locked until the remaining accounting semantics are standardized.
+
+Midstream retains Adjusted EBITDA as its primary financial anchor. Its selected
+lag baseline has TIME MASE 0.586 and WAPE 4.754%. A separate bridge converts
+the EBITDA forecast to a revenue range using only company history available by
+the target-quarter day-61 cutoff. The bridge uses trailing empirical margin
+quantiles—not one fixed margin—and separately reports anchor, bridge, total,
+and interaction errors. The same scenario-only rule applies to the Integrated
+corporate/unmodeled bridge.
+
+New GAAP target studies remain research-only. Refining operating margin is
+promising on the covered names (TIME MASE 0.727) but is locked because PSX lacks
+the standardized tag and interval coverage fails. Services operating margin,
+E&P operating margin, and E&P cash CapEx all fail their strict gates and fall
+back to prior-year zero-change baselines. Detailed TIME/LOCO predictions,
+scorecards, gates, bridge attribution, common target schema, and the concise
+decision report are written to `output/phase6_value_driver_research/`.
+
+Analyst consensus uses Arcana's local `alpha-vantage`, `fmp`, and `finnworlds`
+folders. Alpha Vantage and FMP estimates are normalized under the same
+release-date cutoff. Finnworlds is retained as ratings-only coverage and is not
+treated as revenue consensus. Current forward spreads are reported, while
+historical model-versus-consensus performance remains `TRACKING` until at least
+20 matched point-in-time observations exist.
+
+## Energy Valuation Platform V1
+
+```powershell
+python run_energy_valuation_v1.py
+python run_energy_valuation_v1.py --freeze
+```
+
+V1 completes the common economic chain for all 26 companies and five Energy
+subindustries: `Economic Anchor → Revenue/EBIT → NOPAT → Reinvestment → FCFF →
+ROIC → DCF → Reverse DCF → Expectations Gap`. The anchor remains industry
+specific—production and realized price for E&P, throughput and refining margin
+for Refining, volume/fees and Adjusted EBITDA for Midstream, activity/pricing
+and margin for Services, and segment earnings for Integrated.
+
+Bear/Base/Bull assumptions carry separate growth, operating-margin,
+reinvestment, ROIC, WACC, and terminal-growth values. Possible/Plausible/
+Probable labels are checked against point-in-time historical distributions and
+subindustry guardrails. Missing CapEx taxonomy is never replaced by one fixed
+margin: the bridge uses company trailing history first and then a disclosed,
+prior-only subindustry peer distribution. `OVV` and `ET` currently use dated
+August 21 price overrides because their Arcana yfinance files are pending;
+those inputs and conservative beta fallback are explicitly frozen.
+
+The benchmark is frozen under `benchmarks/energy_valuation_v1/manifest.json`.
+V1 code and research are complete, while production remains deliberately not
+promoted at `0/20` matched live observations. Analyst consensus continues to
+come only from Arcana's Alpha Vantage, FMP, and Finnworlds coverage described
+above; historical model-versus-consensus performance is therefore still a
+tracking result, not evidence for promotion.
+
+## Energy Valuation Platform V1.1 sanity audit
+
+```powershell
+python run_energy_valuation_v1_1.py
+python run_energy_valuation_v1_1.py --freeze
+```
+
+V1.1 preserves the immutable V1.0 benchmark and adds a fail-closed validation
+layer before any successor can be frozen. Every scenario assumption now stores
+its raw value, clipped value, lower and upper bounds, and boundary-hit side.
+Subindustry/variable saturation is green below 10%, yellow from 10% through
+25%, and freeze-prohibited above 25%; any ticker putting all three scenarios on
+the same boundary is also freeze-prohibited.
+
+The valuation perimeter is explicitly reconciled from operating enterprise
+value through adjusted debt, noncontrolling interest, preferred claims, cash,
+standardized nonoperating assets, common equity, and shares. Total-debt concepts
+are no longer added to current debt twice. A disclosed lease liability is not
+added without reversing the matching lease expense, and a current debt taxonomy
+gap may use only an exposed last-point-in-time-disclosed fallback. PSX's net
+`PaymentsForProceedsFromOtherInvestingActivities` concept is rejected as gross
+CapEx; an observation is either replaced from a prior-only subindustry
+distribution or excluded from complete history.
+
+Forward and reverse DCF now have two round-trip checks: forward base EV must
+recover its originating assumption, and a solved market-implied assumption must
+reprice market EV. An unbracketed market value is reported as no solution in the
+declared domain, never as a fake boundary solution. Historical FCFF cash
+conversion, forward `NOPAT - Reinvestment = FCFF`, and
+`Growth = Reinvestment Rate × Normalized ROIC` are separately audited.
+Historical incremental ROIC remains a diagnostic and is not substituted for
+forecast normalized ROIC.
+
+The 60/20/20 inputs are named default scenario weights, not empirical
+probabilities. Terminal-value dependence (<70 normal, 70–80 warning, >80 high),
+nonpositive/unstable enterprise values, company expectations-gap outliers, and
+subindustry valuation skew are written as explicit diagnostic flags. These
+flags are not investment recommendations, and production remains locked at
+`0/20` matched live-forward observations even when the V1.1 code/research audit
+passes.
+
+## Energy V1.1 live-forward monitoring
+
+```powershell
+python run_energy_valuation_v1_1_live.py --as-of 2026-09-02
+python run_energy_valuation_v1_1_live.py --as-of 2026-09-02 `
+  --market-prices path/to/market_prices.csv `
+  --settlements path/to/settlements.csv
+```
+
+The live runner verifies the immutable V1.0 parent and frozen V1.1 manifest
+before and after every run. It reads the frozen fair value, Year-1 base FCFF,
+scenario, and terminal artifacts without rebuilding or tuning them. Market
+prices, actual releases, Arcana Alpha Vantage/FMP consensus vintages,
+Finnworlds ratings coverage, snapshots, settlements, attribution, and reports
+are append-only observations. Re-running the same as-of date is idempotent; a
+different value under an existing snapshot key is rejected.
+
+FCFF attribution stores `NOPAT + D&A - Cash CapEx - Delta operating NWC + Other
+cash conversion = FCFF`. The explicit `Other` term prevents stock compensation,
+deferred tax, asset-sale, and other cash-conversion effects from being
+mislabelled as working capital. When standardized D&A or current-balance facts
+are unavailable, the row is marked partial and retains the exact combined CFO
+bridge. Every attribution row is diagnostic-only and cannot feed back into the
+frozen valuation.
+
+E&P expectations skew, terminal dependence, and the E&P FCFF-versus-operating-
+margin difference are materialized as `MONITOR` hypotheses. They cannot change
+WACC, scenario bounds, terminal growth, bridges, parser semantics, E&P values,
+or scenario weights. A proven implementation error routes to V1.1.1; a new
+economic idea routes to V1.2. Production remains locked until at least 20
+forward settlements and a separate promotion review are complete.
+
+## E&P V1.2 expectations-surface research
+
+```powershell
+python run_ep_expectations_attribution.py
+python run_ep_expectations_surface_v1_2.py
+```
+
+V1.2 research remains outside the frozen V1.1 package and verifies both Energy
+manifests before and after every run. Company through-cycle margin and ROIC
+quantiles use historical observations with an eight-observation E&P peer prior
+and retain explicit confidence labels. They are research distributions rather
+than replacements for V1.1 assumptions.
+
+The expectations layer builds terminal-margin/WACC, growth/operating-margin,
+and growth/normalized-ROIC surfaces. Reverse results are stored as iso-value
+curves: each solved row is only one of many assumption combinations capable of
+matching the same market price. Unbracketed rows remain unsolved and never use a
+domain boundary as a fake implied value. Hormuz and AIS inputs are deferred to a
+future regime/scenario overlay; they do not determine through-cycle economics.
+
+Freeze the approved V1.2 research surface with:
+
+```powershell
+python freeze_ep_expectations_surface_v1_2.py
+```
+
+## E&P V1.3 normalized unit-economics research
+
+```powershell
+python run_ep_normalized_unit_economics_v1_3.py
+```
+
+V1.3 reads the frozen V1.2 surface but does not recalibrate it. Audited
+production mix is combined with a pre-recent 2015Q1-2024Q4 WTI, Henry Hub, and
+propane distribution. Reserve life, organic replacement, development cost per
+added BOE, normalized accounting margin, and replacement-cash margin are
+calculated only when standardized SEC reserve facts reconcile to the separate
+production KPI. Missing chains remain locked.
+
+The WACC diagnostic uses adjusted-total-return beta term structures and reports
+symmetric/downside ranges without fitting current price. Commodity, decline,
+replacement cost, and geopolitical operating shocks belong to cash-flow
+scenarios; broad systematic return and capital-structure risk belong to WACC.
+Hormuz is not added to both. V1.1 and V1.2 remain immutable and production stays
+locked at 0/20.
+
+## E&P V1.4 standardized cost-scope research
+
+```powershell
+python run_ep_cost_scope_v1_4.py
+python freeze_ep_cost_scope_v1_4.py
+```
+
+V1.4 is a research-only child of the frozen V1.3 benchmark. It expands the
+three core reserve-replacement cross-checks with standardized transport,
+production tax, G&A, reported hedge gains/losses, and an exact-upstream-revenue
+basis against the production-mix benchmark basket. Every annual value retains
+its SEC source tag and scope. Missing components remain null and produce an
+explicit known-cost upper bound instead of being treated as zero.
+
+Reported hedging is quantified separately and normalized to zero for the
+long-run diagnostic, but is not netted against revenue without proof that the
+selected revenue fact includes it. The realized-revenue basis is also labelled
+as a broad upstream-revenue-minus-benchmark measure, not a pure price
+differential. V1.4 cannot replace a terminal anchor, choose a single WACC, or
+promote production; those gates remain locked at 0/14 and 0/20 respectively.
+
+## E&P V1.5 accounting-perimeter and reserve-coverage research
+
+```powershell
+python run_ep_accounting_perimeter_v1_5.py
+python freeze_ep_accounting_perimeter_v1_5.py
+```
+
+V1.5 keeps frozen V1.4 immutable and adds a same-year accounting-perimeter
+reconciliation gate. Reconstructed upstream unit margin is compared with the
+consolidated EBIT margin using provisional green/yellow/red absolute-gap bands
+of 5 and 10 percentage points. A numerical match cannot pass if cost scope or
+revenue coverage is incomplete, and alternative hedge-presentation bridges
+remain unapplied diagnostics.
+
+Reserve extraction now routes per year across equivalent Energy and generic
+standardized tags while independently calibrating production quantities to the
+audited production KPI. Project development ROIC is shown separately from a
+broader development-plus-exploration-plus-acquisition reserve-investment
+proxy. Neither is labelled company incremental ROIC, and the sector terminal
+gate remains locked until at least 8/14 reserve chains and the missing capital
+perimeter are independently verified.
+
+## E&P V1.6 coverage-completion and accounting-proof research
+
+```powershell
+python run_ep_coverage_accounting_proof_v1_6.py
+```
+
+V1.6 verifies the frozen V1.0 through V1.5 manifests before and after every
+run. Supplemental IR extraction preserves separate total-proved event-chain
+and total stock-flow semantics, requires an independent operational-production
+check, and enforces both the 8/14 sector gate and oil-heavy/gas-heavy/mixed
+coverage gates. A stock-flow row that includes acquisitions is never labelled
+organic replacement.
+
+FANG annual Selected Operating Data supplies actual oil/NGL/gas mix and exact
+reported gathering, processing, transportation, and production-tax evidence.
+Development ROIC, reserve-replacement ROIC, and company incremental ROIC are
+reported as three distinct levels. Company incremental ROIC remains diagnostic
+until M&A normalization and accounting-perimeter proof are complete. V1.6 does
+not alter frozen WACC or terminal economics, and production remains locked at
+0/20 live matched observations.
+
+## E&P V1.6.1 accounting-proven frozen benchmark
+
+```powershell
+python run_ep_accounting_proof_v1_6_1.py
+python freeze_ep_accounting_proof_v1_6_1.py
+```
+
+V1.6.1 proves the AR composite lifting-cost scope, reconciles CNX production
+revenue with realized and unrealized hedge presentation, and attributes the
+FANG 2025 margin anomaly to the reported impairment and duplicate composite
+cost additions. The 3/3 accounting-perimeter gate is frozen without changing
+WACC, terminal assumptions, or production status. Its M&A bridge remains a
+denominator-only diagnostic and is not a terminal ROIC input.
+
+## E&P V1.7 organic company-economics research
+
+```powershell
+python run_ep_organic_company_economics_v1_7.py
+```
+
+V1.7 preserves the frozen V1.6.1 manifest and reads event-specific evidence
+from the SEC Financial Statement and Notes data set. Purchase-price allocation
+net assets, acquired debt, acquired cash, equity consideration, acquiree net
+income since close, and operating acquisition costs are kept as separate
+fields. Acquiree net income is explicitly an after-tax proxy rather than
+NOPAT. Material divestitures without divested book capital and operating
+contribution fail closed, as do asset acquisitions whose operating contribution
+cannot be separated from the buyer. Purchase-accounting step-up, validated
+organic company ROIC, terminal replacement, and production promotion all stay
+locked.
+
+## E&P V1.7.1 M&A numerator and purchase-accounting proof research
+
+```powershell
+python run_ep_mna_numerator_purchase_accounting_v1_7_1.py
+```
+
+V1.7.1 preserves both the frozen V1.6.1 benchmark and the V1.7 parent research
+snapshot. Public-target deals use the last pre-close 10-Q to reconstruct book
+invested capital and compare it with purchase-price-allocation economic capital.
+Post-close acquiree net income is calendar-day normalized for a separate
+run-rate return diagnostic, while the buyer's same-period organic bridge removes
+only the actually reported post-close contribution.
+
+Deal cohorts retain separate `t`, `t+1`, and `t+2` annual observations and a
+cumulative diagnostic. Net income and tax-adjusted divested-business earnings
+remain explicit proxies rather than NOPAT. Incomplete additional acquisitions,
+divestitures, private-target book bases, and partial cohort windows fail closed.
+The layer cannot recalibrate WACC or terminal economics and cannot promote
+production.
+
+## E&P V1.7.2 acquiree NOPAT and cycle-normalized cohort research
+
+```powershell
+python run_ep_acquiree_nopat_cycle_cohorts_v1_7_2.py
+```
+
+V1.7.2 preserves the V1.7.1 parent snapshot and adds an evidence-backed
+net-income-to-NOPAT bridge for public acquirees. It annualizes pre-deal target
+interest expense, applies the target tax rate, scales the financing burden to
+PPA-assumed debt, and keeps pre-deal non-operating items unapplied when they do
+not share the post-close period. The result is labelled a bridged NOPAT proxy,
+never directly disclosed NOPAT.
+
+Reported deal-cohort ROIC is shown separately from a commodity-cycle-normalized
+view based on normalized price, production, and normalized unit cost. DVN uses
+SEC upstream cost components, FANG uses the V1.6.1 accounting-proven component
+scope, and incomplete peers retain an explicit hierarchical-margin-implied cost
+route. Contaminated deal years and incomplete `t` through `t+2` windows continue
+to fail closed. The layer cannot replace terminal economics or promote
+production.
+
+## E&P V1.7.3 normalization-attribution and NOPAT-triangulation research
+
+```powershell
+python run_ep_normalization_attribution_nopat_triangulation_v1_7_3.py
+```
+
+V1.7.3 preserves the complete V1.7.2 parent snapshot. It predeclares a 10%
+symmetric tolerance and compares target NOPAT through `net income + after-tax
+interest` and `operating income x (1-tax)` on the same target period. Historical
+FANG–Energen evidence adds a third evidence-backed bridge without pretending
+that direct operating expense is complete NOPAT.
+
+The cycle bridge separates reported GAAP NOPAT, accounting-scope residual,
+price normalization, cost normalization, and tax normalization. DVN and FANG
+receive Grade A only after every production and cost component is checked back
+to SEC/IR source cells; hierarchical-implied Grade C rows receive zero sector
+inference weight. A complete independent methodology cohort is distinct from a
+complete organic ROIC cohort. Missing disposed-asset operating contribution
+therefore keeps FANG organic validation locked even when its book-capital bridge
+is proven. Terminal economics, WACC, and production status remain unchanged.

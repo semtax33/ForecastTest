@@ -1,0 +1,110 @@
+version = "ENERGY_VALUATION_PLATFORM_V1_1_RC1"
+parent_version = "ENERGY_VALUATION_PLATFORM_V1"
+status = "RELEASE_CANDIDATE_SANITY_AUDIT_REQUIRED"
+forecast_horizon_years = 5
+maximum_reverse_dcf_cap_years = 20
+historical_distribution_quarters = 20
+minimum_distribution_observations = 8
+production_live_minimum = 20
+live_matched_observations = 0
+terminal_growth_cap_pct = 3.0
+fixed_ratio_reverse_calculation_allowed = false
+
+[scenario_construction]
+anchor_reliability_weight = 0.25
+historical_prior_strength = 8.0
+scenario_spread_scale = 0.20
+guardrail_interior_buffer_fraction = 0.05
+minimum_roic_spread_over_terminal_growth_pct = 1.0
+wacc_min_pct = 3.0
+wacc_max_pct = 20.0
+reinvestment_min_pct = -50.0
+reinvestment_max_pct = 150.0
+
+[sanity_gates]
+boundary_green_below_pct = 10.0
+boundary_red_above_pct = 25.0
+roundtrip_value_tolerance_pct = 0.10
+roundtrip_assumption_tolerance = 0.01
+ev_equity_reconciliation_tolerance_pct = 0.000001
+forward_fcff_identity_tolerance_usd = 0.001
+growth_reinvestment_roic_tolerance_pct_points = 0.000001
+terminal_warning_share_pct = 70.0
+terminal_high_share_pct = 80.0
+expectations_gap_outlier_abs_pct = 75.0
+subindustry_value_skew_abs_pct = 50.0
+
+[reverse_domains]
+growth_min_pct = -30.0
+growth_max_pct = 50.0
+margin_min_pct = -20.0
+margin_max_pct = 60.0
+roic_min_pct = 1.0
+roic_max_pct = 60.0
+
+[[scenarios]]
+name = "BEAR"
+default_scenario_weight = 0.20
+growth_quantile = 0.20
+margin_quantile = 0.20
+roic_quantile = 0.20
+wacc_shift_pct = 1.50
+terminal_growth_pct = 1.00
+
+[[scenarios]]
+name = "BASE"
+default_scenario_weight = 0.60
+growth_quantile = 0.50
+margin_quantile = 0.50
+roic_quantile = 0.50
+wacc_shift_pct = 0.00
+terminal_growth_pct = 2.00
+
+[[scenarios]]
+name = "BULL"
+default_scenario_weight = 0.20
+growth_quantile = 0.80
+margin_quantile = 0.80
+roic_quantile = 0.80
+wacc_shift_pct = -1.00
+terminal_growth_pct = 2.50
+
+[guardrails.ep]
+growth_min_pct = -15.0
+growth_max_pct = 20.0
+margin_min_pct = -20.0
+margin_max_pct = 50.0
+roic_min_pct = 2.0
+roic_max_pct = 35.0
+
+[guardrails.integrated]
+growth_min_pct = -10.0
+growth_max_pct = 15.0
+margin_min_pct = -5.0
+margin_max_pct = 30.0
+roic_min_pct = 2.0
+roic_max_pct = 30.0
+
+[guardrails.refining]
+growth_min_pct = -15.0
+growth_max_pct = 20.0
+margin_min_pct = -10.0
+margin_max_pct = 20.0
+roic_min_pct = 2.0
+roic_max_pct = 35.0
+
+[guardrails.midstream]
+growth_min_pct = -5.0
+growth_max_pct = 12.0
+margin_min_pct = 0.0
+margin_max_pct = 40.0
+roic_min_pct = 2.0
+roic_max_pct = 20.0
+
+[guardrails.services]
+growth_min_pct = -15.0
+growth_max_pct = 20.0
+margin_min_pct = -10.0
+margin_max_pct = 30.0
+roic_min_pct = 2.0
+roic_max_pct = 35.0

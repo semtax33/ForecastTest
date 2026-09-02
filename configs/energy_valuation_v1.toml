@@ -1,0 +1,81 @@
+version = "ENERGY_VALUATION_PLATFORM_V1"
+status = "RESEARCH_COMPLETE_PRODUCTION_NOT_PROMOTED"
+forecast_horizon_years = 5
+maximum_reverse_dcf_cap_years = 20
+historical_distribution_quarters = 20
+minimum_distribution_observations = 8
+market_price_max_age_days = 30
+production_live_minimum = 20
+live_matched_observations = 0
+equity_risk_premium_pct = 4.5
+fallback_credit_spread_pct = 2.0
+terminal_growth_cap_pct = 3.0
+fixed_ratio_reverse_calculation_allowed = false
+
+[[scenarios]]
+name = "BEAR"
+probability = 0.20
+growth_quantile = 0.20
+margin_quantile = 0.20
+roic_quantile = 0.20
+wacc_shift_pct = 1.50
+terminal_growth_pct = 1.00
+
+[[scenarios]]
+name = "BASE"
+probability = 0.60
+growth_quantile = 0.50
+margin_quantile = 0.50
+roic_quantile = 0.50
+wacc_shift_pct = 0.00
+terminal_growth_pct = 2.00
+
+[[scenarios]]
+name = "BULL"
+probability = 0.20
+growth_quantile = 0.80
+margin_quantile = 0.80
+roic_quantile = 0.80
+wacc_shift_pct = -1.00
+terminal_growth_pct = 2.50
+
+[guardrails.ep]
+growth_min_pct = -15.0
+growth_max_pct = 20.0
+margin_min_pct = -20.0
+margin_max_pct = 50.0
+roic_min_pct = 2.0
+roic_max_pct = 35.0
+
+[guardrails.integrated]
+growth_min_pct = -10.0
+growth_max_pct = 15.0
+margin_min_pct = -5.0
+margin_max_pct = 30.0
+roic_min_pct = 2.0
+roic_max_pct = 30.0
+
+[guardrails.refining]
+growth_min_pct = -15.0
+growth_max_pct = 20.0
+margin_min_pct = -10.0
+margin_max_pct = 20.0
+roic_min_pct = 2.0
+roic_max_pct = 35.0
+
+[guardrails.midstream]
+growth_min_pct = -5.0
+growth_max_pct = 12.0
+margin_min_pct = 0.0
+margin_max_pct = 40.0
+roic_min_pct = 2.0
+roic_max_pct = 20.0
+
+[guardrails.services]
+growth_min_pct = -15.0
+growth_max_pct = 20.0
+margin_min_pct = -10.0
+margin_max_pct = 30.0
+roic_min_pct = 2.0
+roic_max_pct = 35.0
+

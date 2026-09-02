@@ -1,0 +1,67 @@
+version = "PHASE6_VALUE_DRIVER_RESEARCH_V1"
+status = "RESEARCH_ONLY"
+platform_name = "SUBINDUSTRY_DRIVER_FINANCIAL_BRIDGE_VALUATION"
+forecast_cutoff_day_of_quarter = 61
+time_holdout_quarters = 8
+production_live_minimum = 20
+revenue_models_frozen = true
+fixed_ratio_reverse_calculation_allowed = false
+scenario_bridge_required = true
+production_champion = "V3.4_FROZEN"
+ep_research_champion = "V3.5.3_GROUPED_RESEARCH_CHAMPION"
+
+[validation]
+ridge_alpha = 12.0
+minimum_training_observations = 16
+minimum_forecasts_per_entity = 8
+margin_change_clip_percentage_points = 30.0
+log_change_clip_points = 60.0
+
+[bridge]
+trailing_quarters = 12
+minimum_history = 8
+lower_quantile = 0.20
+base_quantile = 0.50
+upper_quantile = 0.80
+guidance_adjustment_default = 0.0
+
+[integrated]
+minimum_training_observations = 12
+upstream_features = "wti_log_yoy;henry_log_yoy;us_crude_production_log_yoy;us_dry_gas_production_log_yoy"
+downstream_features = "product_price_basket_log_yoy;crack_321_per_bbl_log_yoy;refinery_crude_input_log_yoy"
+chemicals_features = "henry_log_yoy;us_liquid_fuels_consumption_log_yoy"
+
+[[target_hierarchy]]
+subindustry = "E&P"
+primary_anchor = "PRODUCTION_PLUS_REALIZED_PRICE"
+secondary_targets = "GAAP_REVENUE;OPERATING_MARGIN;CASH_CAPEX"
+validation_targets = "FCFF;ROIC"
+bridge = "VOLUME_X_REALIZED_PRICE_THEN_COST_AND_REINVESTMENT"
+
+[[target_hierarchy]]
+subindustry = "Refining"
+primary_anchor = "THROUGHPUT_PLUS_REFINING_MARGIN"
+secondary_targets = "GAAP_REVENUE;EBITDA"
+validation_targets = "OPERATING_INCOME;FCFF"
+bridge = "THROUGHPUT_X_PRODUCT_PRICE_AND_CAPTURE_MARGIN"
+
+[[target_hierarchy]]
+subindustry = "Midstream"
+primary_anchor = "VOLUME_PLUS_FEE_PLUS_ADJUSTED_EBITDA"
+secondary_targets = "GAAP_REVENUE"
+validation_targets = "FCF"
+bridge = "ADJUSTED_EBITDA_WITH_PIT_MARGIN_REGIME_SCENARIOS"
+
+[[target_hierarchy]]
+subindustry = "Services"
+primary_anchor = "ACTIVITY_PLUS_PRICING_PLUS_OPERATING_MARGIN"
+secondary_targets = "GAAP_REVENUE;EBIT"
+validation_targets = "FCFF"
+bridge = "ACTIVITY_X_PRICING_THEN_UTILIZATION_AND_MARGIN"
+
+[[target_hierarchy]]
+subindustry = "Integrated"
+primary_anchor = "SEGMENT_EARNINGS"
+secondary_targets = "CONSOLIDATED_EARNINGS;EBIT"
+validation_targets = "FCF"
+bridge = "SUM_SEGMENT_EARNINGS_PLUS_CORPORATE_UNMODELED_SCENARIOS"

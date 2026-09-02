@@ -1,0 +1,12 @@
+metric,value,detail
+equity_value_gap_median_pct,90.66707198700433,12/14 positive; 8/14 absolute gap above 75%
+enterprise_value_gap_median_pct,79.11633220676765,Before EV-to-common-equity claims
+ev_to_equity_individual_gap_amplification_median_pct_points,12.529230987624832,"Amplifier, not originating operating-value driver"
+base_wacc_median_pct,6.565589944856866,Frozen V1.1 E&P base
+base_operating_margin_median_pct,32.505145155933704,Held constant into terminal in V1.1
+base_roic_median_pct,15.213203247270432,Used for explicit and terminal reinvestment
+near_term_anchor_coverage_tickers,4.0,"Revenue nowcast anchor, 25% growth-center weight"
+near_term_anchor_gap_reduction_median_anchored_pct_points,9.401275207520442,Four anchored tickers only
+near_term_anchor_gap_reduction_median_all_ep_pct_points,0.0,Sector median unchanged
+terminal_margin_prior_window_high_confidence_tickers,4.0,Remaining names use full-history fallback
+historical_fcff_margin_gap_rank_correlation,0.5384615384615385,"Descriptive, not mechanical or causal"
