@@ -159,3 +159,5 @@ output/energy_live_forward_v2/live_forward.sqlite
 !output/industrials_v5_4_hii_margin_mechanism_research/**
 !benchmarks/industrials_v5_4_hii_margin_mechanisms/
 !benchmarks/industrials_v5_4_hii_margin_mechanisms/manifest.json
+output/**
+data-lake/**
