@@ -1,49 +1,51 @@
 from __future__ import annotations
 
-import re
-import warnings
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
-
+from equity_platform.documents import DocumentMetadata, adapt_html_document
 from equity_platform.metrics import absolute_percentage_error, mean_absolute_scaled_error
+from equity_platform.parsing import compile_rule_file, execute_rules
+from equity_platform.paths import PROJECT_ROOT
 
 
-FIRM_BACKLOG_PATTERN = re.compile(
-    r"The dollar amount of backlog believed to be firm was approximately "
-    r"\$([\d,.]+) billion at December 31, (\d{4}) and "
-    r"\$([\d,.]+) billion at December 31, (\d{4})",
-    re.IGNORECASE,
-)
-NOT_EXPECTED_PATTERN = re.compile(
-    r"Of the total backlog at December 31, (\d{4}), approximately "
-    r"\$([\d,.]+) billion was not expected to be filled in (\d{4})",
-    re.IGNORECASE,
-)
-
-
-def _document_text(path: Path) -> str:
-    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
-    soup = BeautifulSoup(path.read_text(encoding="utf-8"), "lxml")
-    return " ".join(soup.stripped_strings).replace("\xa0", " ")
+CAT_RULES = PROJECT_ROOT / "configs/parser_rules/industrials/cat.arc"
 
 
 def parse_cat_order_backlog(source: pd.Series) -> dict[str, object]:
     path = Path(str(source["resolved_path"]))
-    text = _document_text(path)
-    firm = FIRM_BACKLOG_PATTERN.search(text)
-    not_expected = NOT_EXPECTED_PATTERN.search(text)
-    if firm is None or not_expected is None:
-        raise ValueError(f"CAT firm backlog disclosure was not found: {path}")
-    current_backlog_b = float(firm.group(1).replace(",", ""))
-    current_year = int(firm.group(2))
-    prior_backlog_b = float(firm.group(3).replace(",", ""))
-    prior_year = int(firm.group(4))
-    not_expected_year = int(not_expected.group(1))
-    not_expected_b = float(not_expected.group(2).replace(",", ""))
-    fill_year = int(not_expected.group(3))
+    document = adapt_html_document(
+        path=path,
+        metadata=DocumentMetadata(
+            entity="CAT",
+            source_kind="SEC_10K",
+            document_kind="ANNUAL_REPORT",
+            available_at=pd.Timestamp(source["filing_date"]).date().isoformat(),
+            report_period=str(int(source["fiscal_year"])),
+        ),
+        expected_sha256=str(source["source_sha256"]),
+        source_uri=str(source["source_url"]),
+        include_tables=False,
+        include_inline_facts=False,
+    )
+    executions = execute_rules(document, compile_rule_file(CAT_RULES))
+    failures = [execution for execution in executions if execution.status != "EMITTED"]
+    if failures:
+        detail = [(item.rule_id, item.status, item.error) for item in failures]
+        raise ValueError(f"CAT backlog DSL failed for {path}: {detail}")
+    facts = {
+        execution.fact.metric: execution.fact
+        for execution in executions
+        if execution.fact is not None
+    }
+    current_backlog_b = facts["FIRM_ORDER_BACKLOG"].value
+    current_year = int(facts["FIRM_ORDER_BACKLOG_CURRENT_YEAR"].value)
+    prior_backlog_b = facts["PRIOR_YEAR_FIRM_ORDER_BACKLOG"].value
+    prior_year = int(facts["FIRM_ORDER_BACKLOG_PRIOR_YEAR"].value)
+    not_expected_year = int(facts["BACKLOG_NOT_EXPECTED_REFERENCE_YEAR"].value)
+    not_expected_b = facts["BACKLOG_NOT_EXPECTED_NEXT_YEAR"].value
+    fill_year = int(facts["EXPECTED_FILL_YEAR"].value)
     if current_year != int(source["fiscal_year"]):
         raise ValueError(f"Backlog year mismatch in {path}: {current_year}")
     if prior_year != current_year - 1 or not_expected_year != current_year:
@@ -51,7 +53,13 @@ def parse_cat_order_backlog(source: pd.Series) -> dict[str, object]:
     expected_b = current_backlog_b - not_expected_b
     if expected_b < 0 or fill_year != current_year + 1:
         raise ValueError(f"Invalid next-year backlog bridge in {path}")
-    excerpt = firm.group(0) + ". " + not_expected.group(0) + "."
+    firm_excerpt = facts["FIRM_ORDER_BACKLOG"].lineage.match_trace["matches"][0][
+        "source_excerpt"
+    ]
+    not_expected_excerpt = facts[
+        "BACKLOG_NOT_EXPECTED_NEXT_YEAR"
+    ].lineage.match_trace["matches"][0]["source_excerpt"]
+    excerpt = str(firm_excerpt) + ". " + str(not_expected_excerpt) + "."
     return {
         "fiscal_year": current_year,
         "filing_date": pd.Timestamp(source["filing_date"]).date().isoformat(),
@@ -244,4 +252,3 @@ def build_next_year_backlog_bridge(
         "backlog_anchor_gate": gate,
         "backlog_conversion_candidate": candidate,
     }
-

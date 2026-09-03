@@ -1,3 +1,4 @@
+experiment_id = "industrials.aerospace_defense.gd.v6"
 version = "INDUSTRIALS_PLATFORM_V6_GD_FOURTH_COMPANY_RESEARCH"
 as_of_date = "2026-09-04"
 ticker = "GD"
@@ -11,6 +12,12 @@ arcana_pqci_root = "D:/Programming/python_example/Arcana/data-lake/bronze/pqci"
 bls_labor_snapshot = "data-lake/bronze/industrials/v5_4/bls/hii_shipbuilding_labor_current_revised_2026-09-03.json"
 bls_labor_maximum_reference_period = "2026M06"
 validation_start_period = "2025Q1"
+prospective_target_period = "2026Q3"
+prospective_forecast_as_of = "2026-07-29"
+prospective_actual_available_at = "2099-12-31"
+prospective_origin_period = "2026Q2"
+prospective_horizon_quarters = 1
+expected_segments = 4
 minimum_training_quarters = 8
 ridge_penalty = 8.0
 expected_oos_quarters_per_segment = 6

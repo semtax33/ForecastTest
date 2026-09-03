@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from hashlib import sha256
-from io import StringIO
 import json
 from pathlib import Path
-import re
 
 import numpy as np
 import pandas as pd
+
+from .ifrs_rules import build_ifrs_rule_evidence
 
 
 IFRS_CONCEPTS: dict[str, tuple[str, ...]] = {
@@ -24,9 +24,10 @@ IFRS_CONCEPTS: dict[str, tuple[str, ...]] = {
     "pretax_profit_local": ("ProfitLossBeforeTax",),
     "income_tax_local": ("IncomeTaxExpenseContinuingOperations",),
     "cfo_local": ("CashFlowsFromUsedInOperatingActivities",),
+    # AdditionsToNoncurrentAssets is deliberately excluded: for concession
+    # operators it can be a balance-like disclosure, not period cash CapEx.
     "capex_local": (
         "AdditionsOtherThanThroughBusinessCombinationsPropertyPlantAndEquipment",
-        "AdditionsToNoncurrentAssets",
     ),
     "depreciation_amortization_local": (
         "DepreciationAndAmortisationExpense",
@@ -49,10 +50,7 @@ IFRS_CONCEPTS: dict[str, tuple[str, ...]] = {
         "ShorttermBorrowings",
     ),
     "debt_noncurrent_local": ("LongtermBorrowings", "Borrowings"),
-    "equity_local": (
-        "EquityAttributableToOwnersOfParent",
-        "Equity",
-    ),
+    "equity_local": ("EquityAttributableToOwnersOfParent", "Equity"),
     "shares_outstanding": ("NumberOfSharesOutstanding",),
 }
 
@@ -64,27 +62,6 @@ FLOW_METRICS = {
     "cfo_local",
     "capex_local",
     "depreciation_amortization_local",
-}
-
-MONTHS = {
-    name: index
-    for index, name in enumerate(
-        [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-        ],
-        start=1,
-    )
 }
 
 
@@ -136,13 +113,13 @@ def _select(
     if frame.empty:
         return np.nan, "NOT_IDENTIFIED", "NOT_IDENTIFIED"
     candidates = frame.loc[
-        frame["accn"].eq(accession)
-        & frame["end"].eq(pd.Timestamp(report_date))
+        frame["accn"].eq(accession) & frame["end"].eq(pd.Timestamp(report_date))
     ].copy()
-    if flow:
-        candidates = candidates.loc[candidates["duration_days"].between(300, 390)]
-    else:
-        candidates = candidates.loc[candidates["start"].isna()]
+    candidates = (
+        candidates.loc[candidates["duration_days"].between(300, 390)]
+        if flow
+        else candidates.loc[candidates["start"].isna()]
+    )
     if candidates.empty:
         return np.nan, "NOT_IDENTIFIED", "NOT_IDENTIFIED"
     selected = candidates.sort_values(["concept_priority", "filed"]).iloc[0]
@@ -150,15 +127,22 @@ def _select(
 
 
 def _currency(payload: dict[str, object]) -> str:
-    revenue = payload["facts"]["ifrs-full"]["Revenue"]["units"]
-    candidates = [unit for unit in revenue if unit not in {"USD", "shares", "pure"}]
-    return candidates[0] if candidates else next(iter(revenue))
+    namespace = payload["facts"]["ifrs-full"]
+    revenue_node = next(
+        (namespace[concept] for concept in IFRS_CONCEPTS["revenue_local"] if concept in namespace),
+        None,
+    )
+    if revenue_node is None:
+        raise ValueError("IFRS revenue concept not identified")
+    units = revenue_node["units"]
+    candidates = [unit for unit in units if unit not in {"USD", "shares", "pure"}]
+    return candidates[0] if candidates else next(iter(units))
 
 
 def _annual_ifrs(
     *, project_root: Path, manifest: dict[str, object]
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
-    facts_path = project_root / manifest["companyfacts_path"]
+    facts_path = project_root / str(manifest["companyfacts_path"])
     if _sha(facts_path) != manifest["companyfacts_sha256"]:
         raise ValueError(f"IFRS companyfacts hash mismatch: {facts_path}")
     payload = json.loads(facts_path.read_text(encoding="utf-8"))
@@ -191,8 +175,8 @@ def _annual_ifrs(
         for metric, frame in facts.items():
             value, concept, unit = _select(
                 frame,
-                accession=filing["accession_number"],
-                report_date=filing["report_date"],
+                accession=str(filing["accession_number"]),
+                report_date=str(filing["report_date"]),
                 flow=metric in FLOW_METRICS,
             )
             row[metric] = value
@@ -206,14 +190,37 @@ def _annual_ifrs(
                     "unit": unit,
                     "available": pd.notna(value),
                     "accession_number": filing["accession_number"],
+                    "parser": "SEC_COMPANYFACTS_IFRS",
                 }
             )
         rows.append(row)
     annual = pd.DataFrame(rows).sort_values("fiscal_year").reset_index(drop=True)
+    return annual, pd.DataFrame(selections)
+
+
+def _derive_annual_economics(annual: pd.DataFrame) -> pd.DataFrame:
+    annual = annual.copy()
     if annual.empty:
-        return annual, pd.DataFrame(selections)
-    annual["operating_margin_pct"] = (
+        return annual
+    if "zero_margin_construction_revenue_local" not in annual:
+        annual["zero_margin_construction_revenue_local"] = np.nan
+    annual["economic_revenue_local"] = (
+        annual["revenue_local"] - annual["zero_margin_construction_revenue_local"]
+    ).where(
+        annual["zero_margin_construction_revenue_local"].notna(),
+        annual["revenue_local"],
+    )
+    annual["gaap_operating_margin_pct"] = (
         annual["operating_profit_local"] / annual["revenue_local"] * 100.0
+    )
+    annual["economic_operating_margin_pct"] = (
+        annual["operating_profit_local"] / annual["economic_revenue_local"] * 100.0
+    )
+    annual["operating_margin_pct"] = annual["economic_operating_margin_pct"]
+    annual["model_revenue_definition"] = np.where(
+        annual["zero_margin_construction_revenue_local"].notna(),
+        "GAAP_REVENUE_MINUS_IFRIC12_ZERO_MARGIN_CONSTRUCTION",
+        "GAAP_REVENUE",
     )
     annual["effective_tax_rate_pct"] = (
         annual["income_tax_local"] / annual["pretax_profit_local"] * 100.0
@@ -228,8 +235,7 @@ def _annual_ifrs(
         annual["total_debt_local"] + annual["equity_local"] - annual["cash_local"]
     )
     annual["average_invested_capital_local"] = (
-        annual["invested_capital_local"]
-        + annual["invested_capital_local"].shift(1)
+        annual["invested_capital_local"] + annual["invested_capital_local"].shift(1)
     ) / 2.0
     annual["reported_roic_pct"] = (
         annual["nopat_local"] / annual["average_invested_capital_local"] * 100.0
@@ -267,163 +273,107 @@ def _annual_ifrs(
     annual["core_reinvestment_rate_pct"] = (
         annual["core_reinvestment_local"] / annual["nopat_local"] * 100.0
     ).where(annual["core_reinvestment_claim_allowed"])
+    # Missing R&D is unknown, never zero. A separate innovation route must earn authority.
+    annual["research_development_local"] = np.nan
+    annual["innovation_reinvestment_claim_allowed"] = False
     annual["terminal_input_allowed"] = False
     annual["fair_value_authority"] = False
-    return annual, pd.DataFrame(selections)
+    return annual
 
 
-def _clean_cell(value: object) -> str:
-    return re.sub(r"\s+", " ", str(value)).strip()
-
-
-def _number(value: object) -> float:
-    cleaned = _clean_cell(value).replace(",", "")
-    cleaned = re.sub(r"[^0-9.()-]", "", cleaned)
-    if not cleaned:
-        return np.nan
-    negative = cleaned.startswith("(") and cleaned.endswith(")")
-    cleaned = cleaned.strip("()")
-    result = float(pd.to_numeric(cleaned, errors="coerce"))
-    return -result if negative else result
-
-
-def build_pac_passenger_traffic(
-    *, project_root: Path, manifest: dict[str, object]
-) -> dict[str, pd.DataFrame]:
-    rows: list[dict[str, object]] = []
-    source_rows: list[dict[str, object]] = []
-    title = re.compile(
-        r"Reports\s+(?:I|i)n\s+([A-Za-z]+)\s+(20\d{2})\s+(?:a\s+)?Passenger\s+Traffic",
-        re.IGNORECASE,
-    )
-    for filing in manifest["filings"]:
-        if filing["form"] != "6-K":
-            continue
-        path = project_root / filing["local_path"]
-        content = path.read_bytes()
-        if _sha(path) != filing["sha256"]:
-            raise ValueError(f"PAC 6-K hash mismatch: {path}")
-        html = content.decode("utf-8", errors="ignore")
-        plain = re.sub(r"<[^>]+>", " ", html)
-        plain = re.sub(r"&(?:#\d+|[A-Za-z]+);", " ", plain)
-        match = title.search(plain)
-        if not match or match.group(1).title() not in MONTHS:
-            continue
-        month_name, year_text = match.group(1).title(), match.group(2)
-        target_period = pd.Period(
-            f"{year_text}-{MONTHS[month_name]:02d}", freq="M"
+def _apply_parser_facts(
+    annual: pd.DataFrame, parser_facts: pd.DataFrame
+) -> pd.DataFrame:
+    annual = annual.copy()
+    annual["zero_margin_construction_revenue_local"] = np.nan
+    annual["ifric12_rule_id"] = pd.NA
+    if annual.empty or parser_facts.empty:
+        return _derive_annual_economics(annual)
+    capex = parser_facts.loc[parser_facts["metric"].eq("CONCESSION_CAPEX")].copy()
+    if not capex.empty:
+        capex["fiscal_year"] = pd.to_datetime(capex["period"]).dt.year
+        capex = capex.sort_values("available_at").drop_duplicates(
+            ["entity", "fiscal_year"], keep="first"
         )
-        candidates: list[float] = []
-        try:
-            tables = pd.read_html(StringIO(html))
-        except ValueError:
-            tables = []
-        for table in tables:
-            normalized = table.map(_clean_cell)
-            header_candidates = normalized.index[
-                normalized.apply(
-                    lambda row: row.str.fullmatch("Airport", case=False).any(),
-                    axis=1,
-                )
-            ]
-            if len(header_candidates) == 0:
+        lookup = capex.set_index(["entity", "fiscal_year"])
+        for index, row in annual.iterrows():
+            key = (row["ticker"], int(row["fiscal_year"]))
+            if key not in lookup.index:
                 continue
-            header_index = header_candidates[0]
-            header = normalized.loc[header_index].tolist()
-            body = normalized.loc[header_index + 1 :].copy()
-            body.columns = [f"{value}_{index}" for index, value in enumerate(header)]
-            airport_column = next(
-                (column for column in body if column.lower().startswith("airport_")),
-                None,
-            )
-            if airport_column is None:
-                continue
-            total = body.loc[body[airport_column].str.fullmatch("Total", case=False)]
-            if total.empty:
-                continue
-            month_pattern = re.compile(
-                rf"{month_name[:3]}\s*-?\s*{str(target_period.year)[-2:]}",
-                re.IGNORECASE,
-            )
-            current_columns = [
-                column for column in body if month_pattern.search(column)
-            ]
-            for column in current_columns:
-                value = _number(total.iloc[0][column])
-                if np.isfinite(value) and value >= 0:
-                    candidates.append(value)
-        if not candidates:
-            source_rows.append(
-                {
-                    "period": str(target_period),
-                    "filing_date": filing["filing_date"],
-                    "source_path": filing["local_path"],
-                    "source_sha256": filing["sha256"],
-                    "selection_status": "TRAFFIC_RELEASE_TABLE_NOT_IDENTIFIED",
-                }
-            )
-            continue
-        # Domestic, international and combined tables coexist. The combined total
-        # is the maximum and is selected by an outcome-independent accounting rule.
-        value = max(candidates)
-        rows.append(
-            {
-                "ticker": "PAC",
-                "subindustry_code": "airport_services",
-                "period": str(target_period),
-                "terminal_passengers_thousands": value,
-                "filing_date": filing["filing_date"],
-                "available_at": filing["filing_date"],
-                "source_url": filing["source_url"],
-                "source_path": filing["local_path"],
-                "source_sha256": filing["sha256"],
-                "quantity_anchor": "TOTAL_TERMINAL_PASSENGERS",
-                "historical_pit_input": True,
-                "selection_rule": "MAX_TOTAL_ACROSS_DOMESTIC_INTERNATIONAL_COMBINED_TABLES",
-            }
-        )
-        source_rows.append(
-            {
-                "period": str(target_period),
-                "filing_date": filing["filing_date"],
-                "source_path": filing["local_path"],
-                "source_sha256": filing["sha256"],
-                "selection_status": "PARSED",
-            }
-        )
-    monthly = pd.DataFrame(rows)
-    if not monthly.empty:
-        monthly = monthly.sort_values(["period", "filing_date"]).drop_duplicates(
-            "period", keep="first"
-        )
+            fact = lookup.loc[key]
+            value = float(fact["value"])
+            annual.at[index, "capex_local"] = value
+            # IFRIC 12 improvement revenue equals its cost and contributes no
+            # operating profit; remove it for the passenger-economics bridge.
+            annual.at[index, "zero_margin_construction_revenue_local"] = value
+            annual.at[index, "ifric12_rule_id"] = fact["rule_id"]
+    return _derive_annual_economics(annual)
+
+
+def _yoy_by_period(frame: pd.DataFrame, *, periods: int) -> pd.Series:
+    if frame.empty:
+        return pd.Series(dtype=float)
+    lookup = frame.set_index("period")["terminal_passengers_thousands"]
+    frequency = "M" if periods == 12 else "Q"
+    current = pd.PeriodIndex(frame["period"], freq=frequency)
+    previous_keys = (current - periods).astype(str)
+    previous = pd.Series(previous_keys, index=frame.index).map(lookup).astype(float)
+    return frame["terminal_passengers_thousands"] / previous * 100.0 - 100.0
+
+
+def _traffic_frames(rule_evidence: dict[str, pd.DataFrame]) -> dict[str, pd.DataFrame]:
+    facts = rule_evidence["parser_fact_ir"]
+    if facts.empty or "metric" not in facts:
+        traffic = pd.DataFrame()
+    else:
+        traffic = facts.loc[facts["metric"].eq("TERMINAL_PASSENGERS")].copy()
+    if traffic.empty:
+        monthly = pd.DataFrame()
+        quarterly = pd.DataFrame()
+    else:
+        monthly = traffic.rename(
+            columns={"entity": "ticker", "value": "terminal_passengers_thousands"}
+        ).sort_values(["period", "available_at"])
+        monthly = monthly.drop_duplicates("period", keep="first")
+        monthly["subindustry_code"] = "airport_services"
+        monthly["filing_date"] = monthly["available_at"]
+        monthly["quantity_anchor"] = "TOTAL_TERMINAL_PASSENGERS"
+        monthly["historical_pit_input"] = True
+        monthly["selection_rule"] = monthly["rule_id"]
         monthly["period_m"] = pd.PeriodIndex(monthly["period"], freq="M")
         monthly["quarter"] = monthly["period_m"].dt.asfreq("Q").astype(str)
         monthly["year"] = monthly["period_m"].dt.year
-        monthly["passenger_yoy_pct"] = (
-            monthly["terminal_passengers_thousands"]
-            / monthly["terminal_passengers_thousands"].shift(12)
-            * 100.0
-            - 100.0
-        )
+        monthly["passenger_yoy_pct"] = _yoy_by_period(monthly, periods=12)
         quarterly = monthly.groupby("quarter", as_index=False).agg(
             months=("period", "nunique"),
             terminal_passengers_thousands=("terminal_passengers_thousands", "sum"),
             latest_available_at=("available_at", "max"),
         )
         quarterly["complete_quarter"] = quarterly["months"].eq(3)
-        quarterly["passenger_yoy_pct"] = (
-            quarterly["terminal_passengers_thousands"]
-            / quarterly["terminal_passengers_thousands"].shift(4)
-            * 100.0
-            - 100.0
+        quarterly["period"] = quarterly["quarter"]
+        quarterly["passenger_yoy_pct"] = _yoy_by_period(quarterly, periods=4).where(
+            quarterly["complete_quarter"]
         )
-    else:
-        quarterly = pd.DataFrame()
+        quarterly = quarterly.drop(columns="period")
+    audit = rule_evidence["parser_rule_execution_audit"]
+    if not audit.empty:
+        audit = audit.loc[
+            audit["rule_id"].eq("airport.monthly_terminal_passengers")
+        ].copy()
+        audit["selection_status"] = audit["status"]
     return {
         "pac_monthly_passenger_traffic": monthly,
         "pac_quarterly_passenger_traffic": quarterly,
-        "pac_6k_traffic_selection_audit": pd.DataFrame(source_rows),
+        "pac_6k_traffic_selection_audit": audit,
     }
+
+
+def build_pac_passenger_traffic(
+    *, project_root: Path, manifest: dict[str, object]
+) -> dict[str, pd.DataFrame]:
+    return _traffic_frames(
+        build_ifrs_rule_evidence(project_root=project_root, manifest=manifest)
+    )
 
 
 def build_ifrs_evidence(
@@ -432,16 +382,24 @@ def build_ifrs_evidence(
     catalog = json.loads(catalog_manifest_path.read_text(encoding="utf-8"))
     annual_frames: list[pd.DataFrame] = []
     selection_frames: list[pd.DataFrame] = []
+    rule_artifacts: list[dict[str, pd.DataFrame]] = []
     source_rows: list[dict[str, object]] = []
-    passenger: dict[str, pd.DataFrame] = {}
     for company in catalog["companies"]:
         manifest_path = project_root / company["manifest_path"]
         if _sha(manifest_path) != company["manifest_sha256"]:
             raise ValueError(f"IFRS manifest hash mismatch: {manifest_path}")
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         annual, selections = _annual_ifrs(project_root=project_root, manifest=manifest)
+        rules = build_ifrs_rule_evidence(project_root=project_root, manifest=manifest)
+        annual = _apply_parser_facts(annual, rules["parser_fact_ir"])
         annual_frames.append(annual)
         selection_frames.append(selections)
+        rule_artifacts.append(rules)
+        quantity_rows = (
+            int(rules["parser_fact_ir"]["metric"].eq("TERMINAL_PASSENGERS").sum())
+            if not rules["parser_fact_ir"].empty
+            else 0
+        )
         source_rows.append(
             {
                 **company,
@@ -449,20 +407,27 @@ def build_ifrs_evidence(
                 "annual_rows": len(annual),
                 "operating_margin_rows": int(annual["operating_margin_pct"].notna().sum()),
                 "roic_rows": int(annual["reported_roic_pct"].notna().sum()),
-                "core_reinvestment_rows": int(
-                    annual["core_reinvestment_claim_allowed"].sum()
-                ),
+                "core_reinvestment_rows": int(annual["core_reinvestment_claim_allowed"].sum()),
+                "quantity_anchor_rows": quantity_rows,
+                "parser_rule_count": len(rules["parser_rule_inventory"]),
                 "quarterly_financial_history_ready": False,
                 "terminal_input_allowed": False,
             }
         )
-        if company["ticker"] == "PAC":
-            passenger = build_pac_passenger_traffic(
-                project_root=project_root, manifest=manifest
-            )
+
+    def concat(key: str) -> pd.DataFrame:
+        frames = [artifact[key] for artifact in rule_artifacts if not artifact[key].empty]
+        return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+
+    combined_rules = {
+        "parser_rule_inventory": concat("parser_rule_inventory"),
+        "parser_rule_execution_audit": concat("parser_rule_execution_audit"),
+        "parser_fact_ir": concat("parser_fact_ir"),
+    }
     return {
         "ifrs_source_inventory": pd.DataFrame(source_rows),
         "ifrs_annual_financial_history": pd.concat(annual_frames, ignore_index=True),
         "ifrs_metric_selection_audit": pd.concat(selection_frames, ignore_index=True),
-        **passenger,
+        **combined_rules,
+        **_traffic_frames(combined_rules),
     }

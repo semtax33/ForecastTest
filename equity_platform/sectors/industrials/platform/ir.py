@@ -36,6 +36,7 @@ def build_arcana_ir_evidence(
     ir_root: Path,
     start_date: pd.Timestamp = pd.Timestamp("2021-01-01"),
     cutoff: pd.Timestamp,
+    verified_cache_path: Path | None = None,
 ) -> dict[str, pd.DataFrame]:
     """Audit Arcana's SEC Exhibit 99 IR corpus and identify P/Q/C/I evidence.
 
@@ -44,6 +45,14 @@ def build_arcana_ir_evidence(
     """
     document_rows: list[dict[str, object]] = []
     inventory_rows: list[dict[str, object]] = []
+    cache: dict[str, dict[str, object]] = {}
+    if verified_cache_path is not None and verified_cache_path.exists():
+        cached = pd.read_csv(verified_cache_path)
+        cache = {
+            str(row["source_path"]): row.to_dict()
+            for _, row in cached.iterrows()
+            if bool(row.get("metadata_sha256_matches", False))
+        }
     for profile in INDUSTRIALS_SUBINDUSTRIES:
         ticker = profile.representative_ticker
         company_dir = ir_root / ticker
@@ -59,13 +68,30 @@ def build_arcana_ir_evidence(
             html_path = Path(str(metadata_path)[: -len(".metadata.json")])
             if not html_path.exists():
                 continue
-            content = html_path.read_bytes()
-            actual_hash = _sha256_bytes(content)
-            lowered = content.lower()
-            hits = {
-                role: sum(lowered.count(term) for term in terms)
-                for role, terms in ROLE_TERMS.items()
-            }
+            cached_row = cache.get(str(html_path))
+            cache_reusable = bool(
+                cached_row
+                and cached_row.get("source_sha256") == metadata.get("sha256")
+                and html_path.stat().st_size == int(metadata.get("byte_size", -1))
+            )
+            if cache_reusable:
+                actual_hash = str(cached_row["source_sha256"])
+                hits = {
+                    "P": int(cached_row["price_keyword_hits"]),
+                    "Q": int(cached_row["quantity_keyword_hits"]),
+                    "C": int(cached_row["cost_keyword_hits"]),
+                    "I": int(cached_row["investment_keyword_hits"]),
+                }
+                verification_mode = "REUSED_VERIFIED_SHA_WITH_SIZE_GATE"
+            else:
+                content = html_path.read_bytes()
+                actual_hash = _sha256_bytes(content)
+                lowered = content.lower()
+                hits = {
+                    role: sum(lowered.count(term) for term in terms)
+                    for role, terms in ROLE_TERMS.items()
+                }
+                verification_mode = "SHA256_RECOMPUTED"
             row = {
                 "subindustry_code": profile.code,
                 "ticker": ticker,
@@ -77,6 +103,8 @@ def build_arcana_ir_evidence(
                 "source_path": str(html_path),
                 "source_sha256": actual_hash,
                 "metadata_sha256_matches": actual_hash == metadata.get("sha256"),
+                "source_byte_size": html_path.stat().st_size,
+                "hash_verification_mode": verification_mode,
                 "price_keyword_hits": hits["P"],
                 "quantity_keyword_hits": hits["Q"],
                 "cost_keyword_hits": hits["C"],
@@ -121,6 +149,13 @@ def build_arcana_ir_evidence(
                 if not frame.empty
                 else 0,
                 "hash_mismatches": int((~frame["metadata_sha256_matches"]).sum())
+                if not frame.empty
+                else 0,
+                "hashes_reused_from_verified_cache": int(
+                    frame["hash_verification_mode"]
+                    .eq("REUSED_VERIFIED_SHA_WITH_SIZE_GATE")
+                    .sum()
+                )
                 if not frame.empty
                 else 0,
                 "company_specific_numeric_parser_required": True,

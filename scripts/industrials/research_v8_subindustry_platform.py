@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
+from time import perf_counter
 
 import pandas as pd
 
@@ -19,6 +21,7 @@ from equity_platform.sectors.industrials.platform import (
     build_industrials_bls_sensor_map,
     build_market_wacc_evidence,
     build_arcana_pqci_context,
+    build_ifrs_evidence,
     build_subindustry_companyfacts_evidence,
     run_fixed_oos_company_forecasts,
 )
@@ -37,6 +40,19 @@ ARCANA_IR = Path(
 )
 
 
+def _stage(name: str, started: float) -> float:
+    now = perf_counter()
+    print(f"stage={name} elapsed_seconds={now - started:.2f}", flush=True)
+    return now
+
+
+def _read_stage_cache(root: Path, names: tuple[str, ...]) -> dict[str, pd.DataFrame]:
+    missing = [name for name in names if not (root / f"{name}.csv").exists()]
+    if missing:
+        raise FileNotFoundError(f"Verified stage cache is incomplete: {missing}")
+    return {name: pd.read_csv(root / f"{name}.csv") for name in names}
+
+
 def _coverage_matrix(
     *,
     sec_summary: pd.DataFrame,
@@ -46,6 +62,7 @@ def _coverage_matrix(
     performance: pd.DataFrame,
     forecast_routes: pd.DataFrame,
     pqci_context_routes: pd.DataFrame,
+    ifrs_inventory: pd.DataFrame,
     valuation_gates: pd.DataFrame,
 ) -> pd.DataFrame:
     profiles = registry_frame().rename(
@@ -53,6 +70,31 @@ def _coverage_matrix(
     )
     source = profiles.merge(sec_summary, on=["subindustry_code", "ticker"], how="left")
     source = source.merge(ir_inventory, on=["subindustry_code", "ticker"], how="left")
+    source = source.merge(
+        ifrs_inventory[
+            [
+                "subindustry_code",
+                "ticker",
+                "status",
+                "annual_rows",
+                "operating_margin_rows",
+                "roic_rows",
+                "core_reinvestment_rows",
+                "quantity_anchor_rows",
+                "parser_rule_count",
+            ]
+        ].rename(
+            columns={
+                "status": "ifrs_status",
+                "annual_rows": "ifrs_annual_rows",
+                "operating_margin_rows": "ifrs_operating_margin_rows",
+                "roic_rows": "ifrs_roic_rows",
+                "core_reinvestment_rows": "ifrs_core_reinvestment_rows",
+            }
+        ),
+        on=["subindustry_code", "ticker"],
+        how="left",
+    )
     bls = sensors.groupby("segment", as_index=False).agg(
         bls_series=("series_id", "nunique"),
         dedicated_output_route=(
@@ -114,16 +156,37 @@ def _coverage_matrix(
     )
     source["sec_status"] = source["company_forecast_history_ready"].map(
         {True: "SEC_FORECAST_HISTORY_READY", False: "SEC_HISTORY_INSUFFICIENT"}
-    ).fillna("IFRS_ADAPTER_NOT_IMPLEMENTED")
+    )
+    foreign_ready = source["ifrs_status"].eq("READY")
+    source.loc[
+        source["sec_status"].isna()
+        & foreign_ready
+        & source["quantity_anchor_rows"].fillna(0).gt(0),
+        "sec_status",
+    ] = "IFRS_ANNUAL_AND_COMPANY_Q_ANCHOR_READY"
+    source.loc[
+        source["sec_status"].isna() & foreign_ready,
+        "sec_status",
+    ] = "IFRS_ANNUAL_SHORT_HISTORY"
+    source["sec_status"] = source["sec_status"].fillna("SOURCE_ADAPTER_NOT_READY")
+    for destination, foreign_column in (
+        ("roic_observations", "ifrs_roic_rows"),
+        ("core_reinvestment_observations", "ifrs_core_reinvestment_rows"),
+    ):
+        source[destination] = source[destination].fillna(source[foreign_column]).fillna(0)
     source["quantity_status"] = source.apply(
         lambda row: (
             "SEC_RPO_ROUTE_TESTED"
             if pd.notna(row.get("rpo_quantity_route_ready"))
             and bool(row.get("rpo_quantity_route_ready"))
             else (
+                "COMPANY_DISCLOSED_MONTHLY_QUANTITY_DSL_READY"
+                if row.get("quantity_anchor_rows", 0) > 0
+                else (
                 "IR_KPI_DISCOVERY_READY_NUMERIC_PARSER_REQUIRED"
                 if row.get("ir_documents_in_window", 0) > 0
                 else "NOT_IDENTIFIED"
+                )
             )
         ),
         axis=1,
@@ -134,47 +197,96 @@ def _coverage_matrix(
 
 
 def main() -> int:
+    stage_started = perf_counter()
+    use_stage_cache = os.environ.get("V8_USE_VERIFIED_STAGE_CACHE") == "1"
     sensors = build_industrials_bls_sensor_map()
+    stage_started = _stage("sensor_registry", stage_started)
     sensor_path = ROOT / "data-lake/silver/industrials/v8/reference/industrials_bls_sensor_map.csv"
     sensor_path.parent.mkdir(parents=True, exist_ok=True)
     sensors.to_csv(sensor_path, index=False)
-    bls = parse_bls_ppi_vintages(
-        project_root=ROOT,
-        archive_manifest_path=ROOT
-        / "data-lake/bronze/industrials/v1_5/bls/archive_manifest.json",
-        sensor_map_path=sensor_path,
-        cutoff=AS_OF,
-    )
-    sec = build_subindustry_companyfacts_evidence(
-        project_root=ROOT,
-        catalog_manifest_path=BRONZE / "sec/catalog_manifest.json",
-        cutoff=AS_OF,
-    )
-    ir = build_arcana_ir_evidence(
-        ir_root=ARCANA_IR,
-        start_date=pd.Timestamp("2021-01-01"),
-        cutoff=AS_OF,
-    )
+    if use_stage_cache:
+        bls = _read_stage_cache(
+            SILVER,
+            (
+                "bls_ppi_archive_sources",
+                "bls_ppi_vintage_audit",
+                "bls_ppi_vintage_canonical",
+                "bls_ppi_vintage_coverage",
+                "bls_release_schedule_sources",
+            ),
+        )
+    else:
+        bls = parse_bls_ppi_vintages(
+            project_root=ROOT,
+            archive_manifest_path=ROOT
+            / "data-lake/bronze/industrials/v1_5/bls/archive_manifest.json",
+            sensor_map_path=sensor_path,
+            cutoff=AS_OF,
+        )
+    stage_started = _stage("bls_pit_vintages", stage_started)
+    if use_stage_cache:
+        sec = _read_stage_cache(
+            SILVER,
+            (
+                "subindustry_sec_source_inventory",
+                "subindustry_companyfacts_summary",
+                "subindustry_companyfacts_metric_coverage",
+                "subindustry_companyfacts_metric_selections",
+                "subindustry_periodic_financial_history",
+                "subindustry_quarterly_financial_history",
+                "subindustry_annual_roic_reinvestment_history",
+            ),
+        )
+    else:
+        sec = build_subindustry_companyfacts_evidence(
+            project_root=ROOT,
+            catalog_manifest_path=BRONZE / "sec/catalog_manifest.json",
+            cutoff=AS_OF,
+        )
+    stage_started = _stage("sec_companyfacts", stage_started)
+    if use_stage_cache:
+        ir = _read_stage_cache(
+            SILVER,
+            ("subindustry_ir_document_evidence", "subindustry_ir_coverage_inventory"),
+        )
+    else:
+        ir = build_arcana_ir_evidence(
+            ir_root=ARCANA_IR,
+            start_date=pd.Timestamp("2021-01-01"),
+            cutoff=AS_OF,
+            verified_cache_path=SILVER / "subindustry_ir_document_evidence.csv",
+        )
+    stage_started = _stage("arcana_ir_audit", stage_started)
     pqci_context = build_arcana_pqci_context(
         pqci_root=Path(
             "D:/Programming/python_example/Arcana/data-lake/bronze/pqci"
         ),
         cutoff=AS_OF,
     )
+    stage_started = _stage("arcana_pqci_context", stage_started)
+    ifrs = build_ifrs_evidence(
+        project_root=ROOT,
+        catalog_manifest_path=BRONZE / "ifrs/catalog_manifest.json",
+    )
+    stage_started = _stage("ifrs_dsl", stage_started)
     origins = build_company_forecast_origins(
         sec["subindustry_quarterly_financial_history"]
     )
+    stage_started = _stage("forecast_origins", stage_started)
     industry = build_company_pit_industry_features(
         vintages=bls["bls_ppi_vintage_canonical"],
         sensor_map=sensors,
         origins=origins,
     )
+    stage_started = _stage("pit_industry_features", stage_started)
     panel = build_company_forecast_panel(
         quarterly=sec["subindustry_quarterly_financial_history"],
         origins=origins,
         industry_features=industry["subindustry_pit_industry_features"],
     )
+    stage_started = _stage("forecast_panel", stage_started)
     forecast = run_fixed_oos_company_forecasts(panel)
+    stage_started = _stage("fixed_oos_forecasts", stage_started)
     market_root = BRONZE / "market"
     market = build_market_wacc_evidence(
         annual=sec["subindustry_annual_roic_reinvestment_history"],
@@ -184,6 +296,7 @@ def main() -> int:
         risk_free_path=market_root / "fred_dgs10.csv",
         valuation_date=AS_OF,
     )
+    stage_started = _stage("market_wacc", stage_started)
     valuation = build_conditional_valuation_research(
         annual=sec["subindustry_annual_roic_reinvestment_history"],
         quarterly=sec["subindustry_quarterly_financial_history"],
@@ -192,6 +305,7 @@ def main() -> int:
         market_ev=market["subindustry_market_ev_bridge"],
         wacc=market["subindustry_independent_wacc_range"],
     )
+    stage_started = _stage("conditional_valuation", stage_started)
     coverage = _coverage_matrix(
         sec_summary=sec["subindustry_companyfacts_summary"],
         ir_inventory=ir["subindustry_ir_coverage_inventory"],
@@ -200,6 +314,7 @@ def main() -> int:
         performance=forecast["subindustry_forecast_performance"],
         forecast_routes=forecast["subindustry_forecast_routes"],
         pqci_context_routes=pqci_context["subindustry_pqci_context_routes"],
+        ifrs_inventory=ifrs["ifrs_source_inventory"],
         valuation_gates=valuation["subindustry_valuation_gates"],
     )
     performance = forecast["subindustry_forecast_performance"]
@@ -208,12 +323,31 @@ def main() -> int:
         [
             {
                 "version": "INDUSTRIALS_SUBINDUSTRY_PLATFORM_V8_RESEARCH",
+                "verified_stage_cache_used": use_stage_cache,
                 "registered_subindustries": len(INDUSTRIALS_SUBINDUSTRIES),
                 "domestic_sec_companies_ready": int(
                     sec["subindustry_sec_source_inventory"]["hashes_verified"].sum()
                 ),
                 "sec_10k_10q_filings": int(
                     sec["subindustry_sec_source_inventory"]["filings"].sum()
+                ),
+                "ifrs_companies_ready": int(
+                    ifrs["ifrs_source_inventory"]["hashes_verified"].sum()
+                ),
+                "ifrs_20f_6k_filings": int(
+                    ifrs["ifrs_source_inventory"]["filing_count"].sum()
+                ),
+                "ifrs_annual_rows": len(ifrs["ifrs_annual_financial_history"]),
+                "company_disclosed_monthly_quantity_rows": len(
+                    ifrs["pac_monthly_passenger_traffic"]
+                ),
+                "compiled_parser_rules": len(ifrs["parser_rule_inventory"]),
+                "parser_emitted_facts": len(ifrs["parser_fact_ir"]),
+                "parser_failures": int(
+                    ifrs["parser_rule_execution_audit"]["status"]
+                    .astype(str)
+                    .str.startswith("FAIL")
+                    .sum()
                 ),
                 "arcana_ir_companies_ready": int(
                     ir["subindustry_ir_coverage_inventory"][
@@ -304,6 +438,7 @@ def main() -> int:
         "subindustry_forecast_panel": panel,
         **ir,
         **pqci_context,
+        **ifrs,
     }
     gold_artifacts = {
         **forecast,
@@ -313,8 +448,11 @@ def main() -> int:
         "industrials_v8_gate": gate,
     }
     write_csv_artifacts(SILVER, silver_artifacts)
+    stage_started = _stage("write_silver", stage_started)
     write_csv_artifacts(GOLD, gold_artifacts)
+    stage_started = _stage("write_gold", stage_started)
     write_csv_artifacts(OUTPUT, gold_artifacts)
+    stage_started = _stage("write_output", stage_started)
     source_paths = [
         "equity_platform/sectors/industrials/platform/domain.py",
         "equity_platform/sectors/industrials/platform/registry.py",
@@ -323,6 +461,19 @@ def main() -> int:
         "equity_platform/sectors/industrials/platform/forecast.py",
         "equity_platform/sectors/industrials/platform/ir.py",
         "equity_platform/sectors/industrials/platform/pqci_context.py",
+        "equity_platform/sectors/industrials/platform/ifrs.py",
+        "equity_platform/sectors/industrials/platform/ifrs_rules.py",
+        "equity_platform/ir/authority.py",
+        "equity_platform/ir/fact.py",
+        "equity_platform/ir/economic.py",
+        "equity_platform/ir/evidence.py",
+        "equity_platform/ir/causal.py",
+        "equity_platform/documents/model.py",
+        "equity_platform/documents/html.py",
+        "equity_platform/parsing/rule_ir.py",
+        "equity_platform/parsing/dsl/compiler.py",
+        "equity_platform/parsing/executor.py",
+        "configs/parser_rules/industrials/pac.arc",
         "equity_platform/sectors/industrials/platform/valuation.py",
         "equity_platform/sectors/industrials/platform/validation.py",
         "scripts/industrials/fetch_v8_subindustry_sec.py",
@@ -335,6 +486,7 @@ def main() -> int:
         "as_of_date": AS_OF.date().isoformat(),
         "source_hashes": hash_files(ROOT, source_paths),
         "sec_catalog_sha256": sha256_file(BRONZE / "sec/catalog_manifest.json"),
+        "ifrs_catalog_sha256": sha256_file(BRONZE / "ifrs/catalog_manifest.json"),
         "uses_10k": True,
         "uses_10q": True,
         "uses_tagged_notes": True,
@@ -342,6 +494,9 @@ def main() -> int:
         "uses_historical_pit_industry_data": True,
         "uses_current_revised_industry_context": True,
         "uses_current_revised_industry_data_in_oos": False,
+        "uses_typed_parser_rule_ir": True,
+        "uses_non_turing_complete_parser_dsl": True,
+        "verified_stage_cache_used": use_stage_cache,
         "pdf_parsing_used": False,
         "terminal_input_allowed": False,
         "fair_value_claim_allowed": False,
@@ -373,10 +528,10 @@ production authority are locked.
 
 ## Architecture
 
-`platform/domain.py` owns authority contracts; `registry.py` owns subindustry economic
-anchors; `companyfacts.py`, `ir.py`, and `bls.py` own source adapters; `forecast.py`
-owns fixed-OOS estimation; `valuation.py` owns accounting identities and conditional
-DCF/reverse DCF. Frozen CAT/CMI/LMT/NOC/HII/GD packages are not modified.
+The migration now separates canonical `FactIR / EconomicGraphIR / EvidenceGraphIR /
+CausalGraphIR`, semantic documents, typed parser-rule IR, deterministic rule execution,
+and research policy. Existing engines remain behind compatibility adapters while
+golden results are preserved. Frozen CAT/CMI/LMT/NOC/HII/GD packages are not modified.
 
 ## Coverage
 
@@ -403,8 +558,9 @@ flagged; no conditional value is promoted to fair value.
 
 Arcana's BEA/BLS/Census/EIA/USDA snapshots provide current-revised P/Q/C/I context
 for all 26 subindustries, but cannot enter historical OOS claims without vintages.
-PAC/FER require a separate IFRS 20-F/6-K adapter. IR keyword evidence is audited and
-hashed, but company-specific numerical P/Q/C/I table parsers are still required.
+PAC now has hashed 20-F annual facts plus a DSL-parsed monthly passenger Q anchor;
+its quarterly financial bridge remains unavailable. FER has only two 20-F years and
+therefore fails closed. Other IR numerical KPI rules still require staged DSL migration.
 GEV lacks enough post-spin history. Live settlement remains 0/20.
 """
     (OUTPUT / "report.md").write_text(report, encoding="utf-8")

@@ -2,6 +2,13 @@ from __future__ import annotations
 
 import pandas as pd
 
+from equity_platform.ir import (
+    AuthorityLevel,
+    DriverRole,
+    SensorIR,
+    SensorTransform,
+)
+
 
 # Each output series was verified against BLS PPI detailed-report Table 9/11.
 # Proxy use is explicit; no proxy is relabeled as a dedicated company KPI.
@@ -101,3 +108,27 @@ def build_industrials_bls_sensor_map() -> pd.DataFrame:
                 }
             )
     return pd.DataFrame(rows)
+
+
+def build_industrials_bls_sensor_ir() -> tuple[SensorIR, ...]:
+    """Expose the legacy tabular map as typed, sector-neutral SensorIR."""
+
+    frame = build_industrials_bls_sensor_map()
+    return tuple(
+        SensorIR(
+            sensor_id=str(row.sensor_id),
+            source="BLS",
+            dataset="PPI",
+            series_id=str(row.series_id),
+            role=(DriverRole.PRICE if row.role == "output_price" else DriverRole.COST),
+            target_scope=str(row.segment),
+            frequency="MONTHLY",
+            unit="INDEX_1982_100_OR_SERIES_NATIVE",
+            transform=SensorTransform.YOY_PCT,
+            availability_lag_days=0,
+            authority=AuthorityLevel.RESEARCH_EVIDENCE,
+            proxy_status=str(row.route_note),
+            weight=float(row.weight),
+        )
+        for row in frame.itertuples(index=False)
+    )

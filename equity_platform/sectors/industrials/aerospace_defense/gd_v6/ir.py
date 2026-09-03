@@ -8,6 +8,8 @@ import re
 import numpy as np
 import pandas as pd
 
+from equity_platform.parsing import parse_numeric_token
+
 
 SEGMENTS = ("aerospace", "marine_systems", "combat_systems", "technologies")
 SEGMENT_LABELS = {
@@ -32,15 +34,7 @@ def _label(value: object) -> str:
 
 
 def _number(value: object) -> float | None:
-    text = _label(value).replace(",", "").replace("$", "").replace("%", "")
-    if not text or text.lower() == "nan" or text in {"—", "–", "-", "NM"}:
-        return None
-    negative = text.startswith("(")
-    try:
-        parsed = float(text.lstrip("(").rstrip(")"))
-    except ValueError:
-        return None
-    return -parsed if negative else parsed
+    return parse_numeric_token(_label(value))
 
 
 def _numeric_clusters(row: pd.Series) -> list[float]:

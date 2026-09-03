@@ -36,6 +36,8 @@ def freeze_gd_v6_research(root: Path) -> dict[str, object]:
         "equity_platform/sectors/industrials/aerospace_defense/gd_v6/research.py",
         "equity_platform/sectors/industrials/aerospace_defense/gd_v6/sec.py",
         "equity_platform/sectors/industrials/aerospace_defense/gd_v6/valuation.py",
+        "equity_platform/sectors/industrials/aerospace_defense/gd_v6/experiment.py",
+        "equity_platform/experiments/runner.py",
         "scripts/industrials/fetch_gd_periodic_filings_v6.py",
         "scripts/industrials/fetch_gd_v6_market.py",
         "scripts/industrials/freeze_v6_gd.py",

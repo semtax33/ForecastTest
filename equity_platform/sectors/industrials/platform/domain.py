@@ -1,28 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import StrEnum
-
-
-class DriverRole(StrEnum):
-    PRICE = "P"
-    QUANTITY = "Q"
-    COST = "C"
-    INVESTMENT = "I"
-
-
-class DataAuthority(StrEnum):
-    HISTORICAL_PIT_MODEL_INPUT = "HISTORICAL_PIT_MODEL_INPUT"
-    CURRENT_REVISED_CONTEXT_ONLY = "CURRENT_REVISED_CONTEXT_ONLY"
-    COMPANY_DISCLOSED_PIT_INPUT = "COMPANY_DISCLOSED_PIT_INPUT"
-    NOT_IDENTIFIED = "NOT_IDENTIFIED"
-
-
-class ForecastAuthority(StrEnum):
-    STRONG = "STRONG"
-    MIXED = "MIXED"
-    DIAGNOSTIC_ONLY = "DIAGNOSTIC_ONLY"
-    NOT_TESTED = "NOT_TESTED"
+from equity_platform.ir.authority import (
+    DataAuthority,
+    DriverRole,
+    ForecastAuthority,
+)
 
 
 @dataclass(frozen=True)

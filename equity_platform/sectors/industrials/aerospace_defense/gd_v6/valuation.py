@@ -1,47 +1,13 @@
 from __future__ import annotations
 
-from dataclasses import replace
-
 import numpy as np
 import pandas as pd
 
-from equity_platform.sectors.industrials.aerospace_defense.hii_v52.valuation import (
-    HiiDcfAssumptions,
-    hii_enterprise_value,
+from equity_platform.valuation_kernel import (
+    DcfAssumptions,
+    enterprise_value,
+    solve_parameter,
 )
-
-
-def _solve(
-    assumptions: HiiDcfAssumptions,
-    target_ev_usd: float,
-    field: str,
-    lower: float,
-    upper: float,
-    tolerance_usd: float = 1.0,
-) -> dict[str, float | str]:
-    def residual(value: float) -> float:
-        candidate = replace(assumptions, **{field: value})
-        return hii_enterprise_value(candidate)[1]["enterprise_value_usd"] - target_ev_usd
-
-    low_error, high_error = residual(lower), residual(upper)
-    if low_error * high_error > 0:
-        return {
-            "status": "UNBRACKETED_NO_SOLUTION_IN_DOMAIN",
-            "value": np.nan,
-            "residual_usd": min(abs(low_error), abs(high_error)),
-        }
-    low, high = lower, upper
-    middle, error = (low + high) / 2.0, np.inf
-    for _ in range(240):
-        middle = (low + high) / 2.0
-        error = residual(middle)
-        if abs(error) <= tolerance_usd:
-            break
-        if low_error * error <= 0:
-            high = middle
-        else:
-            low, low_error = middle, error
-    return {"status": "SOLVED", "value": middle, "residual_usd": error}
 
 
 def build_gd_conditional_valuation(
@@ -87,10 +53,11 @@ def build_gd_conditional_valuation(
             "wacc": float(wacc_row["symmetric_wacc_pct"]),
         },
     }
-    assumptions: list[HiiDcfAssumptions] = []
+    assumptions: list[DcfAssumptions] = []
     for scenario, values in scenario_inputs.items():
         assumptions.append(
-            HiiDcfAssumptions(
+            DcfAssumptions(
+                ticker="GD",
                 scenario=scenario,
                 base_revenue_usd=float(ttm["ttm_revenue_usd"]),
                 near_term_growth_pct=values["near_growth"],
@@ -108,8 +75,8 @@ def build_gd_conditional_valuation(
     scenario_rows: list[dict[str, object]] = []
     projections: list[pd.DataFrame] = []
     for item in assumptions:
-        projection, value = hii_enterprise_value(item)
-        projections.append(projection)
+        projection, value = enterprise_value(item)
+        projections.append(projection.drop(columns="ticker"))
         equity = (
             value["enterprise_value_usd"]
             - float(market_row["total_debt_usd"])
@@ -118,7 +85,7 @@ def build_gd_conditional_valuation(
         price = equity / float(market_row["shares_outstanding"])
         scenario_rows.append(
             {
-                **item.__dict__,
+                **{key: value for key, value in item.__dict__.items() if key != "ticker"},
                 **value,
                 "equity_value_usd": equity,
                 "conditional_value_per_share": price,
@@ -157,7 +124,14 @@ def build_gd_conditional_valuation(
     )
     reverse_rows = []
     for diagnostic, field, lower, upper in reverse_specs:
-        solved = _solve(base, target_ev, field, lower, upper)
+        solved = solve_parameter(
+            base,
+            target_ev_usd=target_ev,
+            field=field,
+            lower=lower,
+            upper=upper,
+            tolerance_usd=1.0,
+        )
         reverse_rows.append(
             {
                 "diagnostic": diagnostic,
@@ -171,13 +145,14 @@ def build_gd_conditional_valuation(
                 "appropriate_parameter_claim_allowed": False,
             }
         )
-    base_ev = hii_enterprise_value(base)[1]["enterprise_value_usd"]
-    round_trip = _solve(
+    base_ev = enterprise_value(base)[1]["enterprise_value_usd"]
+    round_trip = solve_parameter(
         base,
-        base_ev,
-        "near_term_growth_pct",
-        float(config["reverse_growth_lower_pct"]),
-        float(config["reverse_growth_upper_pct"]),
+        target_ev_usd=base_ev,
+        field="near_term_growth_pct",
+        lower=float(config["reverse_growth_lower_pct"]),
+        upper=float(config["reverse_growth_upper_pct"]),
+        tolerance_usd=1.0,
     )
     surface_rows: list[dict[str, object]] = []
     iso_rows: list[dict[str, object]] = []
@@ -187,10 +162,14 @@ def build_gd_conditional_valuation(
             float(wacc_row["downside_wacc_pct"]),
             5,
         ):
-            candidate = replace(
-                base, terminal_margin_pct=float(terminal_margin), wacc_pct=float(wacc_pct)
+            candidate = DcfAssumptions(
+                **{
+                    **base.__dict__,
+                    "terminal_margin_pct": float(terminal_margin),
+                    "wacc_pct": float(wacc_pct),
+                }
             )
-            value = hii_enterprise_value(candidate)[1]
+            value = enterprise_value(candidate)[1]
             equity = (
                 value["enterprise_value_usd"]
                 - float(market_row["total_debt_usd"])
@@ -209,12 +188,15 @@ def build_gd_conditional_valuation(
                     "terminal_input_allowed": False,
                 }
             )
-        solved = _solve(
-            replace(base, terminal_margin_pct=float(terminal_margin)),
-            target_ev,
-            "wacc_pct",
-            max(base.terminal_growth_pct + 0.25, 3.0),
-            20.0,
+        solved = solve_parameter(
+            DcfAssumptions(
+                **{**base.__dict__, "terminal_margin_pct": float(terminal_margin)}
+            ),
+            target_ev_usd=target_ev,
+            field="wacc_pct",
+            lower=max(base.terminal_growth_pct + 0.25, 3.0),
+            upper=20.0,
+            tolerance_usd=1.0,
         )
         iso_rows.append(
             {

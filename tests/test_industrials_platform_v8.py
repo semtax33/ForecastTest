@@ -178,5 +178,37 @@ def test_medallion_outputs_and_foreign_adapter_fail_closed() -> None:
     coverage = _read("subindustry_coverage_matrix")
     foreign = coverage.loc[coverage["ticker"].isin(["PAC", "FER"])]
     assert len(foreign) == 2
-    assert foreign["sec_status"].eq("IFRS_ADAPTER_NOT_IMPLEMENTED").all()
+    pac = foreign.loc[foreign["ticker"].eq("PAC")].iloc[0]
+    fer = foreign.loc[foreign["ticker"].eq("FER")].iloc[0]
+    assert pac["sec_status"] == "IFRS_ANNUAL_AND_COMPANY_Q_ANCHOR_READY"
+    assert pac["quantity_status"] == "COMPANY_DISCLOSED_MONTHLY_QUANTITY_DSL_READY"
+    assert fer["sec_status"] == "IFRS_ANNUAL_SHORT_HISTORY"
     assert not foreign["conditional_dcf_run"].eq(True).any()
+
+
+def test_ifrs_dsl_pac_quantity_and_ifric12_bridge() -> None:
+    gate = _read("industrials_v8_gate").iloc[0]
+    assert gate["ifrs_companies_ready"] == 2
+    assert gate["ifrs_20f_6k_filings"] == 325
+    assert gate["compiled_parser_rules"] == 2
+    assert gate["parser_emitted_facts"] == 68
+    assert gate["parser_failures"] == 0
+
+    monthly = pd.read_csv(SILVER / "pac_monthly_passenger_traffic.csv")
+    assert len(monthly) == 63
+    assert monthly["period"].min() == "2021-05"
+    assert monthly["period"].max() == "2026-07"
+    assert monthly["terminal_passengers_thousands"].between(0, 10_000).all()
+    assert monthly["historical_pit_input"].all()
+    assert monthly["rule_id"].eq("airport.monthly_terminal_passengers").all()
+
+    annual = pd.read_csv(SILVER / "ifrs_annual_financial_history.csv")
+    pac_2024 = annual.loc[
+        annual["ticker"].eq("PAC") & annual["fiscal_year"].eq(2024)
+    ].iloc[0]
+    assert pac_2024["capex_local"] == pytest.approx(6_832_541_000.0)
+    assert pac_2024["gaap_operating_margin_pct"] == pytest.approx(44.774429, abs=1e-6)
+    assert pac_2024["economic_operating_margin_pct"] == pytest.approx(56.197214, abs=1e-6)
+    assert pd.isna(pac_2024["research_development_local"])
+    assert not bool(pac_2024["innovation_reinvestment_claim_allowed"])
+    assert not bool(pac_2024["terminal_input_allowed"])

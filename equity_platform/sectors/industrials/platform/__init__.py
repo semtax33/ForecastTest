@@ -20,7 +20,7 @@ from .forecast import (
 )
 from .registry import INDUSTRIALS_SUBINDUSTRIES, get_subindustry_profile
 from .validation import build_aggregate_error_decomposition
-from .bls import build_industrials_bls_sensor_map
+from .bls import build_industrials_bls_sensor_ir, build_industrials_bls_sensor_map
 from .companyfacts import build_subindustry_companyfacts_evidence
 from .ir import build_arcana_ir_evidence
 from .valuation import (
@@ -48,6 +48,7 @@ __all__ = [
     "get_subindustry_profile",
     "build_aggregate_error_decomposition",
     "build_industrials_bls_sensor_map",
+    "build_industrials_bls_sensor_ir",
     "build_subindustry_companyfacts_evidence",
     "build_arcana_ir_evidence",
     "DcfAssumptions",

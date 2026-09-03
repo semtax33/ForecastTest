@@ -1,6 +1,19 @@
 from __future__ import annotations
 
+"""Backward-compatible facade over the shared FCFF valuation kernel.
+
+This module deliberately keeps the original public API used by the frozen
+Industrials experiments. All calculations, including reverse solving, are
+delegated to :mod:`equity_platform.valuation_kernel` so forward and reverse
+DCF cannot drift into separate implementations.
+"""
+
 from dataclasses import dataclass
+from math import isfinite
+
+from equity_platform.valuation_kernel import DcfAssumptions as KernelDcfAssumptions
+from equity_platform.valuation_kernel import enterprise_value as kernel_enterprise_value
+from equity_platform.valuation_kernel import solve_parameter
 
 
 @dataclass(frozen=True)
@@ -15,72 +28,59 @@ class DcfAssumptions:
     horizon_years: int = 5
 
     def validate(self) -> None:
-        if self.base_revenue_usd <= 0:
-            raise ValueError("Base revenue must be positive")
-        if self.roic_pct <= 0:
-            raise ValueError("ROIC must be positive for the reinvestment identity")
-        if self.wacc_pct <= self.terminal_growth_pct:
-            raise ValueError("WACC must exceed terminal growth")
-        if self.horizon_years < 1:
-            raise ValueError("DCF horizon must be positive")
+        _as_kernel_assumptions(self).validate()
+
+
+def _as_kernel_assumptions(assumptions: DcfAssumptions) -> KernelDcfAssumptions:
+    return KernelDcfAssumptions(
+        ticker="LEGACY_COMPATIBILITY",
+        scenario="LEGACY_COMPATIBILITY",
+        base_revenue_usd=assumptions.base_revenue_usd,
+        near_term_growth_pct=assumptions.near_term_growth_pct,
+        terminal_growth_pct=assumptions.terminal_growth_pct,
+        initial_margin_pct=assumptions.operating_margin_pct,
+        terminal_margin_pct=assumptions.operating_margin_pct,
+        tax_rate_pct=assumptions.tax_rate_pct,
+        initial_roic_pct=assumptions.roic_pct,
+        terminal_roic_pct=assumptions.roic_pct,
+        wacc_pct=assumptions.wacc_pct,
+        first_discount_years=1.0,
+        horizon_years=assumptions.horizon_years,
+    )
 
 
 def enterprise_value(assumptions: DcfAssumptions) -> tuple[list[dict[str, float]], float]:
-    assumptions.validate()
-    revenue = assumptions.base_revenue_usd
-    wacc = assumptions.wacc_pct / 100.0
-    terminal_growth = assumptions.terminal_growth_pct / 100.0
+    """Return the historical row schema while using the shared evaluator."""
+
+    frame, summary = kernel_enterprise_value(_as_kernel_assumptions(assumptions))
     projections: list[dict[str, float]] = []
-    for year in range(1, assumptions.horizon_years + 1):
-        fade = (year - 1) / max(assumptions.horizon_years - 1, 1)
-        growth_pct = (
-            assumptions.near_term_growth_pct * (1.0 - fade)
-            + assumptions.terminal_growth_pct * fade
-        )
-        revenue *= 1.0 + growth_pct / 100.0
-        ebit = revenue * assumptions.operating_margin_pct / 100.0
-        nopat = ebit * (1.0 - assumptions.tax_rate_pct / 100.0)
-        reinvestment_rate = growth_pct / assumptions.roic_pct
-        reinvestment = nopat * reinvestment_rate
-        fcff = nopat - reinvestment
-        discount_factor = (1.0 + wacc) ** year
-        projections.append(
-            {
-                "forecast_year": year,
-                "revenue_usd": revenue,
-                "growth_pct": growth_pct,
-                "ebit_usd": ebit,
-                "nopat_usd": nopat,
-                "reinvestment_rate": reinvestment_rate,
-                "reinvestment_usd": reinvestment,
-                "fcff_usd": fcff,
-                "discount_factor": discount_factor,
-                "pv_fcff_usd": fcff / discount_factor,
-            }
-        )
-    terminal_revenue = revenue * (1.0 + terminal_growth)
-    terminal_nopat = (
-        terminal_revenue
-        * assumptions.operating_margin_pct
-        / 100.0
-        * (1.0 - assumptions.tax_rate_pct / 100.0)
-    )
-    terminal_reinvestment_rate = (
-        assumptions.terminal_growth_pct / assumptions.roic_pct
-    )
-    terminal_fcff = terminal_nopat * (1.0 - terminal_reinvestment_rate)
-    terminal_value = terminal_fcff / (wacc - terminal_growth)
-    pv_terminal = terminal_value / ((1.0 + wacc) ** assumptions.horizon_years)
-    value = sum(row["pv_fcff_usd"] for row in projections) + pv_terminal
-    projections[-1].update(
-        {
-            "terminal_reinvestment_rate": terminal_reinvestment_rate,
-            "terminal_fcff_usd": terminal_fcff,
-            "terminal_value_usd": terminal_value,
-            "pv_terminal_value_usd": pv_terminal,
+    for row in frame.to_dict(orient="records"):
+        legacy_row = {
+            "forecast_year": row["forecast_year_index"],
+            "revenue_usd": row["revenue_usd"],
+            "growth_pct": row["revenue_growth_pct"],
+            "ebit_usd": row["ebit_usd"],
+            "nopat_usd": row["nopat_usd"],
+            "reinvestment_rate": row["revenue_growth_pct"] / assumptions.roic_pct,
+            "reinvestment_usd": row["reinvestment_usd"],
+            "fcff_usd": row["fcff_usd"],
+            "discount_factor": row["discount_factor"],
+            "pv_fcff_usd": row["pv_fcff_usd"],
         }
-    )
-    return projections, float(value)
+        terminal_value = row.get("terminal_value_usd")
+        if terminal_value is not None and isfinite(float(terminal_value)):
+            legacy_row.update(
+                {
+                    "terminal_reinvestment_rate": (
+                        assumptions.terminal_growth_pct / assumptions.roic_pct
+                    ),
+                    "terminal_fcff_usd": row["terminal_fcff_usd"],
+                    "terminal_value_usd": row["terminal_value_usd"],
+                    "pv_terminal_value_usd": row["pv_terminal_value_usd"],
+                }
+            )
+        projections.append(legacy_row)
+    return projections, float(summary["enterprise_value_usd"])
 
 
 def solve_implied_growth(
@@ -91,42 +91,17 @@ def solve_implied_growth(
     tolerance_usd: float = 1.0,
     maximum_iterations: int = 200,
 ) -> dict[str, float | str]:
-    def residual(growth: float) -> float:
-        candidate = DcfAssumptions(
-            **{
-                **assumptions.__dict__,
-                "near_term_growth_pct": growth,
-            }
-        )
-        return enterprise_value(candidate)[1] - target_enterprise_value_usd
-
-    low_error = residual(lower_pct)
-    high_error = residual(upper_pct)
-    if low_error == 0:
-        return {"status": "SOLVED", "implied_growth_pct": lower_pct, "residual_usd": 0.0}
-    if high_error == 0:
-        return {"status": "SOLVED", "implied_growth_pct": upper_pct, "residual_usd": 0.0}
-    if low_error * high_error > 0:
-        return {
-            "status": "UNBRACKETED_NO_SOLUTION_IN_DOMAIN",
-            "implied_growth_pct": float("nan"),
-            "residual_usd": min(abs(low_error), abs(high_error)),
-        }
-    low, high = lower_pct, upper_pct
-    middle = (low + high) / 2.0
-    middle_error = residual(middle)
-    for _ in range(maximum_iterations):
-        middle = (low + high) / 2.0
-        middle_error = residual(middle)
-        if abs(middle_error) <= tolerance_usd:
-            break
-        if low_error * middle_error <= 0:
-            high = middle
-        else:
-            low = middle
-            low_error = middle_error
+    solved = solve_parameter(
+        _as_kernel_assumptions(assumptions),
+        target_ev_usd=target_enterprise_value_usd,
+        field="near_term_growth_pct",
+        lower=lower_pct,
+        upper=upper_pct,
+        tolerance_usd=tolerance_usd,
+        maximum_iterations=maximum_iterations,
+    )
     return {
-        "status": "SOLVED",
-        "implied_growth_pct": middle,
-        "residual_usd": middle_error,
+        "status": solved["status"],
+        "implied_growth_pct": solved["value"],
+        "residual_usd": solved["residual_usd"],
     }
