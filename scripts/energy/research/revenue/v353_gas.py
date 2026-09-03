@@ -7,10 +7,10 @@ from pathlib import Path
 import pandas as pd
 
 from energy_nowcast.operations.champion import sha256_file, verify_champion
-from energy_nowcast.research.v35.adapters import StandardizedKPIBundle
-from energy_nowcast.research.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
-from energy_nowcast.research.v35.taxonomy import E_AND_P_GROUPS
-from energy_nowcast.research.v35.validation import run_loco, run_time_holdout
+from equity_platform.sectors.energy.research.revenue.v35.adapters import StandardizedKPIBundle
+from equity_platform.sectors.energy.research.revenue.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import E_AND_P_GROUPS
+from equity_platform.sectors.energy.research.revenue.v35.validation import run_loco, run_time_holdout
 from energy_nowcast.research.v353.gas_prices import (
     extract_strict_gas_prices,
     merge_strict_gas_prices,

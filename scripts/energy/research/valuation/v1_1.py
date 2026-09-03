@@ -11,7 +11,7 @@ import pandas as pd
 
 from energy_nowcast.valuation.benchmark import verify_v1
 from energy_nowcast.valuation_v11.benchmark import MANIFEST, freeze_v11, verify_v11
-from energy_nowcast.valuation_v11.engine import run_valuation_v11
+from equity_platform.sectors.energy.valuation.v11 import run_valuation_v11
 from energy_nowcast.valuation_v11.financial_adjustments import (
     overlay_latest_financials,
     rebuild_semantically_safe_financials,

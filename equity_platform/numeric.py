@@ -14,6 +14,7 @@ def parse_numeric_token(
     *,
     scale: int = 0,
     sign: str | None = None,
+    strict: bool = False,
 ) -> float | None:
     """Parse filing numeric tokens without issuer-specific callbacks."""
 
@@ -22,7 +23,14 @@ def parse_numeric_token(
     text = re.sub(r"\s+", " ", str(value).replace("\xa0", " ")).strip()
     if text.casefold() in MISSING_NUMBER_TOKENS:
         return None
-    parenthetical = text.startswith("(") and text.endswith(")")
+    if strict and not re.fullmatch(
+        r"[-+]?\$?\d[\d,]*(?:\.\d+)?%?|\([-+]?\$?\d[\d,]*(?:\.\d+)?\)%?",
+        text.replace(" ", ""),
+    ):
+        return None
+    parenthetical = text.startswith("(") and (
+        text.endswith(")") or text.endswith(")%")
+    )
     cleaned = re.sub(
         r"[^0-9.eE+\-]", "", text.replace(",", "").replace("$", "").strip("()")
     )

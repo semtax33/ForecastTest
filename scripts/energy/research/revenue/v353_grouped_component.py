@@ -8,8 +8,8 @@ import numpy as np
 import pandas as pd
 
 from energy_nowcast.operations.champion import sha256_file, verify_champion
-from energy_nowcast.research.v35.adapters import StandardizedKPIBundle
-from energy_nowcast.research.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
+from equity_platform.sectors.energy.research.revenue.v35.adapters import StandardizedKPIBundle
+from equity_platform.sectors.energy.research.revenue.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
 from energy_nowcast.research.v353.validation import validate_grouped_component
 
 

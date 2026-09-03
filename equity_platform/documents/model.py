@@ -20,6 +20,11 @@ class DocumentTable:
 
     resolved_table_index: int
     cells: tuple[tuple[str, ...], ...]
+    context: str = ""
+    source_uri: str = ""
+    source_description: str = ""
+    source_table_index: int | None = None
+    source_row_indices: tuple[int, ...] = ()
 
 
 @dataclass(frozen=True)

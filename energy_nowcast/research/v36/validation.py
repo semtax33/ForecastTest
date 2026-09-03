@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 from ...validation.cross_section_metrics import ticker_scorecard
-from ..v35.taxonomy import group_for_ticker
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import group_for_ticker
 
 
 @dataclass(frozen=True)

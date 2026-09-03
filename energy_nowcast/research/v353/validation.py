@@ -8,9 +8,9 @@ import pandas as pd
 
 from ...validation.cross_section_metrics import ticker_scorecard, universe_summary
 from ...validation.universe_backtest import LEGACY_FEATURES, PooledRidge
-from ..v35.strategy import KPIHierarchicalStrategy
-from ..v35.taxonomy import E_AND_P_GROUPS, group_for_ticker
-from ..v35.validation import run_loco, run_time_holdout
+from equity_platform.sectors.energy.research.revenue.v35.strategy import KPIHierarchicalStrategy
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import E_AND_P_GROUPS, group_for_ticker
+from equity_platform.sectors.energy.research.revenue.v35.validation import run_loco, run_time_holdout
 
 
 @dataclass(frozen=True)

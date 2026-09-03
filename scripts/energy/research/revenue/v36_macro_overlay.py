@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 
 from energy_nowcast.operations.champion import sha256_file, verify_champion
-from energy_nowcast.research.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
+from equity_platform.sectors.energy.research.revenue.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
 from energy_nowcast.research.v353.validation import validate_grouped_component
 from energy_nowcast.research.v36.benchmark import verify_research_champion
 from energy_nowcast.research.v36.macro_data import (

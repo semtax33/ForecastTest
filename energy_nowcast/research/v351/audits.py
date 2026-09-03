@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 from ...data.cutoff import quarter_cutoff_date
-from ..v35.adapters import StandardizedKPIBundle
+from equity_platform.sectors.energy.research.revenue.v35.adapters import StandardizedKPIBundle
 
 
 def _period_shift(value: str, quarters: int) -> str:

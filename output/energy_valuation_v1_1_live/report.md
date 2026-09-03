@@ -1,7 +1,7 @@
 # Energy Valuation V1.1 live-forward monitoring
 
 The V1.1 benchmark was verified before and after this append-only run.
-Benchmark manifest SHA-256: `671b5b5af4d8ac3de7c7098cb6238eab687124724f41146fad57625b8d092601`. No frozen assumption, bridge,
+Benchmark manifest SHA-256: `25d4a4d28d89f7e8565ea6b681d9492eb9ffec4c095ee998a0043157e7081fee`. No frozen assumption, bridge,
 parser, WACC, scenario bound, terminal growth, or weight was changed.
 
 ## Live gate
@@ -10,7 +10,7 @@ parser, WACC, scenario bound, terminal growth, or weight was changed.
 |-----------------------:|----------------:|------------------------------------------:|-------------------------------:|--------------------------:|:--------------------|----------------------:|:--------------------------------------|
 |                      0 |             nan |                                       nan |                            nan |                         0 | LOCKED              |                    20 | NOT_PROMOTED_REQUIRES_SEPARATE_REVIEW |
 
-Snapshots: {'inserted': 0, 'unchanged': 26}. FCFF attributions: {'inserted': 0, 'unchanged': 26}.
+Snapshots: {'inserted': 26, 'unchanged': 0}. FCFF attributions: {'inserted': 26, 'unchanged': 0}.
 Consensus vintages: {'inserted': 0, 'unchanged': 3158, 'coverage_inserted': 0}. Production remains separately locked.
 
 ## Frozen research hypotheses

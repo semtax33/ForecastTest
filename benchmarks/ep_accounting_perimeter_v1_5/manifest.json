@@ -1,7 +1,7 @@
 {
   "name": "E&P_ACCOUNTING_PERIMETER_RESERVE_COVERAGE_V1_5_RESEARCH",
   "version": "1.5",
-  "frozen_as_of": "2026-09-02",
+  "frozen_as_of": "2026-09-04",
   "immutable": true,
   "research_frozen": true,
   "accounting_perimeter_framework_frozen": true,
@@ -14,10 +14,10 @@
   "terminal_anchor_ready": 0,
   "terminal_anchor_replacement_allowed": false,
   "parent_v1_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
-  "parent_v1_1_manifest_sha256": "9e9de7368dccb316a3c41f6a801a101e3868cbda5e5a8da815635f50a424099e",
-  "parent_v1_2_manifest_sha256": "161c5df008dc4cd22873332af13662f624a9f89497168f29e7c90741288babfd",
-  "parent_v1_3_manifest_sha256": "a7eb4670d2ae1756830a8d04af8737431fd7a017cb694a507f52e347af96b7ca",
-  "parent_v1_4_manifest_sha256": "53499622cade6fc4c736ef36cbb303e893b2b82d4d529406fe1ef3de81c14479",
+  "parent_v1_1_manifest_sha256": "25d4a4d28d89f7e8565ea6b681d9492eb9ffec4c095ee998a0043157e7081fee",
+  "parent_v1_2_manifest_sha256": "83b6b278908e0ff45ae583b4a7d22ee8515a2dd16f04ae611037905387a07a83",
+  "parent_v1_3_manifest_sha256": "2cbc7eca0e9f95ea92dfe55dae67c1c421962828971f2c328c7e56d7d8dd0aca",
+  "parent_v1_4_manifest_sha256": "1cbc802432e7e21df9f3cb4b35b7bbfd52cf10db6a529ef8e2278d92c6c7e4d6",
   "production_promoted": false,
   "live_matched_observations": "0/20",
   "files": {
@@ -32,18 +32,12 @@
     "output/energy_valuation_v1_5_research/annual_accounting_perimeter_reconciliation.csv": "6945a15e546f083568342d7f42591627de9c4e56e737ef37ff159fb2539e04f4",
     "output/energy_valuation_v1_5_research/annual_all_in_reserve_cost.csv": "4a8efce34d78202261de6841fb34b63905f08943e8080427176a24bd9bfe2cfb",
     "output/energy_valuation_v1_5_research/annual_reserve_roic_scope_panel.csv": "1d8742f40ac9484d775646b25a6b186891b7e90242c03ef00b3da203b3ea53e8",
-    "output/energy_valuation_v1_5_research/metadata.json": "679ed214c248e8a23a18e8022239d8ec8355c9df4e44d7d0a9ec01a419ec4d62",
+    "output/energy_valuation_v1_5_research/metadata.json": "41f9b85f8d871ab5d94204a4c6708bc6be6030dba6d11b0d3d1078917e87d7a6",
     "output/energy_valuation_v1_5_research/production_mix_coverage.csv": "fb51d824245f55cac2cea2deaf4331516e15d697eaf37d4ff365853873415e60",
     "output/energy_valuation_v1_5_research/report.md": "74fdf80100f1fdbcdae24c9b29d3925ec397d5207323b993e1faacc0999b956d",
     "output/energy_valuation_v1_5_research/reserve_coverage_summary.csv": "031e98adcbbf6ae86cee80e9cc029c35ee1b8eaef8ec9970d40e13ce5240774d",
     "output/energy_valuation_v1_5_research/reserve_roic_scope_cross_check.csv": "0537ef036b183c636ab8c8f4ff574e25f1e0a50f8dae7a1cde357aea8947b5be",
     "output/energy_valuation_v1_5_research/route_aware_reserve_panel.csv": "0f8269b16efdbdb8baa3f825669c85b84355c1f5416271f768b37145f5f42708",
     "output/energy_valuation_v1_5_research/v1_5_gate.csv": "60cb33b75221cc9eb89d4e7add2d722c0d5168ef2b68873cd6e29dc0cb30f13d"
-  },
-  "layout_rebaseline": {
-    "date": "2026-09-03",
-    "scope": "physical_paths_and_code_tests_only",
-    "economic_outputs": "byte_preserved",
-    "reason": "responsibility_packages_and_bronze_silver_gold_layout"
   }
 }

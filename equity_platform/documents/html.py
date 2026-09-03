@@ -5,6 +5,7 @@ from io import StringIO
 from pathlib import Path
 import re
 import warnings
+from dataclasses import dataclass
 
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from lxml import html as lxml_html
@@ -15,6 +16,19 @@ from equity_platform.ir import SourceRef
 from equity_platform.numeric import parse_numeric_token
 
 from .model import CanonicalDocument, DocumentMetadata, DocumentTable, InlineFact
+
+
+@dataclass(frozen=True)
+class HtmlFragment:
+    """One immutable source fragment in a composite filing document."""
+
+    content: bytes
+    source_uri: str
+    source_description: str
+    local_path: str = ""
+    expected_sha256: str | None = None
+    numeric_rows_only: bool = True
+    collapse_adjacent_cells: bool = False
 
 
 def _sha(path: Path) -> str:
@@ -157,4 +171,102 @@ def adapt_html_document(
         text=text,
         tables=tuple(tables),
         inline_facts=inline,
+    )
+
+
+def adapt_html_fragments(
+    *, fragments: tuple[HtmlFragment, ...], metadata: DocumentMetadata
+) -> CanonicalDocument:
+    """Adapt multiple SEC/IR HTML exhibits into a provenance-preserving row IR.
+
+    This adapter intentionally mirrors browser-visible table rows.  It is used
+    for operating KPIs whose issuer presentations do not expose stable XBRL
+    concepts.  Rules see only :class:`CanonicalDocument`, never BeautifulSoup.
+    """
+
+    if not fragments:
+        raise ValueError("At least one HTML fragment is required")
+    tables: list[DocumentTable] = []
+    text_parts: list[str] = []
+    fragment_hashes: list[str] = []
+    resolved_index = 0
+    for fragment in fragments:
+        actual_sha = sha256(fragment.content).hexdigest()
+        if fragment.expected_sha256 and actual_sha != fragment.expected_sha256:
+            raise ValueError(f"Source hash mismatch: {fragment.local_path}")
+        fragment_hashes.append(actual_sha)
+        html = fragment.content.decode("utf-8", errors="ignore")
+        soup = BeautifulSoup(html, "html.parser")
+        text_parts.append(" ".join(soup.get_text(" ", strip=True).split()))
+        seen: set[tuple[str, tuple[float, ...]]] = set()
+        for source_table_index, table in enumerate(soup.find_all("table")):
+            context_rows = []
+            for context_tr in table.find_all("tr", recursive=False)[:4]:
+                context = re.sub(
+                    r"\s+", " ", context_tr.get_text(" | ", strip=True)
+                ).strip()
+                if context:
+                    context_rows.append(context)
+            context = " || ".join(context_rows)[:2_000]
+            rows: list[tuple[str, ...]] = []
+            row_indices: list[int] = []
+            for source_row_index, tr in enumerate(table.find_all("tr")):
+                cells = tr.find_all(["td", "th"], recursive=False)
+                if not cells:
+                    continue
+                tokens = tuple(
+                    token
+                    for cell in cells
+                    if (
+                        token := re.sub(
+                            r"\s+", " ", cell.get_text(" ", strip=True)
+                        ).strip()
+                    )
+                )
+                if fragment.collapse_adjacent_cells:
+                    tokens = tuple(
+                        token
+                        for index, token in enumerate(tokens)
+                        if index == 0 or token != tokens[index - 1]
+                    )
+                numeric = tuple(
+                    value
+                    for token in tokens
+                    if (value := parse_numeric_token(token, strict=True)) is not None
+                )
+                row_text = " | ".join(tokens)
+                key = (row_text.casefold(), numeric)
+                if (fragment.numeric_rows_only and not numeric) or key in seen:
+                    continue
+                seen.add(key)
+                rows.append(tokens)
+                row_indices.append(source_row_index)
+            if not rows:
+                continue
+            tables.append(
+                DocumentTable(
+                    resolved_table_index=resolved_index,
+                    cells=tuple(rows),
+                    context=context,
+                    source_uri=fragment.source_uri,
+                    source_description=fragment.source_description,
+                    source_table_index=source_table_index,
+                    source_row_indices=tuple(row_indices),
+                )
+            )
+            resolved_index += 1
+    aggregate_sha = sha256("".join(fragment_hashes).encode("ascii")).hexdigest()
+    source = SourceRef(
+        source_type=metadata.source_kind,
+        uri=";".join(fragment.source_uri for fragment in fragments),
+        local_path=";".join(fragment.local_path for fragment in fragments),
+        sha256=aggregate_sha,
+        available_at=metadata.available_at,
+    )
+    return CanonicalDocument(
+        metadata=metadata,
+        source=source,
+        text=" ".join(text_parts),
+        tables=tuple(tables),
+        inline_facts=(),
     )

@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from ..v35.adapters import (
+from equity_platform.sectors.energy.research.revenue.v35.adapters import (
     PRICE_COLUMNS,
     _metadata,
     _numbers,
@@ -13,7 +13,7 @@ from ..v35.adapters import (
     _source_url,
     _table_rows,
 )
-from ..v35.taxonomy import E_AND_P_GROUPS
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import E_AND_P_GROUPS
 
 
 GAS_TICKERS = E_AND_P_GROUPS["gas_heavy"]

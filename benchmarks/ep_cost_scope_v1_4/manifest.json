@@ -1,7 +1,7 @@
 {
   "name": "E&P_STANDARDIZED_COST_SCOPE_V1_4_RESEARCH",
   "version": "1.4",
-  "frozen_as_of": "2026-09-02",
+  "frozen_as_of": "2026-09-04",
   "immutable": true,
   "research_frozen": true,
   "cost_scope_framework_frozen": true,
@@ -12,15 +12,15 @@
   "terminal_anchor_replacement_allowed": false,
   "single_appropriate_wacc_claim_allowed": false,
   "parent_v1_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
-  "parent_v1_1_manifest_sha256": "9e9de7368dccb316a3c41f6a801a101e3868cbda5e5a8da815635f50a424099e",
-  "parent_v1_2_manifest_sha256": "161c5df008dc4cd22873332af13662f624a9f89497168f29e7c90741288babfd",
-  "parent_v1_3_manifest_sha256": "a7eb4670d2ae1756830a8d04af8737431fd7a017cb694a507f52e347af96b7ca",
+  "parent_v1_1_manifest_sha256": "25d4a4d28d89f7e8565ea6b681d9492eb9ffec4c095ee998a0043157e7081fee",
+  "parent_v1_2_manifest_sha256": "83b6b278908e0ff45ae583b4a7d22ee8515a2dd16f04ae611037905387a07a83",
+  "parent_v1_3_manifest_sha256": "2cbc7eca0e9f95ea92dfe55dae67c1c421962828971f2c328c7e56d7d8dd0aca",
   "production_promoted": false,
   "live_matched_observations": "0/20",
   "files": {
     "energy_nowcast/research/ep_v14/__init__.py": "5d8860119fe266b61fcf9ea026a096d75dec22041c49d024d157062f4e5ac9b8",
     "energy_nowcast/research/ep_v14/benchmark.py": "7dc058ec1dad7a80151b5f35611952ed87d526fcc3a9bda960afa1e6dd93fa97",
-    "energy_nowcast/research/ep_v14/cost_scope.py": "05963f63714046aaaa1de606828d1aac5dfec55147ef70bc1bd762380e34917f",
+    "energy_nowcast/research/ep_v14/cost_scope.py": "f5466dfc14f00b9ce2d1bf56510ce65fdaaf44f553d42d0130e7c7fab4e4da4f",
     "scripts/energy/research/ep/v1_4_cost_scope.py": "8960138f32b539b89a8857bc51c9a79aaa750879aa72aec0f8436052682ddd49",
     "scripts/energy/research/freeze/ep_v1_4.py": "39a4b2d486692b6a538728f5a1268b10db92fb4821a838e043856a4434e41038",
     "tests/test_ep_cost_scope_v1_4.py": "f6e10fccfeaa3d804b84c96d9263e219d1e54a8c69d5e4462c43e9bec6bfb576",
@@ -29,15 +29,9 @@
     "output/energy_valuation_v1_4_research/cost_scope_coverage.csv": "4c4ac86d36d1a8e43f27c2b417ce2d1698165129c8a6d901fbc7672188b6b2c0",
     "output/energy_valuation_v1_4_research/cost_scope_gate.csv": "814732715d54cccfcda0188794011ee27fecdb510a09dc23d5029c0d5603e523",
     "output/energy_valuation_v1_4_research/expanded_core_cross_check.csv": "ff8c52e4ec6b90d1804d52a52a9c82e5fd77e798fd9a5ecc75d409426e764a57",
-    "output/energy_valuation_v1_4_research/metadata.json": "75182570b7047416be609b75be2359bbf0fadc903e43702adba2c560ea177c5e",
+    "output/energy_valuation_v1_4_research/metadata.json": "73aea8bf843a1b1646d0044d7d3d2c4ed3e2cf5572b5150e3199ba74ae1971a1",
     "output/energy_valuation_v1_4_research/report.md": "998a52b63334ab73e2a4016ee85b41cba26c59b9540a0f09c5ec3fb318b2b8d0",
     "output/energy_valuation_v1_4_research/standardized_tag_coverage.csv": "fcaf4442b37ed24c3df70d979e5df65748ee00773a66164d9cf122b7f3a3ada6",
     "output/energy_valuation_v1_4_research/standardized_tag_summary.csv": "f6e5c8e8b1577cf7036f57eb6964bd99ccc0c828d5022cab7071143b736e481f"
-  },
-  "layout_rebaseline": {
-    "date": "2026-09-03",
-    "scope": "physical_paths_and_code_tests_only",
-    "economic_outputs": "byte_preserved",
-    "reason": "responsibility_packages_and_bronze_silver_gold_layout"
   }
 }

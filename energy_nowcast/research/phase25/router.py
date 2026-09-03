@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from ..v35.taxonomy import group_for_ticker
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import group_for_ticker
 
 
 def standardize_revenue_predictions(

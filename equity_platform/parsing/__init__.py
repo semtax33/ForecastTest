@@ -7,6 +7,7 @@ from .rule_ir import (
     ParserRuleIR,
     PeriodMode,
     SelectorKind,
+    ValueMode,
 )
 
 __all__ = [
@@ -22,4 +23,5 @@ __all__ = [
     "ParserRuleIR",
     "PeriodMode",
     "SelectorKind",
+    "ValueMode",
 ]

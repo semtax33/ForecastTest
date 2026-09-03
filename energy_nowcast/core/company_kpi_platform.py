@@ -5,10 +5,12 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 
-from ..integrated.company_kpi import predict_integrated_company_kpi
-from ..midstream.company_kpi import predict_midstream_company_kpi
-from ..refining.company_kpi import predict_refiner_company_kpi
-from ..services.company_kpi import predict_services_company_kpi
+from equity_platform.sectors.energy.forecasting import (
+    predict_integrated_company_kpi,
+    predict_midstream_company_kpi,
+    predict_refiner_company_kpi,
+    predict_services_company_kpi,
+)
 from ..validation.cross_section_metrics import ticker_scorecard, universe_summary
 from .calibration import interval_score, pooled_conformal_interval
 from .platform import _fit_structural_weight, _test_rows

@@ -1,9 +1,9 @@
 {
   "version": "E&P_NORMALIZED_UNIT_ECONOMICS_V1_3_RESEARCH_ONLY",
-  "generated_at_utc": "2026-09-02T02:23:19.808861+00:00",
+  "generated_at_utc": "2026-09-03T20:35:41.482255+00:00",
   "v1_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
-  "v1_1_manifest_sha256": "9e9de7368dccb316a3c41f6a801a101e3868cbda5e5a8da815635f50a424099e",
-  "v1_2_manifest_sha256": "161c5df008dc4cd22873332af13662f624a9f89497168f29e7c90741288babfd",
+  "v1_1_manifest_sha256": "25d4a4d28d89f7e8565ea6b681d9492eb9ffec4c095ee998a0043157e7081fee",
+  "v1_2_manifest_sha256": "83b6b278908e0ff45ae583b4a7d22ee8515a2dd16f04ae611037905387a07a83",
   "frozen_parent_mutated": false,
   "ep_ticker_count": 14,
   "price_volume_proxy_ready": 13,

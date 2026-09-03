@@ -6,11 +6,13 @@ import numpy as np
 import pandas as pd
 
 from ..data.cutoff import quarter_cutoff_date
-from ..integrated.model import predict_integrated
-from ..midstream.model import predict_midstream
-from ..refining.model import predict_refiner
+from equity_platform.sectors.energy.forecasting import (
+    predict_integrated,
+    predict_midstream,
+    predict_refiner,
+    predict_services,
+)
 from ..research.v351.revenue import load_companyfacts_quarterly_revenue
-from ..services.model import predict_services
 from ..validation.cross_section_metrics import ticker_scorecard, universe_summary
 from .taxonomy import SUBINDUSTRY_TICKERS, phase_for_subindustry, subindustry_for_ticker
 

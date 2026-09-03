@@ -13,12 +13,12 @@ from energy_nowcast.core.taxonomy import (
     all_phase_tickers,
     subindustry_for_ticker,
 )
-from energy_nowcast.integrated.model import predict_integrated
-from energy_nowcast.midstream.model import predict_midstream
+from equity_platform.sectors.energy.forecasting.integrated import predict_integrated
+from equity_platform.sectors.energy.forecasting.midstream import predict_midstream
 from energy_nowcast.operations.champion import verify_champion
-from energy_nowcast.refining.model import predict_refiner
+from equity_platform.sectors.energy.forecasting.refining import predict_refiner
 from energy_nowcast.research.v36.benchmark import verify_research_champion
-from energy_nowcast.services.model import predict_services
+from equity_platform.sectors.energy.forecasting.services import predict_services
 
 
 ROOT = Path(__file__).resolve().parents[1]

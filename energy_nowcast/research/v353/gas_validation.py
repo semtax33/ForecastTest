@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from ..v35.taxonomy import E_AND_P_GROUPS
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import E_AND_P_GROUPS
 
 
 def gas_research_gate(
@@ -41,4 +41,3 @@ def gas_research_gate(
     result["gas_macro_research_unlocked"] = passed
     result["production_champion_changed"] = False
     return result
-

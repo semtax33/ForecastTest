@@ -5,7 +5,12 @@ from pathlib import Path
 
 import pytest
 
-from equity_platform.documents import DocumentMetadata, adapt_html_document
+from equity_platform.documents import (
+    DocumentMetadata,
+    HtmlFragment,
+    adapt_html_document,
+    adapt_html_fragments,
+)
 from equity_platform.experiments import ExperimentRunner, ExperimentSpec
 from equity_platform.governance import PolicyPurpose, evaluate_authority
 from equity_platform.ir import (
@@ -47,11 +52,15 @@ from equity_platform.valuation import enterprise_value as legacy_enterprise_valu
 from equity_platform.valuation_kernel import DcfAssumptions as KernelDcfAssumptions
 from equity_platform.valuation_kernel import enterprise_value as kernel_enterprise_value
 from equity_platform.sectors.industrials.platform import build_industrials_bls_sensor_ir
+from equity_platform.sectors.energy.forecasting import ENERGY_SUBINDUSTRIES
+from equity_platform.sectors.energy.parsing.company_kpi import ENERGY_KPI_RULES
 
 
 ROOT = Path(__file__).resolve().parents[1]
 PAC_RULES = ROOT / "configs/parser_rules/industrials/pac.arc"
 CAT_RULES = ROOT / "configs/parser_rules/industrials/cat.arc"
+ENERGY_RULES = ROOT / "configs/parser_rules/energy/company_kpi.arc"
+EP_ACTUAL_RULES = ROOT / "configs/parser_rules/energy/ep_v35_actuals.arc"
 
 
 def _sha(path: Path) -> str:
@@ -429,3 +438,119 @@ def test_gd_entrypoint_is_thin_and_valuation_no_longer_depends_on_hii() -> None:
     assert "gd_v6.experiment import main" in entrypoint
     assert "hii_v52" not in valuation
     assert "equity_platform.valuation_kernel" in valuation
+
+
+def test_energy_kpi_rules_are_declarative_hashed_and_cover_all_supported_issuers() -> None:
+    rules = compile_rule_file(ENERGY_RULES)
+    assert rules == ENERGY_KPI_RULES
+    assert len(rules) == 26
+    assert len({rule.entities[0] for rule in rules}) == 12
+    assert {rule.selector.value for rule in rules} == {"TABLE_ROW"}
+    assert all(len(rule.source_sha256) == 64 for rule in rules)
+    text = ENERGY_RULES.read_text(encoding="utf-8").casefold()
+    assert "python" not in text
+    assert "table_index" not in text
+
+
+def test_energy_table_row_dsl_reproduces_adjacent_pair_and_provenance() -> None:
+    html = b"""
+    <html><body><table>
+      <tr><th>Three months ended</th><th>Q1</th></tr>
+      <tr><td>Crude oil refined</td><td>2,100</td></tr>
+      <tr><td>Other charge and blendstocks</td><td>500</td></tr>
+    </table></body></html>
+    """
+    document = adapt_html_fragments(
+        fragments=(
+            HtmlFragment(html, "https://example.test/mpc", "MPC release"),
+        ),
+        metadata=DocumentMetadata(
+            entity="MPC",
+            source_kind="SEC_EDGAR",
+            document_kind="SEC_8K_EARNINGS_EXHIBIT",
+            available_at="2026-04-30",
+            report_period="2026Q1",
+        ),
+    )
+    rule = next(rule for rule in ENERGY_KPI_RULES if rule.rule_id == "MPC.company_throughput")
+    result = execute_rule(document, rule)
+    assert result.status == "EMITTED"
+    assert result.fact is not None
+    assert result.fact.value == 2600.0
+    members = result.match_trace["pair_candidates"][0]["members"]
+    assert [member["source_row_index"] for member in members] == [1, 2]
+    assert all(member["source_uri"] == "https://example.test/mpc" for member in members)
+
+
+def test_ep_issuer_layout_is_dsl_driven_and_composes_numeric_columns() -> None:
+    rules = compile_rule_file(EP_ACTUAL_RULES)
+    assert len(rules) == 4
+    assert {rule.entities for rule in rules} == {("AR",)}
+    assert all(rule.value_indices for rule in rules)
+    source = EP_ACTUAL_RULES.read_text(encoding="utf-8").casefold()
+    assert "python" not in source
+    assert "table_index" not in source
+
+    document = adapt_html_fragments(
+        fragments=(
+            HtmlFragment(
+                b"""
+                <table><tr><td>Average Net Production</td>
+                <td>1,200</td><td>200</td><td>100</td><td>50</td><td>1,500</td>
+                </tr></table>
+                """,
+                "https://example.test/ar",
+                "AR release",
+                numeric_rows_only=False,
+                collapse_adjacent_cells=True,
+            ),
+        ),
+        metadata=DocumentMetadata(
+            entity="AR",
+            source_kind="COMPANY_IR_SEC",
+            document_kind="EARNINGS_RELEASE",
+            available_at="2026-04-30",
+            report_period="2026Q1",
+        ),
+    )
+    ngl = execute_rule(
+        document,
+        next(rule for rule in rules if rule.metric == "ep_actual_ngl_mbpd"),
+    )
+    total = execute_rule(
+        document,
+        next(rule for rule in rules if rule.metric == "ep_actual_total_mboed"),
+    )
+    assert ngl.fact is not None and ngl.fact.value == 0.15
+    assert total.fact is not None and total.fact.value == 250.0
+    assert ngl.match_trace["row_candidates"][0]["numeric_values"] == [
+        1200.0,
+        200.0,
+        100.0,
+        50.0,
+        1500.0,
+    ]
+
+
+def test_energy_anchor_bridge_registry_is_hierarchical_and_v11_uses_shared_dcf() -> None:
+    assert set(ENERGY_SUBINDUSTRIES) == {
+        "exploration_production",
+        "refining",
+        "midstream",
+        "services",
+        "integrated",
+    }
+    assert ENERGY_SUBINDUSTRIES["midstream"].primary_targets == (
+        "volume",
+        "adjusted_ebitda",
+    )
+    assert ENERGY_SUBINDUSTRIES["exploration_production"].validation_targets == (
+        "fcff",
+        "roic",
+    )
+    engine = (
+        ROOT / "equity_platform/sectors/energy/valuation/v11/engine.py"
+    ).read_text(encoding="utf-8")
+    assert "equity_platform.valuation_kernel" in engine
+    for directory in ("integrated", "refining", "midstream", "services"):
+        assert not list((ROOT / "energy_nowcast" / directory).glob("*.py"))

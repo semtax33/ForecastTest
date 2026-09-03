@@ -1,7 +1,7 @@
 {
   "version": "E&P_ACQUIREE_NOPAT_CYCLE_NORMALIZED_COHORT_V1_7_2_RESEARCH",
-  "generated_at_utc": "2026-09-02T09:28:15.647992+00:00",
-  "v1_6_1_manifest_sha256": "18f6ba102538e3851501a9cc396d8712928ed9098c360c09178d6b0527e5d7c8",
+  "generated_at_utc": "2026-09-03T20:59:05.592966+00:00",
+  "v1_6_1_manifest_sha256": "a15ac595313d93bbbebaa82f7f180b4a33e9777dced8877ad7f12cb57e622bdd",
   "v1_7_1_parent_snapshot_sha256": "9cb798ad1fdbf178d63a22d868e142f13004a92db0efe0647452d8d4aa0d3466",
   "frozen_v1_6_1_mutated": false,
   "v1_7_1_parent_mutated": false,

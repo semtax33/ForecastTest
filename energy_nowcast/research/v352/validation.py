@@ -4,8 +4,12 @@ import numpy as np
 import pandas as pd
 
 from ...validation.cross_section_metrics import ticker_scorecard, universe_summary
-from ..v35.strategy import KPIHierarchicalStrategy
-from ..v35.validation import V35ValidationResult, run_loco, run_time_holdout
+from equity_platform.sectors.energy.research.revenue.v35.strategy import KPIHierarchicalStrategy
+from equity_platform.sectors.energy.research.revenue.v35.validation import (
+    V35ValidationResult,
+    run_loco,
+    run_time_holdout,
+)
 
 
 def _score_counts(scorecard: pd.DataFrame) -> dict[str, object]:

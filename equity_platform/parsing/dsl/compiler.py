@@ -12,6 +12,7 @@ from equity_platform.parsing.rule_ir import (
     ParserRuleIR,
     PeriodMode,
     SelectorKind,
+    ValueMode,
 )
 
 
@@ -24,6 +25,8 @@ ALLOWED_KEYS = {
     "period_patterns",
     "table_headers_all",
     "row_labels",
+    "row_patterns",
+    "context_patterns",
     "capture_column",
     "fact_names",
     "text_patterns",
@@ -44,6 +47,12 @@ ALLOWED_KEYS = {
     "assertions",
     "ambiguity",
     "missing",
+    "entities",
+    "value_mode",
+    "value_indices",
+    "scale_factor",
+    "scale_when_pattern",
+    "scale_when_factor",
 }
 
 
@@ -192,6 +201,16 @@ def _strings(value: object | None) -> tuple[str, ...]:
     return tuple(value)
 
 
+def _integers(value: object | None) -> tuple[int, ...]:
+    if value is None:
+        return ()
+    if not isinstance(value, list) or not all(
+        isinstance(item, int) and not isinstance(item, bool) for item in value
+    ):
+        raise DslCompileError("Expected a list of integers")
+    return tuple(value)
+
+
 def compile_rules(text: str) -> tuple[ParserRuleIR, ...]:
     source_sha = sha256(text.encode("utf-8")).hexdigest()
     compiled: list[ParserRuleIR] = []
@@ -222,6 +241,8 @@ def compile_rules(text: str) -> tuple[ParserRuleIR, ...]:
                 period_patterns=_strings(values.get("period_patterns")),
                 table_headers_all=_strings(values.get("table_headers_all")),
                 row_labels=_strings(values.get("row_labels")),
+                row_patterns=_strings(values.get("row_patterns")),
+                context_patterns=_strings(values.get("context_patterns")),
                 capture_column=(
                     str(values["capture_column"])
                     if values.get("capture_column") is not None
@@ -251,6 +272,16 @@ def compile_rules(text: str) -> tuple[ParserRuleIR, ...]:
                 ambiguity=FailurePolicy(str(values.get("ambiguity", "FAIL"))),
                 missing=FailurePolicy(str(values.get("missing", "FAIL"))),
                 source_sha256=source_sha,
+                entities=_strings(values.get("entities")),
+                value_mode=ValueMode(str(values.get("value_mode", "FIRST"))),
+                value_indices=_integers(values.get("value_indices")),
+                scale_factor=float(values.get("scale_factor", 1.0)),
+                scale_when_pattern=(
+                    str(values["scale_when_pattern"])
+                    if values.get("scale_when_pattern") is not None
+                    else None
+                ),
+                scale_when_factor=float(values.get("scale_when_factor", 1.0)),
             )
             rule.validate()
             for pattern in rule.period_patterns:
@@ -265,6 +296,10 @@ def compile_rules(text: str) -> tuple[ParserRuleIR, ...]:
                     raise DslCompileError(
                         f"{rule_id} text pattern lacks capture group {rule.capture_group!r}"
                     )
+            for pattern in (*rule.row_patterns, *rule.context_patterns):
+                re.compile(pattern)
+            if rule.scale_when_pattern:
+                re.compile(rule.scale_when_pattern)
         except (KeyError, TypeError, ValueError) as exc:
             if isinstance(exc, DslCompileError):
                 raise

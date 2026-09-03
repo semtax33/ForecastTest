@@ -11,7 +11,7 @@ import pandas as pd
 
 from energy_nowcast.research.ep_v13.unit_economics import build_annual_production_kpi
 from energy_nowcast.research.phase6.financial_targets import EP_TICKERS
-from energy_nowcast.research.v35.taxonomy import E_AND_P_GROUPS, group_for_ticker
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import E_AND_P_GROUPS, group_for_ticker
 
 
 EVENT_TICKERS = ("EOG", "RRC", "DVN", "SM")

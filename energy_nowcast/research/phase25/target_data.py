@@ -9,8 +9,8 @@ import pandas as pd
 
 from ...core.company_kpi import _current_value, _table_rows, select_company_kpis_for_targets
 from ...data.cutoff import quarter_cutoff_date
-from ...midstream.company_kpi import SAFE_ACTIVITY_METRICS
-from ...midstream.model import CONTRACT_PROFILES
+from equity_platform.sectors.energy.forecasting.midstream import SAFE_ACTIVITY_METRICS
+from equity_platform.sectors.energy.forecasting.midstream import CONTRACT_PROFILES
 
 
 MIDSTREAM_EBITDA_RULES: dict[str, tuple[str, str]] = {

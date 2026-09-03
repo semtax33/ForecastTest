@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-from energy_nowcast.research.v35.adapters import _table_rows
+from equity_platform.sectors.energy.research.revenue.v35.adapters import _table_rows
 
 
 MARKERS = (

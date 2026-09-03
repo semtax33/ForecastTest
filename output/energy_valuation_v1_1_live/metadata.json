@@ -1,8 +1,8 @@
 {
   "monitoring_version": "ENERGY_VALUATION_V1_1_LIVE_MONITORING_V1",
-  "as_of_date": "2026-09-02",
+  "as_of_date": "2026-09-04",
   "benchmark_status": "SANITY_AUDITED_RESEARCH_FROZEN",
-  "benchmark_manifest_sha256": "9e9de7368dccb316a3c41f6a801a101e3868cbda5e5a8da815635f50a424099e",
+  "benchmark_manifest_sha256": "25d4a4d28d89f7e8565ea6b681d9492eb9ffec4c095ee998a0043157e7081fee",
   "parent_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
   "benchmark_verified_before_and_after": true,
   "frozen_benchmark_mutated": false,
@@ -17,12 +17,12 @@
     "finnworlds_treatment": "RATINGS_ONLY_NOT_REVENUE_CONSENSUS"
   },
   "snapshot_status": {
-    "inserted": 0,
-    "unchanged": 26
+    "inserted": 26,
+    "unchanged": 0
   },
   "attribution_status": {
-    "inserted": 0,
-    "unchanged": 26
+    "inserted": 26,
+    "unchanged": 0
   },
   "settlement_status": {
     "inserted": 0,

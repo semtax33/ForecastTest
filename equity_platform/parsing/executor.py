@@ -7,7 +7,14 @@ import re
 from equity_platform.documents import CanonicalDocument, DocumentTable
 from equity_platform.ir import FactIR, LineageRef
 
-from .rule_ir import CombineMode, FailurePolicy, ParserRuleIR, PeriodMode, SelectorKind
+from .rule_ir import (
+    CombineMode,
+    FailurePolicy,
+    ParserRuleIR,
+    PeriodMode,
+    SelectorKind,
+    ValueMode,
+)
 from equity_platform.numeric import parse_numeric_token
 
 
@@ -197,6 +204,128 @@ def _inline_candidates(
     }
 
 
+def _row_value(
+    row: tuple[str, ...],
+    report_period: str,
+    mode: ValueMode,
+    value_indices: tuple[int, ...] = (),
+) -> tuple[float | None, tuple[float, ...]]:
+    values = tuple(
+        value
+        for token in row
+        if (value := parse_numeric_token(token, strict=True)) is not None
+    )
+    if not values:
+        return None, values
+    if value_indices:
+        if any(index >= len(values) for index in value_indices):
+            return None, values
+        value = sum(values[index] for index in value_indices)
+    else:
+        quarter = int(report_period[-1])
+        if mode is ValueMode.REPORTED_QUARTER_INDEX:
+            index = quarter - 1
+        elif mode is ValueMode.CURRENT_YEAR_AFTER_PRIOR_YEAR:
+            index = quarter + 4
+        else:
+            index = 0
+        if index >= len(values):
+            return None, values
+        value = values[index]
+    return (value if isfinite(value) and value > 0 else None), values
+
+
+def _table_row_candidates(
+    document: CanonicalDocument, rule: ParserRuleIR, period: str
+) -> tuple[list[float], dict[str, object]]:
+    unique: dict[tuple[str, float], dict[str, object]] = {}
+    for table in document.tables:
+        if rule.context_patterns and not all(
+            re.search(pattern, table.context, flags=re.IGNORECASE)
+            for pattern in rule.context_patterns
+        ):
+            continue
+        for ordinal, row in enumerate(table.cells):
+            pattern_index = next(
+                (
+                    index
+                    for index, pattern in enumerate(rule.row_patterns)
+                    if any(re.search(pattern, cell, flags=re.IGNORECASE) for cell in row)
+                ),
+                None,
+            )
+            if pattern_index is None:
+                continue
+            value, numeric_values = _row_value(
+                row, period, rule.value_mode, rule.value_indices
+            )
+            if value is None:
+                continue
+            value *= rule.scale_factor
+            row_text = " | ".join(cell for cell in row if cell)
+            if rule.scale_when_pattern and re.search(
+                rule.scale_when_pattern, row_text, flags=re.IGNORECASE
+            ):
+                value *= rule.scale_when_factor
+            source_row = (
+                table.source_row_indices[ordinal]
+                if ordinal < len(table.source_row_indices)
+                else ordinal
+            )
+            candidate = {
+                "value": value,
+                "row_text": row_text,
+                "row_pattern_index": pattern_index,
+                "resolved_table_index": table.resolved_table_index,
+                "source_table_index": (
+                    table.source_table_index
+                    if table.source_table_index is not None
+                    else table.resolved_table_index
+                ),
+                "source_row_index": source_row,
+                "source_uri": table.source_uri or document.source.uri,
+                "source_description": table.source_description,
+                "table_context": table.context,
+                "numeric_token_count": len(numeric_values),
+                "numeric_values": list(numeric_values),
+            }
+            unique[(row_text.casefold(), round(value, 8))] = candidate
+    candidates = list(unique.values())
+    if rule.combine is CombineMode.ADJACENT_PAIR_SUM_MAX:
+        pairs: list[dict[str, object]] = []
+        for left in candidates:
+            if left["row_pattern_index"] != 0:
+                continue
+            for right in candidates:
+                same_location = (
+                    left["source_uri"] == right["source_uri"]
+                    and left["source_table_index"] == right["source_table_index"]
+                    and abs(
+                        int(left["source_row_index"])
+                        - int(right["source_row_index"])
+                    )
+                    <= 3
+                )
+                if right["row_pattern_index"] != 1 or not same_location:
+                    continue
+                pairs.append(
+                    {
+                        "value": float(left["value"]) + float(right["value"]),
+                        "members": [left, right],
+                    }
+                )
+        values = [float(pair["value"]) for pair in pairs]
+        return values, {
+            "candidate_count": len(values),
+            "row_candidates": candidates,
+            "pair_candidates": pairs,
+        }
+    return [float(candidate["value"]) for candidate in candidates], {
+        "candidate_count": len(candidates),
+        "row_candidates": candidates,
+    }
+
+
 def _text_candidates(
     document: CanonicalDocument, rule: ParserRuleIR
 ) -> tuple[list[float], dict[str, object]]:
@@ -240,6 +369,8 @@ def _combine(values: list[float], mode: CombineMode) -> float:
         return max(values)
     if mode is CombineMode.SUM:
         return sum(values)
+    if mode is CombineMode.ADJACENT_PAIR_SUM_MAX:
+        return max(values)
     raise ValueError(f"Unsupported combine mode: {mode}")
 
 
@@ -266,12 +397,16 @@ def _assert_candidate_invariants(values: list[float], assertions: tuple[str, ...
 def execute_rule(document: CanonicalDocument, rule: ParserRuleIR) -> RuleExecution:
     if document.metadata.source_kind != rule.source or document.metadata.document_kind != rule.document:
         return RuleExecution(rule.rule_id, rule.version, "NOT_APPLICABLE", None, {}, {})
+    if rule.entities and document.metadata.entity not in rule.entities:
+        return RuleExecution(rule.rule_id, rule.version, "NOT_APPLICABLE", None, {}, {})
     period = _period(document, rule)
     if period is None:
         status = "FAIL_MISSING_PERIOD" if rule.missing is FailurePolicy.FAIL else "SKIP_MISSING_PERIOD"
         return RuleExecution(rule.rule_id, rule.version, status, None, {}, {}, "period not identified")
     if rule.selector is SelectorKind.TABLE:
         values, match_trace = _table_candidates(document, rule, period)
+    elif rule.selector is SelectorKind.TABLE_ROW:
+        values, match_trace = _table_row_candidates(document, rule, period)
     elif rule.selector is SelectorKind.INLINE_FACT:
         values, match_trace = _inline_candidates(document, rule, period)
     else:

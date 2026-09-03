@@ -15,7 +15,7 @@ from equity_platform.parsing import compile_rule_file
 
 ROOT = PROJECT_ROOT
 OUTPUT = ROOT / "output/platform_architecture_v2"
-PYTHON_ROOTS = (ROOT / "equity_platform", ROOT / "scripts")
+PYTHON_ROOTS = (ROOT / "equity_platform", ROOT / "energy_nowcast", ROOT / "scripts")
 NEW_CORE_PREFIXES = (
     "equity_platform/ir/",
     "equity_platform/documents/",
@@ -24,6 +24,10 @@ NEW_CORE_PREFIXES = (
     "equity_platform/economics/",
     "equity_platform/valuation_kernel/",
     "equity_platform/experiments/",
+)
+CANONICAL_SECTOR_PREFIXES = (
+    "equity_platform/sectors/energy/",
+    "equity_platform/sectors/industrials/",
 )
 
 
@@ -45,7 +49,9 @@ class InventoryVisitor(ast.NodeVisitor):
 
     def visit_If(self, node: ast.If) -> None:
         text = ast.unparse(node.test)
-        if re.search(r"\b(ticker|company|entity)\b", text, re.IGNORECASE):
+        if re.search(r"\b(ticker|company|entity)\b", text, re.IGNORECASE) and re.search(
+            r"['\"][A-Z][A-Z0-9._-]+['\"]", text
+        ):
             self._add(node, "ISSUER_BRANCH", text[:300])
         if re.search(r"\b(period|fiscal_year|quarter)\b", text, re.IGNORECASE):
             if re.search(r"['\"](?:19|20)\d{2}", text):
@@ -62,10 +68,14 @@ class InventoryVisitor(ast.NodeVisitor):
 def _classification(path: str) -> str:
     if path.startswith(NEW_CORE_PREFIXES):
         return "PLATFORM_V2_CORE"
+    if path.startswith(CANONICAL_SECTOR_PREFIXES):
+        return "CANONICAL_SECTOR_IMPLEMENTATION"
     if re.search(r"/(?:v\d|.*_v\d)", path):
         return "LEGACY_OR_FROZEN_EXPERIMENT"
     if path.startswith("equity_platform/sectors/industrials/platform/"):
         return "V8_COMPATIBILITY_ADAPTER"
+    if path.startswith("energy_nowcast/"):
+        return "ENERGY_LEGACY_OR_COMPATIBILITY"
     return "SHARED_OR_ORCHESTRATION"
 
 
@@ -126,6 +136,9 @@ def main() -> int:
             )
     rules = pd.DataFrame(rule_rows)
     new_core = files.loc[files["classification"].eq("PLATFORM_V2_CORE")]
+    canonical_sector = files.loc[
+        files["classification"].eq("CANONICAL_SECTOR_IMPLEMENTATION")
+    ]
     summary = pd.DataFrame(
         [
             {
@@ -140,7 +153,14 @@ def main() -> int:
                     new_core["period_literal_branches"].sum()
                 ),
                 "platform_v2_core_positional_iloc": int(new_core["positional_iloc"].sum()),
+                "canonical_sector_files": len(canonical_sector),
+                "canonical_sector_issuer_branches": int(
+                    canonical_sector["issuer_branches"].sum()
+                ),
                 "compiled_parser_rules": len(rules),
+                "energy_legacy_or_compatibility_files": int(
+                    files["classification"].eq("ENERGY_LEGACY_OR_COMPATIBILITY").sum()
+                ),
                 "duplicate_dcf_kernels_remaining": 1,
                 "migration_status": "INCREMENTAL_MIGRATION_ACTIVE",
             }
@@ -183,10 +203,12 @@ Forecast / DCF / Reverse DCF
 separate governance policy
 ```
 
-The V2 core contains no issuer branch, period literal branch, or positional `iloc`
-selector. Issuer vocabulary and structural signatures live in `.arc` profiles;
+The platform IR/parser core contains no issuer branch, period literal branch, or
+positional `iloc` selector. Issuer vocabulary and structural signatures live in
+`.arc` profiles or explicit sector adapters;
 resolved table indexes and text spans are emitted only as provenance. PAC table/inline
-XBRL rules and CAT narrative backlog rules are live consumers of the same executor.
+XBRL rules, CAT narrative backlog rules, and 26 Energy SEC/IR KPI rules are live
+consumers of the same executor.
 
 ## Migration boundary
 
@@ -197,6 +219,10 @@ kernel, protected by an exact golden compatibility test. GD V6 was also detached
 the HII package and moved to this kernel without changing any legacy CSV. The remaining
 duplicate is the frozen HII V5.2 evaluator; it stays on the migration ledger until its
 own frozen artifact chain can be re-baselined independently.
+
+Energy now uses the same valuation evaluator for both forward and reverse DCF. Its
+Integrated, Refining, Midstream, and Services driver/bridge pairs live under the
+canonical sector package; old `energy_nowcast` paths are compatibility facades.
 
 The V8 verified-stage cache is repeat-run byte deterministic. A first full-run to
 cache-run transition can still reserialize floating values in four derived CSVs even

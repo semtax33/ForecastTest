@@ -160,7 +160,9 @@ def enterprise_value(
         "explicit_period_pv_usd": explicit_pv,
         "pv_terminal_value_usd": pv_terminal,
         "enterprise_value_usd": value,
-        "terminal_value_share_pct": pv_terminal / value * 100.0,
+        "terminal_value_share_pct": (
+            pv_terminal / value * 100.0 if value != 0 else np.nan
+        ),
     }
 
 

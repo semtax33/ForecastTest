@@ -1,9 +1,3 @@
-from __future__ import annotations
+"""Compatibility import; implementation lives in equity_platform.validation.leave_one_company_out."""
 
-import pandas as pd
-
-
-def leave_one_company_out(backtester: object, panel: pd.DataFrame) -> pd.DataFrame:
-    """Public LOCO entry point; the backtester owns the fixed modeling rules."""
-    return backtester.run_loco(panel)  # type: ignore[attr-defined]
-
+from equity_platform.validation.leave_one_company_out import *  # noqa: F401,F403

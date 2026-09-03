@@ -1,8 +1,8 @@
 {
   "analysis": "E&P_EXPECTATIONS_GAP_ATTRIBUTION",
-  "generated_at_utc": "2026-09-02T00:27:17.850314+00:00",
+  "generated_at_utc": "2026-09-03T20:57:39.460064+00:00",
   "v1_0_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
-  "v1_1_manifest_sha256": "9e9de7368dccb316a3c41f6a801a101e3868cbda5e5a8da815635f50a424099e",
+  "v1_1_manifest_sha256": "25d4a4d28d89f7e8565ea6b681d9492eb9ffec4c095ee998a0043157e7081fee",
   "frozen_v1_1_mutated": false,
   "original_median_gap_pct": 90.66707198700433,
   "maximum_frozen_reproduction_error_per_share": 2.842170943040401e-14,

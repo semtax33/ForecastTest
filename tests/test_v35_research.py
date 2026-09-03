@@ -16,6 +16,10 @@ from energy_nowcast.research.v35.adapters import (
 from energy_nowcast.research.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
 from energy_nowcast.research.v35.taxonomy import E_AND_P_GROUPS, all_tickers, group_for_ticker
 from energy_nowcast.research.v35.validation import v35_promotion_gate
+from equity_platform.sectors.energy.research.revenue.v35.adapters import (
+    _extract_actual_from_file,
+    _extract_guidance_from_file,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -107,6 +111,21 @@ def test_guidance_unit_sanity_converts_raw_daily_units() -> None:
     assert _guidance_scale_sanity(320_000.0, "total") == 320.0
     assert _guidance_scale_sanity(150_000.0, "oil") == 150.0
     assert _guidance_scale_sanity(3_500.0, "gas") == 3_500.0
+
+
+def test_ir_adapter_skips_empty_rows_and_applies_ep_layout_dsl(tmp_path: Path) -> None:
+    path = tmp_path / "2026-04-30_ar.htm"
+    path.write_text("<table></table>", encoding="utf-8")
+    tables = [[[], ["Average Net Production", "1200", "200", "100", "50", "1500"]]]
+    metadata = {"filing_date": "2026-04-30", "source_url": "https://example.test/ar"}
+    actual, _ = _extract_actual_from_file("AR", path, tables, metadata)
+    guidance = _extract_guidance_from_file("AR", path, tables, metadata)
+    assert actual is not None
+    assert actual["gas_mmcfd"] == 1200.0
+    assert actual["oil_mbpd"] == 0.2
+    assert actual["ngl_mbpd"] == 0.15
+    assert actual["total_mboed"] == 250.0
+    assert guidance is None
 
 
 def test_loco_prediction_is_invariant_to_held_company_revenue_labels() -> None:

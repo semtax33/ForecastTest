@@ -1,7 +1,7 @@
 {
   "version": "ENERGY_VALUATION_PLATFORM_V1_1_RC1",
   "parent_version": "ENERGY_VALUATION_PLATFORM_V1",
-  "generated_at_utc": "2026-09-01T23:20:52.071464+00:00",
+  "generated_at_utc": "2026-09-03T20:09:57.773145+00:00",
   "parent_v1_0_manifest_verified": true,
   "parent_v1_0_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
   "v1_1_code_complete": true,

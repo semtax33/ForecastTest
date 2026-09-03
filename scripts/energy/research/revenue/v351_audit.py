@@ -8,14 +8,14 @@ from pathlib import Path
 import pandas as pd
 
 from energy_nowcast.operations.champion import sha256_file, verify_champion
-from energy_nowcast.research.v35.adapters import (
+from equity_platform.sectors.energy.research.revenue.v35.adapters import (
     StandardizedKPIBundle,
     adapter_registry_frame,
     build_standardized_kpis,
 )
-from energy_nowcast.research.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
-from energy_nowcast.research.v35.taxonomy import all_tickers
-from energy_nowcast.research.v35.validation import validate_v35
+from equity_platform.sectors.energy.research.revenue.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import all_tickers
+from equity_platform.sectors.energy.research.revenue.v35.validation import validate_v35
 from energy_nowcast.research.v351.audits import (
     audit_basis_adjustment,
     audit_direction_errors,

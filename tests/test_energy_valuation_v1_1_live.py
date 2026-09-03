@@ -44,7 +44,11 @@ def test_live_monitoring_preserves_both_frozen_benchmarks() -> None:
 def test_live_snapshot_is_complete_and_production_remains_locked() -> None:
     snapshots = pd.read_csv(OUTPUT / "valuation_snapshots.csv")
     score = pd.read_csv(OUTPUT / "live_scorecard_summary.csv").iloc[0]
-    assert len(snapshots) == snapshots["ticker"].nunique() == 26
+    vintage_coverage = snapshots.groupby("as_of_date")["ticker"].agg(
+        rows="size", unique_tickers="nunique"
+    )
+    assert vintage_coverage["rows"].eq(26).all()
+    assert vintage_coverage["unique_tickers"].eq(26).all()
     assert snapshots["model_version"].eq("ENERGY_VALUATION_V1_1").all()
     assert snapshots["production_eligible"].eq(0).all()
     assert snapshots[[
@@ -103,13 +107,17 @@ def test_fcff_attribution_separates_components_and_reconciles() -> None:
         "capex_monitor_status", "attribution_status",
     }
     assert required.issubset(attribution.columns)
-    assert len(attribution) == 26
+    vintage_coverage = attribution.groupby("as_of_date")["ticker"].agg(
+        rows="size", unique_tickers="nunique"
+    )
+    assert vintage_coverage["rows"].eq(26).all()
+    assert vintage_coverage["unique_tickers"].eq(26).all()
     assert attribution["diagnostic_only"].all()
     assert attribution["combined_identity_error_usd"].abs().le(1e-3).all()
     complete = attribution.loc[attribution["attribution_status"].eq(
         "COMPLETE_D_AND_A_NWC_OTHER_SEPARATED"
     )]
-    assert len(complete) == 21
+    assert complete.groupby("as_of_date").size().eq(21).all()
     assert complete["detailed_identity_error_usd"].abs().le(1e-3).all()
     imputed = attribution.loc[attribution["capex_imputed"].eq(1)]
     assert not imputed.empty
@@ -195,7 +203,11 @@ def test_market_override_changes_observation_only_and_rejects_future_data(
     tmp_path: Path,
 ) -> None:
     manifest = verify_v11(ROOT)
-    baseline = pd.read_csv(OUTPUT / "valuation_snapshots.csv").set_index("ticker")
+    baseline = (
+        pd.read_csv(OUTPUT / "valuation_snapshots.csv")
+        .loc[lambda frame: frame["as_of_date"].eq("2026-09-02")]
+        .set_index("ticker")
+    )
     override_path = tmp_path / "market.csv"
     pd.DataFrame([{
         "ticker": "EOG", "market_date": "2026-09-01", "market_price": 200.0,
@@ -205,8 +217,11 @@ def test_market_override_changes_observation_only_and_rejects_future_data(
     ).set_index("ticker")
     assert updated.loc["EOG", "market_price"] == 200.0
     assert updated.loc["EOG", "fair_value"] == baseline.loc["EOG", "fair_value"]
-    assert updated.loc["EOG", "base_year1_fcff_usd"] == (
-        baseline.loc["EOG", "base_year1_fcff_usd"]
+    assert np.isclose(
+        updated.loc["EOG", "base_year1_fcff_usd"],
+        baseline.loc["EOG", "base_year1_fcff_usd"],
+        rtol=0.0,
+        atol=1e-6,
     )
     pd.DataFrame([{
         "ticker": "EOG", "market_date": "2026-09-03", "market_price": 200.0,

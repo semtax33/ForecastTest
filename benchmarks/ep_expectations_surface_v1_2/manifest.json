@@ -1,7 +1,7 @@
 {
   "name": "E&P_EXPECTATIONS_SURFACE_V1_2_RESEARCH",
   "version": "1.2",
-  "frozen_as_of": "2026-09-02",
+  "frozen_as_of": "2026-09-04",
   "immutable": true,
   "research_frozen": true,
   "expectations_surface_frozen": true,
@@ -9,7 +9,7 @@
   "iso_value_solver_frozen": true,
   "single_point_market_implied_claim_allowed": false,
   "parent_v1_0_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
-  "parent_v1_1_manifest_sha256": "9e9de7368dccb316a3c41f6a801a101e3868cbda5e5a8da815635f50a424099e",
+  "parent_v1_1_manifest_sha256": "25d4a4d28d89f7e8565ea6b681d9492eb9ffec4c095ee998a0043157e7081fee",
   "production_promoted": false,
   "live_matched_observations": "0/20",
   "files": {
@@ -24,18 +24,12 @@
     "output/energy_valuation_v1_2_research/frozen_v1_1_reproduction.csv": "a62f410723a94861864df5a54cdced2dcaa9dbc88113ea652ab2322cfde78b34",
     "output/energy_valuation_v1_2_research/iso_value_curve_summary.csv": "7b5acb297b71afca06c229837ef043d09abc4e6f1a1fce7482c125d33a91fd47",
     "output/energy_valuation_v1_2_research/iso_value_curves.csv": "b95a26705a4bf313715b399d7fd16226b34ff424b2a9c92887e1ce252500296a",
-    "output/energy_valuation_v1_2_research/metadata.json": "fbe70181d3124eed2f89233abe90ec613ef60eec4ad3dbf508787135d4bfbd66",
+    "output/energy_valuation_v1_2_research/metadata.json": "1193a2146861a034649abd40d08f7decf3a18fac9bb214db29fe896ed6ac66b2",
     "output/energy_valuation_v1_2_research/report.md": "0b71d18f9f84556f045c6447f8737fff35deaea1f0c363c90f1d16ba4f7da5ed",
     "output/energy_valuation_v1_2_research/terminal_margin_wacc_above_market_count_matrix.csv": "1af80b283581cb6039d49eca4ad99814e364d3c86bed6db14dc7db9bf4601d2e",
     "output/energy_valuation_v1_2_research/terminal_margin_wacc_gap_matrix.csv": "1c70d0bba6a792920070b944d542607904e8bda334b228e8092d2e6b451c941a",
     "output/energy_valuation_v1_2_research/through_cycle_economics.csv": "a13a7740236e47bcadb9a8f8f3efb5b38fbd196e6186437373439743aff25eaa",
     "output/energy_valuation_v1_2_research/through_cycle_margin_wacc_summary.csv": "c6afbfabac6884dadb8087bd7000c5dbf63894c217d512ab232d55cf9a8eaa84",
     "output/energy_valuation_v1_2_research/through_cycle_margin_wacc_tradeoffs.csv": "0dbcd4c6e27a95a5966c256e5cbcb1f87f266b3b2c02518f57ae28a436f881b8"
-  },
-  "layout_rebaseline": {
-    "date": "2026-09-03",
-    "scope": "physical_paths_and_code_tests_only",
-    "economic_outputs": "byte_preserved",
-    "reason": "responsibility_packages_and_bronze_silver_gold_layout"
   }
 }
