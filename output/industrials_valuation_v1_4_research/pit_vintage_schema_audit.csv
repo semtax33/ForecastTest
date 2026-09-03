@@ -1,0 +1,2 @@
+required_columns,schema_columns_complete,observation_rows,series_count,release_date_coverage_pct,available_at_coverage_pct,source_hash_coverage_pct,pit_eligible_rows,historical_pit_ready,status
+source|dataset|series_id|observation_period|vintage_value|release_date|available_at|revision_number|source_hash|vintage_status|pit_eligible,True,946,12,0.0,100.0,100.0,0,False,SCHEMA_READY_VINTAGE_HISTORY_DEFERRED

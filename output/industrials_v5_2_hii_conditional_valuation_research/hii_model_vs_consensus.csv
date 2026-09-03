@@ -1,0 +1,2 @@
+forecast_year,model_route,model_revenue_midpoint_usd,consensus_revenue_median_usd,model_minus_consensus_pct,consensus_used_to_fit_model,authority
+2026,IR_GUIDANCE_ACCOUNTING_BRIDGE,13250000000.0,13003558002.0,1.8951889779866171,False,DIAGNOSTIC_ONLY

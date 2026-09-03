@@ -1,0 +1,2 @@
+forecast_periods,segments,feature_rows,minimum_series_coverage_pct,maximum_feature_lag_quarters,cutoff_violations,historical_pit_ready
+14,3,42,100.0,2,0,True

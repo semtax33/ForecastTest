@@ -1,0 +1,4 @@
+ticker,group,roic_range_width_pct,range_width_category,range_width_research_weight,range_width_gate_pass,accounting_confidence_grade,company_confidence_weight,terminal_input_allowed
+AR,gas_heavy,9.008963693350221,STRONG,1.0,True,A,1.0,False
+DVN,mixed,41.47727728297681,TOO_UNCERTAIN_FOR_TERMINAL,0.25,False,A,0.25,False
+FANG,oil_heavy,126.70666910606548,TOO_UNCERTAIN_FOR_TERMINAL,0.25,False,A,0.25,False

@@ -1,0 +1,22 @@
+version = "INDUSTRIALS_PLATFORM_V3_1_LMT_PROGRAM_CONVERSION_RESEARCH"
+as_of_date = "2026-09-03"
+parent_output = "output/industrials_v3_lmt_aerospace_research"
+validation_start_period = "2025Q1"
+validation_end_period = "2026Q2"
+minimum_training_quarters = 8
+ridge_penalty = 4.0
+delivery_value_penalty = 4.0
+minimum_research_joint_champions = 2
+production_minimum_live_observations = 20
+
+[authorized_changes]
+aeronautics_revenue = "BACKLOG_HORIZON_PLUS_MAJOR_PROGRAM_MIX_CHALLENGER"
+rotary_mission_systems_revenue = "REVENUE_WEIGHTED_SIKORSKY_DELIVERY_MIX_CHALLENGER"
+space_margin = "PROFIT_RECOGNITION_CHALLENGER"
+
+[required_preservation]
+missiles_fire_control_revenue_and_margin = true
+space_revenue = true
+non_space_margin = true
+fixed_oos_window = true
+parent_champion_when_challenger_fails = true

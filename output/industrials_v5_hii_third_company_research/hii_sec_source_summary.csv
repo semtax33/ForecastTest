@@ -1,0 +1,2 @@
+sec_filings,sec_10k_filings,sec_10q_filings,sec_hash_matches,concept_families_audited,concept_family_minimum_coverage_pct,segment_metric_comparable_cells,segment_metric_identity_pass_cells,segment_metric_identity_pass_pct,source_gate_pass,pdf_parsing_used
+27,7,20,27,13,100.0,156,156,100.0,True,False

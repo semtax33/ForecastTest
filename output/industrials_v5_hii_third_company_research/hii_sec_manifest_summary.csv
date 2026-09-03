@@ -1,0 +1,2 @@
+dataset,start_date,cutoff_date,filing_count,ten_k_count,ten_q_count,periodic_history_years,six_year_criterion_pass
+HII_PERIODIC_FILINGS_INDUSTRIALS_V5,2020-01-01,2026-09-03,27,7,20,7,True

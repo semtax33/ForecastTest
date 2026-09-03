@@ -1,8 +1,8 @@
 {
   "version": "E&P_EXPECTATIONS_SURFACE_V1_2_RESEARCH_ONLY",
   "generated_at_utc": "2026-09-02T01:01:08.010346+00:00",
-  "v1_0_manifest_sha256": "c3a548d82c98c8cb0d6ef9e758465f8c7c4d755b8468af49aad7b58476c8426a",
-  "v1_1_manifest_sha256": "671b5b5af4d8ac3de7c7098cb6238eab687124724f41146fad57625b8d092601",
+  "v1_0_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
+  "v1_1_manifest_sha256": "9e9de7368dccb316a3c41f6a801a101e3868cbda5e5a8da815635f50a424099e",
   "frozen_v1_1_mutated": false,
   "maximum_frozen_reproduction_error_per_share": 2.842170943040401e-14,
   "ticker_count": 14,

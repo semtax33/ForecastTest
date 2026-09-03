@@ -1,0 +1,14 @@
+family,coverage_denominator_policy,filings,filings_with_family,applicable_filings,applicable_filings_with_family,coverage_pct
+capital_structure,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+note_contract_assets_liabilities,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+note_debt,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+note_goodwill_intangibles,ANNUAL_10K_ONLY,27,27,7,7,100.0
+note_income_taxes,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+note_pension,ANNUAL_10K_ONLY,27,27,7,7,100.0
+note_program_accounting,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+note_remaining_performance_obligation,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+note_revenue_and_contracts,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+note_segments,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+statement_cash_flow_capex_depreciation,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+statement_revenue_operating_income_tax,ALL_PERIODIC_FILINGS,27,27,27,27,100.0
+statement_working_capital,ALL_PERIODIC_FILINGS,27,27,27,27,100.0

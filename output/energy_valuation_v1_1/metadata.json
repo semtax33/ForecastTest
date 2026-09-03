@@ -3,7 +3,7 @@
   "parent_version": "ENERGY_VALUATION_PLATFORM_V1",
   "generated_at_utc": "2026-09-01T23:20:52.071464+00:00",
   "parent_v1_0_manifest_verified": true,
-  "parent_v1_0_manifest_sha256": "c3a548d82c98c8cb0d6ef9e758465f8c7c4d755b8468af49aad7b58476c8426a",
+  "parent_v1_0_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
   "v1_1_code_complete": true,
   "v1_1_research_complete": true,
   "v1_1_production_promoted": false,

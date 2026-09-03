@@ -1,0 +1,39 @@
+version = "INDUSTRIALS_PLATFORM_V5_2_HII_CONDITIONAL_VALUATION_RESEARCH"
+valuation_date = "2026-07-31"
+ticker = "HII"
+forecast_horizon_years = 5
+equity_risk_premium_pct = 4.5
+fallback_credit_spread_pct = 2.0
+beta_weeks = 104
+beta_blume_weight = 0.67
+terminal_growth_base_pct = 2.0
+terminal_growth_bear_pct = 1.0
+terminal_growth_bull_pct = 2.5
+reverse_growth_lower_pct = -15.0
+reverse_growth_upper_pct = 20.0
+production_minimum_live_observations = 20
+
+frozen_hii_v5_output = "output/industrials_v5_hii_third_company_research"
+frozen_hii_v5_manifest = "benchmarks/industrials_platform_v5_hii_evidence/manifest.json"
+bls_archive_manifest = "data-lake/bronze/industrials/v1_5/bls/archive_manifest.json"
+bls_sensor_map = "configs/industrials_v5_hii_bls_sensors.csv"
+
+ir_q2_2026 = "D:/Programming/python_example/Arcana/data-lake/bronze/sec/fillings/ir/HII/2026-07-30_0001501585-26-000045_EX-99.1_hii2026q2earningsrelease.htm"
+hii_price_history = "D:/Programming/python_example/Arcana/data-lake/bronze/yfinance/price/HII.csv"
+risk_free_history = "D:/Programming/python_example/Arcana/data-lake/bronze/fred/rates/us_dgs10.csv"
+alpha_vantage_estimates = "D:/Programming/python_example/Arcana/data-lake/bronze/consensus/alpha-vantage/earnings-estimates/snapshot_date=2026-07-26/ticker=HII.json"
+fmp_estimates = "D:/Programming/python_example/Arcana/data-lake/bronze/consensus/fmp/analyst-estimates/period=annual/snapshot_date=2026-07-31/ticker=HII.json"
+yahoo_consensus = "D:/Programming/python_example/Arcana/data-lake/bronze/consensus/yahoo/snapshot_date=2026-07-31/ticker=HII.json"
+finnworlds_ratings = "D:/Programming/python_example/Arcana/data-lake/bronze/consensus/finnworlds/company-ratings/snapshot_date=2026-07-31/ticker=HII.json"
+
+[scenario_weights]
+bear = 0.25
+base = 0.50
+bull = 0.25
+
+[authority]
+terminal = false
+production = false
+dcf = "RESEARCH_CONDITIONAL_ONLY"
+reverse_dcf = "RESEARCH_CONDITIONAL_ONLY"
+pdf_parsing = false

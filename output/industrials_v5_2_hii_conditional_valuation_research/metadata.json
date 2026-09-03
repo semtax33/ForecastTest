@@ -1,0 +1,50 @@
+{
+  "generated_at_utc": "2026-09-03T09:28:21.814062+00:00",
+  "parent_hii_v5_manifest_sha256": "c1a9e4e2ea3f9586472ed8e2ef13cb9ea9e3155a32b4394145d10a5150214f36",
+  "parent_hii_v5_unchanged": true,
+  "pdf_parsing_used": false,
+  "terminal_authority": false,
+  "production_promoted": false,
+  "version": "INDUSTRIALS_PLATFORM_V5_2_HII_CONDITIONAL_VALUATION_RESEARCH",
+  "valuation_date": "2026-07-31",
+  "source_layers": [
+    "SEC_10K",
+    "SEC_10Q",
+    "IR_HTML",
+    "BLS_AS_RELEASED_VINTAGE",
+    "ANALYST_CONSENSUS_PROVIDER",
+    "MARKET_PRICE",
+    "MARKET_RETURN_SERIES",
+    "FRED_DGS10"
+  ],
+  "authority": {
+    "aggregate_revenue_point_authority": "RESEARCH_CONDITIONAL_IR_GUIDANCE_BRIDGE",
+    "segment_revenue_point_authority": "SHIPBUILDING_COMBINED_AND_MISSION_GUIDANCE_ONLY",
+    "segment_revenue_causal_attribution_authority": false,
+    "segment_margin_point_authority": "SHIPBUILDING_COMBINED_AND_MISSION_GUIDANCE_ONLY",
+    "margin_component_causal_authority": false,
+    "roic_attribution_authority": false,
+    "terminal_authority": false,
+    "dcf_authority": "RESEARCH_CONDITIONAL_ONLY",
+    "reverse_dcf_authority": "RESEARCH_CONDITIONAL_ONLY",
+    "production_authority": false,
+    "live_forward_matched_observations": "0/20"
+  },
+  "gate": {
+    "parent_hii_v5_unchanged": true,
+    "route_selection_leakage_audited": true,
+    "clean_predeclared_route_retained": true,
+    "quarterly_nwc_chain_complete": true,
+    "fcff_identity_pass": true,
+    "all_source_cutoffs_pass": true,
+    "dcf_run": true,
+    "reverse_dcf_run": true,
+    "solver_round_trip_pass": true,
+    "ev_to_equity_identity_pass": true,
+    "terminal_authority": false,
+    "production_promoted": false,
+    "live_forward_matched_observations": "0/20",
+    "research_freeze_eligible": true,
+    "status": "CONDITIONAL_VALUATION_RESEARCH_READY_TERMINAL_AND_PRODUCTION_LOCKED"
+  }
+}

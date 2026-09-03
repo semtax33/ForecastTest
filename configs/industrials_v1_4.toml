@@ -1,0 +1,13 @@
+version = "INDUSTRIALS_V1_4_SEGMENT_COST_DRIVER_MARGIN_VALIDATION"
+as_of_date = "2026-09-03"
+parent_branch = "INDUSTRIALS_V1_3_LITE_CAPTURE_CALIBRATION"
+sensor_map = "configs/industrials_v1_4_segment_sensors.csv"
+bls_snapshot = "data-lake/bronze/industrials/v1_4/bls/latest_segment_cost_drivers.json"
+minimum_training_quarters = 8
+minimum_validation_quarters = 3
+ridge_penalty = 8.0
+hierarchical_prior_strength = 6.0
+catastrophic_margin_mase = 2.0
+minimum_segments_below_one = 2
+minimum_capture_mae_improvement_pct = 0.0
+production_minimum_live_observations = 20

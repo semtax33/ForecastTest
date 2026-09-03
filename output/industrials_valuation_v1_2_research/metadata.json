@@ -1,0 +1,32 @@
+{
+  "version": "INDUSTRIALS_VALUATION_PLATFORM_V1_2_CAT_EXPECTATIONS_ECONOMICS_AUDIT",
+  "generated_at_utc": "2026-09-02T18:47:27.384673+00:00",
+  "as_of_date": "2026-09-03",
+  "ticker": "CAT",
+  "parent_manifest_verified_before": true,
+  "parent_manifest_verified_after": true,
+  "research_complete": true,
+  "historical_industry_pit_vintages_available": false,
+  "terminal_input_allowed": false,
+  "production_promoted": false,
+  "live_matched_observations": "0/20",
+  "v1_2_sotp_value_per_share": 363.8863803839645,
+  "market_price": 827.9000244140625,
+  "valuation_interpretation": "V1_2_RESEARCH_DIAGNOSTIC_NOT_A_MISPRICING_SIGNAL",
+  "source_hashes": {
+    "configs/industrials_v1_2.toml": "9c7b4e033b2cc64e222b258ad6320f1dc52f29939a9cfcda8200855767cd3451",
+    "configs/industrials_v1_2_cat_industry_sensor_map.csv": "d1671401918ec4537f7d788cbf436cfb7df6892678a0f20d9a23fb9b4bec8785",
+    "configs/industrials_v1_2_cat_industry_weights.csv": "332d48397fef45b5cffaf5a6d114814e4dbed61fe4db0c0f771f3c1fe0313854",
+    "configs/industrials_v1_2_cfsc_10k_sources.csv": "ca43819d0f64bfed7300977aef318a80533922b9a1aaa1714c2696da59e99736",
+    "configs/industry_sensor_registry.csv": "c2c5bfdedacdf1c08313c165ca900107506800714b8f08983cc2ccd59825fc02",
+    "equity_platform/industry_data/pqci.py": "023c43e0e84eb5de42a089d0d83cf8e775310a1e1e7f4c05ffee74b8c09e1748",
+    "equity_platform/industry_data/registry.py": "3c0ca8c2f671a0b5a3d98c6025032b33a577c175b901f6d457a2e2cbbc35e099",
+    "equity_platform/sectors/industrials/v12/finance_economics.py": "95f8ac6643bf6b9982a308044d58ceb5debedba8c4721fd1af7df0e4ffd633fc",
+    "equity_platform/sectors/industrials/v12/industry_forecast.py": "3fb07c25a0cf949726ec58f4cbe469029ea8aaa85c8d10e597ec27fa2bfff8fd",
+    "equity_platform/sectors/industrials/v12/parser_audit.py": "5dedbdf8834fd359fb44f2cb4d59f52971954431c689685da733ca6b8dc3d769",
+    "equity_platform/sectors/industrials/v12/research.py": "9e7eec4161da4b03983c19d41a0ae62dfad542d3e2a626b2b7f4fdfbb00718a7",
+    "equity_platform/sectors/industrials/v12/roic_audit.py": "5b5dc94164b5c3655826fc6e78808b4580bb7082c90a57c5ac0c09431cbd88bd",
+    "equity_platform/sectors/industrials/v12/surfaces.py": "e3c458f647ca7deec55d11e4bfdb25618d0b608f9a629bc87c3d6e9d4a5152c6",
+    "scripts/industrials/valuation_v1_2.py": "21902751f3a3b214a961fe304e8ac9dec1ccb06cb8cb2d0cac8d9cbe89a83d21"
+  }
+}

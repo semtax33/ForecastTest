@@ -1,17 +1,19 @@
 # Energy driver forecasting and valuation platform
 
 The active code is the modular `energy_nowcast` package. The historical
-`energy_revenue_regression_v*.py` scripts remain untouched as research records;
-V3.3 is frozen and verified by `benchmarks/v3_3/manifest.json`.
+The monolithic `energy_revenue_regression_v*.py` scripts are preserved under
+`archive/energy_revenue/` as research records; V3.3 is frozen and verified by
+`benchmarks/v3_3/manifest.json`. Active entrypoints are grouped under
+`scripts/` by operating responsibility.
 
 ## Run order
 
 Activate the project Python environment, then run:
 
 ```powershell
-python run_nowcast.py --verify-benchmark-only
-python run_nowcast.py --config configs/v3_3_1.json
-python run_nowcast.py --config configs/v3_4.json
+python -m scripts.energy.operations.nowcast --verify-benchmark-only
+python -m scripts.energy.operations.nowcast --config configs/v3_3_1.json
+python -m scripts.energy.operations.nowcast --config configs/v3_4.json
 python -m pytest
 ```
 
@@ -26,7 +28,7 @@ Analyst consensus is loaded point-in-time from Arcana's
 estimates are normalized and combined by median after taking each provider's
 latest eligible snapshot. The local Finnworlds dataset is ratings-only, so it
 is recorded in provider coverage but is not misused as revenue consensus.
-`data-lake/analyst_consensus.csv` remains a manual fallback. A formal
+`data-lake/bronze/manual_consensus/analyst_consensus.csv` remains a manual fallback. A formal
 model-vs-consensus comparison starts only after the configured sample minimum.
 
 ## Frozen champion and live-forward operations
@@ -36,9 +38,9 @@ code, config, inputs, input schemas, and material artifacts. Every forecast
 capture verifies it before writing an immutable SQLite row.
 
 ```powershell
-python run_operations.py
-python run_operations.py --as-of 2026-10-17 --timing-label T-15
-python run_operations.py --as-of 2026-10-27 --timing-label T-5
+python -m scripts.energy.operations.revenue_nowcast
+python -m scripts.energy.operations.revenue_nowcast --as-of 2026-10-17 --timing-label T-15
+python -m scripts.energy.operations.revenue_nowcast --as-of 2026-10-27 --timing-label T-5
 ```
 
 The default `FROZEN_BASELINE` label does not pretend that 2026-08-31 was a
@@ -54,7 +56,7 @@ only. After a release, provide a CSV with
 `ticker,quarter,actual_revenue,release_date[,source_path]`:
 
 ```powershell
-python run_operations.py --actuals-csv path\to\released_actuals.csv
+python -m scripts.energy.operations.revenue_nowcast --actuals-csv path\to\released_actuals.csv
 ```
 
 The scorecard calculates model and consensus errors, disagreement, 80/95% PI
@@ -65,7 +67,7 @@ the other six promotion conditions.
 ## E&P universe validation
 
 ```powershell
-python run_universe_backtest.py
+python -m scripts.energy.validation.universe_backtest
 ```
 
 This runs one fixed pipeline on 14 E&P companies with both a four-quarter time
@@ -85,8 +87,8 @@ with status `REJECTED_EXPERIMENT`; it is not an active candidate.
 ## V3.5 KPI-first hierarchical research
 
 ```powershell
-python run_v35_research.py
-python run_v35_research.py --reuse-standardized-kpis
+python -m scripts.energy.research.revenue.v35
+python -m scripts.energy.research.revenue.v35 --reuse-standardized-kpis
 ```
 
 V3.5 replaces the rejected revenue-implied production shortcut with
@@ -107,8 +109,8 @@ production champion promotion remains locked until 20 matched live actuals.
 ## V3.5.1 audit-only
 
 ```powershell
-python run_v351_audit.py
-python run_v351_audit.py --reuse-standardized-kpis
+python -m scripts.energy.research.revenue.v351_audit
+python -m scripts.energy.research.revenue.v351_audit --reuse-standardized-kpis
 ```
 
 V3.5.1 keeps the V3.5 model equation fixed and audits the data and validation
@@ -128,8 +130,8 @@ preserved with an invalidation notice rather than overwritten.
 ## V3.5.2 clean component
 
 ```powershell
-python run_v352_clean_component.py
-python run_v352_clean_component.py --reuse-audit-kpis
+python -m scripts.energy.research.revenue.v352_clean_component
+python -m scripts.energy.research.revenue.v352_clean_component --reuse-audit-kpis
 ```
 
 V3.5.2 keeps the corrected revenue labels, quarterly-only guidance, unit
@@ -149,7 +151,7 @@ V3.4 champion remains unchanged.
 ## V3.5.3 grouped component
 
 ```powershell
-python run_v353_grouped_component.py
+python -m scripts.energy.research.revenue.v353_grouped_component
 ```
 
 V3.5.3 evaluates the unchanged clean component separately for oil-heavy,
@@ -167,7 +169,7 @@ coverage, and at least 65% directional accuracy.
 ## V3.5.3 gas-basis research
 
 ```powershell
-python run_v353_gas_research.py
+python -m scripts.energy.research.revenue.v353_gas
 ```
 
 This isolated experiment covers AR, CNX, EQT, and RRC. It rejects table-of-
@@ -181,8 +183,8 @@ Gas-heavy continues to use legacy unless the isolated gas gate passes.
 ## V3.6 macro-overlay research
 
 ```powershell
-python run_v36_macro_overlay_research.py --refresh-macro-data
-python run_v36_macro_overlay_research.py
+python -m scripts.energy.research.revenue.v36_macro_overlay --refresh-macro-data
+python -m scripts.energy.research.revenue.v36_macro_overlay
 ```
 
 V3.5.3 is frozen separately in
@@ -213,8 +215,8 @@ V3.5.3 remains the research benchmark. V3.4 remains the production champion at
 ## Energy platform Phase 2-4 structural research
 
 ```powershell
-python run_phase2_4_structural_research.py --refresh-free-data
-python run_phase2_4_structural_research.py
+python -m scripts.energy.research.revenue.structural_phase2_4 --refresh-free-data
+python -m scripts.energy.research.revenue.structural_phase2_4
 ```
 
 Phase 2 separates Integrated (`XOM`, `CVX`) from pure Refining (`VLO`, `MPC`,
@@ -257,9 +259,9 @@ research benchmark.
 ## Phase 2-4 company KPI and uncertainty refinement
 
 ```powershell
-python run_phase2_4_company_kpi_research.py --refresh-company-kpis
-python run_kpi_parser_gold_audit.py
-python run_phase2_4_company_kpi_research.py
+python -m scripts.energy.research.revenue.company_kpi_phase2_4 --refresh-company-kpis
+python -m scripts.energy.validation.kpi_parser_gold
+python -m scripts.energy.research.revenue.company_kpi_phase2_4
 ```
 
 The original Phase 2-4 structural proxy is frozen under
@@ -321,8 +323,8 @@ the concise decision record in `report.md`, current forecasts in
 ## Phase 2.5 target-aligned research and Phase 5 router
 
 ```powershell
-python run_phase2_5_target_aligned_research.py --refresh-macro-data
-python run_phase2_5_target_aligned_research.py
+python -m scripts.energy.research.revenue.target_aligned_phase2_5 --refresh-macro-data
+python -m scripts.energy.research.revenue.target_aligned_phase2_5
 ```
 
 The accepted P2.1 Refining result is frozen independently under
@@ -367,7 +369,7 @@ remains the lag-revenue baseline at 0/20 matched live observations.
 ## Phase 6 value-driver targets and conditional bridges
 
 ```powershell
-python run_phase6_value_driver_research.py
+python -m scripts.energy.research.revenue.value_driver_phase6
 ```
 
 Phase 6 renames the working architecture to **Subindustry Driver Forecast →
@@ -419,8 +421,8 @@ historical model-versus-consensus performance remains `TRACKING` until at least
 ## Energy Valuation Platform V1
 
 ```powershell
-python run_energy_valuation_v1.py
-python run_energy_valuation_v1.py --freeze
+python -m scripts.energy.research.valuation.v1
+python -m scripts.energy.research.valuation.v1 --freeze
 ```
 
 V1 completes the common economic chain for all 26 companies and five Energy
@@ -449,8 +451,8 @@ tracking result, not evidence for promotion.
 ## Energy Valuation Platform V1.1 sanity audit
 
 ```powershell
-python run_energy_valuation_v1_1.py
-python run_energy_valuation_v1_1.py --freeze
+python -m scripts.energy.research.valuation.v1_1
+python -m scripts.energy.research.valuation.v1_1 --freeze
 ```
 
 V1.1 preserves the immutable V1.0 benchmark and adds a fail-closed validation
@@ -490,8 +492,8 @@ passes.
 ## Energy V1.1 live-forward monitoring
 
 ```powershell
-python run_energy_valuation_v1_1_live.py --as-of 2026-09-02
-python run_energy_valuation_v1_1_live.py --as-of 2026-09-02 `
+python -m scripts.energy.operations.valuation_v1_1 --as-of 2026-09-02
+python -m scripts.energy.operations.valuation_v1_1 --as-of 2026-09-02 `
   --market-prices path/to/market_prices.csv `
   --settlements path/to/settlements.csv
 ```
@@ -522,8 +524,8 @@ forward settlements and a separate promotion review are complete.
 ## E&P V1.2 expectations-surface research
 
 ```powershell
-python run_ep_expectations_attribution.py
-python run_ep_expectations_surface_v1_2.py
+python -m scripts.energy.research.ep.expectations_attribution
+python -m scripts.energy.research.ep.v1_2_expectations_surface
 ```
 
 V1.2 research remains outside the frozen V1.1 package and verifies both Energy
@@ -548,7 +550,7 @@ python freeze_ep_expectations_surface_v1_2.py
 ## E&P V1.3 normalized unit-economics research
 
 ```powershell
-python run_ep_normalized_unit_economics_v1_3.py
+python -m scripts.energy.research.ep.v1_3_normalized_unit_economics
 ```
 
 V1.3 reads the frozen V1.2 surface but does not recalibrate it. Audited
@@ -568,7 +570,7 @@ locked at 0/20.
 ## E&P V1.4 standardized cost-scope research
 
 ```powershell
-python run_ep_cost_scope_v1_4.py
+python -m scripts.energy.research.ep.v1_4_cost_scope
 python freeze_ep_cost_scope_v1_4.py
 ```
 
@@ -589,7 +591,7 @@ promote production; those gates remain locked at 0/14 and 0/20 respectively.
 ## E&P V1.5 accounting-perimeter and reserve-coverage research
 
 ```powershell
-python run_ep_accounting_perimeter_v1_5.py
+python -m scripts.energy.research.ep.v1_5_accounting_perimeter
 python freeze_ep_accounting_perimeter_v1_5.py
 ```
 
@@ -611,7 +613,7 @@ perimeter are independently verified.
 ## E&P V1.6 coverage-completion and accounting-proof research
 
 ```powershell
-python run_ep_coverage_accounting_proof_v1_6.py
+python -m scripts.energy.research.ep.v1_6_coverage_accounting_proof
 ```
 
 V1.6 verifies the frozen V1.0 through V1.5 manifests before and after every
@@ -632,7 +634,7 @@ not alter frozen WACC or terminal economics, and production remains locked at
 ## E&P V1.6.1 accounting-proven frozen benchmark
 
 ```powershell
-python run_ep_accounting_proof_v1_6_1.py
+python -m scripts.energy.research.ep.v1_6_1_accounting_proof
 python freeze_ep_accounting_proof_v1_6_1.py
 ```
 
@@ -646,7 +648,7 @@ denominator-only diagnostic and is not a terminal ROIC input.
 ## E&P V1.7 organic company-economics research
 
 ```powershell
-python run_ep_organic_company_economics_v1_7.py
+python -m scripts.energy.research.ep.v1_7_organic_company_economics
 ```
 
 V1.7 preserves the frozen V1.6.1 manifest and reads event-specific evidence
@@ -663,7 +665,7 @@ locked.
 ## E&P V1.7.1 M&A numerator and purchase-accounting proof research
 
 ```powershell
-python run_ep_mna_numerator_purchase_accounting_v1_7_1.py
+python -m scripts.energy.research.ep.v1_7_1_mna_numerator
 ```
 
 V1.7.1 preserves both the frozen V1.6.1 benchmark and the V1.7 parent research
@@ -683,7 +685,7 @@ production.
 ## E&P V1.7.2 acquiree NOPAT and cycle-normalized cohort research
 
 ```powershell
-python run_ep_acquiree_nopat_cycle_cohorts_v1_7_2.py
+python -m scripts.energy.research.ep.v1_7_2_acquiree_nopat_cycle
 ```
 
 V1.7.2 preserves the V1.7.1 parent snapshot and adds an evidence-backed
@@ -704,7 +706,7 @@ production.
 ## E&P V1.7.3 normalization-attribution and NOPAT-triangulation research
 
 ```powershell
-python run_ep_normalization_attribution_nopat_triangulation_v1_7_3.py
+python -m scripts.energy.research.ep.v1_7_3_normalization_attribution
 ```
 
 V1.7.3 preserves the complete V1.7.2 parent snapshot. It predeclares a 10%
@@ -721,3 +723,157 @@ inference weight. A complete independent methodology cohort is distinct from a
 complete organic ROIC cohort. Missing disposed-asset operating contribution
 therefore keeps FANG organic validation locked even when its book-capital bridge
 is proven. Terminal economics, WACC, and production status remain unchanged.
+
+## E&P V1.7.4 cohort closure and organic ROIC validation research
+
+```powershell
+python -m scripts.energy.research.ep.v1_7_4_cohort_closure
+python freeze_ep_cohort_closure_v1_7_4.py
+```
+
+V1.7.4 preserves the complete V1.7.3 parent snapshot and closes only the two
+predeclared bottlenecks. FANG–Energen uses retrospective, disclosure-bounded
+2019 disposed-asset production and after-tax operating-contribution ranges to
+remove acquisition full-yearization and divestiture contamination. It does not
+label the bounded contribution as directly disclosed NOPAT.
+
+DVN–WPX retains the failed V1.7.3 25.48% route result and adds a separate
+validation route on consolidated continuing-operations scope. Noncontrolling
+interest and discontinued operations explain the material perimeter mismatch;
+the residual two-route gap is 0.61%, below the unchanged predeclared 10%
+tolerance. Two reported and independent full-cycle cohorts are complete, and
+two company organic ROIC research ranges are validated. These ranges are not
+called normal ROIC and cannot replace V1.1 terminal economics. WACC and
+production status remain unchanged.
+
+## E&P V1.8 through-cycle organic ROIC distribution research
+
+```powershell
+python -m scripts.energy.research.ep.v1_8_through_cycle_distribution
+```
+
+V1.8 verifies the frozen V1.7.4 manifest before and after execution and adds a
+deterministically selected gas-heavy clean-organic cohort. AR 2022-2024 is
+selected from AR/CNX/EQT/RRC using evidence coverage, transaction-perimeter,
+reserve-event, numerator-completeness, and positive-denominator rules without
+using ROIC outcomes. Direct AR E&P segment identities provide a complete
+reported cost scope for the gas cohort.
+
+The layer compares reported economic and full-cycle company ranges across
+oil-heavy FANG, mixed DVN, and gas-heavy AR; applies predeclared range-width and
+company-confidence weights; and performs leave-one-cohort-out robustness. The
+pooled output is descriptive research only, not a posterior distribution or a
+normal-ROIC estimate. V1.8 cannot replace terminal inputs, recalibrate WACC, or
+promote production. A freeze is allowed only when at least two company ranges
+are Strong/Usable and every leave-one-cohort-out P50 shift is at most 10
+percentage points.
+
+## E&P V1.9 sample-stability and uncertainty-decomposition research
+
+```powershell
+python -m scripts.energy.research.ep.v1_9_sample_stability
+```
+
+V1.9 preserves a 19-file V1.8 parent snapshot and the frozen V1.7.4 manifest.
+At a fixed 2025-03-01 research cutoff, it selects the latest eligible RRC clean
+window without reading ROIC outcomes. Revenue, total costs, and pretax income
+are re-read from SEC companyfacts; reserve and single-segment cells use a
+curated local SEC FNSD gold registry with exact stock-flow and accounting
+identity checks.
+
+The layer decomposes DVN and FANG range width through denominator, price, cost,
+tax, and accounting-perimeter channels. Signed offsets are retained so the
+components exactly reproduce each observed range. The fourth RRC cohort lifts
+Strong/Usable coverage to two and reduces the maximum leave-one-cohort-out P50
+shift below the unchanged 10 percentage-point gate. V1.9 is frozen as an
+immutable research benchmark with its own manifest. Normal ROIC, terminal
+replacement, WACC recalibration, and production promotion remain locked.
+
+```powershell
+python freeze_ep_sample_stability_v1_9.py
+```
+
+## Common multi-sector platform and Energy live-forward V2
+
+New sector work uses `equity_platform` for sector definitions, point-in-time
+SEC fact selection, DCF identities, immutable manifests, and append-only live
+evidence. Frozen Energy code remains untouched; adapters translate its outputs
+into the common snapshot contract.
+
+```powershell
+python -m scripts.energy.operations.live_forward_v2 --as-of 2026-09-03
+```
+
+Each snapshot stores `forecast_as_of`, `model_version`, `input_hash`, Revenue,
+EBIT, margin, FCFF, ROIC, Forward DCF, Reverse DCF, expectations gap, and the
+matching consensus vintage. Actual outcomes and error attribution append to a
+separate immutable store. A repeated identical run is idempotent; conflicting
+history fails closed. The runtime SQLite file is not a source artifact.
+
+## E&P V1.10 project-to-company ROIC waterfall
+
+```powershell
+python -m scripts.energy.research.ep.v1_10_project_to_company_roic
+```
+
+V1.10 reconciles project, reserve-replacement, and company organic ROIC without
+allocating ratio effects across cost components by assumption. Disclosed
+development, exploration, and acquisition costs are retained as composition
+evidence. Leasehold, shared infrastructure, corporate overhead, acquisition
+premium, maintenance/replacement timing, and impairment/timing remain an
+explicit unexplained residual until independent data identify them. The layer
+does not estimate normal ROIC or alter terminal inputs.
+
+## Industrials Valuation Platform V1
+
+```powershell
+python -m scripts.industrials.valuation_v1
+```
+
+The first cross-sector slice uses CAT and the causal chain Orders/Backlog →
+Shipments → Revenue → Margin → Reinvestment → ROIC/FCFF → Valuation. SEC
+remaining performance obligation is admitted as an anchor only if an expanding
+walk-forward model has the predeclared sample and strictly beats prior-year
+Revenue on MASE. Otherwise the transparent naive baseline remains selected.
+Forward DCF preserves the growth/reinvestment/ROIC identity; Reverse DCF emits
+an explicit unbracketed status when market value has no solution in the
+predeclared growth domain. Production remains locked at 0/20.
+
+## HII V5.1 governance and V5.2 conditional valuation
+
+```powershell
+python -m scripts.industrials.valuation_v5_2_hii
+python -m scripts.industrials.freeze_hii_v5_2
+```
+
+V5.1 preserves frozen HII V5 while reclassifying the same-OOS minimum route as
+`BEST_TESTED_DIAGNOSTIC`; the predeclared equal blend is the clean prospective
+benchmark. It also freezes the three-company A&D aggregate Revenue replication
+as a research hypothesis, explicitly not an industry law or cross-regime test.
+
+V5.2 joins HII 10-K/10-Q XBRL, SEC IR HTML guidance, as-released BLS vintages,
+backlog, three analyst-consensus providers, market prices, Treasury yields, and
+weekly A&D peer returns. It restores the quarterly working-capital chain,
+reconciles the full FCFF identity, and runs conditional DCF, Reverse DCF, and a
+terminal-margin/WACC expectations surface. Terminal and production authority
+remain locked; PDF parsing remains disabled.
+
+## Industrials Valuation Platform V1.1 — CAT semantic/SOTP audit
+
+```powershell
+python -m scripts.industrials.valuation_v1_1
+```
+
+V1.1 retires CAT's standardized remaining-performance-obligation concept as a
+backlog anchor and directly parses firm order backlog plus the portion not
+expected to be filled in the following year from official CAT 10-K filings.
+The resulting next-12-month conversion bridge remains locked until it has the
+predeclared out-of-sample evidence.
+
+The valuation separates MP&E from Financial Products. MP&E DCF subtracts only
+MP&E debt and adds only MP&E cash; Financial Products funding debt remains in
+that business and its equity is valued separately using disclosed book equity,
+normalized ROE, credit losses, finance receivables, funding-cost diagnostics,
+and a residual-income/P-B identity. The SOTP gap and reverse DCF are research
+diagnostics rather than mispricing claims. Terminal inputs and production stay
+locked at 0/20.

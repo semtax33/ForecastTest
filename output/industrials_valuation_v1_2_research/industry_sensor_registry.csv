@@ -1,0 +1,60 @@
+sector,subindustry,sensor_id,source,dataset,raw_series,pqci_dimension,economic_role,lead_months,grade,direction,weight,target,transformation,availability_status,forecast_use,grade_weight,model_weight
+Energy,oil_ep,wti_price,EIA,wti_spot_price,WTI,P,COINCIDENT,0,A,1,0.5,realized_price,quarter_average_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.5
+Energy,oil_ep,crude_production,EIA,crude_oil_production,US_CRUDE,Q,COINCIDENT,0,A,1,0.5,production,quarter_average_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.5
+Energy,oil_ep,rig_count,FRED,baker_hughes_rig_count,RIGS,Q,LEADING,3,B,1,0.3,production,three_month_momentum,SOURCE_AVAILABLE_NOT_INGESTED,FORECAST,0.8,0.24
+Energy,refining,refinery_utilization,EIA,refinery_utilization,US_REFINERY_UTILIZATION,Q,COINCIDENT,0,A,1,0.5,throughput,quarter_average_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.5
+Energy,refining,crack_spread,EIA,petroleum_prices,GASOLINE_MINUS_WTI,P,COINCIDENT,0,B,1,0.5,refining_margin,quarter_average_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.4
+Utilities,electric_utilities,electricity_sales,EIA,electricity_sales,RETAIL_MWH,Q,COINCIDENT,0,A,1,0.5,revenue,quarter_average_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.5
+Utilities,electric_utilities,electricity_price,EIA,electricity_price,RETAIL_PRICE_KWH,P,COINCIDENT,0,A,1,0.5,revenue,quarter_average_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.5
+Financials,banks,loan_growth,FDIC,quarterly_bank_financials,LNLSNET,Q,COINCIDENT,0,A,1,0.3,net_interest_income,quarter_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.3
+Financials,banks,net_interest_margin,FDIC,quarterly_bank_financials,NIMY,P,COINCIDENT,0,A,1,0.4,net_interest_income,level_change,AVAILABLE_ARCANA,NOWCAST,1.0,0.4
+Financials,banks,credit_cost,FDIC,quarterly_bank_financials,NTLNLSR,C,LAGGING,0,A,-1,0.3,roe,quarter_yoy,AVAILABLE_ARCANA,CALIBRATION_ONLY,1.0,0.3
+Financials,credit_cards,retail_sales,Census,advance_retail_sales,TOTAL_RETAIL,Q,COINCIDENT,0,B,1,0.5,purchase_volume,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.8,0.4
+Financials,credit_cards,unemployment,BLS,price_labor_activity,LNS14000000,C,LEADING,3,B,-1,0.5,credit_loss,level_change,AVAILABLE_ARCANA,FORECAST,0.8,0.4
+Consumer Discretionary,homebuilders,building_permits,Census,residential_construction,PERMITS,Q,LEADING,6,A,1,0.3,closings,three_month_momentum,AVAILABLE_ARCANA,FORECAST,1.0,0.3
+Consumer Discretionary,homebuilders,housing_starts,Census,residential_construction,STARTS,Q,LEADING,3,A,1,0.3,closings,three_month_momentum,AVAILABLE_ARCANA,FORECAST,1.0,0.3
+Consumer Discretionary,homebuilders,new_home_sales,Census,new_residential_sales,SALES,Q,COINCIDENT,0,A,1,0.2,closings,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.2
+Consumer Discretionary,homebuilders,house_price,FHFA,hpi_master,US_HPI,P,COINCIDENT,0,A,1,0.2,asp,quarter_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.2
+Consumer Discretionary,autos,new_vehicle_price,BLS,price_labor_activity,CUUR0000SETA01,P,COINCIDENT,0,B,1,0.4,asp,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.8,0.32000000000000006
+Consumer Discretionary,autos,vehicle_shipments,Census,manufacturing_orders_shipments_inventories,36S:VS,Q,COINCIDENT,0,B,1,0.4,units,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.8,0.32000000000000006
+Consumer Discretionary,autos,vehicle_orders,Census,manufacturing_orders_shipments_inventories,36S:NO,Q,LEADING,3,B,1,0.2,units,three_month_momentum,AVAILABLE_ARCANA,FORECAST,0.8,0.16000000000000003
+Industrials,airlines,passenger_miles,BTS,form_41,RPM,Q,COINCIDENT,0,A,1,0.4,revenue,same_period_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,1.0,0.4
+Industrials,airlines,available_seat_miles,BTS,form_41,ASM,I,COINCIDENT,0,A,1,0.2,capacity,same_period_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,1.0,0.2
+Industrials,airlines,average_fare,BTS,form_41,AVERAGE_FARE,P,COINCIDENT,0,A,1,0.2,yield,same_period_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,1.0,0.2
+Industrials,airlines,jet_fuel,EIA,petroleum_prices,JET_FUEL,C,COINCIDENT,0,A,-1,0.2,margin,quarter_average_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,1.0,0.2
+Industrials,freight,freight_tsi,BTS,transportation_services_index,FREIGHT_TSI,Q,COINCIDENT,0,A,1,0.5,shipments,three_month_momentum,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,1.0,0.5
+Industrials,freight,diesel_price,EIA,petroleum_prices,DIESEL,C,COINCIDENT,0,A,-1,0.25,margin,quarter_average_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,1.0,0.25
+Industrials,freight,freight_rate,BLS,producer_price_index,TRUCKING_PPI,P,COINCIDENT,0,B,1,0.25,yield,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.2
+Industrials,machinery,new_orders,Census,manufacturing_orders_shipments_inventories,33C|33D|33S:NO,Q,LEADING,6,B,1,0.25,revenue_growth,ytd_yoy,AVAILABLE_ARCANA,FORECAST,0.8,0.2
+Industrials,machinery,unfilled_orders,Census,manufacturing_orders_shipments_inventories,33C|33D|33S:UO,Q,LEADING,6,B,1,0.25,revenue_growth,latest_yoy,AVAILABLE_ARCANA,FORECAST,0.8,0.2
+Industrials,machinery,shipments,Census,manufacturing_orders_shipments_inventories,33C|33D|33S:VS,Q,COINCIDENT,0,B,1,0.5,revenue_growth,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.8,0.4
+Industrials,machinery,inventory,Census,manufacturing_orders_shipments_inventories,33C|33D|33S:TI,I,LEADING,3,B,1,1.0,reinvestment,ytd_yoy,AVAILABLE_ARCANA,FORECAST,0.8,0.8
+Industrials,machinery,producer_price,BLS,price_labor_activity,WPUFD4,P,COINCIDENT,0,C,1,0.4,cost_growth,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.5,0.2
+Industrials,machinery,wage_cost,BLS,price_labor_activity,CES0500000003,C,COINCIDENT,0,C,1,0.6,cost_growth,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.5,0.3
+Consumer Discretionary,restaurants,food_service_sales,Census,advance_retail_sales,FOOD_SERVICES,Q,COINCIDENT,0,A,1,0.5,traffic,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.5
+Consumer Discretionary,restaurants,food_away_price,BLS,consumer_price_index,FOOD_AWAY,P,COINCIDENT,0,B,1,0.2,ticket,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.16000000000000003
+Consumer Discretionary,restaurants,food_input_price,BLS,producer_price_index,FOOD_INPUT,C,COINCIDENT,0,B,-1,0.15,margin,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.12
+Consumer Discretionary,restaurants,wage_cost,BLS,price_labor_activity,CES0500000003,C,LEADING,1,C,-1,0.15,margin,ytd_yoy,AVAILABLE_ARCANA,FORECAST,0.5,0.075
+Consumer Staples,food_beverage,grocery_sales,Census,advance_retail_sales,GROCERY,Q,COINCIDENT,0,A,1,0.4,volume,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.4
+Consumer Staples,food_beverage,food_price,BLS,price_labor_activity,CUUR0000SAF11,P,COINCIDENT,0,B,1,0.3,price_mix,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.8,0.24
+Consumer Staples,food_beverage,grain_cost,USDA,nass,corn|wheat|soybeans,C,LEADING,3,B,-1,0.3,margin,three_month_momentum,AVAILABLE_ARCANA,FORECAST,0.8,0.24
+Consumer Discretionary,retail_apparel,retail_sales,Census,advance_retail_sales,CLOTHING,Q,COINCIDENT,0,A,1,0.45,revenue,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.45
+Consumer Discretionary,retail_apparel,apparel_price,BLS,consumer_price_index,APPAREL,P,COINCIDENT,0,B,1,0.25,revenue,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.2
+Consumer Discretionary,retail_apparel,inventory_sales,Census,manufacturing_trade_inventories_sales,RETAIL_INVENTORY_SALES,I,LEADING,2,B,-1,0.3,margin,level_change,AVAILABLE_ARCANA,FORECAST,0.8,0.24
+Information Technology,semiconductors,semiconductor_orders,Census,manufacturing_orders_shipments_inventories,34X:NO,Q,LEADING,3,B,1,0.3,revenue,three_month_momentum,AVAILABLE_ARCANA,FORECAST,0.8,0.24
+Information Technology,semiconductors,semiconductor_shipments,Census,manufacturing_orders_shipments_inventories,34X:VS,Q,COINCIDENT,0,B,1,0.4,revenue,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.8,0.32000000000000006
+Information Technology,semiconductors,semiconductor_price,BLS,producer_price_index,SEMICONDUCTOR_PPI,P,COINCIDENT,0,B,1,0.3,asp,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.24
+Communication Services,telecom,broadband_subscriptions,FCC,broadband_data_collection,SUBSCRIBERS,Q,COINCIDENT,0,B,1,0.5,subscribers,half_year_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.4
+Communication Services,telecom,telephone_internet_price,BLS,consumer_price_index,TELEPHONE_INTERNET,P,COINCIDENT,0,B,1,0.5,arpu,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.4
+Health Care,pharma,medicare_drug_spending,CMS,drug_spending,PRODUCT_SPEND,Q,COINCIDENT,0,B,1,0.5,revenue,quarter_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.4
+Health Care,pharma,prescription_price,BLS,consumer_price_index,PRESCRIPTION_DRUGS,P,COINCIDENT,0,B,1,0.3,net_price,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.24
+Health Care,pharma,fda_approvals,FDA,drug_approvals,APPROVALS,I,LEADING,12,B,1,0.2,pipeline_value,event_count,SOURCE_AVAILABLE_NOT_INGESTED,FORECAST,0.8,0.16000000000000003
+Health Care,hospitals,procedure_volume,CMS,utilization,PROCEDURES,Q,COINCIDENT,0,B,1,0.5,revenue,quarter_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.4
+Health Care,hospitals,hospital_price,BLS,consumer_price_index,HOSPITAL_SERVICES,P,COINCIDENT,0,B,1,0.25,revenue,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.2
+Health Care,hospitals,healthcare_wage,BLS,current_employment_statistics,HEALTHCARE_WAGE,C,LEADING,1,B,-1,0.25,margin,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,FORECAST,0.8,0.2
+Real Estate,residential_reit,rent_price,BLS,price_labor_activity,CUUR0000SAH1,P,COINCIDENT,0,B,1,0.5,revenue,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.8,0.4
+Real Estate,residential_reit,housing_supply,Census,residential_construction,COMPLETIONS,I,LEADING,6,B,-1,0.25,occupancy,three_month_momentum,AVAILABLE_ARCANA,FORECAST,0.8,0.2
+Real Estate,residential_reit,house_price,FHFA,hpi_master,US_HPI,P,LAGGING,0,B,1,0.25,nav,quarter_yoy,AVAILABLE_ARCANA,CALIBRATION_ONLY,0.8,0.2
+Materials,chemicals,chemical_shipments,Census,manufacturing_orders_shipments_inventories,22S:VS,Q,COINCIDENT,0,B,1,0.4,revenue,ytd_yoy,AVAILABLE_ARCANA,NOWCAST,0.8,0.32000000000000006
+Materials,chemicals,chemical_price,BLS,producer_price_index,CHEMICAL_PPI,P,COINCIDENT,0,B,1,0.3,revenue,ytd_yoy,SOURCE_AVAILABLE_NOT_INGESTED,NOWCAST,0.8,0.24
+Materials,chemicals,natural_gas,EIA,henry_hub_spot_price,HENRY_HUB,C,COINCIDENT,0,A,-1,0.3,margin,quarter_average_yoy,AVAILABLE_ARCANA,NOWCAST,1.0,0.3

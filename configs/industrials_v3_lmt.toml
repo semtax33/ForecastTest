@@ -1,0 +1,15 @@
+version = "INDUSTRIALS_PLATFORM_V3_LMT_AEROSPACE_DEFENSE_RESEARCH"
+as_of_date = "2026-09-03"
+ticker = "LMT"
+ir_root = "D:/Programming/python_example/Arcana/data-lake/bronze/sec/fillings/ir/LMT"
+sec_manifest = "data-lake/bronze/industrials/v3/sec/lmt/manifest.json"
+bls_archive_manifest = "data-lake/bronze/industrials/v1_5/bls/archive_manifest.json"
+bls_sensor_map = "configs/industrials_v3_lmt_bls_sensors.csv"
+validation_start_period = "2025Q1"
+minimum_training_quarters = 8
+ridge_penalty = 8.0
+expected_oos_quarters_per_segment = 6
+minimum_research_champions = 2
+minimum_conformal_calibration_observations = 10
+production_minimum_live_observations = 20
+

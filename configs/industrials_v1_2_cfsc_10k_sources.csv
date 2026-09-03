@@ -1,0 +1,6 @@
+fiscal_year,filing_date,accession,primary_document,source_url,local_path
+2021,2022-02-16,0000764764-22-000029,cfsc-20211231.htm,https://www.sec.gov/Archives/edgar/data/764764/000076476422000029/cfsc-20211231.htm,data-lake/bronze/snapshots/industrials_cfsc_10k/fiscal_year=2021/cfsc-20211231.htm
+2022,2023-02-15,0000764764-23-000016,cfsc-20221231.htm,https://www.sec.gov/Archives/edgar/data/764764/000076476423000016/cfsc-20221231.htm,data-lake/bronze/snapshots/industrials_cfsc_10k/fiscal_year=2022/cfsc-20221231.htm
+2023,2024-02-16,0000764764-24-000011,cfsc-20231231.htm,https://www.sec.gov/Archives/edgar/data/764764/000076476424000011/cfsc-20231231.htm,data-lake/bronze/snapshots/industrials_cfsc_10k/fiscal_year=2023/cfsc-20231231.htm
+2024,2025-02-14,0000764764-25-000006,cfsc-20241231.htm,https://www.sec.gov/Archives/edgar/data/764764/000076476425000006/cfsc-20241231.htm,data-lake/bronze/snapshots/industrials_cfsc_10k/fiscal_year=2024/cfsc-20241231.htm
+2025,2026-02-13,0000764764-26-000007,cfsc-20251231.htm,https://www.sec.gov/Archives/edgar/data/764764/000076476426000007/cfsc-20251231.htm,data-lake/bronze/snapshots/industrials_cfsc_10k/fiscal_year=2025/cfsc-20251231.htm

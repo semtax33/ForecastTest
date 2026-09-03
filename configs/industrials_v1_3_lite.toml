@@ -1,0 +1,18 @@
+version = "INDUSTRIALS_VALUATION_PLATFORM_V1_3_LITE_CAPTURE_CALIBRATION"
+as_of_date = "2026-09-03"
+parent_v1_2_manifest = "benchmarks/industrials_v1_2_architecture/manifest.json"
+cat_10k_source_catalog = "configs/industrials_v1_1_cat_10k_sources.csv"
+arcana_ir_relative_path = "data-lake/bronze/sec/fillings/ir/CAT"
+minimum_training_quarters = 8
+minimum_validation_quarters = 3
+capture_prior_strength = 8.0
+cost_driver_industry_weight = 0.65
+cost_driver_inflation_weight = 0.35
+prediction_interval_z = 1.6448536269514722
+terminal_growth_pct = 2.0
+market_match_tolerance_pct = 5.0
+cap_duration_years = [3, 5, 7, 10, 15, 20]
+cap_margin_grid_pct = [17.011566114410755, 20.0, 23.0, 26.0]
+cap_roic_grid_pct = [30.0, 49.37189223562976, 75.0, 100.0]
+production_minimum_live_observations = 20
+

@@ -1,0 +1,2 @@
+benchmark,companies,aggregate_pass,aggregate_total,segment_pass,segment_total,fixed_oos_window,cross_company_replication,cross_regime_replication,status,terminal_input_allowed,production_promoted,research_freeze_eligible
+AEROSPACE_DEFENSE_AGGREGATE_REVENUE_REPLICATION_V1,3,3,3,6,10,2025Q1-2026Q2,True,False,REPLICATED_RESEARCH_HYPOTHESIS_NOT_INDUSTRY_LAW,False,False,True

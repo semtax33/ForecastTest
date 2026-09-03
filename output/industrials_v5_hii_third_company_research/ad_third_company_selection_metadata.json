@@ -1,0 +1,8 @@
+{
+  "selected_ticker": "HII",
+  "selection_rule": "MAX_UNAMBIGUOUS_QUARTERLY_IR_THEN_CONTRACT_EVIDENCE_THEN_TICKER",
+  "selection_outcome_blind": true,
+  "performance_fields_read": [],
+  "pdf_parsing_used": false,
+  "assertion": "COMPANY_SELECTED_WITHOUT_FORECAST_OR_VALUATION_OUTCOMES"
+}

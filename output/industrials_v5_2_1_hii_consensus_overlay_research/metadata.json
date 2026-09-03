@@ -1,0 +1,14 @@
+{
+  "version": "INDUSTRIALS_V5_2_1_HII_CONSENSUS_EXPECTATIONS_OVERLAY",
+  "generated_at_utc": "2026-09-03T09:38:28.917881+00:00",
+  "parent_hii_v52_manifest_sha256": "e4f76ba608b319c9396e501eb049fce1f1ba23035654659933a08d9b75fc3666",
+  "required_providers": [
+    "ALPHA_VANTAGE",
+    "FMP",
+    "FINNWORLDS"
+  ],
+  "additional_provider": "YAHOO",
+  "consensus_used_to_fit_dcf": false,
+  "terminal_authority": false,
+  "production_promoted": false
+}

@@ -1,0 +1,16 @@
+segment,role,series_count,first_period,latest_period,full_quarter_observations
+construction,component,1,2021Q1,2026Q2,22
+construction,freight,1,2021Q1,2026Q2,22
+construction,labor,1,2021Q1,2026Q2,22
+construction,material,2,2021Q1,2026Q2,22
+construction,output_price,1,2021Q1,2026Q2,22
+power_energy,component,1,2021Q1,2026Q2,22
+power_energy,freight,2,2021Q1,2026Q2,22
+power_energy,labor,1,2021Q1,2026Q2,22
+power_energy,material,2,2021Q1,2026Q2,22
+power_energy,output_price,3,2021Q1,2026Q2,22
+resource,component,1,2021Q1,2026Q2,22
+resource,freight,2,2021Q1,2026Q2,22
+resource,labor,1,2021Q1,2026Q2,22
+resource,material,2,2021Q1,2026Q2,22
+resource,output_price,1,2021Q1,2026Q2,22

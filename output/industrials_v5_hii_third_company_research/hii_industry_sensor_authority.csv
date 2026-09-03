@@ -1,0 +1,13 @@
+sensor_id,series_id,series_title,role,segment,weight,route_note,source,historical_pit_eligible,model_input_allowed,authority,dedicated_shipbuilding_output_series
+fabricated_metal_output_proxy,WPU107,Fabricated structural metal products PPI,output_price,ingalls_shipbuilding,1.0,SHIPBUILDING_OUTPUT_PRICE_PROXY_NOT_DEDICATED_SERIES,BLS,True,True,MODEL_INPUT_PROXY,False
+nonferrous_input,WPU102,Nonferrous metals PPI,input_cost,ingalls_shipbuilding,0.5,SHIPBUILDING_INPUT_COST,BLS,True,True,MODEL_INPUT_PROXY,False
+fabricated_metal_input,WPU107,Fabricated structural metal products PPI,input_cost,ingalls_shipbuilding,0.3,SHIPBUILDING_INPUT_COST,BLS,True,True,MODEL_INPUT_PROXY,False
+electrical_equipment_input,WPU117,Electrical machinery and equipment PPI,input_cost,ingalls_shipbuilding,0.2,SHIPBUILDING_INPUT_COST,BLS,True,True,MODEL_INPUT_PROXY,False
+fabricated_metal_output_proxy,WPU107,Fabricated structural metal products PPI,output_price,newport_news_shipbuilding,1.0,SHIPBUILDING_OUTPUT_PRICE_PROXY_NOT_DEDICATED_SERIES,BLS,True,True,MODEL_INPUT_PROXY,False
+nonferrous_input,WPU102,Nonferrous metals PPI,input_cost,newport_news_shipbuilding,0.5,SHIPBUILDING_INPUT_COST,BLS,True,True,MODEL_INPUT_PROXY,False
+fabricated_metal_input,WPU107,Fabricated structural metal products PPI,input_cost,newport_news_shipbuilding,0.3,SHIPBUILDING_INPUT_COST,BLS,True,True,MODEL_INPUT_PROXY,False
+electrical_equipment_input,WPU117,Electrical machinery and equipment PPI,input_cost,newport_news_shipbuilding,0.2,SHIPBUILDING_INPUT_COST,BLS,True,True,MODEL_INPUT_PROXY,False
+electrical_equipment_output_proxy,WPU117,Electrical machinery and equipment PPI,output_price,mission_technologies,1.0,MISSION_TECHNOLOGIES_OUTPUT_PRICE_PROXY,BLS,True,True,MODEL_INPUT_PROXY,False
+nonferrous_input,WPU102,Nonferrous metals PPI,input_cost,mission_technologies,0.2,MISSION_TECHNOLOGIES_INPUT_COST,BLS,True,True,MODEL_INPUT_PROXY,False
+fabricated_metal_input,WPU107,Fabricated structural metal products PPI,input_cost,mission_technologies,0.2,MISSION_TECHNOLOGIES_INPUT_COST,BLS,True,True,MODEL_INPUT_PROXY,False
+electrical_equipment_input,WPU117,Electrical machinery and equipment PPI,input_cost,mission_technologies,0.6,MISSION_TECHNOLOGIES_INPUT_COST,BLS,True,True,MODEL_INPUT_PROXY,False

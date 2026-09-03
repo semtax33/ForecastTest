@@ -1,0 +1,2 @@
+sensor_count,leading_sensor_count,pqci_dimensions,all_sources_available_at_cutoff,historical_release_date_coverage,current_research_nowcast_allowed,historical_pit_backtest_allowed,terminal_replacement_allowed,production_promoted,live_matched_observations
+6,3,C|I|P|Q,True,False,True,False,False,False,0/20

@@ -1,0 +1,17 @@
+version = "INDUSTRIALS_PLATFORM_V2_CMI_PORTABILITY_RESEARCH"
+as_of_date = "2026-09-03"
+ticker = "CMI"
+ir_root = "D:/Programming/python_example/Arcana/data-lake/bronze/sec/fillings/ir/CMI"
+sec_manifest = "data-lake/bronze/industrials/v2/sec/cmi/manifest.json"
+bls_archive_manifest = "data-lake/bronze/industrials/v1_5/bls/archive_manifest.json"
+bls_sensor_map = "configs/industrials_v2_cmi_bls_sensors.csv"
+industry_sensor_registry = "configs/industry_sensor_registry.csv"
+validation_start_period = "2025Q1"
+minimum_training_quarters = 8
+ridge_penalty = 8.0
+expected_oos_quarters_per_segment = 6
+minimum_research_champions = 3
+maximum_worst_champion_mase = 1.0
+minimum_conformal_calibration_observations = 10
+production_minimum_live_observations = 20
+

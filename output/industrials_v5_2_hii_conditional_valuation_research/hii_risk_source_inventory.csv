@@ -1,0 +1,3 @@
+source,as_of,value,unit,source_path,source_sha256
+FRED_DGS10,2026-07-31,4.75,PERCENT,D:/Programming/python_example/Arcana/data-lake/bronze/fred/rates/us_dgs10.csv,46423d3e4feb7d47c20f436648ea2817cc300ccc713e979fc7136187ab225e10
+CONFIGURED_US_EQUITY_RISK_PREMIUM,2026-07-31,4.5,PERCENT,configs/industrials_v5_2_hii_valuation.toml,RECORDED_IN_FROZEN_MANIFEST

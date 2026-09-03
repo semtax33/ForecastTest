@@ -1,0 +1,4 @@
+held_out_ticker,held_out_group,remaining_cohorts,remaining_groups,full_midpoint_p50_pct,loco_midpoint_p25_pct,loco_midpoint_p50_pct,loco_midpoint_p75_pct,p50_shift_pct_points,abs_p50_shift_pct_points,predeclared_max_abs_p50_shift_pct_points,loco_p50_stable,terminal_input_allowed,research_only,all_loco_p50_stable,max_abs_p50_shift_pct_points
+AR,gas_heavy,2,2,-1.0909070478200262,1.6475092608256006,10.105181449583243,18.562853638340886,11.19608849740327,11.19608849740327,10.0,False,False,True,False,11.19608849740327
+DVN,mixed,2,2,-1.0909070478200262,-2.916517920250444,-2.0037124840352356,0.2783011065027865,-0.9128054362152094,0.9128054362152094,10.0,True,False,True,False,11.19608849740327
+FANG,oil_heavy,2,2,-1.0909070478200262,-2.916517920250444,1.3793563914678217,12.119042170763487,2.470263439287848,2.470263439287848,10.0,True,False,True,False,11.19608849740327

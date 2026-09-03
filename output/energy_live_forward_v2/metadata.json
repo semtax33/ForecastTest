@@ -1,0 +1,25 @@
+{
+  "version": "ENERGY_LIVE_FORWARD_V2",
+  "as_of_date": "2026-09-03",
+  "append_only": true,
+  "snapshot_count": 26,
+  "matched_observations": 0,
+  "minimum_production_observations": 20,
+  "production_promoted": false,
+  "v1_1_manifest_sha256": "671b5b5af4d8ac3de7c7098cb6238eab687124724f41146fad57625b8d092601",
+  "v1_9_manifest_sha256": "6eb255b7cf950f4bc3f46c30c432b2c591818ba85d0fff924f23837989613d02",
+  "counts": {
+    "snapshots": {
+      "INSERTED": 26,
+      "UNCHANGED": 0
+    },
+    "consensus": {
+      "INSERTED": 3158,
+      "UNCHANGED": 0
+    },
+    "actuals": {
+      "INSERTED": 0,
+      "UNCHANGED": 0
+    }
+  }
+}

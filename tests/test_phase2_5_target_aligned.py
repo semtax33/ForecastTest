@@ -6,6 +6,7 @@ import shutil
 
 import pandas as pd
 
+from equity_platform.data_catalog import DATA
 from energy_nowcast.core.company_kpi import select_company_kpis_for_targets
 from energy_nowcast.research.phase25.benchmark import (
     verify_refining_kpi_benchmark,
@@ -43,7 +44,7 @@ def test_p21_refining_benchmark_fails_closed_on_byte_change(tmp_path: Path) -> N
 
 
 def test_target_aligned_macro_snapshot_is_point_in_time() -> None:
-    macro = load_macro_snapshot(ROOT / "data-lake" / "v3_6_macro_snapshot")
+    macro = load_macro_snapshot(DATA.macro_snapshot)
     required = {
         "EIA_TOTAL_GASOLINE_INVENTORY",
         "EIA_DISTILLATE_INVENTORY",

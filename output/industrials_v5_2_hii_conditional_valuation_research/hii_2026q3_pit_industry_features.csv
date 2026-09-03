@@ -1,0 +1,4 @@
+period,segment,forecast_as_of,actual_available_at,feature_reference_quarter,feature_lag_quarters,output_price_yoy_pct,dedicated_cost_yoy_pct,ppi_series_coverage_pct,historical_pit_eligible
+2026Q3,ingalls_shipbuilding,2026-07-31,NOT_YET_AVAILABLE,2026Q2,1,6.513670731685977,23.649969309409755,100.0,True
+2026Q3,mission_technologies,2026-07-31,NOT_YET_AVAILABLE,2026Q2,1,12.855846833578795,16.666121735759752,100.0,True
+2026Q3,newport_news_shipbuilding,2026-07-31,NOT_YET_AVAILABLE,2026Q2,1,6.513670731685977,23.649969309409755,100.0,True

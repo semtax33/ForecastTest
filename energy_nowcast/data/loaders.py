@@ -5,6 +5,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from equity_platform.data_catalog import DataCatalog
+
 from ..config import ProjectPaths
 
 
@@ -33,33 +35,36 @@ def _read_csv(path: Path, required: tuple[str, ...] = ()) -> pd.DataFrame:
 def load_legacy_artifacts(paths: ProjectPaths) -> LegacyArtifacts:
     lake = paths.data_lake
     assert lake is not None
+    catalog = DataCatalog(lake)
+    v33 = catalog.v33
+    v21 = catalog.v21
     validation = _read_csv(
-        lake / "energy_v3_3_validation.csv",
+        v33 / "energy_v3_3_validation.csv",
         ("quarter", "ticker", "actual_log_yoy", "blend_log_yoy"),
     )
     nowcast = _read_csv(
-        lake / "energy_v3_3_nowcast.csv",
+        v33 / "energy_v3_3_nowcast.csv",
         ("ticker", "nowcast_quarter", "predicted_revenue_B"),
     )
-    metrics = _read_csv(lake / "energy_v3_3_metrics.csv")
+    metrics = _read_csv(v33 / "energy_v3_3_metrics.csv")
     weights = _read_csv(
-        lake / "energy_v3_3_blend_weights.csv",
+        v33 / "energy_v3_3_blend_weights.csv",
         ("ticker", "base_structural_weight", "guardrail"),
     )
     panel = _read_csv(
-        lake / "energy_v3_3_structural_panel.csv",
+        v33 / "energy_v3_3_structural_panel.csv",
         ("ticker", "quarter", "revenue"),
     )
     component_panel = _read_csv(
-        lake / "energy_v3_3_eog_component_panel.csv",
+        v33 / "energy_v3_3_eog_component_panel.csv",
         ("quarter", "current_total_driver", "component_structural_log_yoy"),
     )
     prices = _read_csv(
-        lake / "energy_v3_3_price_quarters.csv",
+        v33 / "energy_v3_3_price_quarters.csv",
         ("quarter", "wti_price", "henry_price", "propane_price_bbl"),
     )
     v21_validation = _read_csv(
-        lake / "energy_v2_1_validation.csv",
+        v21 / "energy_v2_1_validation.csv",
         ("quarter", "ticker", "actual", "predicted", "naive"),
     )
     return LegacyArtifacts(

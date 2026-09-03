@@ -1,0 +1,2 @@
+ticker,market_equity_value_usd,less_financial_products_equity_value_usd,add_mpe_debt_usd,less_mpe_cash_usd,market_target_mpe_enterprise_value_usd,reverse_dcf_status,market_implied_near_term_growth_pct,solver_residual_usd,search_lower_pct,search_upper_pct,boundary_reported_as_solution
+CAT,385211393522.354,8970834187.35831,10990000000.0,9333000000.0,377897559334.99567,UNBRACKETED_NO_SOLUTION_IN_DOMAIN,,234022556133.65402,-10.0,15.0,False

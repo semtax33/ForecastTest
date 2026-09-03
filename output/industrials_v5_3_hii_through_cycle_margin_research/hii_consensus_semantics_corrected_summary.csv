@@ -1,0 +1,2 @@
+provider_average_target_median,provider_count,provider_names,reported_provider_analyst_counts,independent_analyst_count,analyst_counts_may_overlap,analyst_counts_can_be_summed,target_used_to_fit_dcf,authority
+361.79544999999996,2,FINNWORLDS|YAHOO,FINNWORLDS:6|YAHOO:11,,True,False,False,PROVIDER_LEVEL_EXPECTATIONS_DIAGNOSTIC_ONLY

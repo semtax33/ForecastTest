@@ -55,7 +55,7 @@ class ModelConfig:
     promotion_tolerance_log_points: float = 0.0
     validation_regression_tolerance_pct: float = 2.0
     arcana_consensus_dir: str = "../Arcana/data-lake/bronze/consensus"
-    consensus_file: str = "analyst_consensus.csv"
+    consensus_file: str = "bronze/manual_consensus/analyst_consensus.csv"
     minimum_consensus_observations: int = 20
     metadata: dict[str, Any] = field(default_factory=dict)
 

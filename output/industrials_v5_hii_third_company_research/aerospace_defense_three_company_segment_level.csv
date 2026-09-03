@@ -1,0 +1,11 @@
+company,segment,revenue_mase,revenue_champion_eligible,margin_mase,margin_champion_eligible,joint_champion
+LMT,aeronautics,1.0678595591180708,False,0.2745055806096747,True,False
+LMT,missiles_fire_control,0.3132342756063001,True,0.042353365190104,True,True
+LMT,rotary_mission_systems,1.4517688961424484,False,0.1039068338452816,True,False
+LMT,space,0.6611087424008795,True,1.0293042449306269,False,False
+NOC,aeronautics_systems,0.0610890006766264,False,20.021621621623268,False,False
+NOC,mission_systems,0.6151087239906403,True,0.3776068347036638,True,True
+NOC,space_systems,1.8478574835768284,False,,False,False
+HII,ingalls_shipbuilding,0.7749879951048645,True,0.8755867856161723,True,True
+HII,mission_technologies,0.9164120777227892,True,0.7208396801987026,True,True
+HII,newport_news_shipbuilding,0.8983255710992581,True,0.4267425284557132,True,True

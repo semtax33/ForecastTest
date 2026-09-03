@@ -1,0 +1,2 @@
+ticker,market_date,market_price,shares_outstanding,equity_market_value_usd,total_debt_usd,cash_usd,market_enterprise_value_usd,beta,beta_observations,risk_free_rate_pct,risk_free_date,equity_risk_premium_pct,cost_of_equity_pct,cost_of_debt_pct,cost_of_debt_method,wacc_pct,market_data_point_in_time
+CAT,2026-08-21,827.9000244140625,465287332.0,385211393522.354,30696000000.0,9980000000.0,405927393522.354,1.106771141908494,104,4.69,2026-08-20,4.5,9.670470138588223,6.69,RISK_FREE_PLUS_PREDECLARED_CREDIT_SPREAD_FALLBACK,9.332074450283809,True

@@ -8,6 +8,8 @@ from typing import Iterable
 
 import numpy as np
 import pandas as pd
+
+from equity_platform.data_catalog import DataCatalog
 from lxml import html as lxml_html
 
 from .taxonomy import all_tickers, group_for_ticker
@@ -525,8 +527,11 @@ def _extract_guidance_from_file(
 
 
 def _legacy_actuals(data_lake: Path) -> pd.DataFrame:
+    catalog = DataCatalog(data_lake)
+    v327 = catalog.model("v3_2_7")
+    v321 = catalog.model("v3_2_1")
     rows: list[pd.DataFrame] = []
-    eog = pd.read_csv(data_lake / "energy_v3_2_7_actual_EOG.csv")
+    eog = pd.read_csv(v327 / "energy_v3_2_7_actual_EOG.csv")
     rows.append(pd.DataFrame({
         "ticker": "EOG", "quarter": eog["quarter"].astype(str),
         "oil_mbpd": eog["oil_production"], "ngl_mbpd": eog["ngl_production"],
@@ -534,12 +539,12 @@ def _legacy_actuals(data_lake: Path) -> pd.DataFrame:
         "raw_total_value": eog["total_production"], "raw_total_unit": "MBOE/D",
         "normalized_total_unit": "MBOE/D", "conversion_rule": "IDENTITY_VALIDATED",
         "filing_date": pd.to_datetime(eog["release_date"]), "source_url": eog["source_url"],
-        "source_path": str(data_lake / "energy_v3_2_7_actual_EOG.csv"),
+        "source_path": str(v327 / "energy_v3_2_7_actual_EOG.csv"),
         "quality_score": eog["data_quality_score"], "mna_flag": False,
         "adapter": "EOG_VALIDATED_COMPONENT_V327",
     }))
     for ticker in ("COP", "FANG", "DVN"):
-        path = data_lake / f"energy_v3_2_1_actual_selected_{ticker}.csv"
+        path = v321 / f"energy_v3_2_1_actual_selected_{ticker}.csv"
         source = pd.read_csv(path)
         rows.append(pd.DataFrame({
             "ticker": ticker, "quarter": source["quarter"].astype(str),
@@ -555,8 +560,11 @@ def _legacy_actuals(data_lake: Path) -> pd.DataFrame:
 
 
 def _legacy_guidance(data_lake: Path) -> pd.DataFrame:
+    catalog = DataCatalog(data_lake)
+    v327 = catalog.model("v3_2_7")
+    v321 = catalog.model("v3_2_1")
     rows: list[pd.DataFrame] = []
-    eog = pd.read_csv(data_lake / "energy_v3_2_7_guidance_EOG.csv")
+    eog = pd.read_csv(v327 / "energy_v3_2_7_guidance_EOG.csv")
     rows.append(pd.DataFrame({
         "ticker": "EOG", "target_quarter": eog["target_quarter"].astype(str),
         "oil_mbpd_low": eog["guidance_oil_production"], "oil_mbpd_high": eog["guidance_oil_production"], "oil_mbpd_mid": eog["guidance_oil_production"],
@@ -567,11 +575,11 @@ def _legacy_guidance(data_lake: Path) -> pd.DataFrame:
         "normalized_total_unit": "MBOE/D", "conversion_rule": "IDENTITY_VALIDATED",
         "period_semantics": "QUARTERLY_VALIDATED",
         "filing_date": pd.to_datetime(eog["release_date"]), "source_url": eog["source_url"],
-        "source_path": str(data_lake / "energy_v3_2_7_guidance_EOG.csv"),
+        "source_path": str(v327 / "energy_v3_2_7_guidance_EOG.csv"),
         "quality_score": eog["guidance_data_quality_score"], "adapter": "EOG_VALIDATED_GUIDANCE_V327",
     }))
     for ticker in ("COP", "FANG", "DVN"):
-        path = data_lake / f"energy_v3_2_1_guidance_selected_{ticker}.csv"
+        path = v321 / f"energy_v3_2_1_guidance_selected_{ticker}.csv"
         source = pd.read_csv(path)
         total = source["guidance_total_production"]
         oil = source["guidance_oil_production"]

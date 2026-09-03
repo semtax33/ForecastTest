@@ -3,6 +3,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from equity_platform.data_catalog import DataCatalog
+
 from ..config import ModelConfig, ProjectPaths
 from ..data.cutoff import quarter_cutoff_date
 
@@ -42,7 +44,10 @@ def add_realized_basis_candidates(
     revenue["revenue"] = pd.to_numeric(revenue["revenue"], errors="coerce")
 
     assert paths.data_lake is not None
-    releases_path = paths.data_lake / "energy_v3_2_7_actual_EOG.csv"
+    releases_path = (
+        DataCatalog(paths.data_lake).model("v3_2_7")
+        / "energy_v3_2_7_actual_EOG.csv"
+    )
     releases = pd.read_csv(releases_path)[["quarter", "release_date"]]
     releases["quarter"] = releases["quarter"].astype(str)
     releases["release_date"] = pd.to_datetime(releases["release_date"], errors="coerce")

@@ -1,0 +1,10 @@
+ticker,group,window_start_year,window_end_year,four_year_direct_unit_evidence,capital_transaction_perimeter_clean,reserve_event_max_ratio,reserve_event_materiality_threshold,reserve_transaction_perimeter_clean,cumulative_organic_invested_capital_usd,denominator_threshold_usd,reported_nopat_complete,window_eligible,selection_status,outcome_values_used_for_selection,terminal_input_allowed,research_only,selected_for_v18
+AR,gas_heavy,2019.0,2021.0,True,True,0.037992628296002265,0.02,False,0.0,,True,False,LOCKED__MATERIAL_RESERVE_PURCHASE_OR_SALE__CUMULATIVE_ORGANIC_DENOMINATOR_NOT_ELIGIBLE,False,False,True,False
+AR,gas_heavy,2020.0,2022.0,True,True,0.037992628296002265,0.02,False,11841000.0,214592220.0,True,False,LOCKED__MATERIAL_RESERVE_PURCHASE_OR_SALE__CUMULATIVE_ORGANIC_DENOMINATOR_NOT_ELIGIBLE,False,False,True,False
+AR,gas_heavy,2021.0,2023.0,True,True,0.037992628296002265,0.02,False,563356000.0,,True,False,LOCKED__MATERIAL_RESERVE_PURCHASE_OR_SALE__CUMULATIVE_ORGANIC_DENOMINATOR_NOT_ELIGIBLE,False,False,True,False
+AR,gas_heavy,2022.0,2024.0,True,True,0.010153965012968379,0.02,True,526920000.0,163830720.0,True,True,ELIGIBLE_CLEAN_ORGANIC_WINDOW,False,False,True,True
+AR,gas_heavy,2023.0,2025.0,True,True,0.028263419538624813,0.02,False,729218000.0,164012600.0,True,False,LOCKED__MATERIAL_RESERVE_PURCHASE_OR_SALE,False,False,True,False
+CNX,gas_heavy,2022.0,2024.0,True,False,0.017160180240626745,0.02,True,-1005876000.0,118216580.0,False,False,LOCKED__MATERIAL_CAPITAL_TRANSACTION_PERIMETER__REPORTED_NOPAT_INCOMPLETE__CUMULATIVE_ORGANIC_DENOMINATOR_NOT_ELIGIBLE,False,False,True,False
+CNX,gas_heavy,2023.0,2025.0,True,False,0.07823816579707782,0.02,False,-267382000.0,102697500.0,False,False,LOCKED__MATERIAL_CAPITAL_TRANSACTION_PERIMETER__MATERIAL_RESERVE_PURCHASE_OR_SALE__REPORTED_NOPAT_INCOMPLETE__CUMULATIVE_ORGANIC_DENOMINATOR_NOT_ELIGIBLE,False,False,True,False
+EQT,gas_heavy,,,False,False,,0.02,False,,,False,False,LOCKED__NO_FOUR_YEAR_DIRECT_UNIT_EVIDENCE_WINDOW,False,False,True,False
+RRC,gas_heavy,,,False,False,,0.02,False,,,False,False,LOCKED__NO_FOUR_YEAR_DIRECT_UNIT_EVIDENCE_WINDOW,False,False,True,False

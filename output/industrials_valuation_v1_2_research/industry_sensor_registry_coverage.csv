@@ -1,0 +1,20 @@
+sector,subindustry,sensor_count,ingested_sensor_count,leading_sensor_count,pqci_dimensions,targets,ingested_coverage_pct,forecast_ready
+Communication Services,telecom,2,0,0,P|Q,arpu|subscribers,0.0,False
+Consumer Discretionary,autos,3,3,1,P|Q,asp|units,100.0,True
+Consumer Discretionary,homebuilders,4,4,2,P|Q,asp|closings,100.0,True
+Consumer Discretionary,restaurants,4,2,1,C|P|Q,margin|ticket|traffic,50.0,False
+Consumer Discretionary,retail_apparel,3,2,1,I|P|Q,margin|revenue,66.66666666666666,False
+Consumer Staples,food_beverage,3,3,1,C|P|Q,margin|price_mix|volume,100.0,True
+Energy,oil_ep,3,2,1,P|Q,production|realized_price,66.66666666666666,False
+Energy,refining,2,1,0,P|Q,refining_margin|throughput,50.0,False
+Financials,banks,3,3,0,C|P|Q,net_interest_income|roe,100.0,False
+Financials,credit_cards,2,2,1,C|Q,credit_loss|purchase_volume,100.0,True
+Health Care,hospitals,3,0,1,C|P|Q,margin|revenue,0.0,False
+Health Care,pharma,3,0,1,I|P|Q,net_price|pipeline_value|revenue,0.0,False
+Industrials,airlines,4,0,0,C|I|P|Q,capacity|margin|revenue|yield,0.0,False
+Industrials,freight,3,0,0,C|P|Q,margin|shipments|yield,0.0,False
+Industrials,machinery,6,6,3,C|I|P|Q,cost_growth|reinvestment|revenue_growth,100.0,True
+Information Technology,semiconductors,3,2,1,P|Q,asp|revenue,66.66666666666666,False
+Materials,chemicals,3,2,0,C|P|Q,margin|revenue,66.66666666666666,False
+Real Estate,residential_reit,3,3,1,I|P,nav|occupancy|revenue,100.0,True
+Utilities,electric_utilities,2,2,0,P|Q,revenue,100.0,False

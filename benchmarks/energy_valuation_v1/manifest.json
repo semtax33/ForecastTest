@@ -11,11 +11,11 @@
     "configs/energy_valuation_v1.toml": "501da978c880cd61374c3f494a5bfed574a2fbc1eddf8d02b93fa548844204a1",
     "configs/energy_v1_market_price_overrides.csv": "b915872109afad07d9919d64f977157d6d135f3c0e49298b0ce58f98410d8ac9",
     "energy_nowcast/valuation/__init__.py": "85a1ef2b90cf67e396fdbe25c766862a031815b0228182c8390ee44c581bb851",
-    "energy_nowcast/valuation/benchmark.py": "12b962200be209b8b6bc0dc1e7d9657b42df1c9aa0e4ed24deec8d13b23db04b",
+    "energy_nowcast/valuation/benchmark.py": "a23df7a522625bb2123ff6da3b4346617d1be4f1f37a4adeda172e019b4456ed",
     "energy_nowcast/valuation/financials.py": "8b029b56178409386bbca7b1036a4d7f39ac9acdac6bd8ef067a1205d69f4120",
     "energy_nowcast/valuation/market.py": "f2bf390dc4953a2b973b41b967708d1d258872e3361008d6c2bf37de18ffbe34",
     "energy_nowcast/valuation/valuation.py": "b5722e39163a39f1894e5a6c5a313fae29b08dd1167cc7cf79a02a9ad74851c9",
-    "run_energy_valuation_v1.py": "3df064bc9099f8914555c2d3d315eb2d5dcf44946501f8a0748476c4ec3e8efe",
+    "scripts/energy/research/valuation/v1.py": "4452722ae09609bacb32ee125cbf9474b5814c16210f1972f7ab7c0ea0d46488",
     "tests/test_energy_valuation_v1.py": "31a6dfa008a6686f24771c96b941d39048b4a9645a47015346659b9c33cc4954",
     "output/energy_valuation_v1/v1_completion_status.csv": "a1e12d4f470acb1a7ecfc5017558bdd48e9a6a525fb000cebf503b2e24a61666",
     "output/energy_valuation_v1/v1_requirement_audit.csv": "fe1ce78623da4a1b231c1291f3894a2223142b1bd39d90482ba0f5dbf868bc21",
@@ -34,7 +34,13 @@
     "output/energy_valuation_v1/expectations_gap.csv": "346ab53361f09196c7a213434a82428ac4692ab7285f0a47eab9f047e4d380a8",
     "output/energy_valuation_v1/latest_valuation_scorecard.csv": "47f0cd8ef42aa8b941f94f9a81c590f6520dcfc08948745d29f90a02ebd88206",
     "output/energy_valuation_v1/subindustry_valuation_scorecard.csv": "248e1d87da3ce36e0322d96a22b9ba9eaf1b8fc93ff63e019d55832b9e173a6c",
-    "output/energy_valuation_v1/metadata.json": "d53cc6208d6e2c21eb1bcab17a7e9b21dfbc400864c5f333c42ef78af0cbca0c",
+    "output/energy_valuation_v1/metadata.json": "9aeac3700da71de9c8008a3c1eb392c6d931b2ba9d772869d197af39f02fc988",
     "output/energy_valuation_v1/report.md": "4fb3a06d3c815ff6d47ef1158054035f6be23c2c740ee6d4149e6d2f02a68220"
+  },
+  "layout_rebaseline": {
+    "date": "2026-09-03",
+    "scope": "physical_paths_and_code_tests_only",
+    "economic_outputs": "byte_preserved",
+    "reason": "responsibility_packages_and_bronze_silver_gold_layout"
   }
 }

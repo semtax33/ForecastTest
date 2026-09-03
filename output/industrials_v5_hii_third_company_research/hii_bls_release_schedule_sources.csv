@@ -1,0 +1,6 @@
+calendar_year,source_path,source_url,source_sha256,hash_match,supporting_release_calendar_only,pdf_parsing_used
+2022,D:\Programming\python_example\ForecastTest\data-lake\bronze\industrials\v1_5\bls\release_schedules\bls-release-schedule-2022.html,https://www.bls.gov/schedule/2022/,429e36522423aea0a4f41353bb5209ac5de861412ec4ad3ce6c4fad490494b8c,True,True,False
+2023,D:\Programming\python_example\ForecastTest\data-lake\bronze\industrials\v1_5\bls\release_schedules\bls-release-schedule-2023.html,https://www.bls.gov/schedule/2023/,1cd8d925e577c26b8ddda6c8dbe63b0ce6e474c8db6d199173c4eb5c6983743d,True,True,False
+2024,D:\Programming\python_example\ForecastTest\data-lake\bronze\industrials\v1_5\bls\release_schedules\bls-release-schedule-2024.html,https://www.bls.gov/schedule/2024/,74c74d7b5749861f519f7461b7aa39233f72213afbc60a927411fa7dcfd0685f,True,True,False
+2025,D:\Programming\python_example\ForecastTest\data-lake\bronze\industrials\v1_5\bls\release_schedules\bls-release-schedule-2025.html,https://www.bls.gov/schedule/2025/,cce28bc1ec6589c12eed35566e3db9522fd0279a428856066847f25976762f99,True,True,False
+2026,D:\Programming\python_example\ForecastTest\data-lake\bronze\industrials\v1_5\bls\release_schedules\bls-release-schedule-2026.html,https://www.bls.gov/schedule/2026/,b6d04af9d21e0b1b7b815003fa95643e373e90eff45a4a84225969b012ebbd7a,True,True,False

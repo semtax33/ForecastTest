@@ -1,0 +1,31 @@
+{
+  "name": "INDUSTRIALS_V5_2_1_HII_CONSENSUS_EXPECTATIONS_OVERLAY",
+  "version": "5.2.1-research",
+  "frozen_as_of": "2026-09-03",
+  "immutable": true,
+  "research_frozen": true,
+  "assertions": {
+    "research_freeze_eligible": true,
+    "required_providers_present": true,
+    "all_consensus_is_out_of_model_fit": true,
+    "bad_reference_price_cannot_replace_official_close": true,
+    "terminal_input_allowed": false,
+    "production_promoted": false
+  },
+  "parents": {
+    "hii_v52_valuation_manifest": "e4f76ba608b319c9396e501eb049fce1f1ba23035654659933a08d9b75fc3666"
+  },
+  "files": {
+    "equity_platform/sectors/industrials/aerospace_defense/hii_v521/__init__.py": "bff9a46b0c1537bc7c96e29bb766a5536f03989162df8df6e2e0afd29b443a0f",
+    "equity_platform/sectors/industrials/aerospace_defense/hii_v521/benchmark.py": "5ad09c0de26e351f81b27f88c3f7dab344bf3833f2ec87022939ad7bdb04177d",
+    "equity_platform/sectors/industrials/aerospace_defense/hii_v521/research.py": "312bcdcb2ff84468d6aea686f8233ee5ddd4cd49285c49a95b676987d674161e",
+    "output/industrials_v5_2_1_hii_consensus_overlay_research/hii_analyst_price_target_vintages.csv": "0722df820069a726ab2958ab88d4d76b03c289931f8366150cf403afc6dcd48d",
+    "output/industrials_v5_2_1_hii_consensus_overlay_research/hii_consensus_provider_coverage.csv": "2c655f07a0b0681120713370b1561caf101b40863ed4f6dd5a1573dac835eef6",
+    "output/industrials_v5_2_1_hii_consensus_overlay_research/hii_model_vs_analyst_expectations.csv": "860f9888178b32cf00ec677b89271d00d0bcb3eb06019c0ede618def6f5c7dd5",
+    "output/industrials_v5_2_1_hii_consensus_overlay_research/hii_v521_consensus_gate.csv": "8a211f70d90e19cb398a4a8fb8c6076c37ab217144a260b88960c3bd2f8f762d",
+    "output/industrials_v5_2_1_hii_consensus_overlay_research/metadata.json": "af336b483ba65ae50b799fadcd3c12b457c8f79de7c6670ebee3592aca8717d8",
+    "output/industrials_v5_2_1_hii_consensus_overlay_research/report.md": "62b0bf0fb81291766dc688051760ac2a2bf44907602b7ef7203ae24c959e36ca",
+    "scripts/industrials/valuation_v5_2_1_hii_consensus.py": "d24f9d0ccc97c70403b133f7715efe9191f45eff505af71dcead16bcc359aae5",
+    "tests/test_industrials_v5_2_1_hii_consensus.py": "bbc416271ff40f295c6221cf5e60001e43647e0ff323ddf8ad22f202ecc500ba"
+  }
+}

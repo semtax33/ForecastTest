@@ -15,7 +15,7 @@ FROZEN_FILES = (
     "energy_nowcast/valuation/financials.py",
     "energy_nowcast/valuation/market.py",
     "energy_nowcast/valuation/valuation.py",
-    "run_energy_valuation_v1.py",
+    "scripts/energy/research/valuation/v1.py",
     "tests/test_energy_valuation_v1.py",
     "output/energy_valuation_v1/v1_completion_status.csv",
     "output/energy_valuation_v1/v1_requirement_audit.csv",

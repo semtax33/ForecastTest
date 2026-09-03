@@ -4,6 +4,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from equity_platform.data_catalog import DataCatalog
+
 from ..config import ModelConfig, ProjectPaths
 from ..data.cutoff import add_forecast_cutoff
 
@@ -12,12 +14,14 @@ def _guidance_source(paths: ProjectPaths, ticker: str) -> tuple[Path, str, str]:
     assert paths.data_lake is not None
     if ticker == "EOG":
         return (
-            paths.data_lake / "energy_v3_2_7_guidance_EOG.csv",
+            DataCatalog(paths.data_lake).model("v3_2_7")
+            / "energy_v3_2_7_guidance_EOG.csv",
             "target_quarter",
             "release_date",
         )
     return (
-        paths.data_lake / f"energy_v3_2_1_guidance_selected_{ticker}.csv",
+        DataCatalog(paths.data_lake).model("v3_2_1")
+        / f"energy_v3_2_1_guidance_selected_{ticker}.csv",
         "target_quarter",
         "filing_date",
     )

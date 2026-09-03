@@ -1,0 +1,2 @@
+required_providers,required_providers_present,all_consensus_is_out_of_model_fit,bad_reference_price_cannot_replace_official_close,research_freeze_eligible,terminal_input_allowed,production_promoted
+ALPHA_VANTAGE|FMP|FINNWORLDS,True,True,True,True,False,False

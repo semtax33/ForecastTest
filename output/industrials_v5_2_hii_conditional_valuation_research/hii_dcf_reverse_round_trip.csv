@@ -1,0 +1,2 @@
+forward_near_term_growth_pct,recovered_near_term_growth_pct,growth_round_trip_error_pct,forward_enterprise_value_usd,solver_residual_usd,status
+6.4620500198509205,6.46205001976341,8.751044333621394e-11,7374360155.877594,-0.003582000732421875,SOLVED

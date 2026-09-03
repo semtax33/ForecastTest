@@ -1,0 +1,4 @@
+diagnostic,solved_field,status,implied_value_pct,residual_usd,lower_bound_pct,upper_bound_pct,conditional_on_other_base_assumptions,appropriate_parameter_claim_allowed
+MARKET_IMPLIED_NEAR_TERM_GROWTH,near_term_growth_pct,UNBRACKETED_NO_SOLUTION_IN_DOMAIN,,7653013709.847995,-15.0,20.0,True,False
+MARKET_IMPLIED_TERMINAL_MARGIN,terminal_margin_pct,SOLVED,11.715248949243687,-0.1970958709716797,1.0,12.0,True,False
+MARKET_IMPLIED_WACC,wacc_pct,SOLVED,5.157197003805777,-0.8403949737548828,3.0,20.0,True,False

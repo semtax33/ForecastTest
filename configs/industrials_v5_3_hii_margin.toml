@@ -1,0 +1,15 @@
+version = "INDUSTRIALS_V5_3_HII_THROUGH_CYCLE_MARGIN_RESEARCH"
+as_of_date = "2026-07-31"
+valuation_date = "2026-07-31"
+sec_10k_directory = "data-lake/bronze/industrials/v5/sec/hii/10-K"
+sec_10q_directory = "data-lake/bronze/industrials/v5/sec/hii/10-Q"
+ir_segment_history = "output/industrials_v5_hii_third_company_research/hii_segment_as_reported_pit_history.csv"
+ir_company_history = "output/industrials_v5_hii_third_company_research/hii_company_as_reported_pit_history.csv"
+industry_feature_history = "output/industrials_v5_hii_third_company_research/hii_pit_segment_features.csv"
+industry_sensor_authority = "output/industrials_v5_hii_third_company_research/hii_industry_sensor_authority.csv"
+v52_output = "output/industrials_v5_2_hii_conditional_valuation_research"
+v521_output = "output/industrials_v5_2_1_hii_consensus_overlay_research"
+terminal_margin_hypotheses_pct = [8.0, 10.0, 12.0]
+terminal_value_dependence_threshold_pct = 75.0
+source_hash_required = true
+pdf_parsing_used = false

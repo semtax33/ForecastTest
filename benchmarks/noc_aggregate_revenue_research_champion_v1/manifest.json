@@ -1,0 +1,48 @@
+{
+  "name": "NOC_AGGREGATE_REVENUE_RESEARCH_CHAMPION_V1",
+  "version": "1.0-research",
+  "frozen_as_of": "2026-09-03",
+  "immutable": true,
+  "research_frozen": true,
+  "assertions": {
+    "benchmark_scope": "NOC_AGGREGATE_SEGMENT_GROSS_REVENUE_POINT_RESEARCH_ONLY",
+    "research_freeze_eligible": true,
+    "aggregate_revenue_point_authority": true,
+    "aggregate_is_gaap_consolidated_revenue": false,
+    "aggregate_definition": "SUM_OF_FOUR_SEGMENT_SALES_BEFORE_INTERSEGMENT_ELIMINATIONS",
+    "validation_observations": 6,
+    "fixed_validation_window": "2025Q1-2026Q2",
+    "revenue_mase": 0.9374475239933094,
+    "revenue_mean_ape_pct": 4.740288837027852,
+    "funded_backlog_incremental_value": "NOT_IDENTIFIED",
+    "funded_vs_total_mase_improvement_pct": 1.4927056524317583,
+    "segment_revenue_attribution_authority": false,
+    "segment_expected_rows": 24,
+    "segment_model_rows": 10,
+    "margin_authority": false,
+    "margin_claim_observations": 1,
+    "uncertainty_authority": false,
+    "terminal_authority": false,
+    "production_authority": false,
+    "forecast_freeze_eligible": false,
+    "new_dcf_run": false,
+    "new_reverse_dcf_run": false
+  },
+  "parents": {
+    "noc_v4_evidence_manifest": "c93af8901c03cc1eee65dfe87fb58ea7075b77470225c34b0042503dbc6b7699"
+  },
+  "files": {
+    "equity_platform/sectors/industrials/aerospace_defense/aggregate_revenue_v1/__init__.py": "a018e2e8a5d19a07797eab3e4cc2f36f2bfe9361a530e447139b92d0be6893c7",
+    "equity_platform/sectors/industrials/aerospace_defense/aggregate_revenue_v1/benchmark.py": "0f03ad3b0a85b6e406980f052fe913a51b8a4ea77e573295068b3c2cdb80d8f8",
+    "output/industrials_v4_noc_cross_company_research/industrials_v4_noc_authority.csv": "53f06f0469f9a3c6035e55ee23560f99f508cdf699819d863e42a58de4bf44ec",
+    "output/industrials_v4_noc_cross_company_research/industrials_v4_noc_gate.csv": "c70922ea6930079980e39470aef49ed31f7ade00b90bce4061ac2db98ae5b663",
+    "output/industrials_v4_noc_cross_company_research/metadata.json": "6055439ab841de12eaf3cd7544d8a0fa2de24f8d9511d5efa422ddd13b88faec",
+    "output/industrials_v4_noc_cross_company_research/noc_company_portability_summary.csv": "6a93bf46d864cbff4fdae99d6ccfc5559a763a32d9d16867ac7b09f8f0953120",
+    "output/industrials_v4_noc_cross_company_research/noc_company_walk_forward.csv": "17ded42fbef8d8219295cfe9422b970e025bfbba300642f15d2e4aa570a60b26",
+    "output/industrials_v4_noc_cross_company_research/noc_portability_summary.csv": "d07510c8d783e0d8b547732d5a1cb5d09ef2b7c75c6468a7b6e2a18da1620106",
+    "output/industrials_v4_noc_cross_company_research/noc_segment_model_coverage.csv": "e905902193a3ed30712e23e5a920abd3d3b350c1f6c8b2af9863d420f339bc8f",
+    "output/industrials_v4_noc_cross_company_research/noc_uncertainty_gate.csv": "d413dad90dad5374909ca3e69a1e09b6f84ad359a6509dad536280fb1aa3edec",
+    "scripts/industrials/freeze_noc_aggregate_revenue_v1.py": "711434192391b62c6c132e20b6a19ce4e353fbe9d1207f018bd27bc7c48c685c",
+    "tests/test_noc_aggregate_revenue_v1_freeze.py": "de2dbef2af70a7a1baab1a11314fd36adf00d7d5e4ab49dfcb0969337456b4f7"
+  }
+}

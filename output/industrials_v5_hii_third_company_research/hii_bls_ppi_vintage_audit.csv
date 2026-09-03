@@ -1,0 +1,2 @@
+archive_report_files,archive_report_hash_mismatches,release_schedule_files,release_schedule_hash_mismatches,required_series,parsed_series,missing_series,vintage_rows,release_date_coverage_pct,available_at_coverage_pct,source_hash_coverage_pct,pit_eligible_rows,historical_pit_ready,pdf_parsing_used,status
+54,0,5,0,3,3,,810,100.0,100.0,100.0,810,True,False,HISTORICAL_PIT_ARCHIVE_READY

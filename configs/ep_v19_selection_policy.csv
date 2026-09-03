@@ -1,0 +1,11 @@
+policy_name,value,unit,semantics
+research_cutoff,2025-03-01,date,Only filings available by this date may establish the fourth cohort
+cohort_length,3,years,Three consecutive observation years
+baseline_years,1,years,One pre-cohort year is required for delta NOPAT
+capital_materiality_ratio,0.01,ratio,Retain the V1.8 material business transaction threshold
+reserve_event_materiality_ratio,0.02,ratio,Retain the V1.8 purchase or sale threshold
+eligible_denominator_ratio,0.02,ratio,Cumulative organic invested capital must exceed this share of opening capital
+selection_order,LATEST_ELIGIBLE_WINDOW,rule,Choose the latest eligible window at the fixed cutoff
+outcome_values_used_for_selection,false,boolean,ROIC levels and range widths are forbidden selection inputs
+freeze_min_strong_or_usable,2,cohorts,Retain the V1.8 freeze gate without relaxation
+loco_max_p50_shift,10,percentage_points,Retain the V1.8 leave-one-cohort-out gate without relaxation

@@ -1,0 +1,1 @@
+"""Energy valuation research entrypoints."""

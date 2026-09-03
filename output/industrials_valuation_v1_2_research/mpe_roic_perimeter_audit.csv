@@ -1,0 +1,6 @@
+component,included,latest_usd,limitation
+MP&E equity,True,17440000000.0,Supplemental allocated equity
+MP&E debt,True,10990000000.0,Direct supplemental debt
+MP&E cash,True,-9333000000.0,Subtracted as non-operating cash
+Financial Products,False,4841000000.0,Valued separately
+Goodwill/intangibles,True,,Embedded; not separately observable in supplemental perimeter

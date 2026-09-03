@@ -1,0 +1,4 @@
+range_category,min_width_pct_inclusive,max_width_pct_exclusive,research_weight,width_gate_pass,terminal_input_allowed
+STRONG,0,15,1.0,True,False
+USABLE_RESEARCH,15,30,0.75,True,False
+TOO_UNCERTAIN_FOR_TERMINAL,30,,0.25,False,False

@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from equity_platform.data_catalog import DATA
 from energy_nowcast.core.proxy_benchmark import verify_proxy_benchmark
 from energy_nowcast.core.taxonomy import all_phase_tickers
 from energy_nowcast.operations.champion import verify_champion
@@ -15,7 +16,7 @@ from energy_nowcast.research.v36.benchmark import verify_research_champion
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "output" / "phase2_4_company_kpi_research"
 PROXY_OUTPUT = ROOT / "output" / "phase2_4_structural_research"
-SNAPSHOT = ROOT / "data-lake" / "phase2_4_company_kpi_snapshot"
+SNAPSHOT = DATA.company_kpi_snapshot
 
 
 def test_proxy_benchmark_is_frozen_and_verifiable() -> None:

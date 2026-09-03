@@ -1,0 +1,483 @@
+{
+  "schema_version": 1,
+  "provider": "U.S. Bureau of Labor Statistics",
+  "archive_page": "https://www.bls.gov/ppi/detailed-report/home.htm",
+  "downloaded_at": "2026-09-02T22:45:41.955Z",
+  "pdf_parsing_used": false,
+  "ppi_report_artifacts": [
+    {
+      "report_period": "2022-01",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-january-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-january-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1246163,
+      "sha256": "8536504b7a2fce58841f72c542f3e9d10f7d827b8a408aa88427ab1f91ae2d52"
+    },
+    {
+      "report_period": "2022-02",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-february-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-february-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1464476,
+      "sha256": "bf71d6534990a2d820999b827e1e3e96d9acc65247607fa6a2e534aa3478d0a7"
+    },
+    {
+      "report_period": "2022-03",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-march-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-march-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1403045,
+      "sha256": "78c5588e2babc576ecb233e05089ef0f0295094805c24a02f91575c66a9b98d3"
+    },
+    {
+      "report_period": "2022-04",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-april-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-april-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1475591,
+      "sha256": "0477e083c1af817c03cc331c32670ed62789cc840a14a30d4239ee02975d8e50"
+    },
+    {
+      "report_period": "2022-05",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-may-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-may-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1368285,
+      "sha256": "74b58cd041d47bb6220fe60b3a11e6914d381560245bf0bdc4d523bb9180e7f8"
+    },
+    {
+      "report_period": "2022-06",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-june-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-june-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1352981,
+      "sha256": "64ec087ba7a1d739c2a6c2d50c104f4aa61dc779bfdf0ad9f5cf64feeb98a117"
+    },
+    {
+      "report_period": "2022-07",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-july-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-july-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1478803,
+      "sha256": "ae34da19289a63408a2fb3bff85b8cabd280953a7d9ed34b96640f91d09a2474"
+    },
+    {
+      "report_period": "2022-08",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-august-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-august-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1366011,
+      "sha256": "c2c292e8acbcd398e4dc492fd658f1faf4f12cbb18a82397057efed5b8861d4f"
+    },
+    {
+      "report_period": "2022-09",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-september-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-september-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1484344,
+      "sha256": "614d88726979e134f312823a9895b7949677c42e26428eea8f3b62d639ee71ea"
+    },
+    {
+      "report_period": "2022-10",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-october-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-october-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1358601,
+      "sha256": "1d0847f74fc6cf1cee99b18e45b51749b5401eddcec41a0d56c17e0a3fcbbfd0"
+    },
+    {
+      "report_period": "2022-11",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-november-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-november-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1497283,
+      "sha256": "c406aa946e99ed3b0f20abed36b5bc186c8d5be4981f688307a005c60cc1fa3e"
+    },
+    {
+      "report_period": "2022-12",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-december-2022.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-december-2022.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1493626,
+      "sha256": "dcb3e876948240c0dcdca3376e89f8822a831e0a2e0ef2848afaaefb5fd7985a"
+    },
+    {
+      "report_period": "2023-01",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-january-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-january-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1364158,
+      "sha256": "1983283f6a28ac421d35c1050626f9497eb41713cacb2db4371e3dd94f1609ee"
+    },
+    {
+      "report_period": "2023-02",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-february-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-february-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1451165,
+      "sha256": "f858e0328d56c306478f71547caa2691bea64e4a658dc9a9b55fa76cbd1af744"
+    },
+    {
+      "report_period": "2023-03",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-march-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-march-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1468953,
+      "sha256": "b34e516e2b9b99d1e4386e3b675d6bc6fae54bd1bccb9d27c85e367258443d3a"
+    },
+    {
+      "report_period": "2023-04",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-april-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-april-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1319856,
+      "sha256": "07e4f16c517f3c9214ff433b58ade38598d65a03b952a16d7d4db45d5e8b3f82"
+    },
+    {
+      "report_period": "2023-05",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-may-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-may-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1348040,
+      "sha256": "2afba21c6d15e2e8d87d952f68e707473fb5aab63f9e5b3c30ea322f683a82af"
+    },
+    {
+      "report_period": "2023-06",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-june-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-june-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1431277,
+      "sha256": "ea8e905a688e14ee5e2775c235b92ab43781961616c81e8dca253daef8704686"
+    },
+    {
+      "report_period": "2023-07",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-july-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-july-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1363283,
+      "sha256": "2146fe7cb012b301739dd5df583325d33c87cf35a6465220708993c85aa9396c"
+    },
+    {
+      "report_period": "2023-08",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-august-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-august-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1448271,
+      "sha256": "ab4916855f87fbb2837c4b9509a9518a11a2120ba7d4c0428414215a435bab02"
+    },
+    {
+      "report_period": "2023-09",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-september-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-september-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1309106,
+      "sha256": "af361ce61b71e4562f7de2bd3702fa0117334e9a0170eef8893d852d9652727e"
+    },
+    {
+      "report_period": "2023-10",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-october-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-october-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1309928,
+      "sha256": "d8274ecc9f5b83e06e54ac4cb8376fef44e6e4c77e389e727414d19d557381e4"
+    },
+    {
+      "report_period": "2023-11",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-november-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-november-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1309199,
+      "sha256": "39b3ac396833790a657d26cf0f9b7e0576fea88619db619ca65c877dafe85d76"
+    },
+    {
+      "report_period": "2023-12",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-december-2023.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-december-2023.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1276092,
+      "sha256": "a9dcbf2af4f3af9fd547b824b03b6c3856dcf2bfb19da4da6fcf3d8ef68a79d3"
+    },
+    {
+      "report_period": "2024-01",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-january-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-january-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1295427,
+      "sha256": "85dfbbd26349b5ac4733938c870b4446b0101e3022b5fa3241e3820ac3201eb5"
+    },
+    {
+      "report_period": "2024-02",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-february-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-february-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1387504,
+      "sha256": "712ef199314b0b8da4fef7fcdc6910571ac1a79ff56a3c1deb5312ce72969a4c"
+    },
+    {
+      "report_period": "2024-03",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-march-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-march-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1301901,
+      "sha256": "c3c9f4d66951acd1f403d494a508924bef8e1a60e80097360bfb6cc1e38a57c4"
+    },
+    {
+      "report_period": "2024-04",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-april-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-april-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1304582,
+      "sha256": "d6e4a8b49906b7ecc8701547fae82f1cded20402aaac3f7cb0364014af7f559a"
+    },
+    {
+      "report_period": "2024-05",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-may-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-may-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1446734,
+      "sha256": "be7202915b3545cf08d4f4b571515a43e4ca0ee0239bd9e138bb2bd0fcfea517"
+    },
+    {
+      "report_period": "2024-06",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-june-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-june-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1433955,
+      "sha256": "8eaaf8cd7eefb875e7d59c29aa28db9460a963ae145625d66f89f2e58f2d1b63"
+    },
+    {
+      "report_period": "2024-07",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-july-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-july-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1420668,
+      "sha256": "b2310fc2f2a8768eb9b4cdbcfe2c3fa150618d02da750bbccd5e9d4210c77658"
+    },
+    {
+      "report_period": "2024-08",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-august-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-august-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1293653,
+      "sha256": "713cea4beabca9f3d121ececd99a3aba4ef5a9065c7b14f6fea32acf89152bd6"
+    },
+    {
+      "report_period": "2024-09",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-september-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-september-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1400543,
+      "sha256": "ba18db08f7a057be631caab5bf8e6312b62d947dd5dbe2685f968ab3bf8a6915"
+    },
+    {
+      "report_period": "2024-10",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-october-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-october-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1335690,
+      "sha256": "3628bbcb5f41d0ff242c3ab4009ab1b4b2df4d8a465ca2d7e4c7ace5c950e492"
+    },
+    {
+      "report_period": "2024-11",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-november-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-november-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1295962,
+      "sha256": "086d5eda715c4cc5f0aeed6ff27ad11177ed4b234fa124405c57d2896877e444"
+    },
+    {
+      "report_period": "2024-12",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-december-2024.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-december-2024.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1289993,
+      "sha256": "ac676c86586db5717a51452661bfbf6b1f2a9d9a8280db6370e19256d09f3717"
+    },
+    {
+      "report_period": "2025-01",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-january-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-january-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1335307,
+      "sha256": "c6101c92fb37efa6db99ea1532255026099bf805eaaafc706844b6c6ae18a5c2"
+    },
+    {
+      "report_period": "2025-02",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-february-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-february-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1330705,
+      "sha256": "f3b0ea8bb6e999d51e398066fc58c77d8facbdc50647cadb51239f99b0b08563"
+    },
+    {
+      "report_period": "2025-03",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-march-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-march-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1329077,
+      "sha256": "dd1558c482e727a3399010861b8acf40c69fd2745598568aa33bc6728e6e1d4f"
+    },
+    {
+      "report_period": "2025-04",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-april-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-april-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1367762,
+      "sha256": "c9ceac6cd66a6ce7893a8858877ba537ffc652eb43d8a320846ca99c2487aa6c"
+    },
+    {
+      "report_period": "2025-05",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-may-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-may-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1331920,
+      "sha256": "a7f453f119bd50c1207f322ab82182dba95b8b30954fdeb8443964315f06113c"
+    },
+    {
+      "report_period": "2025-06",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-june-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-june-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1453745,
+      "sha256": "7f91f72e7ef9a34b643795ae6b9932217c5a01e54c99e80f78505e9f80f0aec5"
+    },
+    {
+      "report_period": "2025-07",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-july-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-july-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1425617,
+      "sha256": "5183cf009fff9a13be134816dc70d0b84e7b44d1a92471af1365b5e69f7386c4"
+    },
+    {
+      "report_period": "2025-08",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-august-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-august-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1339848,
+      "sha256": "e808284f9133c19472a78d5343003bcbd2d2e08718e5987997a0d0baa673079b"
+    },
+    {
+      "report_period": "2025-09",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-september-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-september-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1319758,
+      "sha256": "52693d6b405f13a44527ac830e7efe6826a4858417d80669421a202758b381bf"
+    },
+    {
+      "report_period": "2025-11",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-november-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-november-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1419727,
+      "sha256": "049809c20df24c4ed66f0a2ff2f5197c5385c111143bd71d966d55e7777892db"
+    },
+    {
+      "report_period": "2025-12",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-december-2025.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-december-2025.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1314209,
+      "sha256": "803b55f7efc846a6e81e4bd3a625b67bc2941f68c09abcd1d2268e5dee0c65e1"
+    },
+    {
+      "report_period": "2026-01",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-january-2026.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-january-2026.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1240435,
+      "sha256": "011a1e5c5f74c66a24c11d51319e3c99fb18878b820fdfbad87706091690198f"
+    },
+    {
+      "report_period": "2026-02",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-february-2026.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-february-2026.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1283651,
+      "sha256": "8165247a276b2aa90872b6be768164b5d471e6c698f04888554a16db37e056cf"
+    },
+    {
+      "report_period": "2026-03",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-march-2026.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-march-2026.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1244773,
+      "sha256": "59c2ac86ae0fdc507e6b9e1606cb148f69ed62a5279c572dcfc4fd068962f74d"
+    },
+    {
+      "report_period": "2026-04",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-april-2026.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-april-2026.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1254882,
+      "sha256": "eb878a1935316a83773b53d56a60988830a4b5da948d6a2f483c5afd1f4229df"
+    },
+    {
+      "report_period": "2026-05",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-may-2026.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-may-2026.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1249462,
+      "sha256": "e8c25f548bb26d1860655f205eaa055c327f2197a845795163e7c3d71e9eaf3b"
+    },
+    {
+      "report_period": "2026-06",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-june-2026.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-june-2026.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1416152,
+      "sha256": "b61d24f70fb7403a9c4e4b9fc54a04ce7647a9d95ce07093411e10b7302d13f9"
+    },
+    {
+      "report_period": "2026-07",
+      "source_url": "https://www.bls.gov/ppi/detailed-report/ppi-detailed-report-july-2026.xlsx",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/ppi_detailed_reports/ppi-detailed-report-july-2026.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 1368543,
+      "sha256": "a455bea5d305ccdc6c683059406ccdb194e0d9ee528912ce72c36c43a79a5640"
+    }
+  ],
+  "release_schedule_artifacts": [
+    {
+      "calendar_year": 2022,
+      "source_url": "https://www.bls.gov/schedule/2022/",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/release_schedules/bls-release-schedule-2022.html",
+      "content_type": "text/html",
+      "size_bytes": 100702,
+      "sha256": "429e36522423aea0a4f41353bb5209ac5de861412ec4ad3ce6c4fad490494b8c"
+    },
+    {
+      "calendar_year": 2023,
+      "source_url": "https://www.bls.gov/schedule/2023/",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/release_schedules/bls-release-schedule-2023.html",
+      "content_type": "text/html",
+      "size_bytes": 100157,
+      "sha256": "1cd8d925e577c26b8ddda6c8dbe63b0ce6e474c8db6d199173c4eb5c6983743d"
+    },
+    {
+      "calendar_year": 2024,
+      "source_url": "https://www.bls.gov/schedule/2024/",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/release_schedules/bls-release-schedule-2024.html",
+      "content_type": "text/html",
+      "size_bytes": 101430,
+      "sha256": "74c74d7b5749861f519f7461b7aa39233f72213afbc60a927411fa7dcfd0685f"
+    },
+    {
+      "calendar_year": 2025,
+      "source_url": "https://www.bls.gov/schedule/2025/",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/release_schedules/bls-release-schedule-2025.html",
+      "content_type": "text/html",
+      "size_bytes": 96699,
+      "sha256": "cce28bc1ec6589c12eed35566e3db9522fd0279a428856066847f25976762f99"
+    },
+    {
+      "calendar_year": 2026,
+      "source_url": "https://www.bls.gov/schedule/2026/",
+      "local_path": "data-lake/bronze/industrials/v1_5/bls/release_schedules/bls-release-schedule-2026.html",
+      "content_type": "text/html",
+      "size_bytes": 100848,
+      "sha256": "b6d04af9d21e0b1b7b815003fa95643e373e90eff45a4a84225969b012ebbd7a"
+    }
+  ]
+}

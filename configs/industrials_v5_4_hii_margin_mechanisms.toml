@@ -1,0 +1,23 @@
+version = "INDUSTRIALS_V5_4_HII_MARGIN_MECHANISM_RESEARCH"
+as_of_date = "2026-07-31"
+valuation_date = "2026-07-31"
+ir_inventory = "output/industrials_v5_hii_third_company_research/hii_ir_source_inventory.csv"
+segment_history = "output/industrials_v5_hii_third_company_research/hii_segment_as_reported_pit_history.csv"
+company_history = "output/industrials_v5_hii_third_company_research/hii_company_as_reported_pit_history.csv"
+sec_10k_directory = "data-lake/bronze/industrials/v5/sec/hii/10-K"
+sec_10q_directory = "data-lake/bronze/industrials/v5/sec/hii/10-Q"
+v52_output = "output/industrials_v5_2_hii_conditional_valuation_research"
+v53_output = "output/industrials_v5_3_hii_through_cycle_margin_research"
+bls_labor_snapshot = "data-lake/bronze/industrials/v5_4/bls/hii_shipbuilding_labor_current_revised_2026-09-03.json"
+bls_max_reference_period = "2026M06"
+terminal_margin_hypotheses_pct = [8.0, 10.0, 12.0]
+guidance_start_period = "2022Q1"
+component_history_start_period = "2023Q1"
+terminal_value_dependence_threshold_pct = 75.0
+pdf_parsing_used = false
+
+[bls_series]
+CES3133661101 = "Ship building and repairing employment, seasonally adjusted"
+CES3133660001 = "Ship and boat building employment, seasonally adjusted"
+CES3133600002 = "Transportation equipment manufacturing average weekly hours, seasonally adjusted proxy"
+CES3133600003 = "Transportation equipment manufacturing average hourly earnings, seasonally adjusted proxy"

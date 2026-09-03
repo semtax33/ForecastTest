@@ -9,24 +9,24 @@
   "risk_channel_policy_frozen": true,
   "terminal_anchor_ready": 0,
   "single_appropriate_wacc_claim_allowed": false,
-  "parent_v1_manifest_sha256": "c3a548d82c98c8cb0d6ef9e758465f8c7c4d755b8468af49aad7b58476c8426a",
-  "parent_v1_1_manifest_sha256": "671b5b5af4d8ac3de7c7098cb6238eab687124724f41146fad57625b8d092601",
-  "parent_v1_2_manifest_sha256": "b90b31752cd72f3ef147f671e044499b34a42ec8fb3219de02f6023249d0c522",
+  "parent_v1_manifest_sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156",
+  "parent_v1_1_manifest_sha256": "9e9de7368dccb316a3c41f6a801a101e3868cbda5e5a8da815635f50a424099e",
+  "parent_v1_2_manifest_sha256": "161c5df008dc4cd22873332af13662f624a9f89497168f29e7c90741288babfd",
   "production_promoted": false,
   "live_matched_observations": "0/20",
   "files": {
     "energy_nowcast/research/ep_v13/__init__.py": "46467fec5be08ff1e124ae3fa9d76e5122d8520b217b4c106b47b622f9583f41",
-    "energy_nowcast/research/ep_v13/benchmark.py": "ab00e576892c0397c2e508d00dde8e39b6a8be0b603b935340b1ebef328dd5c6",
+    "energy_nowcast/research/ep_v13/benchmark.py": "ecc064c9e97e0a020428201fc1cecde7126ba9750dec06110bd3db6c791bb557",
     "energy_nowcast/research/ep_v13/unit_economics.py": "88e9c21fec85c5f0d9e796087d628acc3712267403b081e7e85f02fcbd7845be",
     "energy_nowcast/research/ep_v13/wacc_research.py": "32982ea759c8dbcccc657068d24372fa60a14f9e87646c9aaaaaa50269ddc35d",
-    "run_ep_normalized_unit_economics_v1_3.py": "b141a34150741907b633a460825f72731154e3c53099896a2c87c1fa54f2d7ad",
-    "freeze_ep_normalized_unit_economics_v1_3.py": "c311da5c5f7adbb429b5c4f708a28ad1eee6eebe6f8a3cdc0a18953b75d05e27",
+    "scripts/energy/research/ep/v1_3_normalized_unit_economics.py": "39bcc2aa5472e24c7ae3fbf260d68cef2bc4dc75d607de70cfc49bfba0351feb",
+    "scripts/energy/research/freeze/ep_v1_3.py": "355f953bd7c761581f656e04b90685e84d172103f710cc8d750679b2345fa1dc",
     "tests/test_ep_normalized_unit_economics_v1_3.py": "9401360d365db4ba9c167debd5369ec519bea363819e6cfe1e71febc277a9291",
     "output/energy_valuation_v1_3_research/annual_unit_economics_panel.csv": "b74c17465ef6661ddbc689f4d2b818f2171cf34edc4069fd410d886f5491fddd",
     "output/energy_valuation_v1_3_research/beta_term_structure.csv": "d5262720746a63734ea054887d612ca83ce2e6bbe5dc355267892e9ba8e5b350",
     "output/energy_valuation_v1_3_research/data_coverage.csv": "82ec90c64034a0017761a857532e731860f7f547c5782ceafd6b87e644e7e195",
     "output/energy_valuation_v1_3_research/double_count_gate.csv": "2979c7f81d9a28a64e306e9242adf9120917373812e996e2d630b89bb47e5f8d",
-    "output/energy_valuation_v1_3_research/metadata.json": "72aa07805834bf0a1146055c2d80cf5aabcd73472fb737108fd64003e19d144f",
+    "output/energy_valuation_v1_3_research/metadata.json": "d23a3d0d2dc063a21b274fc2c413c8c61f41f91212f6c0b70508cff98df3b993",
     "output/energy_valuation_v1_3_research/normalized_price_reference.csv": "b9b43901ff9ba52396b53a6913db067a0e19fb725a446b1a919a1faad037816e",
     "output/energy_valuation_v1_3_research/production_mix_price_proxy.csv": "00abc787dac928932ef89dbdd24a52d2332d407fc48901fe5541c858aa4074cf",
     "output/energy_valuation_v1_3_research/report.md": "519b10d7a569a27b42d1e81f153bbc41aedb39a77249226903bf82b1c77dc1a0",
@@ -38,5 +38,11 @@
     "output/energy_valuation_v1_3_research/wacc_cross_comparison.csv": "448967ecfa46da3f9726a7f170851c1900748f4597f4d82396c4859c18fd1f05",
     "output/energy_valuation_v1_3_research/wacc_reference_range.csv": "ed31666d541de4400e8fd0eea12d5c2de6d5187acb5bb2e621f80924a21cb7ed",
     "output/energy_valuation_v1_3_research/wacc_reference_summary.csv": "910bdd65c1a4f7f9a6f9cf3df5c7ca64db0fa139a48e243c94f944fe36b55fcb"
+  },
+  "layout_rebaseline": {
+    "date": "2026-09-03",
+    "scope": "physical_paths_and_code_tests_only",
+    "economic_outputs": "byte_preserved",
+    "reason": "responsibility_packages_and_bronze_silver_gold_layout"
   }
 }

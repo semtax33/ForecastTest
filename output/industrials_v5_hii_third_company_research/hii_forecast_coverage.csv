@@ -1,0 +1,2 @@
+company_expected_oos_rows,company_model_oos_rows,segment_expected_oos_rows,segment_model_oos_rows,missing_rows_imputed,segment_backlog_imputed,actual_after_forecast_all,historical_pit_input_pct
+6,6,18,18,False,False,True,100.0

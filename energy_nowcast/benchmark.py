@@ -8,6 +8,8 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from equity_platform.data_catalog import DataCatalog
+
 from .config import ProjectPaths
 
 
@@ -38,7 +40,10 @@ def verify_frozen_benchmark(paths: ProjectPaths) -> dict[str, Any]:
             mismatches.append(f"hash mismatch: {relative}")
     if mismatches:
         raise RuntimeError("V3.3 benchmark verification failed: " + "; ".join(mismatches))
-    validation = pd.read_csv(paths.root / "data-lake" / "energy_v3_3_validation.csv")
+    assert paths.data_lake is not None
+    validation = pd.read_csv(
+        DataCatalog(paths.data_lake).v33 / "energy_v3_3_validation.csv"
+    )
     expected = manifest["expected_metrics"]
     actual_log_mae = float(
         (validation["actual_log_yoy"] - validation["blend_log_yoy"]).abs().mean()

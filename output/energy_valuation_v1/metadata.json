@@ -9,7 +9,7 @@
   "subindustry_count": 5,
   "scenario_count": 3,
   "fixed_ratio_reverse_calculation_used": false,
-  "revenue_freeze_manifest_sha256": "dcab826abe2ac4a2e6d77d94e45a8664ceed7097d0970c347e753a2b6976fbee",
+  "revenue_freeze_manifest_sha256": "35d166abd8cc1d46e6bd1ff303b965825f3b01c4620140fa561444fc1f456afb",
   "config_sha256": "501da978c880cd61374c3f494a5bfed574a2fbc1eddf8d02b93fa548844204a1",
   "market_price_first_date": "2026-08-21",
   "market_price_last_date": "2026-08-21",

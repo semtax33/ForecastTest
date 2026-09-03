@@ -1,0 +1,2 @@
+valuation_date,market_price,market_price_date,shares_outstanding,market_capitalization_usd,cash_usd,total_debt_usd,market_enterprise_value_usd,ev_to_equity_bridge_identity_error_usd,price_source_path,price_source_sha256
+2026-07-31,324.0150146484375,2026-07-31,39404203.0,12767553412.255005,12000000.0,2702000000.0,15457553412.255005,0.0,D:/Programming/python_example/Arcana/data-lake/bronze/yfinance/price/HII.csv,dc967ee082f73bc7a6edd032fd964080acc44495e8d1f9fb64523954188b689d

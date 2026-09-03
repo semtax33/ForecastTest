@@ -1,0 +1,20 @@
+version = "INDUSTRIALS_V1_5_HISTORICAL_PIT_SEGMENT_ROUTE_VALIDATION"
+as_of_date = "2026-09-03"
+parent_branch = "INDUSTRIALS_V1_4_SEGMENT_COST_DRIVER_MARGIN_VALIDATION"
+parent_output = "output/industrials_valuation_v1_4_research"
+archive_manifest = "data-lake/bronze/industrials/v1_5/bls/archive_manifest.json"
+sensor_map = "configs/industrials_v1_5_pit_segment_sensors.csv"
+validation_start_period = "2025Q1"
+minimum_training_quarters = 8
+minimum_inner_validation_quarters = 3
+ridge_penalty = 8.0
+minimum_pit_series_coverage_pct = 100.0
+minimum_segments_below_one = 2
+worst_segment_margin_mase = 1.5
+maximum_segment_revenue_regression_pct = 10.0
+component_cancellation_ratio_threshold = 0.5
+component_gross_mae_threshold_pct = 10.0
+minimum_reinvestment_oos_years = 3
+maximum_reinvestment_mase = 1.0
+production_minimum_live_observations = 20
+

@@ -1,0 +1,2 @@
+observations,segments,years,fixed_share_vs_absolute_catchup_pearson,contract_vintage_margin_identified,causal_claim_allowed,status
+9,3,3,0.3640997443136272,False,False,SMALL_EX_POST_PANEL_DIAGNOSTIC_ONLY

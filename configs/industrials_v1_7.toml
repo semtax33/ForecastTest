@@ -1,0 +1,19 @@
+version = "INDUSTRIALS_CAT_SEGMENT_PROFIT_AND_MARGIN_V1_7"
+as_of_date = "2026-09-03"
+parent_revenue_manifest = "benchmarks/industrials_cat_revenue_champion_v1/manifest.json"
+parent_v1_5_output = "output/industrials_valuation_v1_5_research"
+parent_v1_6_output = "output/industrials_valuation_v1_6_research"
+parent_v1_2_output = "output/industrials_valuation_v1_2_research"
+sec_manifest = "data-lake/bronze/industrials/v1_7/sec/cat/manifest.json"
+validation_start_period = "2025Q1"
+expected_oos_quarters_per_segment = 6
+ridge_penalty = 8.0
+material_scope_threshold_pct = 5.0
+minimum_margin_champions = 2
+maximum_worst_margin_mase = 1.5
+production_minimum_live_observations = 20
+
+[predeclared_margin_routes]
+construction = "STRUCTURAL_PROFIT_DRIVER"
+power_energy = "REDUCED_FORM_PRODUCT_MIX"
+resource = "REDUCED_FORM_MARGIN"

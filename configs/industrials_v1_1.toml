@@ -1,0 +1,15 @@
+version = "INDUSTRIALS_VALUATION_PLATFORM_V1_1_CAT_SEMANTIC_SOTP_AUDIT"
+as_of_date = "2026-09-03"
+source_catalog = "configs/industrials_v1_1_cat_10k_sources.csv"
+minimum_anchor_validation_observations = 3
+minimum_anchor_history_observations = 2
+bridge_history_years = 5
+forecast_horizon_years = 5
+terminal_growth_pct = 2.0
+equity_risk_premium_pct = 4.5
+fallback_credit_spread_pct = 2.0
+beta_weeks = 104
+finance_cost_of_equity_sensitivity_pct = 1.0
+reverse_growth_lower_pct = -10.0
+reverse_growth_upper_pct = 15.0
+production_minimum_live_observations = 20

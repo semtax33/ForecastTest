@@ -1,0 +1,4 @@
+pressure_channel,scope,primary_metric_pct,secondary_metric_pct,interpretation,pit_status,supports_structural_margin_expansion,terminal_input_allowed
+SHIPBUILDING_MATERIAL_PRICE_RECOVERY_PROXY,INGALLS_AND_NEWPORT,-15.606454401687024,24.002213558850592,Input-cost PPI proxy is outrunning output-price proxy.,PIT_AS_RELEASED_PROXY,False,False
+MISSION_MATERIAL_PRICE_RECOVERY_PROXY,MISSION_TECHNOLOGIES,-5.38408834815988,15.568375448062884,Input-cost PPI proxy is outrunning output-price proxy.,PIT_AS_RELEASED_PROXY,False,False
+SHIPBUILDING_LABOR_INPUT_PROXY,SHIPBUILDING_EMPLOYMENT_PLUS_TRANSPORT_EQUIPMENT_HOURS_WAGES,5.61646019869988,4.53897338403042,Composite employment-hours-wage input proxy remains positive; wage data is broader than shipbuilding.,CURRENT_REVISED_NOT_PIT_MODEL_INPUT,False,False

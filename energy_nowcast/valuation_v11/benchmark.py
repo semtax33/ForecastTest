@@ -15,7 +15,7 @@ FROZEN_FILES = (
     "energy_nowcast/valuation_v11/financial_adjustments.py",
     "energy_nowcast/valuation_v11/perimeter.py",
     "energy_nowcast/valuation_v11/sanity.py",
-    "run_energy_valuation_v1_1.py",
+    "scripts/energy/research/valuation/v1_1.py",
     "tests/test_energy_valuation_v1_1.py",
     "output/energy_valuation_v1_1/capex_semantics_audit.csv",
     "output/energy_valuation_v1_1/capital_claims_reconciliation.csv",

@@ -1,0 +1,23 @@
+sensor_id,series_id,series_title,role,segment,weight,sign_prior,source_grade
+steel_input,WPU101,Iron and steel PPI,material,construction,0.3,negative,A
+fabricated_metal_input,WPU107,Fabricated structural metal products PPI,material,construction,0.2,negative,B
+truck_freight,PCU484121484121,General freight trucking long-distance truckload PPI,freight,construction,0.15,negative,B
+machinery_labor,CES3133310003,Agriculture construction and mining machinery average hourly earnings,labor,construction,0.2,negative,B
+general_components,WPU114,General purpose machinery and equipment PPI,component,construction,0.15,negative,B
+steel_input,WPU101,Iron and steel PPI,material,resource,0.25,negative,A
+fabricated_metal_input,WPU107,Fabricated structural metal products PPI,material,resource,0.15,negative,B
+rail_freight,PCU482111482111,Line-haul railroads PPI,freight,resource,0.15,negative,B
+truck_freight,PCU484121484121,General freight trucking long-distance truckload PPI,freight,resource,0.1,negative,B
+machinery_labor,CES3133310003,Agriculture construction and mining machinery average hourly earnings,labor,resource,0.2,negative,B
+general_components,WPU114,General purpose machinery and equipment PPI,component,resource,0.15,negative,B
+steel_input,WPU101,Iron and steel PPI,material,power_energy,0.15,negative,A
+fabricated_metal_input,WPU107,Fabricated structural metal products PPI,material,power_energy,0.15,negative,B
+general_components,WPU114,General purpose machinery and equipment PPI,component,power_energy,0.3,negative,B
+truck_freight,PCU484121484121,General freight trucking long-distance truckload PPI,freight,power_energy,0.1,negative,B
+power_equipment_labor,CES3133360003,Engine turbine and power transmission equipment average hourly earnings,labor,power_energy,0.25,negative,B
+rail_freight,PCU482111482111,Line-haul railroads PPI,freight,power_energy,0.05,negative,B
+construction_output_price,WPU112,Construction machinery and equipment PPI,output_price,construction,1.0,positive,A
+mining_output_price,WPU1192,Mining machinery and equipment PPI,output_price,resource,1.0,positive,A
+oilfield_output_price,WPU1191,Oil field and gas field machinery PPI,output_price,power_energy,0.3,positive,B
+engine_output_price,WPU1194,Internal combustion engines PPI,output_price,power_energy,0.35,positive,A
+turbine_output_price,WPU1197,Turbines and turbine generator sets PPI,output_price,power_energy,0.35,positive,A

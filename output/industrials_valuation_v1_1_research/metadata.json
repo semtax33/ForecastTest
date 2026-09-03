@@ -1,0 +1,34 @@
+{
+  "version": "INDUSTRIALS_VALUATION_PLATFORM_V1_1_CAT_SEMANTIC_SOTP_AUDIT",
+  "generated_at_utc": "2026-09-02T17:49:22.027115+00:00",
+  "as_of_date": "2026-09-03",
+  "ticker": "CAT",
+  "research_layer": "SEMANTIC_BACKLOG_AND_SEGMENT_SOTP_AUDIT",
+  "research_complete": true,
+  "direct_backlog_anchor_promoted": false,
+  "terminal_input_allowed": false,
+  "production_promoted": false,
+  "live_matched_observations": "0/20",
+  "sotp_value_per_share": 248.62051963982546,
+  "market_price": 827.9000244140625,
+  "valuation_interpretation": "RESEARCH_ONLY_NOT_A_MISPRICING_SIGNAL",
+  "source_hashes": {
+    "configs/industrials_v1_1.toml": "81f2b8eaab31692555e42128171c11e96cbdf2ad65a820ba9626ad2dba8ed516",
+    "configs/industrials_v1_1_cat_10k_sources.csv": "efa5bf950106d06fc9fcd50238ef00f6f046f526650245ec602932b3d2e05f1b",
+    "equity_platform/sectors/industrials/backlog.py": "7ec201075960fca1a1743153ba1f5a47532dbf9aafb37b57e2fa315de07c5595",
+    "equity_platform/sectors/industrials/financials.py": "4af84fa4740c669ce57d92b4b209f9decdca6f1c982b0ff1618d2ba25c8a4199",
+    "equity_platform/sectors/industrials/market.py": "c9cdf51cd773d44fad7f9808c7354446c5edb4e52b1ac56e94349a214c7faf26",
+    "equity_platform/sectors/industrials/segments.py": "6a4c51290ceb04c9f3a2ae4b5fa583a53c4abefc8fc0ccb5b4f06e2b29d49b5f",
+    "equity_platform/sectors/industrials/sotp.py": "5b1e5973a7fa5f657be0bb5901c5a010924e090acd97f51fcd5dc18a97927f3a",
+    "equity_platform/sectors/industrials/sources.py": "9893b53adeb20b331622e76f3fd509886f7af3a016eb5956ec5c98003c458e29",
+    "equity_platform/valuation.py": "84a246d04b751f6a86e18620d91d6d4059cc65cbba29e2ffec09eb563673804c",
+    "scripts/industrials/valuation_v1_1.py": "e7e16786bf8bf1fed89b9af1272d413cbdd2ddface5c2840a52357fa34121a72"
+  },
+  "sec_10k_source_hashes": {
+    "2021": "926c3064c1b485242db38739459d66126011e6f4b2db5289066a58f6456ccc08",
+    "2022": "779a0af213e496cf178df5089e528d4b6ab0afafa4ec812db660c5b230857fe0",
+    "2023": "6234e660810ce6ac07a3574668a3223492164efc9019ff6c05178b0f782ea3d7",
+    "2024": "a2abf5cb2bc7be0440c1d358cdd02b5eb300a8f231ff4233ee6a724f02b6782c",
+    "2025": "090ce2bd6d7dd1e85d4397ab152d3c3c3fb059fd4af0eb9aa979c1eb2ff92f15"
+  }
+}

@@ -1,0 +1,11 @@
+version = "INDUSTRIALS_VALUATION_PLATFORM_V1_RESEARCH"
+as_of_date = "2026-09-03"
+minimum_training_observations = 3
+minimum_validation_observations = 3
+bridge_history_years = 5
+forecast_horizon_years = 5
+terminal_growth_pct = 2.0
+equity_risk_premium_pct = 4.5
+fallback_credit_spread_pct = 2.0
+beta_weeks = 104
+production_minimum_live_observations = 20

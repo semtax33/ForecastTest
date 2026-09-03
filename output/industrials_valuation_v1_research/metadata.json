@@ -1,0 +1,24 @@
+{
+  "version": "INDUSTRIALS_VALUATION_PLATFORM_V1_RESEARCH",
+  "generated_at_utc": "2026-09-02T17:14:07.512767+00:00",
+  "as_of_date": "2026-09-03",
+  "sector": "Industrials",
+  "subindustry": "Machinery",
+  "tickers": [
+    "CAT"
+  ],
+  "primary_anchor": "ORDERS_BACKLOG_SHIPMENTS",
+  "anchor_promoted": false,
+  "research_complete": true,
+  "production_promoted": false,
+  "live_matched_observations": "0/20",
+  "source_hashes": {
+    "configs/industrials_v1.toml": "b66a9a3206cc870a37046a6dcc090fe4d6bfbb4a2a3fbf3e8bca1302e7363f74",
+    "equity_platform/sec.py": "3d6bc550e157d831a84478e0601a893eea46059ef4edc27217ede4c6e22274b5",
+    "equity_platform/sectors/industrials/definition.py": "0c2ad450f8124f17a984bc4a30a1cfc15beeade1ef6987cef1ea53e2874d9df6",
+    "equity_platform/sectors/industrials/financials.py": "4af84fa4740c669ce57d92b4b209f9decdca6f1c982b0ff1618d2ba25c8a4199",
+    "equity_platform/sectors/industrials/market.py": "c9cdf51cd773d44fad7f9808c7354446c5edb4e52b1ac56e94349a214c7faf26",
+    "equity_platform/sectors/industrials/model.py": "72763b86ffa9f5ba550b4d7024ea9924b64fe54a865008c46e3e5e6dbef166e2",
+    "equity_platform/valuation.py": "84a246d04b751f6a86e18620d91d6d4059cc65cbba29e2ffec09eb563673804c"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "AEROSPACE_DEFENSE_AGGREGATE_REVENUE_REPLICATION_V1",
+  "version": "1.0-research",
+  "frozen_as_of": "2026-09-03",
+  "immutable": true,
+  "research_frozen": true,
+  "assertions": {
+    "research_freeze_eligible": true,
+    "companies": 3,
+    "aggregate_pass": 3,
+    "aggregate_total": 3,
+    "segment_pass": 6,
+    "segment_total": 10,
+    "cross_company_replication": true,
+    "cross_regime_replication": false,
+    "status": "REPLICATED_RESEARCH_HYPOTHESIS_NOT_INDUSTRY_LAW",
+    "terminal_input_allowed": false,
+    "production_promoted": false
+  },
+  "parents": {
+    "hii_v5_evidence_manifest": "c1a9e4e2ea3f9586472ed8e2ef13cb9ea9e3155a32b4394145d10a5150214f36"
+  },
+  "files": {
+    "equity_platform/sectors/industrials/aerospace_defense/hii_v52/governance.py": "f935c77c2c6a2e9083f0af46e58eb989c85d848729de2a0f0a2ddff2f05360f3",
+    "output/aerospace_defense_aggregate_revenue_replication_v1/ad_aggregate_replication_company.csv": "4b4ecf269d29748cf619cfa674fdac6061a4bd15a429488924d44e90f792bb81",
+    "output/aerospace_defense_aggregate_revenue_replication_v1/ad_aggregate_replication_segment.csv": "ada9d68c4178f1186442ed69c10ac1b1771d6e776f0e105d62ab192156e9fe9f",
+    "output/aerospace_defense_aggregate_revenue_replication_v1/ad_aggregate_replication_summary.csv": "84e0159974998992456efa1ad46b83ebc08203ec9f30948c5d1b97f7e07a4246",
+    "output/aerospace_defense_aggregate_revenue_replication_v1/metadata.json": "fbdf12195c4bd80543af7da1558d6443ec4ce6fc14992f1acf309d34e90e6442",
+    "tests/test_ad_aggregate_replication_v1_freeze.py": "cb0c3bd9b59d2ffd68f1c3eb888bc6f4b1e7cb4fd13ae4b308dcaa9fc7c376e8"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "version": "E&P_THROUGH_CYCLE_ORGANIC_ROIC_DISTRIBUTION_V1_8_RESEARCH",
+  "generated_at_utc": "2026-09-02T13:18:20.472127+00:00",
+  "v1_7_4_parent_manifest_sha256": "4a73ae6de5ee97548688aabfed5f043aa5bddd8e819c140151f2e2164214bd9a",
+  "v1_7_4_parent_mutated": false,
+  "cohort_count": 3,
+  "group_count": 3,
+  "validated_company_research_ranges": 3,
+  "strong_or_usable_range_count": 1,
+  "too_uncertain_range_count": 2,
+  "midpoint_p25_pct": -2.916517920250444,
+  "midpoint_p50_pct": -1.0909070478200262,
+  "midpoint_p75_pct": 1.6475092608256006,
+  "max_abs_loco_p50_shift_pct_points": 11.19608849740327,
+  "research_gate": true,
+  "research_freeze_eligible": false,
+  "development_status": "RESEARCH_GATE_PASSED_FREEZE_DEFERRED_DISTRIBUTION_UNSTABLE",
+  "normal_roic_claimed": false,
+  "terminal_anchor_replacement_allowed": false,
+  "wacc_recalibrated": false,
+  "production_promoted": false,
+  "live_matched_observations": "0/20"
+}

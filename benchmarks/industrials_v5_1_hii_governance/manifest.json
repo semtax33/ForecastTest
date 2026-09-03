@@ -1,0 +1,30 @@
+{
+  "name": "INDUSTRIALS_V5_1_HII_ROUTE_GOVERNANCE",
+  "version": "5.1-research",
+  "frozen_as_of": "2026-09-03",
+  "immutable": true,
+  "research_frozen": true,
+  "assertions": {
+    "research_freeze_eligible": true,
+    "routes_tested_on_same_oos": 6,
+    "v5_best_tested_diagnostic_mase": 0.678151992455764,
+    "clean_predeclared_mase": 0.8001205898680689,
+    "route_selection_leakage_present": true,
+    "authority_namespaces": 7,
+    "terminal_input_allowed": false,
+    "production_promoted": false
+  },
+  "parents": {
+    "hii_v5_evidence_manifest": "c1a9e4e2ea3f9586472ed8e2ef13cb9ea9e3155a32b4394145d10a5150214f36"
+  },
+  "files": {
+    "equity_platform/sectors/industrials/aerospace_defense/hii_v52/governance.py": "f935c77c2c6a2e9083f0af46e58eb989c85d848729de2a0f0a2ddff2f05360f3",
+    "output/industrials_v5_1_hii_governance_research/hii_authority_namespaces.csv": "4e454b82347f89d359fbdbe29a9be9d29580e41fe59d04c6ea625a6d0906b305",
+    "output/industrials_v5_1_hii_governance_research/hii_company_route_registry.csv": "670c9eb8d8f60ba71aaa153657df88d0595d7dba0f3819d87688c7f5529ff256",
+    "output/industrials_v5_1_hii_governance_research/hii_route_selection_leakage_audit.csv": "40558943ac30e6160556a031d34d29df9f7457391cb95228d5a277a98f70bb26",
+    "output/industrials_v5_1_hii_governance_research/hii_segment_route_registry.csv": "ba50492c239e0cd17335f232a60674dba1311aa24efb430229892e3fcebc3168",
+    "output/industrials_v5_1_hii_governance_research/metadata.json": "160dd85646ea140e07249918dde369a2d78cc3b780df4dfef88d8ad6ce8b8c9e",
+    "scripts/industrials/valuation_v5_2_hii.py": "88b77357422f78d2d65ffb1daec87f42f5e79d801c08d265afa7d9342b50d022",
+    "tests/test_industrials_v5_1_hii_governance.py": "f90851f7b484faf5315aa199f3773d917c7e9795d854ef24cc0919edea2e2202"
+  }
+}

@@ -1,0 +1,31 @@
+version = "INDUSTRIALS_PLATFORM_V5_HII_THIRD_COMPANY_RESEARCH"
+as_of_date = "2026-09-03"
+ticker = "HII"
+cik = "0001501585"
+ir_root = "D:/Programming/python_example/Arcana/data-lake/bronze/sec/fillings/ir/HII"
+sec_manifest = "data-lake/bronze/industrials/v5/sec/hii/manifest.json"
+selection_candidates = "configs/industrials_v5_ad_third_company_candidates.csv"
+bls_archive_manifest = "data-lake/bronze/industrials/v1_5/bls/archive_manifest.json"
+validation_start_period = "2025Q1"
+validation_end_period = "2026Q2"
+minimum_training_quarters = 8
+expected_oos_quarters = 6
+production_minimum_live_observations = 20
+
+[selection]
+minimum_years_periodic_and_ir = 6
+minimum_fixed_pit_oos = 6
+primary_tiebreak = "UNAMBIGUOUS_QUARTERLY_EARNINGS_RELEASE_COUNT"
+secondary_tiebreak = "CONTRACT_BACKLOG_EVIDENCE_DOCUMENT_COUNT"
+tertiary_tiebreak = "TICKER_ASCENDING"
+performance_metric_used = false
+
+[authority]
+aggregate_revenue_point = "RESEARCH_ONLY_PENDING_OOS"
+segment_revenue_attribution = false
+margin = false
+roic_reinvestment = "HISTORICAL_DIAGNOSTIC_ONLY"
+terminal = false
+production = false
+dcf = false
+reverse_dcf = false

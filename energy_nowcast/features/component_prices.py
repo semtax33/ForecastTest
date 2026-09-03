@@ -5,6 +5,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from equity_platform.data_catalog import DataCatalog
+
 from ..config import ModelConfig, ProjectPaths
 from ..data.cutoff import quarter_cutoff_date
 
@@ -15,8 +17,9 @@ def _load_company_sources(
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     assert paths.data_lake is not None
     if ticker == "EOG":
-        actual_path = paths.data_lake / "energy_v3_2_7_actual_EOG.csv"
-        guidance_path = paths.data_lake / "energy_v3_2_7_guidance_EOG.csv"
+        model_data = DataCatalog(paths.data_lake).model("v3_2_7")
+        actual_path = model_data / "energy_v3_2_7_actual_EOG.csv"
+        guidance_path = model_data / "energy_v3_2_7_guidance_EOG.csv"
         actual = pd.read_csv(actual_path).rename(
             columns={
                 "release_date": "source_release_date",
@@ -32,10 +35,9 @@ def _load_company_sources(
             }
         )
     else:
-        actual_path = paths.data_lake / f"energy_v3_2_1_actual_selected_{ticker}.csv"
-        guidance_path = (
-            paths.data_lake / f"energy_v3_2_1_guidance_selected_{ticker}.csv"
-        )
+        model_data = DataCatalog(paths.data_lake).model("v3_2_1")
+        actual_path = model_data / f"energy_v3_2_1_actual_selected_{ticker}.csv"
+        guidance_path = model_data / f"energy_v3_2_1_guidance_selected_{ticker}.csv"
         actual = pd.read_csv(actual_path).rename(
             columns={
                 "filing_date": "source_release_date",

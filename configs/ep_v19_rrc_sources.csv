@@ -1,0 +1,6 @@
+year,fnsd_folder,adsh,expected_reserve_dimh,segment_text_tag,required_segment_phrase,segment_phrase_verified,reserve_values_verified_from_local_fnsd,end_reserves_mmcfe,production_mmcfe,extensions_mmcfe,revisions_mmcfe
+2020,2021q1_notes,0001564590-21-007606,0xcec9f14bc7eff4887675c675fd5e6584,SegmentReportingPolicyPolicyTextBlock,only one operating segment,true,true,17203114,816456,1264282,-608211
+2021,2022q1_notes,0000950170-22-001634,0xcec9f14bc7eff4887675c675fd5e6584,SegmentReportingPolicyPolicyTextBlock,only one operating segment,true,true,17775484,777523,1602769,-252876
+2022,2023q1_notes,0000950170-23-004687,0xcec9f14bc7eff4887675c675fd5e6584,SegmentReportingPolicyPolicyTextBlock,only one operating segment,true,true,18077656,774089,1668244,-591983
+2023,2024q1_notes,0000950170-24-018046,0xcec9f14bc7eff4887675c675fd5e6584,SegmentReportingPolicyPolicyTextBlock,only one operating segment,true,true,18113125,780575,207260,608784
+2024,2025q1_notes,0000950170-25-026789,0xcec9f14bc7eff4887675c675fd5e6584,SegmentReportingPolicyPolicyTextBlock,only one operating segment,true,true,18131475,796235,749362,75765

@@ -8,8 +8,8 @@
   "production_champion": "V3.4_FROZEN",
   "live_model_change_matches": "0/20",
   "files": {
-    "benchmarks/v3_4/manifest.json": "7939db0a4d94d78d1c91c83e19721a98d75147819b6d3eb1c66a667e02f07b40",
-    "benchmarks/v3_5_3_research/manifest.json": "52936c1f9a3c53b782a05bf622ccf765317bba6f308f3c67a9a3484aca8bb707",
+    "benchmarks/v3_4/manifest.json": "eddfadc14a60adccb15598b8cf1b3944e91fab0bf3543cf658e3dc6702c4d584",
+    "benchmarks/v3_5_3_research/manifest.json": "1ff60fab3c2dde9019e9b9509c8e19b467cb918ff344bd5f58380f6e8d0594c2",
     "benchmarks/phase2_4_structural_proxy/manifest.toml": "912898d15772a81a3de6a568566849fee213e33a95a60862fda7cb1b1d27ed92",
     "benchmarks/phase2_1_refining_kpi/manifest.toml": "e9342608e32d7c8cb6a6868da405da94b3a63e27912dd7dc0150213500749411",
     "output/phase2_5_target_aligned_research/phase5_routing_table.csv": "2254e6cc261dd8fcd1e8132935318f3574d8890067b5658b882006cbc406aff4",
@@ -17,6 +17,12 @@
     "output/phase2_5_target_aligned_research/phase5_common_forecast_schema_loco.csv": "256b1370816f7e65ee41c444cb416a0babce9c4da0b8a4c71d96aa0d209f5154",
     "output/phase2_5_target_aligned_research/phase5_sector_scorecard.csv": "b9c4d00c17fccd05cfb6c782fe117377ff9dfb23cc72cc5b6d683c82af65917b",
     "output/phase2_5_target_aligned_research/macro_research_decisions.csv": "47c27140beb7e078f7e04f698c9abb077f707a58cff606dbf1f524b5b8b62cc0",
-    "output/phase2_5_target_aligned_research/metadata.json": "9c2eca35c10d6673bd41d0d0903c38610fbce7679e82657535bde3faaca5096f"
+    "output/phase2_5_target_aligned_research/metadata.json": "32d91030a54a516af0ae8bbcccd363c7f1f830ef4e067329de64358a2079eeaf"
+  },
+  "layout_rebaseline": {
+    "date": "2026-09-03",
+    "scope": "physical_paths_and_code_tests_only",
+    "economic_outputs": "byte_preserved",
+    "reason": "responsibility_packages_and_bronze_silver_gold_layout"
   }
 }

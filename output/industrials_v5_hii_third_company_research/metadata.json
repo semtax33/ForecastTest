@@ -1,0 +1,51 @@
+{
+  "version": "INDUSTRIALS_PLATFORM_V5_HII_THIRD_COMPANY_RESEARCH",
+  "generated_at_utc": "2026-09-03T07:48:10.882290+00:00",
+  "selected_ticker": "HII",
+  "selection_outcome_blind": true,
+  "fixed_validation_window": "2025Q1-2026Q2",
+  "source_layers": [
+    "SEC_10K",
+    "SEC_10Q",
+    "SEC_FINANCIAL_STATEMENTS",
+    "SEC_NOTES",
+    "IR_HTML",
+    "BLS_AS_RELEASED_VINTAGES",
+    "CENSUS_BEA_CONTEXT_ONLY"
+  ],
+  "history_authorities": [
+    "AS_REPORTED_PIT_HISTORY",
+    "CURRENTLY_RECAST_COMPARABLE_HISTORY"
+  ],
+  "pdf_parsing_used": false,
+  "authority": {
+    "aggregate_revenue_point": true,
+    "segment_revenue_attribution": false,
+    "margin": false,
+    "roic_reinvestment": "HISTORICAL_DIAGNOSTIC_ONLY",
+    "terminal": false,
+    "production": false,
+    "dcf": false,
+    "reverse_dcf": false
+  },
+  "parents_unchanged": true,
+  "parent_manifest_sha256": {
+    "lmt_v31": "d2c6fcddee25406b1afa880b3a4ffd8da440e093bec6e74b02d277ae1cde9eda",
+    "noc_v4": "c93af8901c03cc1eee65dfe87fb58ea7075b77470225c34b0042503dbc6b7699",
+    "noc_aggregate_v1": "8459fc962cf496043f9eb9f67cfe9421cb5b04450dcf56d3bc33d3b967d1a4b7"
+  },
+  "source_code_sha256": {
+    "configs/industrials_v5_ad_third_company_candidates.csv": "6acde3065f9f948be76418a4e04f04c729cd702cc67e686d348d1c65cd774a29",
+    "configs/industrials_v5_hii.toml": "fd07482c3af32fe41c9369c2008884d5e2fc79715a9ddf43ae22d801897bca2a",
+    "configs/industrials_v5_hii_bls_sensors.csv": "1ed6e2f8984bc6104ba3c3c2caadb4987ca4dabc169b4a11dca502c1fc71670c",
+    "equity_platform/sectors/industrials/aerospace_defense/hii/__init__.py": "a9a7208238fd4f8e41eff25f6886dc9a7323c240810af82e2b1746ac606e7aa3",
+    "equity_platform/sectors/industrials/aerospace_defense/hii/forecast.py": "36369249e49b462eebb4f0942b18d902b0a391ffb3a0d9ae987d9d628390fb10",
+    "equity_platform/sectors/industrials/aerospace_defense/hii/industry.py": "64a9e026c1fb1ccb176cdb8040d9697f72e1f39ddefe402dec31433f1fced446",
+    "equity_platform/sectors/industrials/aerospace_defense/hii/ir.py": "635ed4c4f5eae6abe5484e895c094ccfe90ca77fcd0fe5199400a080baf365b3",
+    "equity_platform/sectors/industrials/aerospace_defense/hii/sec.py": "c67105d79228b9d5286705718445a823481326386f82f96d1e6ed5eae075d12e",
+    "equity_platform/sectors/industrials/aerospace_defense/hii/selection.py": "ff4a91066b09b506c7cb11c18cfa5fb563a1df32630b12c1bdfe18cbba04ab17",
+    "scripts/industrials/fetch_hii_periodic_filings_v5.py": "1eacd0d3abce1a8570515ee1c7f29d7edcd555b589ff3f34475664d3b0483d94",
+    "scripts/industrials/select_ad_third_company_v5.py": "5b2735a3354858014394f1345f1f2ba812019ee63f280b37f67c6a8955d46ded",
+    "scripts/industrials/valuation_v5_hii.py": "47645c743dfd8df61674f6bcd214d15f26ba6c2ebbad7517a8cd2bba86552875"
+  }
+}

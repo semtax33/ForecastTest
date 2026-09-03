@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 
 from energy_nowcast.research.ep_v161.benchmark import verify_v161
-from run_ep_normalization_attribution_nopat_triangulation_v1_7_3 import (
+from scripts.energy.research.ep.v1_7_3_normalization_attribution import (
     _v172_snapshot,
 )
 

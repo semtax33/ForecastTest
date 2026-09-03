@@ -1,0 +1,2 @@
+ir_html_inventory_count,earnings_release_count,parsed_quarters,parsed_segments,cross_release_cells,cross_release_exact_matches,cross_release_mismatches,all_selected_source_hashes_match,cross_release_recast_or_scope_change_cells,within_release_comparable_basis_used,parser_gate_pass,pdf_parsing_deferred,production_eligible
+118,23,23,4,152,125,27,True,27,True,True,True,False

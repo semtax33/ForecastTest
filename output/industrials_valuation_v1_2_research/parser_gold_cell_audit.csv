@@ -1,0 +1,9 @@
+issuer,fiscal_year,metric,parsed_value_usd,gold_value_usd,difference_usd,gold_match
+CAT,2025,mpe_total_revenue_usd,63980000000.0,63980000000.0,0.0,True
+CAT,2025,financial_products_total_revenue_usd,4382000000.0,4382000000.0,0.0,True
+CAT,2025,firm_backlog_usd,51200000000.0,51200000000.0,0.0,True
+CAT,2025,not_expected_next_year_usd,19300000000.0,19300000000.0,0.0,True
+CFSC,2025,total_revenue_usd,3634000000.0,3634000000.0,0.0,True
+CFSC,2025,standalone_profit_usd,540000000.0,540000000.0,0.0,True
+CFSC,2025,finance_receivables_net_usd,32815000000.0,32815000000.0,0.0,True
+CFSC,2025,standalone_equity_usd,3227000000.0,3227000000.0,0.0,True

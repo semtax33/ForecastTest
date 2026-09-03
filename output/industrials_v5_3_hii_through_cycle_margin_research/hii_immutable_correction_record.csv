@@ -1,0 +1,3 @@
+correction_id,superseded_artifact,superseded_field,replacement_field,preserved_value,correction,independent_analyst_count_claim_allowed,parent_artifact_mutated
+HII_V5_ROUTE_AUTHORITY_001,INDUSTRIALS_V5_HII_EVIDENCE,PIT_INDUSTRY_BRIDGE_CHAMPION_CLAIM,BEST_TESTED_DIAGNOSTIC,0.678151992455764,V5 finding superseded by V5.2 governance correction; six routes shared the same OOS window.,,False
+HII_V521_TARGET_SEMANTICS_001,INDUSTRIALS_V5_2_1_HII_CONSENSUS_EXPECTATIONS_OVERLAY,analyst_average_target_median,provider_average_target_median,361.79545,Median of Finnworlds and Yahoo provider-average targets; underlying analysts may overlap.,False,False

@@ -1,0 +1,17 @@
+{
+  "version": "INDUSTRIALS_V5_4_HII_MARGIN_MECHANISM_RESEARCH",
+  "generated_at_utc": "2026-09-03T12:32:19.251997+00:00",
+  "as_of_date": "2026-07-31",
+  "parent_hii_v52_manifest_sha256": "e4f76ba608b319c9396e501eb049fce1f1ba23035654659933a08d9b75fc3666",
+  "parent_hii_v53_manifest_sha256": "27913b5836200ea4d8b50cfefaa700925198e4df95b0249af4fadcd9e9161ca1",
+  "frozen_parents_unchanged": true,
+  "pdf_parsing_used": false,
+  "contract_vintage_margin_identified": false,
+  "direct_labor_hours_identified": false,
+  "price_reset_lag_identified": false,
+  "valuation_upgrade_allowed": false,
+  "fair_value_claim_allowed": false,
+  "terminal_authority": false,
+  "production_promoted": false,
+  "live_forward_matched_observations": "0/20"
+}

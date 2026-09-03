@@ -1,0 +1,4 @@
+period,forecast_as_of,feature_reference_quarter,series_id,selected_vintage_rows,latest_selected_release_date,cutoff_respected
+2026Q3,2026-07-31,2026Q2,WPU102,15,2026-07-15,True
+2026Q3,2026-07-31,2026Q2,WPU107,15,2026-07-15,True
+2026Q3,2026-07-31,2026Q2,WPU117,15,2026-07-15,True

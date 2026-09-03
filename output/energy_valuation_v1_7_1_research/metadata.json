@@ -1,8 +1,8 @@
 {
   "version": "E&P_MNA_NUMERATOR_PURCHASE_ACCOUNTING_V1_7_1_RESEARCH",
   "generated_at_utc": "2026-09-02T08:12:18.595652+00:00",
-  "v1_6_1_manifest_sha256": "d1578c3c6ae33993abd161133a4899fbcb03ca68a3242cf059d189087274f268",
-  "v1_7_parent_snapshot_sha256": "2987c67dbee0b21f605f1e7218d6714749d5117825620920af23ec2639ea9b65",
+  "v1_6_1_manifest_sha256": "18f6ba102538e3851501a9cc396d8712928ed9098c360c09178d6b0527e5d7c8",
+  "v1_7_parent_snapshot_sha256": "2b0c45f2fea15325cf94943bdf792a80509c27bea9c4046fec413431467d810b",
   "frozen_v1_6_1_mutated": false,
   "v1_7_parent_mutated": false,
   "acquiree_numerator_normalized_events": 4,

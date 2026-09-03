@@ -1,0 +1,75 @@
+{
+  "migration": {
+    "date": "2026-09-03",
+    "scope": "physical_paths_and_code_tests_only",
+    "economic_outputs": "byte_preserved",
+    "reason": "responsibility_packages_and_bronze_silver_gold_layout"
+  },
+  "manifests": [
+    {
+      "manifest": "benchmarks\\v3_3\\manifest.json",
+      "preserved_files": 5,
+      "sha256": "e45fb8f7f6e364c24d20593a6838fbe4205f77f8fe9a565fe0db1cc2be8e2559"
+    },
+    {
+      "manifest": "benchmarks\\v3_4\\manifest.json",
+      "preserved_files": 38,
+      "sha256": "eddfadc14a60adccb15598b8cf1b3944e91fab0bf3543cf658e3dc6702c4d584"
+    },
+    {
+      "manifest": "benchmarks\\v3_5_3_research\\manifest.json",
+      "preserved_files": 18,
+      "sha256": "1ff60fab3c2dde9019e9b9509c8e19b467cb918ff344bd5f58380f6e8d0594c2"
+    },
+    {
+      "manifest": "benchmarks\\phase5_revenue_research\\manifest.json",
+      "preserved_files": 5,
+      "sha256": "35d166abd8cc1d46e6bd1ff303b965825f3b01c4620140fa561444fc1f456afb"
+    },
+    {
+      "manifest": "benchmarks\\energy_valuation_v1\\manifest.json",
+      "preserved_files": 20,
+      "sha256": "1f231480d4d05ff792439f6d4e1270a5e00deec40b44ec5b55ac74ec981c9156"
+    },
+    {
+      "manifest": "benchmarks\\energy_valuation_v1_1\\manifest.json",
+      "preserved_files": 18,
+      "sha256": "9e9de7368dccb316a3c41f6a801a101e3868cbda5e5a8da815635f50a424099e"
+    },
+    {
+      "manifest": "benchmarks\\ep_expectations_surface_v1_2\\manifest.json",
+      "preserved_files": 11,
+      "sha256": "161c5df008dc4cd22873332af13662f624a9f89497168f29e7c90741288babfd"
+    },
+    {
+      "manifest": "benchmarks\\ep_normalized_unit_economics_v1_3\\manifest.json",
+      "preserved_files": 15,
+      "sha256": "a7eb4670d2ae1756830a8d04af8737431fd7a017cb694a507f52e347af96b7ca"
+    },
+    {
+      "manifest": "benchmarks\\ep_cost_scope_v1_4\\manifest.json",
+      "preserved_files": 8,
+      "sha256": "53499622cade6fc4c736ef36cbb303e893b2b82d4d529406fe1ef3de81c14479"
+    },
+    {
+      "manifest": "benchmarks\\ep_accounting_perimeter_v1_5\\manifest.json",
+      "preserved_files": 10,
+      "sha256": "9aceb73340894a3497b337619fdc8660f01bc8279e56353ec723e61ef1db3741"
+    },
+    {
+      "manifest": "benchmarks\\ep_accounting_proof_v1_6_1\\manifest.json",
+      "preserved_files": 8,
+      "sha256": "18f6ba102538e3851501a9cc396d8712928ed9098c360c09178d6b0527e5d7c8"
+    },
+    {
+      "manifest": "benchmarks\\ep_cohort_closure_v1_7_4\\manifest.json",
+      "preserved_files": 9,
+      "sha256": "4a73ae6de5ee97548688aabfed5f043aa5bddd8e819c140151f2e2164214bd9a"
+    },
+    {
+      "manifest": "benchmarks\\ep_sample_stability_v1_9\\manifest.json",
+      "preserved_files": 14,
+      "sha256": "bf7a5ec595452c1bb3dfcefe7ab97540c617c29bc2163b241e2fd4061e79b4ee"
+    }
+  ]
+}

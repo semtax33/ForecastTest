@@ -1,0 +1,21 @@
+{
+  "version": "INDUSTRIALS_V5_3_HII_THROUGH_CYCLE_MARGIN_RESEARCH",
+  "generated_at_utc": "2026-09-03T10:13:44.580087+00:00",
+  "as_of_date": "2026-07-31",
+  "parent_hii_v52_manifest_sha256": "e4f76ba608b319c9396e501eb049fce1f1ba23035654659933a08d9b75fc3666",
+  "parent_hii_v521_manifest_sha256": "b61acc75146e7e7f05285b9cd3eadc8742a53d5386d52cac9263e8935e183a63",
+  "frozen_parents_unchanged": true,
+  "source_layers": [
+    "SEC_10K_HTML",
+    "SEC_10Q_HTML",
+    "IR_HTML_DERIVED_HISTORY",
+    "BLS_AS_RELEASED_VINTAGE",
+    "FROZEN_V5_2_DCF",
+    "FROZEN_V5_2_1_CONSENSUS"
+  ],
+  "pdf_parsing_used": false,
+  "fair_value_claim_allowed": false,
+  "terminal_authority": false,
+  "production_promoted": false,
+  "live_forward_matched_observations": "0/20"
+}

@@ -1,0 +1,2 @@
+surface_points,market_match_points,iso_conditions,iso_solved_conditions,iso_unbracketed_conditions,non_identification_preserved,appropriate_parameter_claim_allowed,terminal_input_allowed,production_eligible
+75,0,10,8,2,True,False,False,False

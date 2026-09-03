@@ -1,0 +1,9 @@
+mechanism,evidence_status,key_metric,supports_8_to_10_pct,valuation_upgrade_allowed,terminal_input_allowed,authority
+CONTRACT_VINTAGE_MARGIN,NOT_IDENTIFIED,0 contract-vintage margin observations,False,False,False,OPERATIONAL_MECHANISM_RESEARCH_ONLY
+FPI_COST_RECOVERY,PARTIAL_RISK_EVIDENCE,Cost-share limit plus escalation basis risk; shipbuilding PIT price-cost gap -15.61%p,False,False,False,OPERATIONAL_MECHANISM_RESEARCH_ONLY
+LABOR_AND_PRODUCTIVITY,PRESSURE_NOT_DIRECT_PRODUCTIVITY,Shipbuilding employment YoY -0.65%; transport-equipment hours 1.69%; wage 4.54%,False,False,False,OPERATIONAL_MECHANISM_RESEARCH_ONLY
+GUIDANCE_AND_SCHEDULE_EXECUTION,NEGATIVE_TAIL_OBSERVED,1 material guidance revision rows,False,False,False,OPERATIONAL_MECHANISM_RESEARCH_ONLY
+AWARD_MODIFICATION_PRICE_RESET_LAG,NOT_IDENTIFIED,Award/modification years exist; economic price reset amount and effective lag do not,False,False,False,OPERATIONAL_MECHANISM_RESEARCH_ONLY
+FAS_CAS_AND_NONSEGMENT,NORMALIZED_DRAG_IDENTIFIED,FY26 guided contribution -0.48%p,False,False,False,OPERATIONAL_MECHANISM_RESEARCH_ONLY
+MISSION_TECHNOLOGIES_MARGIN,FIVE_PERCENT_FORWARD_STRETCH,FY26 guide 5.00% vs neutral max 4.59%,False,False,False,OPERATIONAL_MECHANISM_RESEARCH_ONLY
+CONTEMPORANEOUS_COMPONENT_UPSIDE,NOT_OBSERVED,FY26-mix reweighted same-window max 6.16%,False,False,False,OPERATIONAL_MECHANISM_RESEARCH_ONLY
