@@ -1,0 +1,31 @@
+from .compiler import (
+    FrameRoleIR,
+    FrameSchemaIR,
+    MatcherBackend,
+    PatternExprIR,
+    PatternStepIR,
+    SemanticVarIR,
+    TextDslCompileError,
+    TextRuleProgramIR,
+    TextRuleIR,
+    compile_text_program,
+    compile_text_program_file,
+    compile_text_rule_file,
+    compile_text_rules,
+)
+
+__all__ = [
+    "FrameRoleIR",
+    "FrameSchemaIR",
+    "MatcherBackend",
+    "PatternExprIR",
+    "PatternStepIR",
+    "SemanticVarIR",
+    "TextDslCompileError",
+    "TextRuleProgramIR",
+    "TextRuleIR",
+    "compile_text_program",
+    "compile_text_program_file",
+    "compile_text_rule_file",
+    "compile_text_rules",
+]

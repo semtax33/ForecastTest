@@ -8,14 +8,19 @@ import warnings
 from dataclasses import dataclass
 
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
-from lxml import html as lxml_html
 import numpy as np
 import pandas as pd
 
 from equity_platform.ir import SourceRef
 from equity_platform.numeric import parse_numeric_token
 
-from .model import CanonicalDocument, DocumentMetadata, DocumentTable, InlineFact
+from .model import (
+    CanonicalDocument,
+    DocumentMetadata,
+    DocumentSentence,
+    DocumentTable,
+    InlineFact,
+)
 
 
 @dataclass(frozen=True)
@@ -100,9 +105,104 @@ def _inline_facts(soup: BeautifulSoup) -> tuple[InlineFact, ...]:
                 end=end,
                 has_dimensions=has_dimensions,
                 source_location=f"inline_fact:{ordinal}",
+                literal=_clean(tag.get_text(" ", strip=True)),
             )
         )
     return tuple(facts)
+
+
+def _sentence_spans(
+    text: str,
+    extra_boundaries: tuple[int, ...] = (),
+) -> tuple[tuple[int, int], ...]:
+    boundaries = [0, *extra_boundaries]
+    boundaries.extend(
+        match.end()
+        # EDGAR frequently concatenates adjacent HTML nodes without a space.
+        for match in re.finditer(r"(?<=[.!?])\s*(?=[A-Z$])", text)
+    )
+    boundaries.append(len(text))
+    boundaries = sorted(set(boundaries))
+    return tuple(
+        (start, end)
+        for start, end in zip(boundaries, boundaries[1:])
+        if text[start:end].strip()
+    )
+
+
+def _document_sentences(
+    text: str,
+    soup: BeautifulSoup,
+    inline_facts: tuple[InlineFact, ...],
+) -> tuple[DocumentSentence, ...]:
+    headings: list[tuple[int, str]] = []
+    cursor = 0
+    heading_tags = list(soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6"]))
+    heading_tags.extend(
+        tag
+        for tag in soup.find_all(["div", "p", "span"])
+        if "font-weight:700" in str(tag.get("style", "")).replace(" ", "").lower()
+        and "text-decoration:underline"
+        in str(tag.get("style", "")).replace(" ", "").lower()
+        and 0 < len(_clean(tag.get_text(" ", strip=True))) <= 80
+        and not re.search(r"\$|\d{3,}", _clean(tag.get_text(" ", strip=True)))
+    )
+    seen_headings: set[tuple[int, str]] = set()
+    for tag in heading_tags:
+        heading = _clean(tag.get_text(" ", strip=True))
+        if not heading:
+            continue
+        position = text.casefold().find(heading.casefold(), cursor)
+        if position < 0:
+            position = text.casefold().find(heading.casefold())
+        if position >= 0:
+            key = (position, heading.casefold())
+            if key not in seen_headings:
+                headings.append((position, heading))
+                seen_headings.add(key)
+            cursor = position + len(heading)
+
+    sentences: list[DocumentSentence] = []
+    heading_boundaries = tuple(
+        boundary
+        for position, heading in headings
+        for boundary in (position, position + len(heading))
+    )
+    for sentence_index, (raw_start, raw_end) in enumerate(
+        _sentence_spans(text, heading_boundaries)
+    ):
+        literal = text[raw_start:raw_end]
+        leading = len(literal) - len(literal.lstrip())
+        trailing = len(literal.rstrip())
+        start = raw_start + leading
+        end = raw_start + trailing
+        sentence = text[start:end]
+        heading = next(
+            (
+                value
+                for position, value in reversed(headings)
+                if position <= start
+            ),
+            None,
+        )
+        sentence_folded = sentence.casefold()
+        linked_facts = tuple(
+            index
+            for index, fact in enumerate(inline_facts)
+            if fact.literal and fact.literal.casefold() in sentence_folded
+        )
+        sentences.append(
+            DocumentSentence(
+                sentence_index=sentence_index,
+                text=sentence,
+                char_start=start,
+                char_end=end,
+                heading=heading,
+                section=heading,
+                inline_fact_indices=linked_facts,
+            )
+        )
+    return tuple(sentences)
 
 
 def adapt_html_document(
@@ -121,7 +221,12 @@ def adapt_html_document(
         raise ValueError(f"Source hash mismatch: {path}")
     content = path.read_bytes()
     html = content.decode("utf-8", errors="ignore")
-    text = " ".join(lxml_html.fromstring(content).text_content().split())
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", XMLParsedAsHTMLWarning)
+        soup = BeautifulSoup(html, "lxml")
+    # BeautifulSoup's separator preserves DOM block boundaries that EDGAR's
+    # raw ``text_content`` can concatenate (``HeadingSentence``).
+    text = _clean(soup.get_text(" ", strip=True))
     tables: list[DocumentTable] = []
     if include_tables:
         try:
@@ -152,9 +257,6 @@ def adapt_html_document(
             )
             tables.append(DocumentTable(resolved_table_index=index, cells=cells))
     if include_inline_facts:
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", XMLParsedAsHTMLWarning)
-            soup = BeautifulSoup(html, "lxml")
         inline = _inline_facts(soup)
     else:
         inline = ()
@@ -171,6 +273,7 @@ def adapt_html_document(
         text=text,
         tables=tuple(tables),
         inline_facts=inline,
+        sentences=_document_sentences(text, soup, inline),
     )
 
 
@@ -189,6 +292,7 @@ def adapt_html_fragments(
     tables: list[DocumentTable] = []
     text_parts: list[str] = []
     fragment_hashes: list[str] = []
+    fragment_html: list[str] = []
     resolved_index = 0
     for fragment in fragments:
         actual_sha = sha256(fragment.content).hexdigest()
@@ -196,6 +300,7 @@ def adapt_html_fragments(
             raise ValueError(f"Source hash mismatch: {fragment.local_path}")
         fragment_hashes.append(actual_sha)
         html = fragment.content.decode("utf-8", errors="ignore")
+        fragment_html.append(html)
         soup = BeautifulSoup(html, "html.parser")
         text_parts.append(" ".join(soup.get_text(" ", strip=True).split()))
         seen: set[tuple[str, tuple[float, ...]]] = set()
@@ -263,10 +368,13 @@ def adapt_html_fragments(
         sha256=aggregate_sha,
         available_at=metadata.available_at,
     )
+    combined_text = " ".join(text_parts)
+    combined_soup = BeautifulSoup("\n".join(fragment_html), "html.parser")
     return CanonicalDocument(
         metadata=metadata,
         source=source,
-        text=" ".join(text_parts),
+        text=combined_text,
         tables=tuple(tables),
         inline_facts=(),
+        sentences=_document_sentences(combined_text, combined_soup, ()),
     )

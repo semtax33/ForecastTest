@@ -11,6 +11,7 @@ import pandas as pd
 from equity_platform.paths import PROJECT_ROOT
 from equity_platform.reporting import markdown_table
 from equity_platform.parsing import compile_rule_file
+from equity_platform.text_ie import compile_text_rule_file
 
 
 ROOT = PROJECT_ROOT
@@ -20,6 +21,7 @@ NEW_CORE_PREFIXES = (
     "equity_platform/ir/",
     "equity_platform/documents/",
     "equity_platform/parsing/",
+    "equity_platform/text_ie/",
     "equity_platform/governance/",
     "equity_platform/economics/",
     "equity_platform/valuation_kernel/",
@@ -123,16 +125,36 @@ def main() -> int:
     rule_paths = sorted((ROOT / "configs/parser_rules").rglob("*.arc"))
     rule_rows = []
     for path in rule_paths:
-        for rule in compile_rule_file(path):
-            rule_rows.append(
+        relative = path.relative_to(ROOT).as_posix()
+        if "/text_ie/" in relative:
+            compiled = compile_text_rule_file(path)
+            rows = (
+                {
+                    "rule_id": rule.rule_id,
+                    "version": rule.version,
+                    "selector": "SEMANTIC_FRAME",
+                    "metric": ",".join(rule.concepts) or rule.frame.value,
+                    "source_path": relative,
+                    "source_sha256": rule.source_sha256,
+                }
+                for rule in compiled
+            )
+        else:
+            compiled = compile_rule_file(path)
+            rows = (
                 {
                     "rule_id": rule.rule_id,
                     "version": rule.version,
                     "selector": rule.selector.value,
                     "metric": rule.metric,
-                    "source_path": path.relative_to(ROOT).as_posix(),
+                    "source_path": relative,
                     "source_sha256": rule.source_sha256,
                 }
+                for rule in compiled
+            )
+        for row in rows:
+            rule_rows.append(
+                row
             )
     rules = pd.DataFrame(rule_rows)
     new_core = files.loc[files["classification"].eq("PLATFORM_V2_CORE")]
@@ -192,7 +214,7 @@ Raw SEC / IR / APIs
         ↓
 Canonical Document Model
         ↓
-non-Turing Parser DSL → typed ParserRuleIR → deterministic executor
+non-Turing table/text Parser DSL → typed ParserRuleIR/KPIFrame → deterministic executor
         ↓
 FactIR + lineage + authority
         ↓

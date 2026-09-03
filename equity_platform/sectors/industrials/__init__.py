@@ -9,6 +9,7 @@ from .model import build_industrials_research_baseline
 from .segments import build_cat_segment_history, build_segment_claim_reconciliation
 from .sotp import build_cat_sotp_research
 from .sources import load_cat_10k_sources
+from .text_kpi import CatBacklogSemanticResult, parse_cat_backlog_semantic_ir
 
 __all__ = [
     "INDUSTRIALS_V1",
@@ -21,4 +22,6 @@ __all__ = [
     "build_next_year_backlog_bridge",
     "build_segment_claim_reconciliation",
     "load_cat_10k_sources",
+    "CatBacklogSemanticResult",
+    "parse_cat_backlog_semantic_ir",
 ]

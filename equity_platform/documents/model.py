@@ -36,6 +36,26 @@ class InlineFact:
     end: str
     has_dimensions: bool
     source_location: str
+    literal: str = ""
+
+
+@dataclass(frozen=True)
+class DocumentSentence:
+    """A sentence plus the local document context needed by text IE."""
+
+    sentence_index: int
+    text: str
+    char_start: int
+    char_end: int
+    heading: str | None = None
+    section: str | None = None
+    inline_fact_indices: tuple[int, ...] = ()
+
+    def __post_init__(self) -> None:
+        if self.sentence_index < 0 or self.char_start < 0 or self.char_end <= self.char_start:
+            raise ValueError("Document sentences require ordered non-negative spans")
+        if not self.text.strip():
+            raise ValueError("Document sentences cannot be blank")
 
 
 @dataclass(frozen=True)
@@ -45,3 +65,4 @@ class CanonicalDocument:
     text: str
     tables: tuple[DocumentTable, ...]
     inline_facts: tuple[InlineFact, ...]
+    sentences: tuple[DocumentSentence, ...] = ()

@@ -1,0 +1,68 @@
+from .derivation import derive_difference
+from .document import document_text_blocks
+from .dsl import (
+    FrameSchemaIR,
+    MatcherBackend,
+    PatternExprIR,
+    SemanticVarIR,
+    TextDslCompileError,
+    TextRuleProgramIR,
+    TextRuleIR,
+    compile_text_program,
+    compile_text_program_file,
+    compile_text_rule_file,
+    compile_text_rules,
+)
+from .model import (
+    AmbiguityPolicy,
+    KPIFrame,
+    KPIRelationIR,
+    PeriodSemantics,
+    Polarity,
+    Qualifier,
+    QuantityKind,
+    QuantityMention,
+    ReviewItem,
+    SemanticFrame,
+    TextBlock,
+    TextExtractionResult,
+    VerificationStatus,
+)
+from .runtime import DEFAULT_TEXT_RULES, extract_text_kpis
+from .matcher import LabeledSpan, match_sequence_pattern
+from .validation import FrameValidationError, validate_kpi_frame
+
+__all__ = [
+    "AmbiguityPolicy",
+    "DEFAULT_TEXT_RULES",
+    "KPIFrame",
+    "KPIRelationIR",
+    "LabeledSpan",
+    "FrameSchemaIR",
+    "MatcherBackend",
+    "PatternExprIR",
+    "SemanticVarIR",
+    "PeriodSemantics",
+    "Polarity",
+    "Qualifier",
+    "QuantityKind",
+    "QuantityMention",
+    "ReviewItem",
+    "SemanticFrame",
+    "TextBlock",
+    "TextDslCompileError",
+    "TextExtractionResult",
+    "TextRuleProgramIR",
+    "TextRuleIR",
+    "VerificationStatus",
+    "FrameValidationError",
+    "compile_text_rule_file",
+    "compile_text_rules",
+    "compile_text_program",
+    "compile_text_program_file",
+    "derive_difference",
+    "document_text_blocks",
+    "extract_text_kpis",
+    "match_sequence_pattern",
+    "validate_kpi_frame",
+]

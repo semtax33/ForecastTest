@@ -37,6 +37,12 @@ class ClaimStatus(StrEnum):
 
 class ExtractionMethod(StrEnum):
     DETERMINISTIC = "DETERMINISTIC"
+    INLINE_XBRL = "INLINE_XBRL"
+    REGEX = "REGEX"
+    SPAN_RULE = "SPAN_RULE"
+    DEPENDENCY_RULE = "DEPENDENCY_RULE"
+    CONTEXT_RULE = "CONTEXT_RULE"
+    LEARNED_IE = "LEARNED_IE"
     LLM = "LLM"
     HUMAN = "HUMAN"
 
