@@ -15,12 +15,15 @@ PRICE = re.compile(
     rf"(?P<raw>\$\s*(?P<number>{NUMBER})\s*(?:per|/)\s*(?P<unit>mcf|mmcf|mcfe|boe|bbl|barrel|gallon))",
     re.IGNORECASE,
 )
-PERCENT = re.compile(rf"(?P<raw>(?P<number>{NUMBER})\s*%)", re.IGNORECASE)
+PERCENT = re.compile(
+    rf"(?P<raw>(?P<number>{NUMBER})\s*(?:%|percent\b|per\s+cent\b))",
+    re.IGNORECASE,
+)
 BASIS_POINTS = re.compile(
     rf"(?P<raw>(?P<number>{NUMBER})\s*(?:basis\s+points?|bps?|bp))",
     re.IGNORECASE,
 )
-RATE = re.compile(rf"(?P<raw>(?P<number>{NUMBER})\s*x\b)", re.IGNORECASE)
+RATE = re.compile(rf"(?P<raw>(?P<number>{NUMBER})\s*(?:x\b|times?\b))", re.IGNORECASE)
 COUNT = re.compile(
     rf"(?P<raw>(?P<number>{NUMBER})\s*(?P<scale>billion|million|thousand)?\s*(?P<unit>aircraft|units?|rigs?|wells?|boe(?:/d|\s+per\s+day)?|mboe(?:/d|\s+per\s+day)?|mcf(?:/d|\s+per\s+day)?|mmcf(?:e)?(?:/d|\s+per\s+day)?|bcfe(?:/d|\s+per\s+day)?|barrels?(?:/d|\s+per\s+day)?|bpd|mbpd|dth))",
     re.IGNORECASE,

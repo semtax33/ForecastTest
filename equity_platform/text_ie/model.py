@@ -47,6 +47,17 @@ class AmbiguityPolicy(StrEnum):
     SKIP = "SKIP"
 
 
+class FactTier(StrEnum):
+    CRITICAL = "CRITICAL"
+    NARRATIVE = "NARRATIVE"
+
+
+class EmissionStatus(StrEnum):
+    AUTO_EMITTED = "AUTO_EMITTED"
+    REVIEW = "REVIEW"
+    ABSTAINED = "ABSTAINED"
+
+
 class QuantityKind(StrEnum):
     MONEY = "MONEY"
     PRICE = "PRICE"
@@ -142,6 +153,8 @@ class KPIFrame:
     upper_value: float | None = None
     context_trace: dict[str, object] = field(default_factory=dict)
     verified_by: str | None = None
+    tier: FactTier = FactTier.CRITICAL
+    emission_status: EmissionStatus = EmissionStatus.AUTO_EMITTED
 
     def __post_init__(self) -> None:
         if not self.concept or not self.entity or not self.scope or not self.period:
@@ -164,6 +177,18 @@ class ReviewItem:
     status: str
     reason: str
     source_span: SourceSpan
+    candidates: tuple[str, ...] = ()
+    tier: FactTier = FactTier.CRITICAL
+
+
+@dataclass(frozen=True)
+class AbstentionItem:
+    sentence_index: int
+    rule_id: str
+    reason: str
+    failure_class: str
+    source_span: SourceSpan
+    tier: FactTier
     candidates: tuple[str, ...] = ()
 
 
@@ -197,4 +222,5 @@ class TextExtractionResult:
     evidence_claims: tuple[EvidenceClaimIR, ...]
     relations: tuple[KPIRelationIR, ...]
     reviews: tuple[ReviewItem, ...]
+    abstentions: tuple[AbstentionItem, ...]
     backend_name: str

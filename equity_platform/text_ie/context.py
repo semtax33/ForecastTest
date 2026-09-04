@@ -100,7 +100,18 @@ def qualifier(text: str) -> Qualifier:
     )
     return Qualifier(
         approximation=any(cue in folded for cue in ("approximately", "roughly")),
-        forward_looking=any(cue in folded for cue in ("expected", "expects", "guidance")),
+        forward_looking=any(
+            cue in folded
+            for cue in (
+                "expected",
+                "expects",
+                "forecast",
+                "guidance",
+                "projects",
+                "will",
+                "outlook",
+            )
+        ),
         lower_bound=any(cue in folded for cue in ("at least", "more than")),
         upper_bound="up to" in folded,
         materiality="materially" in folded,

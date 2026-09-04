@@ -1,0 +1,33 @@
+blind_set_id = "V22_BLIND_B_2026_09_04"
+predeclared_at_utc = "2026-09-04T01:25:00Z"
+as_of_date = "2026-09-04"
+annotation_scope = "ALL_TARGETS_IN_3_HASH_SELECTED_NUMERIC_PLUS_1_HASH_SELECTED_OTHER_BLOCK_PER_ISSUER"
+rule_changes_after_selection = false
+
+tickers = [
+  "AR",
+  "CVX",
+  "EPD",
+  "PSX",
+  "HAL",
+  "SLB",
+  "ACCO",
+  "ODFL",
+  "UBER",
+  "KEX",
+]
+
+# AR/CVX blocks were opened while sizing the corpus and are retained only as
+# development diagnostics.  The eight evaluation issuers below were not opened
+# at sentence level before the deterministic sample was fixed.
+development_only_after_precheck = ["AR", "CVX"]
+evaluation_tickers = ["EPD", "PSX", "HAL", "SLB", "ACCO", "ODFL", "UBER", "KEX"]
+numeric_blocks_per_issuer = 3
+other_blocks_per_issuer = 1
+sampling_hash_salt = "V22_BLIND_B_FIXED_BEFORE_SENTENCE_REVIEW"
+
+[parser_snapshot_sha256]
+semantic_frames = "0627e3b860f63180fdab71a10e5e4818368c2d266eaa839b51ae8b6ada871022"
+context_validation = "b6b26077c2bda0c1d94332a63f2f7016a3219db01ee4806dfa5210fa13e76b70"
+runtime = "3146ea162ea2a6229b9bfcf53762d761d6ffbf0533858df836700182cd25d8c7"
+ontology = "374bddd503dcfab64b525939b3013ac2a3b8f7e0c3b506ad3abc90144a040603"

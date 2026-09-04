@@ -1,0 +1,6 @@
+{
+  "generated_at_utc": "2026-09-04T02:47:45.242022+00:00",
+  "annotations": "data-lake/gold/parser/text_ie/v23_blind_sentence_annotations.jsonl",
+  "candidate_sha256": "eff90241e1df4f458de42a3d7472dc89920daff274739a0e3c48ce91ce15715b",
+  "rule_changes_after_selection": false
+}

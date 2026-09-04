@@ -48,7 +48,18 @@ def validate_kpi_frame(frame: KPIFrame, document: CanonicalDocument) -> KPIFrame
     except KeyError as exc:
         raise FrameValidationError(str(exc)) from exc
     kind = _quantity_kind(frame)
-    if kind is not None and definition.quantity_kinds and kind not in definition.quantity_kinds:
+    relation_quantity = (
+        frame.frame is SemanticFrame.CHANGE_BY
+        and kind in {QuantityKind.PERCENT, QuantityKind.BASIS_POINTS}
+    ) or (
+        frame.frame is SemanticFrame.COMPOSITION and kind is QuantityKind.PERCENT
+    )
+    if (
+        kind is not None
+        and definition.quantity_kinds
+        and kind not in definition.quantity_kinds
+        and not relation_quantity
+    ):
         raise FrameValidationError(
             f"{frame.concept} does not accept quantity kind {kind.value}"
         )

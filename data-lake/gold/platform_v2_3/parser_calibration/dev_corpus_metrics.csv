@@ -1,0 +1,2 @@
+examples,expected_frames,auto_emitted,reviews,abstentions,auto_precision,auto_recall,auto_f1,critical_precision,critical_recall,critical_f1,narrative_precision,narrative_recall,narrative_f1,auto_coverage,review_rate,abstention_rate,review_capture,review_plus_abstention_capture
+15,16,16,1,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.8888888888888888,0.05555555555555555,0.05555555555555555,1.0,1.0

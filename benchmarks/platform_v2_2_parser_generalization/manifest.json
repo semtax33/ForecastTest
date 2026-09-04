@@ -1,0 +1,22 @@
+{
+  "benchmark": "PLATFORM_V2_2_BLIND_PARSER_GENERALIZATION",
+  "status": "HISTORICAL_RESEARCH_FROZEN",
+  "frozen_at_utc": "2026-09-04T02:00:00Z",
+  "parser_snapshot_sha256": {
+    "semantic_frames": "0627e3b860f63180fdab71a10e5e4818368c2d266eaa839b51ae8b6ada871022",
+    "context_validation": "b6b26077c2bda0c1d94332a63f2f7016a3219db01ee4806dfa5210fa13e76b70",
+    "runtime": "3146ea162ea2a6229b9bfcf53762d761d6ffbf0533858df836700182cd25d8c7",
+    "ontology": "374bddd503dcfab64b525939b3013ac2a3b8f7e0c3b506ad3abc90144a040603"
+  },
+  "artifact_sha256": {
+    "output/platform_v2_2_parser_generalization/blind_sentence_candidates.csv": "795b67193fb0c58f40dfbe88519f2179553c97934a95cd118f8f4738d45cf3b5",
+    "output/platform_v2_2_parser_generalization/blind_sentence_evaluation.csv": "f99c1b1b739d16f402125462ead4e539eef286c9daba7c4cb407e60aedeaed17",
+    "output/platform_v2_2_parser_generalization/blind_sentence_summary.csv": "01fb7bc9e39f4051a00aaa6faaa62fa35d29b24fc8b35e81d4b8a46c5df713a9",
+    "output/platform_v2_2_parser_generalization/report.md": "802dc8de1ae2c70094068926b362d2aaa4acc5e0b7dcb70afc83c38ba3c897e8"
+  },
+  "policy": {
+    "old_blind_use": "ERROR_ANALYSIS_ONLY_NOT_RETUNING_VALIDATION",
+    "production_promoted": false,
+    "terminal_input_allowed": false
+  }
+}

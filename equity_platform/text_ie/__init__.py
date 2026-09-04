@@ -14,7 +14,10 @@ from .dsl import (
     compile_text_rules,
 )
 from .model import (
+    AbstentionItem,
     AmbiguityPolicy,
+    EmissionStatus,
+    FactTier,
     KPIFrame,
     KPIRelationIR,
     PeriodSemantics,
@@ -40,6 +43,9 @@ from .retrieval import CandidateDecision, narrative_candidate
 
 __all__ = [
     "AmbiguityPolicy",
+    "AbstentionItem",
+    "EmissionStatus",
+    "FactTier",
     "CandidateDecision",
     "DEFAULT_TEXT_RULES",
     "KPIFrame",

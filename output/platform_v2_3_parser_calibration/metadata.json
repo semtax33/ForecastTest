@@ -1,0 +1,45 @@
+{
+  "generated_at_utc": "2026-09-04T02:50:53.851128+00:00",
+  "version": "PLATFORM_V2_3_SEMANTIC_BINDING_CALIBRATION",
+  "forecast_policy": "FROZEN_NO_RETUNING",
+  "dcf_policy": "KERNEL_FROZEN_NO_EXECUTION_BEFORE_L3",
+  "blindness_claim": "SENTENCE_BLOCK_OUTCOME_BLIND_NOT_ISSUER_UNSEEN",
+  "blind_rule_changes_after_selection": false,
+  "blind_annotation_scope": "EXHAUSTIVE_WITHIN_PREDECLARED_HASH_SAMPLE",
+  "selection_critical_concepts": [
+    "ADJUSTED_EBITDA",
+    "BACKLOG",
+    "CAPEX",
+    "CASH",
+    "DEBT",
+    "OPERATING_INCOME",
+    "OPERATING_MARGIN",
+    "PRODUCTION",
+    "REVENUE",
+    "SHARES"
+  ],
+  "gold_critical_concepts_observed": [
+    "ADJUSTED_EBITDA",
+    "BACKLOG",
+    "CAPEX",
+    "CASH",
+    "OPERATING_MARGIN",
+    "ORDERS",
+    "REVENUE",
+    "SHARES"
+  ],
+  "critical_concepts_required": [
+    "ADJUSTED_EBITDA",
+    "BACKLOG",
+    "CAPEX",
+    "CASH",
+    "DEBT",
+    "OPERATING_INCOME",
+    "OPERATING_MARGIN",
+    "PRODUCTION",
+    "REVENUE",
+    "SHARES"
+  ],
+  "terminal_input_allowed": false,
+  "production_promoted": false
+}

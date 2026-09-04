@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from hashlib import sha256
 from pathlib import Path
 import re
@@ -21,10 +22,13 @@ from equity_platform.ir import (
 from equity_platform.paths import PROJECT_ROOT
 
 from .context import ContextStack, polarity, qualifier, resolve_period
+from .context_validation import ContextBindingError, validate_context_binding
 from .document import document_text_blocks
 from .dsl import TextRuleIR, compile_text_rule_file
 from .model import (
     AmbiguityPolicy,
+    AbstentionItem,
+    FactTier,
     KPIFrame,
     KPIRelationIR,
     PeriodSemantics,
@@ -40,6 +44,7 @@ from .matcher import match_sequence_pattern
 from .ontology import definition_for, find_concepts
 from .quantities import extract_quantities, extract_years
 from .retrieval import narrative_candidate
+from .semantic_binding import bind_metric_values
 from .spacy_backend import SemanticMatcherBackend, default_spacy_backend
 from .validation import FrameValidationError, validate_kpi_frame
 
@@ -199,6 +204,11 @@ def _frame(
     qualifiers = qualifier(block.text)
     if qualifiers.approximation:
         confidence -= 0.02
+    base_concept = concept.removeprefix("PRIOR_YEAR_")
+    for suffix in (rule.output_metric_suffix, "_GUIDANCE", "_CHANGE"):
+        if suffix:
+            base_concept = base_concept.removesuffix(suffix)
+    tier = definition_for(base_concept).tier
     proposed = KPIFrame(
         concept=concept + rule.output_metric_suffix,
         entity=block.entity,
@@ -224,8 +234,29 @@ def _frame(
         lower_value=lower_value,
         upper_value=upper_value,
         context_trace=context_trace or {},
+        tier=tier,
     )
-    return validate_kpi_frame(proposed, document)
+    semantic = validate_kpi_frame(proposed, document)
+    decision = validate_context_binding(
+        semantic,
+        block,
+        find_concepts(block.text),
+        value,
+        inherited=inherited,
+    )
+    if not decision.accepted:
+        raise ContextBindingError(decision)
+    return replace(
+        semantic,
+        context_trace={
+            **semantic.context_trace,
+            "context_validation": {
+                "reason": decision.reason,
+                "metric_span": decision.metric_span,
+                "value_span": decision.value_span,
+            },
+        },
+    )
 
 
 def _match_rule(
@@ -253,6 +284,8 @@ def _match_rule(
     names = tuple(dict.fromkeys(getattr(item, "concept") for item in concepts))
     if rule.concepts:
         names = tuple(name for name in names if name in rule.concepts)
+    if not rule.qualitative:
+        names = tuple(name for name in names if definition_for(name).quantity_kinds)
     if rule.require_metric and not names:
         return None
     candidates = _quantity_candidates(quantities, rule)
@@ -276,7 +309,7 @@ def _match_rule(
             and item.char_end <= relation
         )
         if len(names) != 1 or len(values) != 1 or len(changes) > 1:
-            return ()
+            return None if not values else ()
         return (
             _frame(
                 document=document,
@@ -295,6 +328,9 @@ def _match_rule(
 
     if rule.frame is SemanticFrame.CHANGE_BY:
         relation = _relation_position(block.text, rule.relation_words)
+        if relation is None:
+            # English commonly omits ``by``: "revenue grew 9 percent".
+            relation = trigger
         changes = tuple(item for item in candidates if relation is not None and item.char_start > relation)
         if relation is None or len(names) != 1 or len(changes) != 1:
             return None if not changes else ()
@@ -430,13 +466,35 @@ def _match_rule(
             ),
         )
 
+    if rule.frame is SemanticFrame.COMPOSITION:
+        percentages = tuple(
+            item for item in quantities if item.kind is QuantityKind.PERCENT
+        )
+        if len(names) != 1 or len(percentages) != 1:
+            return None if not percentages else ()
+        return (
+            _frame(
+                document=document,
+                block=block,
+                rule=rule,
+                concept=names[0],
+                scope=scope,
+                period=period,
+                period_semantics=semantics,
+                value=percentages[0],
+                inherited=inherited,
+            ),
+        )
+
     if rule.qualitative:
         if not names:
             return None
         # A causal frame has exactly two semantic roles.  Flattened filing or
         # IR blocks can mention several unrelated KPIs; emitting all pairwise
         # combinations would manufacture evidence.  Fail closed to review.
-        if rule.frame is SemanticFrame.CAUSE_EFFECT and len(names) != 2:
+        if rule.frame is SemanticFrame.CAUSE_EFFECT and len(names) < 2:
+            return None
+        if rule.frame is SemanticFrame.CAUSE_EFFECT and len(names) > 2:
             return ()
         dependency_validated = bool(
             backend is not None
@@ -465,6 +523,55 @@ def _match_rule(
             )
             for name in names
         )
+
+    if rule.output_metric_suffix == "_GUIDANCE":
+        bindings = bind_metric_values(
+            block.text,
+            tuple(item for item in concepts if getattr(item, "concept") in names),
+            candidates,
+            forward_only=True,
+        )
+        if bindings:
+            return tuple(
+                _frame(
+                    document=document,
+                    block=block,
+                    rule=rule,
+                    concept=binding.metric.concept,
+                    scope=scope,
+                    period=period,
+                    period_semantics=PeriodSemantics.FORECAST,
+                    value=binding.value,
+                    inherited=inherited,
+                    context_trace={"binding_order": binding.relation},
+                )
+                for binding in bindings
+            )
+        _concept_value_candidates(names, candidates)
+        return None
+
+    if rule.rule_id == "semantic.absolute":
+        bindings = bind_metric_values(
+            block.text,
+            tuple(item for item in concepts if getattr(item, "concept") in names),
+            candidates,
+        )
+        if bindings:
+            return tuple(
+                _frame(
+                    document=document,
+                    block=block,
+                    rule=rule,
+                    concept=binding.metric.concept,
+                    scope=scope,
+                    period=period,
+                    period_semantics=semantics,
+                    value=binding.value,
+                    inherited=inherited,
+                    context_trace={"binding_order": binding.relation},
+                )
+                for binding in bindings
+            )
 
     candidates = _concept_value_candidates(names, candidates)
     if len(names) != 1 or len(candidates) != 1:
@@ -666,11 +773,31 @@ def extract_text_kpis(
     stack = ContextStack()
     frames: list[KPIFrame] = []
     reviews: list[ReviewItem] = []
+    abstentions: list[AbstentionItem] = []
     for block in document_text_blocks(document):
-        if not narrative_candidate(block).accepted:
-            continue
         direct_mentions = find_concepts(block.text)
+        retrieval = narrative_candidate(block)
+        if not retrieval.accepted:
+            if direct_mentions:
+                tier = (
+                    FactTier.CRITICAL
+                    if any(definition_for(item.concept).tier is FactTier.CRITICAL for item in direct_mentions)
+                    else FactTier.NARRATIVE
+                )
+                abstentions.append(
+                    AbstentionItem(
+                        sentence_index=block.sentence_index,
+                        rule_id="retrieval.narrative_candidate",
+                        reason=retrieval.reason,
+                        failure_class="TABLE_TEXT_BOUNDARY",
+                        source_span=_source_span(block),
+                        tier=tier,
+                        candidates=tuple(sorted({item.concept for item in direct_mentions})),
+                    )
+                )
+            continue
         quantities = extract_quantities(block.text)
+        handled = False
         for rule in rules:
             mentions = direct_mentions
             inherited = False
@@ -688,7 +815,32 @@ def extract_text_kpis(
                     scope=stack.resolve_scope(block),
                     backend=backend,
                 )
+            except ContextBindingError as exc:
+                decision = exc.decision
+                abstentions.append(
+                    AbstentionItem(
+                        sentence_index=block.sentence_index,
+                        rule_id=rule.rule_id,
+                        reason=decision.reason,
+                        failure_class=decision.failure_class,
+                        source_span=_source_span(block),
+                        tier=decision.tier,
+                        candidates=tuple(
+                            sorted(
+                                {item.concept for item in mentions}
+                                | {item.raw for item in quantities}
+                            )
+                        ),
+                    )
+                )
+                handled = True
+                break
             except FrameValidationError as exc:
+                tier = (
+                    FactTier.CRITICAL
+                    if any(definition_for(item.concept).tier is FactTier.CRITICAL for item in mentions)
+                    else FactTier.NARRATIVE
+                )
                 reviews.append(
                     ReviewItem(
                         sentence_index=block.sentence_index,
@@ -696,13 +848,21 @@ def extract_text_kpis(
                         status="REVIEW_VALIDATION_FAILED",
                         reason=str(exc),
                         source_span=_source_span(block),
+                        tier=tier,
                     )
                 )
+                handled = True
                 break
             if matched is None:
                 continue
+            handled = True
             if not matched:
                 if rule.ambiguity is not AmbiguityPolicy.SKIP:
+                    tier = (
+                        FactTier.CRITICAL
+                        if any(definition_for(item.concept).tier is FactTier.CRITICAL for item in mentions)
+                        else FactTier.NARRATIVE
+                    )
                     reviews.append(
                         ReviewItem(
                             sentence_index=block.sentence_index,
@@ -720,6 +880,7 @@ def extract_text_kpis(
                                     | {item.raw for item in quantities}
                                 )
                             ),
+                            tier=tier,
                         )
                     )
                 break
@@ -733,6 +894,23 @@ def extract_text_kpis(
             )
             stack.update(block, base_concept, primary.scope, primary.period)
             break
+        if direct_mentions and not handled:
+            tier = (
+                FactTier.CRITICAL
+                if any(definition_for(item.concept).tier is FactTier.CRITICAL for item in direct_mentions)
+                else FactTier.NARRATIVE
+            )
+            abstentions.append(
+                AbstentionItem(
+                    sentence_index=block.sentence_index,
+                    rule_id="semantic.no_rule_match",
+                    reason="NO_SAFE_SEMANTIC_RULE_MATCH",
+                    failure_class="FALSE_KPI_FRAME",
+                    source_span=_source_span(block),
+                    tier=tier,
+                    candidates=tuple(sorted({item.concept for item in direct_mentions})),
+                )
+            )
     facts = tuple(fact for frame in frames for fact in _frame_facts(frame))
     claims = tuple(
         claim
@@ -746,5 +924,6 @@ def extract_text_kpis(
         claims,
         relations,
         tuple(reviews),
+        tuple(abstentions),
         backend.name if backend is not None else "BUILTIN_SPAN_FALLBACK",
     )

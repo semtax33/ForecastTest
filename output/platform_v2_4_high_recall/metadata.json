@@ -1,0 +1,11 @@
+{
+  "generated_at_utc": "2026-09-04T05:04:59.333739+00:00",
+  "version": "PLATFORM_V2_4_HIGH_RECALL_CANDIDATE_GENERATION",
+  "blindness_claim": "ISSUER_AND_DOCUMENT_UNSEEN",
+  "future_use": "ERROR_ANALYSIS_ONLY_NOT_RETUNING_VALIDATION",
+  "forecast_policy": "FROZEN_NO_RETUNING",
+  "dcf_policy": "KERNEL_FROZEN_NOT_EXECUTED_BEFORE_L3",
+  "llm_backend_used": false,
+  "terminal_input_allowed": false,
+  "production_promoted": false
+}

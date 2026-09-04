@@ -1,0 +1,28 @@
+{
+  "benchmark_id": "PLATFORM_V2_4_HIGH_RECALL_2026_09_04",
+  "status": "DIAGNOSTIC_SNAPSHOT_FROZEN",
+  "platform_status": "HOLD_RESEARCH_UNFROZEN",
+  "config_sha256": "a6e7413159264ebf2bce1ea2bd77c38a8f10b30dcabf7f5361a2de7eb9f237b1",
+  "artifact_sha256": {
+    "scripts/architecture/v24_blind_candidates.py": "29a28f00757f5b2c9b5ec9045693d10ca5d920866656819aeb432ba9b8ece763",
+    "scripts/architecture/v24_blind_evaluation.py": "7f9a4f85b32efdd795dab8cd737046e0ffff81c84e51545f73898bd7273af911",
+    "scripts/architecture/universe_certification_v24.py": "065ab552432bb6611c876133fe00efe9995ee8010aa586662bd26a9c82a717e2",
+    "output/platform_v2_4_high_recall/blind_sentence_candidates.csv": "b0ddaad14b75d226409d0a0b36f532f4fa1e6cea3dcad9582e491df16e4e0c48",
+    "data-lake/gold/parser/text_ie/v24_unseen_sentence_annotations.jsonl": "05e8cabb8634ef4e9ef22a8fe417f2cd1ce666cd5a0c12e757bbd027f9b57e2f",
+    "output/platform_v2_4_high_recall/blind_sentence_evaluation.csv": "52d8b3edfc062af1629e08f32ce6f13a53b1488a9f516cc59b7d7f85c5306da0",
+    "output/platform_v2_4_high_recall/blind_sentence_summary.csv": "974a56d784b0cccb605a238c503184dc6a2e4ed554210b29f1955bb6f6c85927",
+    "output/platform_v2_4_high_recall/coverage_ladder.csv": "3c4643f1faee402382124f2dc883fd62ba55bc194b25077c20a6904d387f4228",
+    "output/platform_v2_4_high_recall/platform_v24_gate.csv": "93d0144d7ea8fd99a05cd69f21f0292073b178ad388a54a6b1b74227be1ae0ec",
+    "output/platform_v2_4_high_recall/certification_funnel.csv": "451d9fc08441814766ccf6ee6b57e4fa3ded52837980c9db21ecdf9ab80afa78",
+    "output/platform_v2_4_high_recall/universe_layer_certification.csv": "6fffe767df5a2838c5415b0ecc074ac4c2e0e8e87505f806e73e8af7359eea32",
+    "output/platform_v2_4_high_recall/report.md": "4accba5ab5362d9f72ac29e542305e7375545f94ecd0f050302bd47e97c11648"
+  },
+  "policy": {
+    "blindness_claim": "ISSUER_AND_DOCUMENT_UNSEEN",
+    "future_use": "ERROR_ANALYSIS_ONLY_NOT_RETUNING_VALIDATION",
+    "forecast_snapshot": "FROZEN_UNCHANGED",
+    "dcf_kernel": "FROZEN_UNCHANGED_NOT_EXECUTED",
+    "terminal_input": "LOCKED",
+    "production": "LOCKED_0_OF_20"
+  }
+}

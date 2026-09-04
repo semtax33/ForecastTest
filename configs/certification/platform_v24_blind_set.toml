@@ -1,0 +1,105 @@
+blind_set_id = "V24_ISSUER_DOCUMENT_UNSEEN_2026_09_04"
+predeclared_at_utc = "2026-09-04T05:10:00Z"
+as_of_date = "2026-09-04"
+annotation_scope = "ALL_TARGET_FRAMES_IN_DETERMINISTIC_HASH_SELECTED_BLOCKS"
+blindness_claim = "ISSUER_UNSEEN_AND_DOCUMENT_UNSEEN_FOR_TEXT_IE_DEVELOPMENT"
+issuer_unseen = true
+document_unseen = true
+prior_repository_occurrence_count_before_declaration = 0
+rule_changes_after_selection = false
+v23_diagnostic_only = true
+
+evaluation_tickers = ["AAPL", "AMZN", "MSFT", "NKE", "PEP", "DHR", "WMT", "HD", "SBUX", "FDX"]
+required_critical_concepts = [
+  "REVENUE",
+  "OPERATING_INCOME",
+  "OPERATING_MARGIN",
+  "BACKLOG",
+  "PRODUCTION",
+  "CAPEX",
+  "DEBT",
+  "CASH",
+  "SHARES",
+  "ADJUSTED_EBITDA",
+]
+blocks_per_required_concept = 1
+numeric_blocks_per_issuer = 3
+qualitative_blocks_per_issuer = 1
+table_blocks_per_issuer = 1
+sampling_hash_salt = "V24_UNSEEN_FIXED_BEFORE_SENTENCE_REVIEW"
+
+[gates]
+critical_precision = 0.99
+v24_recall_milestone = 0.50
+final_critical_recall = 0.95
+narrative_precision = 0.90
+narrative_recall = 0.80
+
+[candidate_artifact]
+sha256 = "b0ddaad14b75d226409d0a0b36f532f4fa1e6cea3dcad9582e491df16e4e0c48"
+
+[selection_snapshot]
+generator_sha256 = "29a28f00757f5b2c9b5ec9045693d10ca5d920866656819aeb432ba9b8ece763"
+
+[v24_snapshot_sha256]
+v24_dsl = "63e4c1f500e2e1677151a0b3bfcf80c54b31bb81848c73ae297034f593c65c36"
+table_reconstruction = "7683ce5710fab55ee393ddc2be86c55a663c654742fcdf507e32b168de205ca0"
+documents_init = "6d2c519decabde2447bf4521dd6b9951be0393f315547969443fb6fdb3125949"
+v24_model = "2f5427eafba41a9e11e934bdd8e0167b5f972d534cc3e0982767751a4ce8302f"
+v24_candidate_generator = "1980ac6c1f37879737fbcdafd1bda750307b7526245ee2ee1810d437f5cd3bde"
+v24_binder = "76973a14aa9befe93a27bbcc80c2c6e251eec8e0f14f9092a78b3109404f4481"
+v24_verifier = "a9288e99029200a17ef26c61f15fbdc25b5c971862fcde2bf72406b94db08f4e"
+v24_llm_rescue = "958ebea2bc7ff052c6b86c38ddbdcbf6f6b0babcfa4d4cb1e45e8fe098269a36"
+v24_runtime = "290b93766f27e140fc66945104bbd2e9ddb154311695ed6adfb40cec03d305a8"
+v24_init = "8e5241b8671d76af9cd914428b465a50baa3000256f1165c305d414be467497c"
+v23_dependency_manifest = "781916ba71da17979a8f8cd125a14697ad0c3e32c0046081e8e26f1216a3a60f"
+
+[[sources]]
+ticker = "AAPL"
+file_name = "2026-07-30_0000320193-26-000018_EX-99.1_a8-kex991q3202606272026.htm"
+sha256 = "3a48068e2ed1189b97c224385a194ef703e02f6c2cd7796899275cf130a2db49"
+
+[[sources]]
+ticker = "AMZN"
+file_name = "2026-07-30_0001018724-26-000024_EX-99.1_amzn-20260630xex991.htm"
+sha256 = "54264d717a1fc3e19ba3f9a0e8e599bdf87a64121cc0b19052aad1e3b2372471"
+
+[[sources]]
+ticker = "MSFT"
+file_name = "2026-07-29_0001193125-26-323632_EX-99.1_msft-ex99_1.htm"
+sha256 = "83f124ce1553e422123a6f8c27634ab2ac31da3191a905b683400a688d967c2b"
+
+[[sources]]
+ticker = "NKE"
+file_name = "2026-03-31_0000320187-26-000026_EX-99.1_q3fy26exhibit991er.htm"
+sha256 = "c165066e2181e4a86922e6a4087395d4de3ddfdceaa3b5af9f098c0b275ecbaf"
+
+[[sources]]
+ticker = "PEP"
+file_name = "2026-07-09_0000077476-26-000037_EX-99.1_q220268-kxexhibit991.htm"
+sha256 = "f98b17ea5be4d38649f7e881b7d1b8925447893fd6fead9ea4fee4b9079c08b8"
+
+[[sources]]
+ticker = "DHR"
+file_name = "2026-07-21_0000313616-26-000163_EX-99.1_dhr-20260721xex991.htm"
+sha256 = "bf32efbceb406b12739d1c4b32a3a6873929c80929fc35ed1fa742d25add732d"
+
+[[sources]]
+ticker = "WMT"
+file_name = "2026-08-20_0000104169-26-000145_EX-99.1_earningsreleasefy27q2.htm"
+sha256 = "32ea06ff77e2052121ab7ff53c58c099afe997bbc9aec196766d76273cd12b57"
+
+[[sources]]
+ticker = "HD"
+file_name = "2026-08-18_0000354950-26-000145_EX-99.1_hd_exhibit991x08022026.htm"
+sha256 = "0b5028553f67f77233be3db8879976f6fb2ff1f87d0a9467844852240d77dcb7"
+
+[[sources]]
+ticker = "SBUX"
+file_name = "2026-07-29_0000829224-26-000129_EX-99.1_sbux-06282026xearningsrele.htm"
+sha256 = "1c66c1551c6c0a05e57b4ecca723e98a003515e75f0475d22bc8337babc07319"
+
+[[sources]]
+ticker = "FDX"
+file_name = "2026-06-23_0001048911-26-000050_EX-99.1_fdx-earningsreleasefy2026q4.htm"
+sha256 = "eb9985575cb16da2da1b23c150a66f1e22ff6f4d4d73c9efe54aff666b21d971"

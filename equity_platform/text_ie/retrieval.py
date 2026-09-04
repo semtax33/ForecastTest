@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import re
 
 from .model import TextBlock
 
@@ -31,6 +32,22 @@ def narrative_candidate(block: TextBlock) -> CandidateDecision:
         )
     )
     numeric_tokens = sum(char.isdigit() for char in block.text)
+    numeric_groups = len(re.findall(r"(?<![A-Za-z])[-(]?\d[\d,.]*(?:\))?", block.text))
+    if (
+        numeric_groups >= 12
+        and numeric_tokens > 30
+        and any(
+            marker in folded
+            for marker in (
+                "financial results summary",
+                "in millions of dollars",
+                "in millions, except",
+                "earnings per share",
+                "cash flow from operations",
+            )
+        )
+    ):
+        return CandidateDecision(False, "TABULAR_HEADER_AND_NUMERIC_DENSITY")
     if table_markers >= 2 and numeric_tokens > 30:
         return CandidateDecision(False, "FINANCIAL_TABLE_MARKERS")
     if len(block.text.split()) > 180 and sum(char.isdigit() for char in block.text) > 80:

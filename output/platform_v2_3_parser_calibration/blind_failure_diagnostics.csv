@@ -1,0 +1,12 @@
+ticker,candidate_id,gold_route,disposition,false_positive,false_negative,review_rules,review_reasons,abstention_failure_classes,abstention_reasons,table_route_pass,annotation_note
+CNX,cb9e914a0dd42ad1694d,TEXT_IE,REVIEW,0,2,semantic.range_guidance,No unique semantic-frame assignment,,,True,The footnote states current shares outstanding and expected net shares to be issued; asset-sale amounts are not revenue.
+ETN,cd2ef6bc3dde8567acec,TEXT_IE,REVIEW,0,1,semantic.absolute,BACKLOG does not accept PERCENT; expected MONEY,,,True,Backlog increased 28 percent over the prior-year month.
+GD,d1b14df5598095ed28e3,TEXT_IE,REVIEW,0,2,semantic.change_to_nominal,No unique semantic-frame assignment,,,True,The block explicitly states both the margin level and its 40-basis-point year-over-year expansion.
+GEV,25e9c606f49db4ac49cf,TEXT_IE,ABSTAINED,0,1,,,FALSE_KPI_FRAME,NO_SAFE_SEMANTIC_RULE_MATCH,True,Data-center orders explicitly reached more than $5 billion year to date; the lower-bound qualifier is preserved by the frame.
+GEV,97ad40f830154391f576,TEXT_IE,REVIEW,0,2,semantic.comparative,No unique semantic-frame assignment,,,True,Quarter-end cash balance and its year-to-date increase are explicit; the distant backlog phrase is not causally related to cash.
+HON,951464d04d464c781f4d,TEXT_IE,ABSTAINED,0,1,,,FALSE_KPI_FRAME,NO_SAFE_SEMANTIC_RULE_MATCH,True,Segment margin expansion is explicitly 100 basis points.
+WM,1bb46a5d016151f48e30,TEXT_IE,ABSTAINED,0,3,,,RELATION_ERROR,INTERVENING_KPI_SUBJECT,True,Higher recycling and renewable-energy volumes drove revenue growth; a later bullet states a 1.8 percent Collection and Disposal volume decline.
+WM,166b77bb6e92f789ce5a,TEXT_IE,REVIEW,0,3,semantic.change_to,REVENUE does not accept PERCENT; expected MONEY,,,True,"Revenue grew 4 percent and the same sentence attributes growth to core price, which is a separate causal claim."
+WMB,b44e69ddd0a9fe3188fd,TEXT_IE,REVIEW,0,2,semantic.range_guidance,No unique semantic-frame assignment,,,True,The block contains distinct 2026 adjusted EBITDA and growth-capex guidance ranges.
+XOM,d35b826319fa1e670482,TEXT_IE,REVIEW,0,1,semantic.absolute,No unique semantic-frame assignment,,,True,"Cash capital expenditures year to date are explicitly $13 billion; the identical PP&E additions amount is supporting composition, not a second capex fact."
+XOM,da4ba8b5d329d941f647,TABLE_DSL,REVIEW,0,0,semantic.comparative,No unique semantic-frame assignment,,,False,Flattened cash-capex reconciliation and segment table belongs to the table DSL despite the initial route heuristic.

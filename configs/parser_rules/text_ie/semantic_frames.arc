@@ -59,6 +59,24 @@ text_rule "semantic.change_to" {
   operations = ["normalize_money", "normalize_percent", "resolve_scope", "resolve_period", "assert_unique", "emit_frame"]
 }
 
+text_rule "semantic.change_to_nominal" {
+  version = 1
+  frame = "CHANGE_TO"
+  triggers = ["increase", "decrease"]
+  quantity_kinds = ["MONEY", "PRICE", "COUNT", "RATE", "PERCENT"]
+  relation_words = ["to"]
+  require_metric = true
+  require_value = true
+  require_unique_metric = true
+  require_unique_value = true
+  allow_context_metric = false
+  ambiguity = "REVIEW"
+  authority = "RESEARCH_EVIDENCE"
+  priority = 15
+  backends = ["SEQUENCE"]
+  operations = ["normalize_money", "normalize_percent", "resolve_scope", "resolve_period", "assert_unique", "emit_frame"]
+}
+
 text_rule "semantic.change_by" {
   version = 1
   frame = "CHANGE_BY"
@@ -87,6 +105,23 @@ text_rule "semantic.range_guidance" {
   ambiguity = "REVIEW"
   authority = "RESEARCH_EVIDENCE"
   priority = 30
+}
+
+text_rule "semantic.point_guidance" {
+  version = 1
+  frame = "ABSOLUTE_VALUE"
+  triggers = ["expects", "expected", "forecast", "projects", "will", "outlook", "guidance"]
+  quantity_kinds = ["MONEY", "PRICE", "COUNT", "PERCENT", "RATE"]
+  require_metric = true
+  require_value = true
+  require_unique_metric = false
+  require_unique_value = false
+  output_metric_suffix = "_GUIDANCE"
+  ambiguity = "REVIEW"
+  authority = "RESEARCH_EVIDENCE"
+  priority = 35
+  backends = ["SEQUENCE"]
+  operations = ["resolve_scope", "resolve_period", "assert_unique", "emit_frame"]
 }
 
 text_rule "semantic.not_expected" {
@@ -125,7 +160,7 @@ text_rule "semantic.comparative" {
 text_rule "semantic.composition" {
   version = 1
   frame = "COMPOSITION"
-  triggers = ["of the backlog", "of total backlog", "included", "was funded"]
+  triggers = ["of the backlog", "of total backlog", "included", "was funded", "represented", "accounted for", "comprised", "made up"]
   quantity_kinds = ["MONEY", "COUNT", "PERCENT"]
   relation_words = ["of"]
   require_metric = true
@@ -169,7 +204,7 @@ text_rule "semantic.rate" {
 text_rule "semantic.absolute" {
   version = 1
   frame = "ABSOLUTE_VALUE"
-  triggers = ["was", "were", "is", "stood at", "totaled"]
+  triggers = ["was", "were", "is", "stood at", "totaled", "of", "generated", "generates", "approach", "approaches", "had", "has", "reached"]
   quantity_kinds = ["MONEY", "PRICE", "COUNT", "PERCENT", "RATE"]
   require_metric = true
   require_value = true

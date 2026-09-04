@@ -1,0 +1,16 @@
+example_id,expected_frames,actual_frames,actual_facts,actual_claims,actual_reviews,actual_abstentions,actual_relations,frame_true_positive,frame_false_positive,frame_false_negative,critical_true_positive,critical_false_positive,critical_false_negative,narrative_true_positive,narrative_false_positive,narrative_false_negative,critical_reviews,narrative_reviews,critical_abstentions,narrative_abstentions,review_true_positive,review_false_positive,review_false_negative,annotation_source,frame_match,count_match,passed
+v23.dev.value_before_revenue,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.forward_value_before_revenue,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.nominal_change_to,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.implicit_change_by_symbol,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.implicit_change_by_word,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.composition_value_before_metric,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.metric_of_value,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.point_capex_guidance,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.value_before_cash_with_competing_amount,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.multiple_bullet_clauses,2,2,2,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.sensitivity_not_absolute,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.forward_cue_after_fact,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.tabular_summary_routes_away,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.narrative.price_to_revenue,2,2,0,2,0,0,1,2,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True
+v23.dev.narrative.demand_to_volume,2,2,0,2,0,0,1,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,V23_GENERIC_BINDING_DEV,True,True,True

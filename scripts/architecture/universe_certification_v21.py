@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 from equity_platform.artifacts import sha256_file
-from equity_platform.certification import certify_universe
+from equity_platform.certification import certify_universe, verify_lineage_manifest
 from equity_platform.documents import DocumentMetadata, adapt_html_document
 from equity_platform.paths import PROJECT_ROOT
 from equity_platform.reporting import markdown_table, write_csv_artifacts
@@ -116,8 +116,52 @@ def _latest_ir_source(ticker: str) -> Path | None:
             candidates.append(path)
     if not candidates:
         return None
-    preferred = [path for path in candidates if "EX-99.1" in path.name.upper()]
-    return max(preferred or candidates, key=lambda path: path.name)
+    latest_date = max(pd.Timestamp(path.name[:10]) for path in candidates)
+    recent = [
+        path
+        for path in candidates
+        if pd.Timestamp(path.name[:10]) >= latest_date - pd.Timedelta(days=150)
+    ]
+    return max(recent, key=lambda path: (_ir_document_score(path), path.name))
+
+
+def _ir_document_score(path: Path) -> int:
+    """Rank earnings-result exhibits above later unrelated 8-K exhibits."""
+
+    folded = path.name.casefold()
+    score = min(4, path.stat().st_size // 150_000)
+    for cue, weight in {
+        "earnings": 10,
+        "earning": 8,
+        "results": 8,
+        "result": 6,
+        "livef8k": 8,
+        "q1": 3,
+        "q2": 3,
+        "q3": 3,
+        "q4": 3,
+        "ex-99.1": 1,
+        "ex-99.01": 1,
+    }.items():
+        if cue in folded:
+            score += weight
+    for cue in ("director", "dividend", "appointment", "conference", "presentation"):
+        if cue in folded:
+            score -= 8
+    try:
+        sample = path.read_bytes()[:300_000].lower()
+    except OSError:
+        return score
+    for cue in (
+        b"earnings release",
+        b"financial results",
+        b"quarter ended",
+        b"quarterly results",
+        b"net earnings",
+    ):
+        if cue in sample:
+            score += 4
+    return score
 
 
 def _audit_latest_ir(
@@ -144,6 +188,7 @@ def _audit_latest_ir(
                     "frames": 0,
                     "facts": 0,
                     "reviews": 0,
+                    "abstentions": 0,
                     "error": "",
                     "holdout_issuer": item.ticker in FINAL_BLIND_HOLDOUT_TICKERS,
                     "development_probe_issuer": item.ticker in DEVELOPMENT_PROBE_TICKERS,
@@ -180,6 +225,7 @@ def _audit_latest_ir(
                     "frames": len(result.frames),
                     "facts": len(result.facts),
                     "reviews": len(result.reviews),
+                    "abstentions": len(result.abstentions),
                     "error": "",
                     "holdout_issuer": item.ticker in FINAL_BLIND_HOLDOUT_TICKERS,
                     "development_probe_issuer": item.ticker in DEVELOPMENT_PROBE_TICKERS,
@@ -242,6 +288,7 @@ def _audit_latest_ir(
                     "frames": 0,
                     "facts": 0,
                     "reviews": 0,
+                    "abstentions": 0,
                     "error": repr(exc),
                     "holdout_issuer": item.ticker in FINAL_BLIND_HOLDOUT_TICKERS,
                     "development_probe_issuer": item.ticker in DEVELOPMENT_PROBE_TICKERS,
@@ -333,7 +380,15 @@ def _verified_energy_hashes() -> pd.DataFrame:
                 "lineage_hash_coverage": verified / len(group) if len(group) else 0.0,
             }
         )
-    return pd.DataFrame(rows)
+    legacy = pd.DataFrame(rows)
+    ep_path = ROOT / "data-lake/gold/certification/energy_ep_source_manifest.csv"
+    if not ep_path.exists():
+        return legacy
+    ep = verify_lineage_manifest(_read(ep_path))
+    combined = pd.concat([legacy, ep], ignore_index=True)
+    if combined["ticker"].duplicated().any():
+        raise ValueError("Energy lineage manifests contain duplicate issuers")
+    return combined
 
 
 def _energy_forecast_evidence() -> pd.DataFrame:

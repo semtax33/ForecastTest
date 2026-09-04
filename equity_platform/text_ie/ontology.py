@@ -5,7 +5,7 @@ import re
 
 from equity_platform.ir import ClaimType
 
-from .model import ConceptMention, QuantityKind
+from .model import ConceptMention, FactTier, QuantityKind
 
 
 @dataclass(frozen=True)
@@ -14,6 +14,7 @@ class ConceptDefinition:
     aliases: tuple[str, ...]
     quantity_kinds: tuple[QuantityKind, ...]
     claim_type: ClaimType
+    tier: FactTier = FactTier.CRITICAL
 
 
 CONCEPTS = (
@@ -70,7 +71,7 @@ CONCEPTS = (
     ),
     ConceptDefinition(
         "OPERATING_MARGIN",
-        ("operating earnings margin", "operating margin", "segment margin", "margin"),
+        ("operating earnings margin", "operating margin", "segment margin"),
         (QuantityKind.PERCENT, QuantityKind.BASIS_POINTS),
         ClaimType.GUIDANCE,
     ),
@@ -105,6 +106,46 @@ CONCEPTS = (
         ClaimType.GUIDANCE,
     ),
     ConceptDefinition(
+        "OPERATING_INCOME",
+        ("segment operating income", "operating income", "operating profit"),
+        (QuantityKind.MONEY,),
+        ClaimType.GUIDANCE,
+    ),
+    ConceptDefinition(
+        "EBIT",
+        ("earnings before interest and taxes", "ebit"),
+        (QuantityKind.MONEY,),
+        ClaimType.GUIDANCE,
+    ),
+    ConceptDefinition(
+        "NET_DEBT_TO_ADJUSTED_EBITDA",
+        (
+            "net debt-to-adjusted ebitda",
+            "net debt to adjusted ebitda",
+            "net debt-to-ebitda",
+        ),
+        (QuantityKind.RATE,),
+        ClaimType.CAPITAL_ALLOCATION,
+    ),
+    ConceptDefinition(
+        "DEBT",
+        ("total debt", "long-term debt", "net debt"),
+        (QuantityKind.MONEY,),
+        ClaimType.CAPITAL_ALLOCATION,
+    ),
+    ConceptDefinition(
+        "CASH",
+        ("cash and cash equivalents", "cash balance"),
+        (QuantityKind.MONEY,),
+        ClaimType.CAPITAL_ALLOCATION,
+    ),
+    ConceptDefinition(
+        "SHARES",
+        ("common shares outstanding", "shares outstanding"),
+        (QuantityKind.COUNT,),
+        ClaimType.CAPITAL_ALLOCATION,
+    ),
+    ConceptDefinition(
         "REALIZED_PRICE",
         ("average realized price", "realized commodity price", "realized price"),
         (QuantityKind.PRICE,),
@@ -121,6 +162,35 @@ CONCEPTS = (
         ("supply chain constraints", "supply constraints"),
         (),
         ClaimType.SUPPLY_CONSTRAINT,
+        FactTier.NARRATIVE,
+    ),
+    ConceptDefinition(
+        "PRICE_REALIZATION",
+        ("price realization", "higher pricing", "lower pricing", "pricing"),
+        (),
+        ClaimType.PRICE_ACTION,
+        FactTier.NARRATIVE,
+    ),
+    ConceptDefinition(
+        "ACTIVITY_VOLUME",
+        ("sales volumes", "shipment volumes", "volume growth", "volumes", "volume"),
+        (),
+        ClaimType.OPERATIONAL_EVENT,
+        FactTier.NARRATIVE,
+    ),
+    ConceptDefinition(
+        "CUSTOMER_DEMAND",
+        ("customer demand", "end-market demand", "market demand", "demand"),
+        (),
+        ClaimType.CUSTOMER_DEMAND,
+        FactTier.NARRATIVE,
+    ),
+    ConceptDefinition(
+        "INPUT_COST_PRESSURE",
+        ("raw material costs", "input costs", "labor costs", "cost inflation"),
+        (),
+        ClaimType.COST_PRESSURE,
+        FactTier.NARRATIVE,
     ),
 )
 
@@ -169,6 +239,10 @@ def definition_for(concept: str) -> ConceptDefinition:
         if definition.concept == concept:
             return definition
     raise KeyError(f"Unknown KPI concept: {concept}")
+
+
+def tier_for_concept(concept: str) -> FactTier:
+    return definition_for(concept).tier
 
 
 def find_concepts(text: str) -> tuple[ConceptMention, ...]:

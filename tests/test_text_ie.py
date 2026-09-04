@@ -68,7 +68,7 @@ def _document(text: str, *, heading: str | None = None):
 
 
 def test_text_rule_dsl_is_typed_hashed_and_non_turing() -> None:
-    assert len(DEFAULT_TEXT_RULES) == 10
+    assert len(DEFAULT_TEXT_RULES) == 12
     assert len({rule.source_sha256 for rule in DEFAULT_TEXT_RULES}) == 1
     assert all(len(rule.source_sha256) == 64 for rule in DEFAULT_TEXT_RULES)
     program = compile_text_program_file(

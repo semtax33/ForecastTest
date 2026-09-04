@@ -1,0 +1,17 @@
+example_id,expected_frames,actual_frames,actual_facts,actual_claims,actual_reviews,actual_abstentions,actual_relations,frame_true_positive,frame_false_positive,frame_false_negative,critical_true_positive,critical_false_positive,critical_false_negative,narrative_true_positive,narrative_false_positive,narrative_false_negative,critical_reviews,narrative_reviews,critical_abstentions,narrative_abstentions,review_true_positive,review_false_positive,review_false_negative,annotation_source,frame_match,count_match,passed
+v22.dev.revenue.absolute,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.ebitda.absolute,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.operating.margin,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.leverage.rate,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.cash.absolute,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.debt.absolute,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.shares.absolute,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.production.absolute,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.capex.range,1,1,2,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.revenue.comparative,2,2,2,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.false.turnaround.cost,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.false.dividend,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.false.net_income,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.false.repurchases,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.false.operating_income,1,1,1,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True
+v22.dev.narrative.cause,2,2,0,2,0,0,1,2,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,V22_GENERALIZATION_DEV,True,True,True

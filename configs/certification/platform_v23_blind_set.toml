@@ -1,0 +1,64 @@
+blind_set_id = "V23_OUTCOME_BLIND_2026_09_04"
+predeclared_at_utc = "2026-09-04T03:30:00Z"
+as_of_date = "2026-09-04"
+annotation_scope = "ALL_TARGET_FRAMES_IN_DETERMINISTIC_CONCEPT_BALANCED_BLOCK_SAMPLE"
+blindness_claim = "SENTENCE_BLOCK_OUTCOME_BLIND_NOT_ISSUER_UNSEEN"
+rule_changes_after_selection = false
+prior_v22_blind_tickers_excluded = true
+
+# These issuers were available in earlier platform research, but none was in
+# the V2.2 evaluation set.  Only the selected sentence-block outcomes are blind.
+evaluation_tickers = [
+  "CNX",
+  "XOM",
+  "WMB",
+  "VLO",
+  "GD",
+  "CAT",
+  "GEV",
+  "WM",
+  "ETN",
+  "HON",
+]
+
+required_critical_concepts = [
+  "REVENUE",
+  "OPERATING_INCOME",
+  "OPERATING_MARGIN",
+  "BACKLOG",
+  "PRODUCTION",
+  "CAPEX",
+  "DEBT",
+  "CASH",
+  "SHARES",
+  "ADJUSTED_EBITDA",
+]
+blocks_per_required_concept = 2
+numeric_blocks_per_issuer = 1
+qualitative_blocks_per_issuer = 1
+sampling_hash_salt = "V23_CONCEPT_BALANCED_FIXED_BEFORE_SENTENCE_REVIEW"
+
+[candidate_artifact]
+sha256 = "eff90241e1df4f458de42a3d7472dc89920daff274739a0e3c48ce91ce15715b"
+
+[selection_snapshot]
+generator_sha256 = "aaa2ab5cb570373a0c9c3306e620d33c247b07d16542d3bf18375ea1f846dc4a"
+
+[parser_snapshot_sha256]
+semantic_frames = "9296d75efc9239d1f296dbab3248ac95e63b9a6527bb9c7e71172759fde0c6fe"
+model = "48765072a2137066222b586099e101c7519f7fada3f5a69fc0427d1b633199a2"
+ontology = "9f8c860d7ed05d851e9333aed9e42b2e25c6847c28e0788f2522ae034e24a242"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+context = "7bcd2f44f33109053fa078c14dca4c8eddd4494298eaf963ebcf5b258473a531"
+context_validation = "cf64fca6e0107547dcaa6d28bd8c5693880179521b6e27f340829e6b8c0f1c74"
+semantic_binding = "6b7b9b8c3bf24ad6fb9182e43fb4d0c9632c0efae620b02a1df87c7a46145666"
+retrieval = "9066636d4cdc7aaac28cf0d56fe66e4a9403d93a5991b3360fc31b5bd325b115"
+document = "82f6aa36da596e0d7fdf49824a627b5a5fa95cb5af2f3d841b691469aefd2fc0"
+matcher = "b858b144e5e9ff357a9f7b100a5e4c5c4308b0409f9369de809b65ea55048049"
+runtime = "48f89e8ac93f3938d0b981f597994e6847509cc1792200a7420ae2aa73ce4723"
+validation = "3b8644dc26ca7cc5928d65ac9ddc6a3fbe8d47247b132f474c6b2f92d13c268a"
+dsl_compiler = "65b0dba4462934c68bcfd92997d28cd6fbe9e9b41b8c58e26f52dfe847920e62"
+spacy_backend = "3b7e38ee7146e37b2742aef2f43a2ca804c846f59dfe84805446f80e2bc11dfc"
+document_model = "e95ed0ce82372b8a2654f963888d346245ae95c6d3ecc22f59e53bad6e78eded"
+document_html = "27cff9b505329df5af78ae996de9e95024865fb024e6bbe8d57d2b15c0fdbe7f"
+source_locator = "716fb6fe1b1dacfda1e2b5d4234e9e6bf4c4e6ec6c6dd60b5caa00c7b64b0a14"
