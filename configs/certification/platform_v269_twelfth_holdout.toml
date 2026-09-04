@@ -1,0 +1,111 @@
+holdout_id = "V269_TWELFTH_ISSUER_DOCUMENT_DISJOINT_2026_09_04"
+predeclared_at = "2026-09-04T22:53:28.2628198+09:00"
+evaluation_tickers = ["NFLX", "MA", "GS", "MS", "PLD", "PANW", "LRCX", "ISRG", "MDT", "NOW"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V269_TWELFTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v269_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+source_substitution_reason = "Before candidate artifact creation and content review: GS EX-99.2 (8 eligible blocks) was replaced by same-date EX-99.1; DUK (4 eligible blocks) was replaced by PANW"
+
+[candidate_artifact]
+path = "output/platform_v2_6_9_spacy_semantic_ownership/twelfth_holdout_candidates.csv"
+rows = 100
+sha256 = "e263971258d74b26030b376e1aa01f6de9578a1befa4456e450ca2d3722c0b02"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v269_twelfth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 29
+table_blocks = 25
+sha256 = "19154eeb8d668bb2f7491437922a5c2649180a0604f8490943f3b6d225e28041"
+annotation_script_sha256 = "c63e62a7b8b96a39decda3edde8967523551dd32dadb15b4cfd3881841678aa0"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[selection_snapshot]
+generator_sha256 = "01b0dc2e5504263521fc9aafa9f8ee7897e8a5343bb6a5a7d487220667c13032"
+
+[code_snapshot_sha256]
+compiler = "0104e36ad1d5d1ba2d41df60b68208a0ff39e42aa8ecdc023c704730cd211c03"
+runtime = "578f91af416222be8b55585647268449f375ac19469e035ed87c600ba6fe3766"
+spacy_backend = "0cb343ccd0d0ed34a2dbd3d2431bd38ac001abbb5bf7615ed2383f96487c60cb"
+ontology = "f2b9b7ead57eb58187d31442cda8c86d8599a60d19b660d869dd8bb3262f4e70"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+validation = "ac621c159ac628173bbd666742edc0915c1afc2171a391bd5cf925a4a7e75b32"
+v267_semantics = "e9c09078afa0dde5748016aa3b35c9a0da8b897d2b87ff96b6df70bff3378ff7"
+v267_runtime = "0ce7776598e43e045e489cea19cecdcca000245614edaa649167995d8d4bd9d8"
+v267_router = "e10500c4593bdde63c7b16b33bf9a00af34afc26363d1f021a3befade512f9be"
+v267_init = "2c7e12b774e377f50d95a88d6de7b633364b1cd6e0249a82f26151e2c9a18d00"
+v267_rules = "9df5b74d171690ef11fb1f8227264ee7a3670e5b6fac863492cef397456e6046"
+v268_semantics = "e2945bac11a6be06a63a2acf4f7c575f423392b21b86e5d48b25266f642a526f"
+v268_runtime = "e979bd82963436d4b6bbfb3bb52c861f287a413aef30682d435f7231dad7520f"
+v268_router = "a5bd43655721d57b37df5e72fcc584a81963c77d5c301714dfc421521595235e"
+v268_init = "50b0de3c2a21167b1448021b0408054e68787e20ef2157f8e4c79048cc5eeb88"
+v268_rules = "703b799cbb191dd1dea42b785d6d1f30dac95a2a5731a4e3d68f0449f544b280"
+v269_semantics = "5f34856bfe6e67df5c02d1faff68f3d545abcfc0c7b31ed52702b6012a39895c"
+v269_runtime = "8b25ac7b70f2d1dfaa069fb067a21cee907f4b76f7385c38c1b8e24ffba951c3"
+v269_router = "e2e551824fb93fce413c93d750841939d26dd84a0a5e8b84bb598579f7ef7ae4"
+v269_init = "9298082dcf0121dbe279b6f7ab80d07b13399fab65f0b37cddbcd03d9159f799"
+v269_rules = "04b2c5c67e787fb19574956eeb9d9941aaaf55b5ca15a5c65b2cd2f7a1489d53"
+
+[[sources]]
+ticker = "NFLX"
+file_name = "2026-07-16_0001065280-26-000211_EX-99.1_ex991_q226.htm"
+sha256 = "255ed8b26253e557cde42088dc802016e184922093d1b393b98a3b0158082d64"
+
+[[sources]]
+ticker = "MA"
+file_name = "2026-07-30_0001141391-26-000081_EX-99.1_ma06302026-exx991xearnings.htm"
+sha256 = "c0bd694758ae689933ee241aae97bfe6b5fa1d761a1389d8aa49c536d3587b21"
+
+[[sources]]
+ticker = "GS"
+file_name = "2026-07-14_0000886982-26-000294_EX-99.1_a2q26gsearningsresults.htm"
+sha256 = "cecac93d31b292ec2e49bd4241c19a00cc812097fd83b8c8576b0267b5587203"
+
+[[sources]]
+ticker = "MS"
+file_name = "2026-07-15_0000895421-26-000207_EX-99.1_a2q26msearningsrelease.htm"
+sha256 = "6c6d58dcd4a911ba7aad79779785f0f047320ecae775e8d2f63bd94a1215a004"
+
+[[sources]]
+ticker = "PLD"
+file_name = "2026-07-16_0001193125-26-305416_EX-99.1_pld-ex99_1.htm"
+sha256 = "ae134c215fa67e488c1c6b65a6dc67978fc2fe6dc3fc369357331abf660824d7"
+
+[[sources]]
+ticker = "PANW"
+file_name = "2026-06-02_0001327567-26-000012_EX-99.1_ex991q326earningsrelease.htm"
+sha256 = "8ee00564ac1b37292df9ed336f98e4c1ebbe3dfc01911ba565545591f2d858dd"
+
+[[sources]]
+ticker = "LRCX"
+file_name = "2026-07-29_0000707549-26-000033_EX-99.1_lrcx_exhibitx991xq4x2026.htm"
+sha256 = "60eb25ebf931d5ad979d158e967af609e8bb65c5beeaa5bdbfaf0dd5e25222e3"
+
+[[sources]]
+ticker = "ISRG"
+file_name = "2026-07-16_0001035267-26-000047_EX-99.1_q226ex-991earningsrelease.htm"
+sha256 = "d158c57485c67215f1debe122089c40512ae24e7a8c8dd223a778d710e5c41fe"
+
+[[sources]]
+ticker = "MDT"
+file_name = "2026-06-03_0001628280-26-040034_EX-99.1_exhibit991-fy26q4earningsr.htm"
+sha256 = "acb8c0453d82a09c13cb4d13a34fc027a37df6517dfd4e62b07c18f80b6f7a42"
+
+[[sources]]
+ticker = "NOW"
+file_name = "2026-07-22_0001373715-26-000072_EX-99.1_erq2fy26.htm"
+sha256 = "c9195903e492f27f7d033709e15b9a50b0099f379ce49d818596c53df9ed213e"

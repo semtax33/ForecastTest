@@ -174,7 +174,10 @@ CONCEPTS = (
     ConceptDefinition(
         "ACTIVITY_VOLUME",
         ("sales volumes", "shipment volumes", "volume growth", "volumes", "volume"),
-        (QuantityKind.PERCENT, QuantityKind.COUNT),
+        # Activity anchors can be physical counts/changes or monetary flows
+        # (for example asset-manager net inflows).  The semantic rule must
+        # still bind the amount to an explicit activity noun.
+        (QuantityKind.PERCENT, QuantityKind.COUNT, QuantityKind.MONEY),
         ClaimType.OPERATIONAL_EVENT,
         FactTier.NARRATIVE,
     ),

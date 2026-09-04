@@ -1,0 +1,106 @@
+holdout_id = "V270_THIRTEENTH_ISSUER_DOCUMENT_DISJOINT_2026_09_04"
+predeclared_at = "2026-09-04T23:48:00+09:00"
+evaluation_tickers = ["CDNS", "KLAC", "SCHW", "ADI", "AMAT", "BLK", "EQIX", "ELV", "REGN", "INTU"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V270_THIRTEENTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v270_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+source_substitution_reason = "Before candidate artifact creation and content review: COST had only 6 eligible blocks and was replaced by CDNS; PGR had only 2 eligible blocks and was replaced by ELV"
+
+[candidate_artifact]
+path = "output/platform_v2_7_0_spacy_semantic_ownership/thirteenth_holdout_candidates.csv"
+rows = 100
+sha256 = "c781f512ece42965051f3705b114268f9abc11aa3a4a26b53c119be0f7b778bc"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v270_thirteenth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 43
+table_blocks = 19
+sha256 = "a8cf28a9ee39cefa3fcde1b0468430053e4572616a512782b7adebad9f4fc9d6"
+annotation_script_sha256 = "528da081bad566e070025d9b307ff36ddb5e10597e4dad380b6fbea210dd2474"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[selection_snapshot]
+generator_sha256 = "d83b5d0eca8b46132e5cbf60c3a261338e65b3c0f5d087c5f847c2a1d9a28431"
+
+[code_snapshot_sha256]
+compiler = "0104e36ad1d5d1ba2d41df60b68208a0ff39e42aa8ecdc023c704730cd211c03"
+runtime = "578f91af416222be8b55585647268449f375ac19469e035ed87c600ba6fe3766"
+spacy_backend = "0cb343ccd0d0ed34a2dbd3d2431bd38ac001abbb5bf7615ed2383f96487c60cb"
+ontology = "f2b9b7ead57eb58187d31442cda8c86d8599a60d19b660d869dd8bb3262f4e70"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+validation = "ac621c159ac628173bbd666742edc0915c1afc2171a391bd5cf925a4a7e75b32"
+v269_semantics = "5f34856bfe6e67df5c02d1faff68f3d545abcfc0c7b31ed52702b6012a39895c"
+v269_runtime = "8b25ac7b70f2d1dfaa069fb067a21cee907f4b76f7385c38c1b8e24ffba951c3"
+v269_router = "e2e551824fb93fce413c93d750841939d26dd84a0a5e8b84bb598579f7ef7ae4"
+v269_init = "9298082dcf0121dbe279b6f7ab80d07b13399fab65f0b37cddbcd03d9159f799"
+v269_rules = "04b2c5c67e787fb19574956eeb9d9941aaaf55b5ca15a5c65b2cd2f7a1489d53"
+v270_semantics = "27dfc4f798217b03c5c9a1ede8d688089d43cd33a12b199d581e725c25a0fdcf"
+v270_runtime = "c7be1acb2870b8bab31d10a5f487d61b339122ddbacf35ccebb7d80607bccf86"
+v270_router = "b6cdd38e3421ad92d5fb78b63a84b3d7693067325c34683b711e5bf6940dc54a"
+v270_init = "ab09b1d7d3a26cf470231cd92af1792825a35db775bed96f391be7239dcb8fd1"
+v270_rules = "43781e210e9610e05f8ac9db072c6434baa51d0a61a676edf5713245c7d2f232"
+
+[[sources]]
+ticker = "CDNS"
+file_name = "2026-07-27_0000813672-26-000089_EX-99.02_cfocommentary07272026ex9902.htm"
+sha256 = "0e71d22d2ae9c379214c3b8c92f5a9507320f345539cb161d580fb1c7833bd49"
+
+[[sources]]
+ticker = "KLAC"
+file_name = "2026-07-28_0000319201-26-000024_EX-99.1_exhibit991earningsrelease7.htm"
+sha256 = "694eda8e973472e6b8ee92f7c8c6da1183be0e21ef7f487682233e5512ce7fdf"
+
+[[sources]]
+ticker = "SCHW"
+file_name = "2026-07-21_0000316709-26-000027_EX-99.1_a2q26exhibit991.htm"
+sha256 = "14524d556a1e743ccdd5022b8bd67d16bc671e4bbc709127af0f954d18c0b542"
+
+[[sources]]
+ticker = "ADI"
+file_name = "2026-08-19_0000006281-26-000072_EX-99.1_adi3q26exhibit991earnings.htm"
+sha256 = "f4f00c8b4d5da7ab087b0bccd3ff3b45654852c81f44ee541c72daf3a88e8cba"
+
+[[sources]]
+ticker = "AMAT"
+file_name = "2026-08-13_0001628280-26-056699_EX-99.1_exhibit991q32026earningsre.htm"
+sha256 = "933c0fca0cdd586bb6a29e8da4c36369e48c88ee9e1f42fc08c17d26b26ec00e"
+
+[[sources]]
+ticker = "BLK"
+file_name = "2026-07-15_0001193125-26-304013_EX-99.1_blk-ex99_1.htm"
+sha256 = "9e7de8ea6d11fee6e25a67ac3f6fbf2f0ad43bf27ab9440ceb2f64bcc10dee50"
+
+[[sources]]
+ticker = "EQIX"
+file_name = "2026-07-29_0001101239-26-000145_EX-99.1_a991eqix-q226xpr.htm"
+sha256 = "5319978f68b349ae530e2dbaa2a7706fb398d5779954d8ac17ad09ea423cd8a0"
+
+[[sources]]
+ticker = "ELV"
+file_name = "2026-07-15_0001156039-26-000058_EX-99.1_a2q2026elvearningsrelease.htm"
+sha256 = "d9f305988159903f344c584947635bd4e4bca94e5f7c0b3075a9c026577e7ddb"
+
+[[sources]]
+ticker = "REGN"
+file_name = "2026-07-30_0000872589-26-000023_EX-99.1_exhibit991q22026.htm"
+sha256 = "011bc19d086a78e10bef0832ce3b780edc1b985b25d132ec39fe5f886d019dd7"
+
+[[sources]]
+ticker = "INTU"
+file_name = "2026-08-25_0000896878-26-000029_EX-99.01_fy26q4earningspressrelease.htm"
+sha256 = "6b7a9252caee298d1055e9ed769b16151b99e43f276791180b32c583caeddd3a"
