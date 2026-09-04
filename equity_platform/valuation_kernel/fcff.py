@@ -183,18 +183,47 @@ def solve_parameter(
         candidate = replace(assumptions, **{field: value})
         return enterprise_value(candidate)[1]["enterprise_value_usd"] - target_ev_usd
 
-    low_error, high_error = residual(lower), residual(upper)
-    if low_error == 0:
-        return {"status": "SOLVED", "value": lower, "residual_usd": 0.0}
-    if high_error == 0:
-        return {"status": "SOLVED", "value": upper, "residual_usd": 0.0}
-    if low_error * high_error > 0:
+    # A DCF parameter is not guaranteed to be monotonic across a broad domain
+    # (growth can raise revenue while also raising reinvestment).  Endpoint-only
+    # bracketing therefore creates false ``unbracketed`` results.  Scan the
+    # declared domain and select the root nearest the current assumption.
+    grid = np.linspace(lower, upper, 401)
+    errors = np.asarray([residual(float(value)) for value in grid], dtype=float)
+    exact = np.flatnonzero(np.abs(errors) <= tolerance_usd)
+    reference = float(getattr(assumptions, field))
+    if exact.size:
+        index = min(exact, key=lambda item: abs(float(grid[item]) - reference))
+        return {
+            "status": "SOLVED",
+            "value": float(grid[index]),
+            "residual_usd": float(errors[index]),
+        }
+    brackets = [
+        (index, index + 1)
+        for index in range(len(grid) - 1)
+        if np.isfinite(errors[index : index + 2]).all()
+        and errors[index] * errors[index + 1] < 0
+    ]
+    if not brackets:
+        finite = np.flatnonzero(np.isfinite(errors))
+        if not finite.size:
+            nearest_error = np.nan
+        else:
+            nearest = min(finite, key=lambda item: abs(float(errors[item])))
+            nearest_error = abs(float(errors[nearest]))
         return {
             "status": "UNBRACKETED_NO_SOLUTION_IN_DOMAIN",
             "value": np.nan,
-            "residual_usd": min(abs(low_error), abs(high_error)),
+            "residual_usd": nearest_error,
         }
-    low, high = lower, upper
+    low_index, high_index = min(
+        brackets,
+        key=lambda pair: abs(
+            (float(grid[pair[0]]) + float(grid[pair[1]])) / 2.0 - reference
+        ),
+    )
+    low, high = float(grid[low_index]), float(grid[high_index])
+    low_error = float(errors[low_index])
     middle = (low + high) / 2.0
     error = np.inf
     for _ in range(maximum_iterations):
@@ -208,3 +237,74 @@ def solve_parameter(
             low = middle
             low_error = error
     return {"status": "SOLVED", "value": middle, "residual_usd": error}
+
+
+DEFAULT_ROUNDTRIP_DOMAINS: dict[str, tuple[float, float]] = {
+    "near_term_growth_pct": (-30.0, 40.0),
+    "terminal_margin_pct": (-20.0, 80.0),
+    "terminal_roic_pct": (0.1, 100.0),
+    "wacc_pct": (0.0, 30.0),
+}
+
+
+def roundtrip_parameters(
+    assumptions: DcfAssumptions,
+    *,
+    fields: tuple[str, ...] = tuple(DEFAULT_ROUNDTRIP_DOMAINS),
+    tolerance_usd: float = 1.0,
+) -> pd.DataFrame:
+    """Recover known assumptions from a forward value using the same kernel.
+
+    This is a numerical consistency test, not evidence that a fair value is
+    economically correct.  WACC's lower domain is adjusted to remain above
+    terminal growth, and unbracketed results are retained explicitly.
+    """
+
+    _, target = enterprise_value(assumptions)
+    target_ev = float(target["enterprise_value_usd"])
+    rows: list[dict[str, object]] = []
+    for field in fields:
+        if field not in DEFAULT_ROUNDTRIP_DOMAINS:
+            raise ValueError(f"No declared round-trip domain for {field}")
+        lower, upper = DEFAULT_ROUNDTRIP_DOMAINS[field]
+        if field == "wacc_pct":
+            lower = max(assumptions.terminal_growth_pct + 0.01, 0.01)
+        solved = solve_parameter(
+            assumptions,
+            target_ev_usd=target_ev,
+            field=field,
+            lower=lower,
+            upper=upper,
+            tolerance_usd=tolerance_usd,
+        )
+        recovered = float(solved["value"])
+        if solved["status"] == "SOLVED":
+            candidate = replace(assumptions, **{field: recovered})
+            repriced = float(enterprise_value(candidate)[1]["enterprise_value_usd"])
+            repricing_error_pct = (
+                abs(repriced / target_ev - 1.0) * 100.0 if target_ev else np.nan
+            )
+            assumption_error = abs(
+                recovered - float(getattr(assumptions, field))
+            )
+        else:
+            repriced = np.nan
+            repricing_error_pct = np.nan
+            assumption_error = np.nan
+        rows.append(
+            {
+                "ticker": assumptions.ticker,
+                "scenario": assumptions.scenario,
+                "field": field,
+                "original_assumption": float(getattr(assumptions, field)),
+                "recovered_assumption": solved["value"],
+                "absolute_assumption_error": assumption_error,
+                "target_enterprise_value_usd": target_ev,
+                "repriced_enterprise_value_usd": repriced,
+                "absolute_repricing_error_pct": repricing_error_pct,
+                "solver_residual_usd": abs(float(solved["residual_usd"])),
+                "solver_status": solved["status"],
+                "interpretation": "NUMERICAL_CONSISTENCY_NOT_FAIR_VALUE_ACCURACY",
+            }
+        )
+    return pd.DataFrame(rows)

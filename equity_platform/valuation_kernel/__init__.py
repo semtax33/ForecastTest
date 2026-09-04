@@ -1,3 +1,15 @@
-from .fcff import DcfAssumptions, enterprise_value, solve_parameter
+from .fcff import (
+    DEFAULT_ROUNDTRIP_DOMAINS,
+    DcfAssumptions,
+    enterprise_value,
+    roundtrip_parameters,
+    solve_parameter,
+)
 
-__all__ = ["DcfAssumptions", "enterprise_value", "solve_parameter"]
+__all__ = [
+    "DEFAULT_ROUNDTRIP_DOMAINS",
+    "DcfAssumptions",
+    "enterprise_value",
+    "roundtrip_parameters",
+    "solve_parameter",
+]

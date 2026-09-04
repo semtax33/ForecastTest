@@ -115,6 +115,39 @@ def _concept_value_candidates(
     )
 
 
+def _range_quantity_pair(
+    text: str,
+    candidates: tuple[QuantityMention, ...],
+) -> tuple[QuantityMention, QuantityMention] | tuple[()]:
+    """Return one structurally adjacent range pair, otherwise abstain.
+
+    Merely finding two quantities in an IR text block is insufficient: large
+    flattened blocks commonly contain unrelated KPIs.  This bounded relation
+    check is the semantic equivalent of a labeled ``low connector high`` DSL
+    pattern.
+    """
+
+    ordered = sorted(candidates, key=lambda item: item.char_start)
+    pairs: list[tuple[QuantityMention, QuantityMention]] = []
+    for left, right in zip(ordered, ordered[1:]):
+        if left.kind is not right.kind or left.unit != right.unit:
+            continue
+        connector = text[left.char_end : right.char_start]
+        direct = re.fullmatch(
+            r"\s*(?:to|through|[-–—])\s*",
+            connector,
+            re.IGNORECASE,
+        )
+        between = re.fullmatch(r"\s*and\s*", connector, re.IGNORECASE) and re.search(
+            r"\bbetween\s*$",
+            text[max(0, left.char_start - 32) : left.char_start],
+            re.IGNORECASE,
+        )
+        if direct or between:
+            pairs.append((left, right))
+    return pairs[0] if len(pairs) == 1 else ()
+
+
 def _method(
     document: CanonicalDocument,
     block: TextBlock,
@@ -285,17 +318,17 @@ def _match_rule(
         if relation is None or len(candidates) < 2:
             return None
         candidates = _concept_value_candidates(names, candidates)
-        same_kind = tuple(item for item in candidates if item.kind is candidates[0].kind)
-        if len(names) != 1 or len(same_kind) != 2:
+        pair = _range_quantity_pair(block.text, candidates)
+        if len(names) != 1 or not pair:
             return ()
-        low, high = sorted((same_kind[0].value, same_kind[1].value))
+        low, high = sorted((pair[0].value, pair[1].value))
         midpoint = QuantityMention(
-            same_kind[0].kind,
+            pair[0].kind,
             (low + high) / 2.0,
-            same_kind[0].unit,
-            f"{same_kind[0].raw}..{same_kind[1].raw}",
-            same_kind[0].char_start,
-            same_kind[1].char_end,
+            pair[0].unit,
+            f"{pair[0].raw}..{pair[1].raw}",
+            pair[0].char_start,
+            pair[1].char_end,
         )
         return (
             _frame(
@@ -400,11 +433,18 @@ def _match_rule(
     if rule.qualitative:
         if not names:
             return None
+        # A causal frame has exactly two semantic roles.  Flattened filing or
+        # IR blocks can mention several unrelated KPIs; emitting all pairwise
+        # combinations would manufacture evidence.  Fail closed to review.
+        if rule.frame is SemanticFrame.CAUSE_EFFECT and len(names) != 2:
+            return ()
         dependency_validated = bool(
             backend is not None
             and rule.frame is SemanticFrame.CAUSE_EFFECT
             and backend.dependency_relation(block.text, concepts)
         )
+        if rule.frame is SemanticFrame.CAUSE_EFFECT and not dependency_validated:
+            return ()
         return tuple(
             _frame(
                 document=document,

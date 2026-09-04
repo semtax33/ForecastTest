@@ -9,6 +9,7 @@ import pandas as pd
 from equity_platform.valuation_kernel import (
     DcfAssumptions,
     enterprise_value,
+    roundtrip_parameters,
     solve_parameter,
 )
 
@@ -206,6 +207,8 @@ def build_conditional_valuation_research(
     terminal_growth_pct: float = 2.5,
 ) -> dict[str, pd.DataFrame]:
     flows: list[pd.DataFrame] = []
+    assumption_rows: list[dict[str, object]] = []
+    roundtrip_rows: list[pd.DataFrame] = []
     value_rows: list[dict[str, object]] = []
     reverse_rows: list[dict[str, object]] = []
     gate_rows: list[dict[str, object]] = []
@@ -327,6 +330,15 @@ def build_conditional_valuation_research(
             )
             flow, summary = enterprise_value(assumptions)
             flows.append(flow)
+            assumption_rows.append(
+                {
+                    "subindustry_code": annual_group.iloc[-1][
+                        "subindustry_code"
+                    ],
+                    **assumptions.__dict__,
+                }
+            )
+            roundtrip_rows.append(roundtrip_parameters(assumptions))
             raw_common_equity = (
                 summary["enterprise_value_usd"]
                 + float(market_row["cash_usd"])
@@ -401,8 +413,18 @@ def build_conditional_valuation_research(
                     ],
                     "market_implied_wacc_status": implied_wacc["status"],
                     "market_implied_wacc_pct": implied_wacc["value"],
+                    "market_implied_wacc_repricing_error_pct": (
+                        abs(float(implied_wacc["residual_usd"]))
+                        / float(market_row["market_enterprise_value_usd"])
+                        * 100.0
+                    ),
                     "market_implied_terminal_margin_status": implied_margin["status"],
                     "market_implied_terminal_margin_pct": implied_margin["value"],
+                    "market_implied_margin_repricing_error_pct": (
+                        abs(float(implied_margin["residual_usd"]))
+                        / float(market_row["market_enterprise_value_usd"])
+                        * 100.0
+                    ),
                     "independent_wacc_low_pct": wacc_row["symmetric_wacc_pct"],
                     "independent_wacc_high_pct": wacc_row["downside_wacc_pct"],
                     "appropriate_wacc_claim_allowed": False,
@@ -419,11 +441,46 @@ def build_conditional_valuation_research(
                     "terminal_input_ready": False,
                 }
             )
+    roundtrip = (
+        pd.concat(roundtrip_rows, ignore_index=True)
+        if roundtrip_rows
+        else pd.DataFrame()
+    )
+    if roundtrip.empty:
+        roundtrip_summary = pd.DataFrame()
+    else:
+        roundtrip_summary = (
+            roundtrip.groupby("ticker", as_index=False)
+            .agg(
+                checks=("field", "size"),
+                solved_checks=(
+                    "solver_status",
+                    lambda values: int(values.eq("SOLVED").sum()),
+                ),
+                maximum_absolute_assumption_error=(
+                    "absolute_assumption_error",
+                    "max",
+                ),
+                maximum_absolute_repricing_error_pct=(
+                    "absolute_repricing_error_pct",
+                    "max",
+                ),
+            )
+        )
+        roundtrip_summary["all_roundtrips_solved"] = roundtrip_summary[
+            "checks"
+        ].eq(roundtrip_summary["solved_checks"])
+        roundtrip_summary["interpretation"] = (
+            "NUMERICAL_CONSISTENCY_NOT_FAIR_VALUE_ACCURACY"
+        )
     return {
         "subindustry_conditional_dcf_flows": pd.concat(flows, ignore_index=True)
         if flows
         else pd.DataFrame(),
         "subindustry_conditional_dcf_summary": pd.DataFrame(value_rows),
         "subindustry_reverse_dcf_diagnostics": pd.DataFrame(reverse_rows),
+        "subindustry_dcf_assumptions": pd.DataFrame(assumption_rows),
+        "subindustry_reverse_dcf_roundtrip": roundtrip,
+        "subindustry_valuation_accuracy_summary": roundtrip_summary,
         "subindustry_valuation_gates": pd.DataFrame(gate_rows),
     }

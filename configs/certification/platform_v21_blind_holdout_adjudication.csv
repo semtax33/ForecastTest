@@ -1,0 +1,28 @@
+frame_id,ticker,correct,critical_numeric,adjudication
+648159aad30b933f6854,DVN,true,true,CAPEX value is explicitly predicated on capital expenditures
+d8a90de21dbe31c51b2f,DVN,true,true,Revenue value is explicitly predicated on oil gas and NGL sales
+4e472f7299e7d18a9b01,MPC,true,true,Current adjusted EBITDA is explicit
+124b59bc47574482cca3,MPC,true,true,Prior-year adjusted EBITDA is explicit
+a7c902430b52bb290506,MPC,false,true,Turnaround cost was attached to adjusted EBITDA subject
+57fcae413722df058585,MPC,false,true,Prior-year turnaround cost was attached to adjusted EBITDA subject
+f7608f1cb461985f5a2b,MPC,true,true,Throughput and daily unit are explicit
+20465fd63d49468f63f4,MPC,true,true,Renewable Diesel adjusted EBITDA is explicit
+cd60017f45c2679db56f,MPC,false,false,Generic margin environment is not operating margin
+2a8ecabf6cdffd4704fc,KMI,false,true,Dividend per share was attached to adjusted EBITDA subject
+3784cc6d0657222e2422,KMI,false,true,Annualized dividend was attached to prior-year adjusted EBITDA subject
+ed67b45492cd062071d4,KMI,false,true,Net income value was attached to adjusted EBITDA subject
+48b178a6395fc4e4de1f,KMI,false,false,Net-debt-to-EBITDA ratio is not an EBITDA comparative fact
+02c72503040ee83337b7,BKR,true,false,Sustained production level is a supported qualitative claim
+f381ef1ed9744615045d,BKR,true,true,IET revenue is explicit
+8ba38df5af9af411ef23,CTAS,true,true,Current-quarter revenue is explicit
+7fac53a74ed23fb2cad5,CTAS,true,true,Prior-year quarter revenue is explicit
+cf85373ac32cfd26b2ed,ADT,false,true,Repurchase capacity was attached to later revenue-growth outlook
+62bf00f8fb9c2e639873,UPS,true,true,2025 revenue is explicit
+79529462d8fa348570e1,DAL,true,true,June-quarter revenue and change-to value are explicit
+4d8f56d01342fd477281,MATX,true,true,Current consolidated revenue is explicit
+5a500cc2b80e1e6d4a73,MATX,true,true,Prior-year consolidated revenue is explicit
+d9d575a787bfebe85920,MATX,false,true,Operating income change was attached to revenue
+ff9e619d0238b95bf4ba,MATX,false,true,Operating income change was attached to revenue
+fb536a2526be88d00cf6,MATX,true,true,Current capital expenditures are explicit
+79f4ebbc32133c322d47,MATX,true,true,Prior-year capital expenditures are explicit
+100d5d773b7b3a3ab694,UNP,true,true,Operating revenue and change-to value are explicit

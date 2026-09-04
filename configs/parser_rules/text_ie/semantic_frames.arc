@@ -79,7 +79,7 @@ text_rule "semantic.range_guidance" {
   frame = "RANGE_GUIDANCE"
   triggers = ["expects", "expected", "guidance", "between", "range"]
   quantity_kinds = ["MONEY", "PRICE", "COUNT", "PERCENT"]
-  relation_words = ["between", "from"]
+  relation_words = ["between", "from", "to"]
   require_metric = true
   require_value = true
   require_unique_metric = true

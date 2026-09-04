@@ -7,6 +7,7 @@ import pandas as pd
 import pytest
 
 from equity_platform.paths import PROJECT_ROOT
+from equity_platform.valuation_kernel import roundtrip_parameters
 from equity_platform.sectors.industrials.platform import (
     DcfAssumptions,
     INDUSTRIALS_SUBINDUSTRIES,
@@ -151,6 +152,11 @@ def test_generic_dcf_round_trip_and_accounting_identities() -> None:
     )
     assert unbracketed["status"] == "UNBRACKETED_NO_SOLUTION_IN_DOMAIN"
     assert np.isnan(unbracketed["value"])
+    roundtrip = roundtrip_parameters(assumptions, tolerance_usd=1e-8)
+    assert len(roundtrip) == 4
+    assert roundtrip["solver_status"].eq("SOLVED").all()
+    assert roundtrip["absolute_assumption_error"].max() < 1e-7
+    assert roundtrip["absolute_repricing_error_pct"].max() < 1e-7
 
 
 def test_research_dcf_never_claims_fair_value_or_terminal_readiness() -> None:
@@ -170,6 +176,11 @@ def test_research_dcf_never_claims_fair_value_or_terminal_readiness() -> None:
     reverse = _read("subindustry_reverse_dcf_diagnostics")
     assert reverse["non_identification_preserved"].all()
     assert not reverse["appropriate_wacc_claim_allowed"].any()
+    accuracy = _read("subindustry_valuation_accuracy_summary")
+    assert len(accuracy) == 13
+    assert accuracy["all_roundtrips_solved"].all()
+    assert accuracy["maximum_absolute_assumption_error"].max() < 1e-6
+    assert accuracy["maximum_absolute_repricing_error_pct"].max() < 1e-6
 
 
 def test_medallion_outputs_and_foreign_adapter_fail_closed() -> None:

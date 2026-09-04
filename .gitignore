@@ -171,3 +171,4 @@ data-lake/**
 !data-lake/gold/parser/text_ie/semantic_frames.jsonl
 !data-lake/gold/parser/text_ie/controlled_semantic_frames.jsonl
 !data-lake/gold/parser/text_ie/multisector_review_annotations.jsonl
+!configs/certification/platform_v21_blind_holdout_adjudication.csv

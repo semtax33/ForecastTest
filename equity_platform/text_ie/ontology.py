@@ -53,6 +53,22 @@ CONCEPTS = (
         ClaimType.GUIDANCE,
     ),
     ConceptDefinition(
+        "GROSS_MARGIN",
+        ("gross profit margin", "gross margin"),
+        (QuantityKind.PERCENT, QuantityKind.BASIS_POINTS),
+        ClaimType.GUIDANCE,
+    ),
+    ConceptDefinition(
+        "ADJUSTED_EBITDA_MARGIN",
+        (
+            "adjusted ebitda margin",
+            "segment ebitda margin",
+            "ebitda margin",
+        ),
+        (QuantityKind.PERCENT, QuantityKind.BASIS_POINTS),
+        ClaimType.GUIDANCE,
+    ),
+    ConceptDefinition(
         "OPERATING_MARGIN",
         ("operating earnings margin", "operating margin", "segment margin", "margin"),
         (QuantityKind.PERCENT, QuantityKind.BASIS_POINTS),
@@ -124,6 +140,30 @@ SCOPE_ALIASES = {
 }
 
 
+# Alias-level context constraints keep broad vocabulary reusable without
+# granting a domain concept to every lexical occurrence.  These are data-only
+# guards, not issuer callbacks: the same constraint applies to every company.
+ALIAS_REQUIREMENTS = {
+    ("DELIVERIES", "delivered"): re.compile(
+        r"\s+(?:approximately\s+|about\s+)?\d[\d,.]*\s+(?:aircraft|units?)\b",
+        re.IGNORECASE,
+    ),
+}
+
+ALIAS_FOLLOWING_EXCLUSIONS = {
+    ("PRODUCTION", "production"): re.compile(
+        r"\s+(?:costs?|expenses?|ramp(?:-up|s)?|contracts?)\b",
+        re.IGNORECASE,
+    ),
+}
+
+ALIAS_PRECEDING_EXCLUSIONS = {
+    # In E&P disclosures, "turned to sales" means a well began producing;
+    # it is not a revenue mention.
+    ("REVENUE", "sales"): re.compile(r"turned\s+to\s*$", re.IGNORECASE),
+}
+
+
 def definition_for(concept: str) -> ConceptDefinition:
     for definition in CONCEPTS:
         if definition.concept == concept:
@@ -139,10 +179,29 @@ def find_concepts(text: str) -> tuple[ConceptMention, ...]:
                 rf"(?<![A-Za-z0-9]){re.escape(alias)}(?![A-Za-z0-9])",
                 re.IGNORECASE,
             )
-            candidates.extend(
-                ConceptMention(definition.concept, match.group(0), match.start(), match.end())
-                for match in pattern.finditer(text)
-            )
+            for match in pattern.finditer(text):
+                key = (definition.concept, alias.casefold())
+                requirement = ALIAS_REQUIREMENTS.get(key)
+                if requirement is not None and requirement.match(text, match.end()) is None:
+                    continue
+                exclusion = ALIAS_FOLLOWING_EXCLUSIONS.get(key)
+                if exclusion is not None and exclusion.match(text, match.end()) is not None:
+                    continue
+                preceding_exclusion = ALIAS_PRECEDING_EXCLUSIONS.get(key)
+                if (
+                    preceding_exclusion is not None
+                    and preceding_exclusion.search(text[max(0, match.start() - 32) : match.start()])
+                    is not None
+                ):
+                    continue
+                candidates.append(
+                    ConceptMention(
+                        definition.concept,
+                        match.group(0),
+                        match.start(),
+                        match.end(),
+                    )
+                )
     selected: list[ConceptMention] = []
     for mention in sorted(
         candidates,

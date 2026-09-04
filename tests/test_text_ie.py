@@ -200,6 +200,63 @@ def test_energy_unit_prices_and_scaled_volumes_are_normalized() -> None:
     assert production.facts[0].value == 1_200_000.0
 
 
+def test_disclosure_range_shorthand_and_alias_guards_fail_closed() -> None:
+    capex = extract_text_kpis(
+        _document("Capital expenditures are expected to be $410 to $440 million in 2026.")
+    )
+    assert len(capex.frames) == 1
+    assert capex.frames[0].concept == "CAPEX_GUIDANCE"
+    assert capex.frames[0].lower_value == 410_000_000.0
+    assert capex.frames[0].upper_value == 440_000_000.0
+
+    compact_money = extract_text_kpis(
+        _document("Revenue guidance is expected to be $34-35 billion in 2026.")
+    )
+    assert len(compact_money.frames) == 1
+    assert compact_money.frames[0].lower_value == 34_000_000_000.0
+    assert compact_money.frames[0].upper_value == 35_000_000_000.0
+
+    production = extract_text_kpis(
+        _document("Production is expected to be 2.35 to 2.40 Bcfe per day in 2026.")
+    )
+    assert len(production.frames) == 1
+    assert production.frames[0].lower_value == 2.35
+    assert production.frames[0].upper_value == 2.40
+    assert production.frames[0].unit == "BCFE_PER_D"
+
+    daily_barrels = extract_text_kpis(
+        _document("Production was 198,071 barrels per day during the quarter.")
+    )
+    assert daily_barrels.frames[0].unit == "BARRELS_PER_D"
+
+    assert not extract_text_kpis(
+        _document("EQT delivered outstanding performance during the quarter.")
+    ).frames
+    assert not extract_text_kpis(
+        _document("Production ramp-up and production costs increased revenue.")
+    ).relations
+    assert not extract_text_kpis(
+        _document("Revenue was $90 million for each $0.50 increase in realized price.")
+    ).frames
+
+
+def test_gross_margin_is_not_silently_recast_as_operating_margin() -> None:
+    result = extract_text_kpis(_document("Gross profit margin was 41.1%."))
+    assert len(result.frames) == 1
+    assert result.frames[0].concept == "GROSS_MARGIN"
+    ebitda = extract_text_kpis(_document("Segment EBITDA margin was 10.6%."))
+    assert ebitda.frames[0].concept == "ADJUSTED_EBITDA_MARGIN"
+
+
+def test_causal_rule_requires_exactly_two_semantic_roles() -> None:
+    result = extract_text_kpis(
+        _document("Deliveries, orders, and backlog increased revenue.")
+    )
+    assert not result.frames
+    assert not result.relations
+    assert result.reviews[0].status == "REVIEW_AMBIGUOUS"
+
+
 def test_context_resolution_and_identity_derivation_stay_separate() -> None:
     result = extract_text_kpis(
         _document(
