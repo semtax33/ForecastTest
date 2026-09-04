@@ -1,0 +1,13 @@
+{
+  "generated_at_utc": "2026-09-04T09:13:16.335872+00:00",
+  "version": "PLATFORM_V2_6_ROUTE_AWARE_SEMANTIC_RECALL",
+  "status": "HOLD_RESEARCH_UNFROZEN",
+  "development_set_reused": true,
+  "fourth_holdout_reused_for_tuning": false,
+  "candidate_generator": "V2.4_FROZEN",
+  "semantic_runtime_changed_after_holdout_selection": false,
+  "forecast_policy": "FROZEN_NOT_EXECUTED",
+  "dcf_policy": "FROZEN_NOT_EXECUTED",
+  "terminal_input_allowed": false,
+  "production_promoted": false
+}

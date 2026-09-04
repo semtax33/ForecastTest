@@ -52,6 +52,13 @@ def validate_kpi_frame(frame: KPIFrame, document: CanonicalDocument) -> KPIFrame
         frame.frame is SemanticFrame.CHANGE_BY
         and kind in {QuantityKind.PERCENT, QuantityKind.BASIS_POINTS}
     ) or (
+        frame.frame is SemanticFrame.RANGE_GUIDANCE
+        and frame.concept.endswith("_GUIDANCE")
+        and kind in {QuantityKind.PERCENT, QuantityKind.BASIS_POINTS}
+    ) or (
+        frame.concept.endswith("_CHANGE_GUIDANCE")
+        and kind in {QuantityKind.PERCENT, QuantityKind.BASIS_POINTS}
+    ) or (
         frame.frame is SemanticFrame.COMPOSITION and kind is QuantityKind.PERCENT
     )
     if (

@@ -167,14 +167,14 @@ CONCEPTS = (
     ConceptDefinition(
         "PRICE_REALIZATION",
         ("price realization", "higher pricing", "lower pricing", "pricing"),
-        (),
+        (QuantityKind.PERCENT, QuantityKind.PRICE),
         ClaimType.PRICE_ACTION,
         FactTier.NARRATIVE,
     ),
     ConceptDefinition(
         "ACTIVITY_VOLUME",
         ("sales volumes", "shipment volumes", "volume growth", "volumes", "volume"),
-        (),
+        (QuantityKind.PERCENT, QuantityKind.COUNT),
         ClaimType.OPERATIONAL_EVENT,
         FactTier.NARRATIVE,
     ),

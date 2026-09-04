@@ -1,0 +1,4 @@
+version,validation,critical_precision,critical_recall,candidate_recall,table_route_accuracy,silent_miss
+V2.4,issuer_document_unseen_1,0.5370370370370371,0.5178571428571429,1.0,0.5882352941176471,0
+V2.5,issuer_document_unseen_2,0.5714285714285714,0.21428571428571427,1.0,0.7692307692307693,4
+V2.5.1,issuer_document_unseen_3,1.0,0.16279069767441862,1.0,0.5789473684210527,0

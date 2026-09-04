@@ -41,6 +41,7 @@ class PatternStepIR:
     optional: bool = False
     minimum: int = 1
     maximum: int = 1
+    max_gap_tokens: int | None = None
 
 
 @dataclass(frozen=True)
@@ -132,6 +133,14 @@ PURE_OPERATIONS = {
     "resolve_period",
     "resolve_scope",
     "assert_unique",
+    "bind_labeled_roles",
+    "require_same_clause",
+    "require_dependency_path",
+    "resolve_polarity",
+    "resolve_parenthesized_sign",
+    "derive_relative_range",
+    "emit_each_value",
+    "emit_base_metric",
     "emit_frame",
     "emit_relation",
 }
@@ -346,7 +355,14 @@ def _pattern_steps(
     for item in value:
         if not isinstance(item, dict):
             raise TextDslCompileError("Pattern steps must be objects")
-        unknown = set(item) - {"label", "var", "optional", "min", "max"}
+        unknown = set(item) - {
+            "label",
+            "var",
+            "optional",
+            "min",
+            "max",
+            "max_gap",
+        }
         if unknown:
             raise TextDslCompileError(f"Unknown pattern step keys: {sorted(unknown)}")
         label, variable = item.get("label"), item.get("var")
@@ -358,6 +374,10 @@ def _pattern_steps(
         maximum = int(item.get("max", 1))
         if minimum < 0 or maximum < minimum:
             raise TextDslCompileError("Pattern repetition bounds must be ordered")
+        max_gap = item.get("max_gap")
+        if max_gap is not None:
+            if isinstance(max_gap, bool) or not isinstance(max_gap, int) or max_gap < 0:
+                raise TextDslCompileError("max_gap must be a non-negative integer")
         steps.append(
             PatternStepIR(
                 label=label,
@@ -366,6 +386,7 @@ def _pattern_steps(
                 optional=bool(item.get("optional", False)),
                 minimum=minimum,
                 maximum=maximum,
+                max_gap_tokens=max_gap,
             )
         )
     labels = [step.label for step in steps]

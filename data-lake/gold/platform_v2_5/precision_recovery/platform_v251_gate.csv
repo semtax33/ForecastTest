@@ -1,0 +1,2 @@
+version,critical_precision,critical_recall,candidate_recall,table_route_accuracy,duplicate_auto_emission,illegal_cross_clause_auto_binding,silent_miss,precision_recovery_achieved,all_v25_gates_passed,l0_source_ready,l1_parser_ready,l2_economics_ready,l3_valuation_ready,strict_dcf_runs,forecast_snapshot_changed,dcf_kernel_changed,production_promoted,status
+PLATFORM_V2_5_1_PRECISION_ADJUDICATION,1.0,0.16279069767441862,1.0,0.5789473684210527,0,0,0,True,False,52,0,0,0,0,False,False,False,HOLD_RESEARCH_UNFROZEN

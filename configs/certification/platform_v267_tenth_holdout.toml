@@ -1,0 +1,112 @@
+holdout_id = "V267_TENTH_ISSUER_DOCUMENT_DISJOINT_2026_09_04"
+predeclared_at = "2026-09-04T21:20:29.1641255+09:00"
+evaluation_tickers = ["LMT", "NOC", "GD", "WAB", "NSC", "TMO", "ABT", "GILD", "VZ", "CMCSA"]
+prior_parser_benchmark_overlap = []
+eligibility_amended_at = "2026-09-04T21:34:00+09:00"
+eligibility_amendment = "NSC 2026-07-23 EX-99.1 and EX-99.2 had only 6 and 2 eligible blocks; replaced with the pre-prediction 2026-01-29 EX-99.1 earnings release, which has exactly 10 eligible blocks, before candidate artifact creation or annotation"
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V267_TENTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v267_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+
+[candidate_artifact]
+path = "output/platform_v2_6_7_spacy_semantic_firewall/tenth_holdout_candidates.csv"
+rows = 100
+sha256 = "772a7e6a2d5619cb41b1b03610682ebe5a3e80edc35a7f122241382f821d6ba9"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v267_tenth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 69
+table_blocks = 28
+sha256 = "23012fdd6acbd8567c2370c8f3e95f73290e99f5f3b99d3c049e4ffe0727729f"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[code_snapshot_sha256]
+compiler = "0104e36ad1d5d1ba2d41df60b68208a0ff39e42aa8ecdc023c704730cd211c03"
+runtime = "34116137142d210d94d01f2149e15b584465c87e850ca7a7e33430a4db2d1fff"
+spacy_backend = "0cb343ccd0d0ed34a2dbd3d2431bd38ac001abbb5bf7615ed2383f96487c60cb"
+ontology = "9f8c860d7ed05d851e9333aed9e42b2e25c6847c28e0788f2522ae034e24a242"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+validation = "ac621c159ac628173bbd666742edc0915c1afc2171a391bd5cf925a4a7e75b32"
+v262_semantics = "4767f1644f8d5a601584049c17c6b3640959d01f2a5cb353f509048094860011"
+v262_runtime = "0d82bf5e688a1fd845f4a7f1492d43a5fe7d25187837a6ea8c1dab7f11460400"
+v263_router = "521ff2c89047a17fabe958a208c15e9da2f2a51b8b83c0857195a12d577dd6cf"
+v264_semantics = "1bf7274d2853422328aed51a04372bc9fc35f45d7b6e94fb7692e558e9270518"
+v264_runtime = "46e71d5c80a3d2f1e81f246b2b0485d1e9d70142159f57f71087056844ccf76b"
+v264_rules = "094642928062288c5a040ebc3f0bbb2b9d219a062fcfeab21b017c48e6184832"
+v265_semantics = "5121acba51fd15216137fbf42646561d3d1005a47687077ca7804c6d6e172579"
+v265_runtime = "5b36df3996288860cd33f506210fcee0209b42b38ff60ff937a8ef8a1f751824"
+v265_router = "9dd522361436c8637b5fbd38e8fc03f62b47201c055cd241793fa5b379b71521"
+v265_rules = "e3281870ede530e27025d538f42b69a7ded26452f0b4923695c740933d210e1e"
+v266_semantics = "08c04ad63dc8af33a64004f9fc87cf831a0b064ec601e7443cc098417f12f4e6"
+v266_runtime = "02896326ac5dc3392d0e04ebdc214e9b7d158362c564662c072f4aaa10605c7b"
+v266_router = "9ac69c7e175135c56c3cd491425734c3087b2bdaae653f2d37d0c0d8f5b5a038"
+v266_rules = "42411d83bffad03bfd55615c7c784209990e9c7da7351d0312926840a0ac0a2a"
+v267_semantics = "e9c09078afa0dde5748016aa3b35c9a0da8b897d2b87ff96b6df70bff3378ff7"
+v267_runtime = "0ce7776598e43e045e489cea19cecdcca000245614edaa649167995d8d4bd9d8"
+v267_router = "e10500c4593bdde63c7b16b33bf9a00af34afc26363d1f021a3befade512f9be"
+v267_init = "2c7e12b774e377f50d95a88d6de7b633364b1cd6e0249a82f26151e2c9a18d00"
+v267_rules = "9df5b74d171690ef11fb1f8227264ee7a3670e5b6fac863492cef397456e6046"
+
+[[sources]]
+ticker = "LMT"
+file_name = "2026-07-23_0001628280-26-049277_EX-99.1_ex991q22026.htm"
+sha256 = "ca06aeac85913ca74155d5f9499a3d28dc57638aea29eb5aad629d9a6f1b0216"
+
+[[sources]]
+ticker = "NOC"
+file_name = "2026-07-21_0001133421-26-000033_EX-99_noc-06302026xearningsrelea.htm"
+sha256 = "103411ab2d5d11868fb0daa7d0079bf187e3206f5c9b4a4afedb8668255d3d55"
+
+[[sources]]
+ticker = "GD"
+file_name = "2026-07-29_0000040533-26-000029_EX-99.1_gd-20260705exhibit991.htm"
+sha256 = "f9a540c5233d79ee1e1f97538e5a589455250e6fba2908c9d12f7b67cef9488a"
+
+[[sources]]
+ticker = "WAB"
+file_name = "2026-07-22_0001628280-26-049105_EX-99.1_a2q26pressreleaseword.htm"
+sha256 = "bef654b4a63be61fd950067bc552ec8fb31509c5759de9daaf12ad49a9a2c1fc"
+
+[[sources]]
+ticker = "NSC"
+file_name = "2026-01-29_0001193125-26-028244_EX-99.1_nsc-ex99_1.htm"
+sha256 = "89ce4ec2e34bfa752c4cca69c19f97be1ab30818d6d57c73d5ffe1283f1f15f3"
+
+[[sources]]
+ticker = "TMO"
+file_name = "2026-07-23_0000097745-26-000138_EX-99.1_q22026earnings8kex99_1.htm"
+sha256 = "05824a3406a04613247c6c7bf914ed51e0d6c214c2f1e893e71fad4531833591"
+
+[[sources]]
+ticker = "ABT"
+file_name = "2026-07-16_0001628280-26-048377_EX-99.1_abt-2026q2xexhibitx991.htm"
+sha256 = "b11abf8821d1132d3f902386540e8ada4a2bc86edad12b795f69510bd467417d"
+
+[[sources]]
+ticker = "GILD"
+file_name = "2026-08-04_0000882095-26-000028_EX-99.1_exhibit991earningspressrel.htm"
+sha256 = "c85d6458eb7708134bfdd9b7d4e4a21bf802c17ad267c34de3f9aa9f5a5542fe"
+
+[[sources]]
+ticker = "VZ"
+file_name = "2026-07-24_0000732712-26-000040_EX-99_a2026q2exhibit99.htm"
+sha256 = "b11098111d7e508711aeb5523b5b8966742365688ae456beccda7091641a22df"
+
+[[sources]]
+ticker = "CMCSA"
+file_name = "2026-07-23_0001628280-26-049274_EX-99.1_ex991-6302026.htm"
+sha256 = "666ad029f7984e2f4752ad794f2d33b2ba7462ee701b7640b7dad70afbc0a983"

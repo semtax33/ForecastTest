@@ -1,0 +1,85 @@
+blind_set_id = "V25_ISSUER_DOCUMENT_UNSEEN_2026_09_04"
+predeclared_at_utc = "2026-09-04T06:30:00Z"
+as_of_date = "2026-09-04"
+annotation_scope = "ALL_TARGET_FRAMES_IN_DETERMINISTIC_HASH_SELECTED_BLOCKS"
+blindness_claim = "ISSUER_UNSEEN_AND_DOCUMENT_UNSEEN_FOR_TEXT_IE_DEVELOPMENT"
+issuer_unseen = true
+document_unseen = true
+prior_repository_occurrence_count_before_declaration = 0
+candidate_generator_frozen = true
+rule_changes_after_selection = false
+v24_diagnostic_only = true
+
+evaluation_tickers = ["ABBV", "ADBE", "ABNB", "ACN", "AEP", "AFL", "ALB", "ALGN", "AMD", "MCD"]
+required_critical_concepts = ["REVENUE", "OPERATING_INCOME", "OPERATING_MARGIN", "BACKLOG", "PRODUCTION", "CAPEX", "DEBT", "CASH", "SHARES", "ADJUSTED_EBITDA"]
+blocks_per_required_concept = 1
+numeric_blocks_per_issuer = 3
+qualitative_blocks_per_issuer = 1
+table_blocks_per_issuer = 1
+sampling_hash_salt = "V25_UNSEEN_FIXED_BEFORE_SENTENCE_REVIEW"
+
+[gates]
+candidate_recall = 0.99
+critical_precision = 0.95
+critical_recall = 0.40
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+table_route_accuracy = 0.95
+silent_miss = 0
+
+[candidate_artifact]
+sha256 = "97ae68ead011890491bb58fcc741ca9a8266c7b3bfc08a296286cdf5dc0f5007"
+
+[selection_snapshot]
+generator_sha256 = "292c2dd1b7d836fc536c4d265a01e862ebdca6d3415f19f0228eea6255f1bf84"
+
+[v25_snapshot_sha256]
+v25_model = "37c02dd78c602e91e633b03cea5a107b685fcb6879d06ff322c2f8ae028e2cf5"
+v25_clause = "975a85669dae21b0d5ff29fbd3456211d75dbd50cede8df8cbb57a0e195b185d"
+v25_table_router = "5e41b59646df6ea16d3140332fd8f43821e651bb5a764badd3864f86eba892a7"
+v25_binding = "e56ee9ae5630cac7e28184dd9784e07da995271a322d4070121c1f790b0e7d91"
+v25_runtime = "c5733598792ed7b499fa1405c0a7a67dcfc557a2eeae11e7b391a9daa3ab53ab"
+v25_init = "1a5deca5c4db1e5fd50d569629a9212c2dcedc7a77449661fa27be90735327c5"
+v24_candidate_generator = "1980ac6c1f37879737fbcdafd1bda750307b7526245ee2ee1810d437f5cd3bde"
+v24_candidate_dsl = "63e4c1f500e2e1677151a0b3bfcf80c54b31bb81848c73ae297034f593c65c36"
+
+[[sources]]
+ticker = "ABBV"
+file_name = "2026-07-31_0001551152-26-000023_EX-99.1_abbv-20260630xexhibit991.htm"
+sha256 = "8baad40fc876e620dfa200400e0e9c03f73544293f516214e59aa9ab3912d1b1"
+[[sources]]
+ticker = "ADBE"
+file_name = "2026-06-11_0000796343-26-000109_EX-99.1_adbeex991q226.htm"
+sha256 = "c98c84aea05e473e353d25e9e7a877b6a94a8659071f01394b4eef7f6acf2d7b"
+[[sources]]
+ticker = "ABNB"
+file_name = "2026-08-06_0001193125-26-337928_EX-99.1_d70413dex991.htm"
+sha256 = "df5cee22a7599c81b40f09655180d3292e434567f2a5f1c5abde4f041c833261"
+[[sources]]
+ticker = "ACN"
+file_name = "2026-06-18_0001467373-26-000031_EX-99_q3fy26earnings8-kexhibit.htm"
+sha256 = "4ddfafcef69cd0663d5c785238973a903c4c374ea2d1d75958a7d56eca7cd764"
+[[sources]]
+ticker = "AEP"
+file_name = "2026-07-30_0000004904-26-000055_EX-99_a2q20268kpressreleaseex991.htm"
+sha256 = "d9a8379f204f29e6653a98026f443a308576ba1c4e390b337622ada08bb5b82e"
+[[sources]]
+ticker = "AFL"
+file_name = "2026-08-06_0001628280-26-054333_EX-99.1_aflex991-q22026new.htm"
+sha256 = "66c1ae3a1cdb316872c22c689cb0426a8f4ca6c13117cf521c47858627134049"
+[[sources]]
+ticker = "ALB"
+file_name = "2026-08-05_0000915913-26-000101_EX-99.1_a2q26earningsreleaseex991.htm"
+sha256 = "62e89324845f1d1732493896283d28e9df0179f3b62c85a29eee31fa10d58e8d"
+[[sources]]
+ticker = "ALGN"
+file_name = "2026-07-29_0001097149-26-000054_EX-99.1_algn-q226earningspressrele.htm"
+sha256 = "a8cb08807d96cfb49c40cd18afcbe6babb7692560e7609d16bdf0420655876eb"
+[[sources]]
+ticker = "AMD"
+file_name = "2026-08-04_0000002488-26-000121_EX-99.1_q22026991.htm"
+sha256 = "9da67a95f09dc48cac0c7879b108f43f9fd07be34359de36a7e51b0f83f75513"
+[[sources]]
+ticker = "MCD"
+file_name = "2026-08-04_0000063908-26-000067_EX-99.1_exhibit991-6302026.htm"
+sha256 = "3fb653c6af602282593301053b0b426546474e32641155cbf5b0bd04de156c71"

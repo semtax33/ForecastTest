@@ -1,0 +1,21 @@
+{
+  "benchmark_id": "PLATFORM_V2_5_1_PRECISION_ADJUDICATION_2026_09_04",
+  "status": "PRECISION_RECOVERED_RECALL_AND_TABLE_GATES_FAILED",
+  "platform_status": "HOLD_RESEARCH_UNFROZEN",
+  "artifact_sha256": {
+    "configs/certification/platform_v251_blind_set.toml": "2578a5db61cd8e3ad71f7d233616f090a08641eecba37a912348c71bb938cd45",
+    "scripts/architecture/v251_blind_candidates.py": "3a605a36d49dd9fe17e81d645b806a6f44f6e3ebddddf7f77833701b1a50135b",
+    "scripts/architecture/v251_blind_evaluation.py": "dd32f6537c23793389c41d09b098bb8055650ddc8a080ba4d3d0f39c7a2aa3c4",
+    "scripts/architecture/universe_certification_v25.py": "0455c226f9dfb18e7a6b53f5bd652a22fdf42ba2bb2fb46bee01092cf45b32cb",
+    "output/platform_v2_5_1_precision_adjudication/blind_sentence_candidates.csv": "89008ef3632fdacc1897bd04b7cd7894172e59b150453957c0f5aba4954cd607",
+    "data-lake/gold/parser/text_ie/v251_unseen_sentence_annotations.jsonl": "a8aa3bd7da2c526cbef3539053dd49b769a4080fd51e38806cd138062e43a45a",
+    "output/platform_v2_5_1_precision_adjudication/blind_sentence_evaluation.csv": "39bed1f037bd4fc9937b649dc98fb92ae5586ac8e12a2d1aa4c94c89da76927c",
+    "output/platform_v2_5_1_precision_adjudication/blind_sentence_summary.csv": "564132e56e5f5f19d62d9ec9b614040a0a5f385e0a529ab5593102774f1dfece",
+    "output/platform_v2_5_1_precision_adjudication/error_taxonomy.csv": "e71e5f168e379b5ce43ce5b11e7d939b0f670425a45007051a1e6d3270e7c5b7",
+    "output/platform_v2_5_1_precision_adjudication/version_comparison.csv": "3d49c0d38b19e037dab039e9a9f9ae82d2293c0426693a57e6abde6110d94104",
+    "output/platform_v2_5_1_precision_adjudication/platform_v251_gate.csv": "89f144d2700298e1876b42bc27334b1fd5cc1e114dffb7848fa6b5757e354417",
+    "output/platform_v2_5_1_precision_adjudication/certification_funnel.csv": "451d9fc08441814766ccf6ee6b57e4fa3ded52837980c9db21ecdf9ab80afa78",
+    "output/platform_v2_5_1_precision_adjudication/report.md": "cf0cb8de936e860766ae4724799d5cec2f85b2d26d83eb7f0ad33008e57a5af1"
+  },
+  "policy": {"future_use": "ERROR_ANALYSIS_ONLY_NOT_RETUNING_VALIDATION", "validation_set_reused": false, "candidate_generator": "V2.4_FROZEN", "forecast_dcf": "FROZEN_NOT_EXECUTED", "production": "LOCKED"}
+}

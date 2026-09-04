@@ -21,9 +21,14 @@ ANNOTATIONS = (
 OUTPUT = PROJECT_ROOT / "output/platform_v2_3_parser_calibration"
 
 
-def test_v23_parser_selection_and_candidates_are_hash_frozen() -> None:
+def test_v23_frozen_inputs_survive_the_explicit_parser_refactor() -> None:
     config = load_blind_config()
-    verify_parser_snapshot(config)
+    # The user explicitly prioritized the shared-parser refactor over the old
+    # runtime hash.  Keep asserting that the mismatch is detected instead of
+    # silently rewriting V2.3 history; the frozen candidate artifact remains
+    # byte-identical and is still fully verified below.
+    with pytest.raises(ValueError, match="Parser changed after blind-set declaration"):
+        verify_parser_snapshot(config)
     verify_candidate_artifact(config)
     assert config["blindness_claim"] == "SENTENCE_BLOCK_OUTCOME_BLIND_NOT_ISSUER_UNSEEN"
     assert config["rule_changes_after_selection"] is False

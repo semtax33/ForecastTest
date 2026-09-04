@@ -1,0 +1,76 @@
+holdout_id = "V262_SIXTH_ISSUER_DOCUMENT_DISJOINT_2026_09_04"
+predeclared_at_utc = "2026-09-04T16:15:00+09:00"
+evaluation_tickers = ["BA", "BAC", "C", "COP", "CVX", "DIS", "GE", "GM", "JPM", "KO"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V262_SIXTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v262_runtime_frozen = true
+llm_backend_allowed = false
+
+[candidate_artifact]
+path = "output/platform_v2_6_2_range_and_route_guards/sixth_holdout_candidates.csv"
+sha256 = "fa11ab85065205315f292fd9018e5af35f8e1da4dbaa1f090363753894a7581a"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v262_sixth_holdout_annotations.jsonl"
+sha256 = "93980d4f18295a042392662cf873431827e828791081405ba38ec586240fdb72"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[code_snapshot_sha256]
+router = "a13626105b6ff82ce8414bb1e914664581dc58887d53c9149916910b943bb651"
+semantics = "4767f1644f8d5a601584049c17c6b3640959d01f2a5cb353f509048094860011"
+runtime = "0d82bf5e688a1fd845f4a7f1492d43a5fe7d25187837a6ea8c1dab7f11460400"
+init = "8141bbe40b76642c0c7c49a507d3956f9e1d289977e0f0e8f08293aad4ddcabc"
+validation = "dc1ab9f4f78a391e4160b8d2a6e66192754b9ff2f3ca490699bbf61f4685e832"
+
+[[sources]]
+ticker = "BA"
+file_name = "2026-07-28_0001628280-26-049929_EX-99.1_a202606jun308kprex991.htm"
+sha256 = "fa07d9c78bf0000404fe7115646d56f7201b9f9c6060d26ca072b093aadd83c7"
+[[sources]]
+ticker = "BAC"
+file_name = "2026-07-24_0000070858-26-000364_EX-99.1_exhibit991.htm"
+sha256 = "58a62b36b6239a8d29563f2f02b19868c4e44b1508aa79dc3256a1d960b6bdfc"
+[[sources]]
+ticker = "C"
+file_name = "2026-07-14_0001104659-26-083383_EX-99.3_c-20260714xex99d3.htm"
+sha256 = "f50562e9653ff22da6b99fc7aba16226aa61e1a1b676fd8238159058889917fe"
+[[sources]]
+ticker = "COP"
+file_name = "2026-08-11_0001104659-26-094062_EX-99.1_tm2622739d1_ex99-1.htm"
+sha256 = "66d2d312b564c78b5a1f0f8fed62d964fabc85ab7616a598bbc75b498e0bbb20"
+[[sources]]
+ticker = "CVX"
+file_name = "2026-07-31_0000093410-26-000162_EX-99.1_a06302026ex9918-k.htm"
+sha256 = "819b11a4b37d18f1e54768f9b972921e1467186913143508f651b5982aaec93d"
+[[sources]]
+ticker = "DIS"
+file_name = "2026-08-05_0001744489-26-000056_EX-99.1_fy2026_q3xerxex991.htm"
+sha256 = "2b283457d017b3dd09f696c81327b5566a7cedf809086c4eb996f1b78b0ca715"
+[[sources]]
+ticker = "GE"
+file_name = "2026-07-16_0000040545-26-000047_EX-99_ge2q2026earningsrelease.htm"
+sha256 = "6a9692084c23ddc048cda8933f29b7495d4c9728f25ec2ed0dddefa26e91aad2"
+[[sources]]
+ticker = "GM"
+file_name = "2026-07-21_0001467858-26-000049_EX-99.1_gmq22026pressreleaseandfin.htm"
+sha256 = "5f8f4962fbaa2ac73dd08ddf5578f8a9684f4ce83fc66d9e5b2c016d8a2ececd"
+[[sources]]
+ticker = "JPM"
+file_name = "2026-07-14_0001628280-26-048086_EX-99_a2q26_earningsxpresentat.htm"
+sha256 = "db0f219f7da4d655eacc13634b464a1537ee430b3f8192c46b674ef299bb4b07"
+[[sources]]
+ticker = "KO"
+file_name = "2026-07-28_0001628280-26-049922_EX-99.1_a2026q2earningsreleaseex-9.htm"
+sha256 = "b19a04c2bd568d7c45cac954f953cc78a1b2fbafa7815af3d3edfdc0686402f3"

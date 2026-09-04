@@ -1,0 +1,85 @@
+blind_set_id = "V251_ISSUER_DOCUMENT_UNSEEN_2026_09_04"
+predeclared_at_utc = "2026-09-04T07:30:00Z"
+blindness_claim = "SECOND_ISSUER_AND_DOCUMENT_UNSEEN_AFTER_V25_DIAGNOSTIC"
+issuer_unseen = true
+document_unseen = true
+prior_repository_occurrence_count_before_declaration = 0
+candidate_generator_frozen = true
+rule_changes_after_selection = false
+evaluation_tickers = ["BKNG", "CSCO", "CVS", "DECK", "INTC", "LEN", "ORCL", "PH", "UNH", "URI"]
+pre_selection_empty_candidate_exclusion = "STLD"
+required_critical_concepts = ["REVENUE", "OPERATING_INCOME", "OPERATING_MARGIN", "BACKLOG", "PRODUCTION", "CAPEX", "DEBT", "CASH", "SHARES", "ADJUSTED_EBITDA"]
+blocks_per_required_concept = 1
+numeric_blocks_per_issuer = 3
+qualitative_blocks_per_issuer = 1
+table_blocks_per_issuer = 1
+sampling_hash_salt = "V251_SECOND_UNSEEN_FIXED_BEFORE_REVIEW"
+
+[gates]
+candidate_recall = 0.99
+critical_precision = 0.95
+critical_recall = 0.40
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+table_route_accuracy = 0.95
+silent_miss = 0
+
+[candidate_artifact]
+sha256 = "89008ef3632fdacc1897bd04b7cd7894172e59b150453957c0f5aba4954cd607"
+[selection_snapshot]
+generator_sha256 = "3a605a36d49dd9fe17e81d645b806a6f44f6e3ebddddf7f77833701b1a50135b"
+
+[v251_snapshot_sha256]
+runtime = "386ee6a46c2ef6472afd51f0ad44729908887b1fef94670c5b0b2334f5b65014"
+init = "101d90e405c8d4ae32df951f0eae6cf5996d201740ccba12cfebb5d39230e05a"
+
+[v25_snapshot_sha256]
+v25_model = "37c02dd78c602e91e633b03cea5a107b685fcb6879d06ff322c2f8ae028e2cf5"
+v25_clause = "975a85669dae21b0d5ff29fbd3456211d75dbd50cede8df8cbb57a0e195b185d"
+v25_table_router = "5e41b59646df6ea16d3140332fd8f43821e651bb5a764badd3864f86eba892a7"
+v25_binding = "e56ee9ae5630cac7e28184dd9784e07da995271a322d4070121c1f790b0e7d91"
+v25_runtime = "c5733598792ed7b499fa1405c0a7a67dcfc557a2eeae11e7b391a9daa3ab53ab"
+v25_init = "1a5deca5c4db1e5fd50d569629a9212c2dcedc7a77449661fa27be90735327c5"
+v24_candidate_generator = "1980ac6c1f37879737fbcdafd1bda750307b7526245ee2ee1810d437f5cd3bde"
+v24_candidate_dsl = "63e4c1f500e2e1677151a0b3bfcf80c54b31bb81848c73ae297034f593c65c36"
+
+[[sources]]
+ticker="BKNG"
+file_name="2026-08-04_0001075531-26-000036_EX-99.1_q2-26bkngearningsrelease.htm"
+sha256="f4649267e69d69ce2f5c866db7d9f2462b3c5af71f5812e714b6ff340c6e691c"
+[[sources]]
+ticker="CSCO"
+file_name="2026-08-12_0000858877-26-000106_EX-99.1_exhibit991pressrelease-q4f.htm"
+sha256="04cf167786161d0132e27b9717531a20125f21c6b84cec96140a0018b6da39b7"
+[[sources]]
+ticker="CVS"
+file_name="2026-08-05_0000064803-26-000097_EX-99.1_cvs_ex99x1q2-26.htm"
+sha256="abd01dc1aa47c42865320cde2eee5fb86a227164a8200897e3930d03697b5852"
+[[sources]]
+ticker="DECK"
+file_name="2026-07-23_0000910521-26-000015_EX-99.1_deckex991pressrelease-6302.htm"
+sha256="2325ca7d4081f5058f799e5995379d809412959086273f61c297d906d4850714"
+[[sources]]
+ticker="INTC"
+file_name="2026-07-23_0000050863-26-000155_EX-99.1_q226earningsrelease.htm"
+sha256="9f483545cf2605f46f5be96cd412cbd9d9bc61e4be95e737ac6d1b520c94fd46"
+[[sources]]
+ticker="LEN"
+file_name="2026-06-12_0001193125-26-268580_EX-99.1_d31288dex991.htm"
+sha256="0a8729742676020327d70bd5160403e5f74b529660871aeafc41ff2f340ccddc"
+[[sources]]
+ticker="ORCL"
+file_name="2026-06-10_0001193125-26-265848_EX-99.1_orcl-ex99_1.htm"
+sha256="253f9e026d60a9d37e9ba83c398163a2d51b2db2b3f52f001385177a20edd251"
+[[sources]]
+ticker="PH"
+file_name="2026-08-06_0000076334-26-000082_EX-99.1_exhibit991q4fy26.htm"
+sha256="69b166836ab17603a2f7dc1107ef04c9587830ff4c05fbaadf3f1798036e013d"
+[[sources]]
+ticker="UNH"
+file_name="2026-07-16_0000731766-26-000191_EX-99.1_earningsrelease2q26_7152.htm"
+sha256="f2ac51d02ec3fac446f489e502c97eebb53d768eb0a216517498d1ec2b48bdbc"
+[[sources]]
+ticker="URI"
+file_name="2026-07-22_0001067701-26-000028_EX-99.1_uri-6302026xex991.htm"
+sha256="ae57dafa0c019ca6690c3f2ce5ede179bf05b77903b08b6a84c3dd2fdd469152"

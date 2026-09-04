@@ -1,0 +1,41 @@
+holdout_id = "V26_FOURTH_ISSUER_DOCUMENT_DISJOINT_2026_09_04"
+predeclared_at_utc = "2026-09-04T12:00:00+09:00"
+evaluation_tickers = ["A", "AA", "AAL", "AAOI", "AAON", "AARD", "ABAT", "ABCB", "ABCL", "AACO"]
+prior_parser_benchmark_overlap = []
+document_kinds = ["10-K", "10-Q", "IR"]
+blocks_per_issuer_10k = 3
+blocks_per_issuer_10q = 3
+blocks_per_issuer_ir = 4
+target_annotated_blocks = 100
+sampling_hash_salt = "V26_FOURTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+source_inventory = "configs/certification/platform_v26_fourth_holdout_sources.csv"
+candidate_generator_frozen = true
+semantic_runtime_frozen = true
+router_frozen = true
+llm_backend_allowed = false
+industry_data_role = "CONTEXT_ONLY_NOT_COMPANY_FACT"
+
+[candidate_artifact]
+path = "output/platform_v2_6_route_aware_recall/fourth_holdout_candidates.csv"
+sha256 = "d2388b85913c65b0d799db9df91efdea4b796a22e24ae13fa4191a06e7e78937"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v26_fourth_holdout_annotations.jsonl"
+sha256 = "ef0c40132f27c8099c90b3274332f65bc12f94bfe63534df2fe89dc6c3860301"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[code_snapshot_sha256]
+model = "c76ec0dd3db26f6fb76657c691100f8a436d2565e8dded6b0bd845c14dba234c"
+runtime = "609630ff43a442a0a80cb78a4c92b4dd5e46ddc6dfed462c3be86fcc03803727"
+router = "a706393ef294388db66baff4985f2801ce375e5a1a3da2299afbf0cb8784c9d9"
+semantics = "b3ab9e99548744360512f2cd01b193386ee8c2b244ad936af2fad0060912d325"
+candidate_generator = "1980ac6c1f37879737fbcdafd1bda750307b7526245ee2ee1810d437f5cd3bde"
+candidate_dsl = "63e4c1f500e2e1677151a0b3bfcf80c54b31bb81848c73ae297034f593c65c36"

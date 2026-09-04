@@ -1,0 +1,75 @@
+holdout_id = "V261_FIFTH_ISSUER_DOCUMENT_DISJOINT_2026_09_04"
+predeclared_at_utc = "2026-09-04T14:30:00+09:00"
+evaluation_tickers = ["ADP", "NEE", "EMR", "PCAR", "NUE", "QCOM", "TXN", "IBM", "PFE", "LOW"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V261_FIFTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v261_runtime_frozen = true
+llm_backend_allowed = false
+
+[candidate_artifact]
+path = "output/platform_v2_6_1_segment_domain_guards/fifth_holdout_candidates.csv"
+sha256 = "046e62024352443342827c0b78103e9d6cb170e682e8db4a45bde67a68603852"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v261_fifth_holdout_annotations.jsonl"
+sha256 = "fdc281fdf16b766bef07c2c1db7a4f61045749854af393b1cd2cdfc17976882b"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[code_snapshot_sha256]
+router = "90b698d38844c598e03b59920eadd66f2639b756bb051a73147f63672d136bd7"
+semantics = "93472cb4638c9811ab1a6b9e8f0b743c471c563ab9216d42eb4cff4311eb1bc4"
+runtime = "32ff7cdd03c26f91bf51ae76d6c5760c93053bd0138b737fe1a26d22f23fa8f4"
+init = "a74cf878e129169d69d0ab6d818b5a8bc3c9e355dfc3dd87ad56e84b0499134d"
+
+[[sources]]
+ticker = "ADP"
+file_name = "2026-07-29_0000008670-26-000025_EX-99_q4fy26exhibit99.htm"
+sha256 = "03ab607c10e6e1e5ae3767e297db3f10ad4e7880cd6fa7fb5be929ea97c150ec"
+[[sources]]
+ticker = "NEE"
+file_name = "2026-08-11_0000753308-26-000065_EX-99.2_exhibit992toneedated08x10x.htm"
+sha256 = "cde06dbee94c90e0efd630e6705b16dfd1dd73f1260b051f79b4b853e2a82f28"
+[[sources]]
+ticker = "EMR"
+file_name = "2026-08-04_0000032604-26-000042_EX-99.1_a2026q3release_ex991.htm"
+sha256 = "ba284b12498eb8c266601452aea88026ab954974ad2adb8dd6dffe1a85993eed"
+[[sources]]
+ticker = "PCAR"
+file_name = "2026-07-28_0001193125-26-318918_EX-99.1_pcar-ex99_1.htm"
+sha256 = "099ba97805e5b23cccd3439073a8026575620e50270695ce261d1bd63c1828ca"
+[[sources]]
+ticker = "NUE"
+file_name = "2026-07-27_0001193125-26-318190_EX-99.2_d468854dex992.htm"
+sha256 = "1183b0c1392ac65da6f33b56519e3cdc5313654bbb66356677c5311a56206259"
+[[sources]]
+ticker = "QCOM"
+file_name = "2026-07-29_0000804328-26-000085_EX-99.1_qcom062826erex991.htm"
+sha256 = "7f71dd65938b7fd5c632f44224fd2fde9e1a8610c30837d6a13fddd420daea8f"
+[[sources]]
+ticker = "TXN"
+file_name = "2026-07-22_0000097476-26-000148_EX-99_q22026txnex99-eredgar.htm"
+sha256 = "c8ce46866f3e56a09b0b296c9a4031819e28c557685767ffb2a6bd6029ba88b7"
+[[sources]]
+ticker = "IBM"
+file_name = "2026-07-22_0000051143-26-000077_EX-99.2_ibm-20260722xex992.htm"
+sha256 = "16d4b536a81acfae2238bd5edc6f7f08ff2796d6ad33a392779bf90179232f72"
+[[sources]]
+ticker = "PFE"
+file_name = "2026-08-04_0000078003-26-000094_EX-99_pfe-6282026xex99.htm"
+sha256 = "2c4e1714b91d8680583fe8b972a587aae4bcea071105f3766ff5e04c3f8eac4a"
+[[sources]]
+ticker = "LOW"
+file_name = "2026-08-19_0000060667-26-000113_EX-99.2_exhibit992-081926.htm"
+sha256 = "5a3d8538e3c8909dbcc89eb8e8430fca36636ba62ce6b31ff4253e5c78122a68"

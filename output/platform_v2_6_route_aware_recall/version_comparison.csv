@@ -1,0 +1,4 @@
+version,evaluation,critical_precision,critical_recall,candidate_recall,table_route_accuracy,status
+V2.5.1,third_disjoint_holdout,1.0,0.1627906977,1.0,0.5789473684,HOLD_RESEARCH_UNFROZEN
+V2.6,v251_disclosed_development_set,1.0,0.813953488372093,1.0,1.0,DEVELOPMENT_GATE_PASS_NOT_BLIND
+V2.6,fourth_disjoint_holdout,0.75,0.3333333333333333,0.925925925925926,0.94,HOLD_RESEARCH_UNFROZEN

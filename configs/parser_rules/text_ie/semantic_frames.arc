@@ -8,7 +8,7 @@ var "KPI_METRIC" {
 }
 
 var "CHANGE_VERB" {
-  expression = {"any": [{"lower": "increased"}, {"lower": "rose"}, {"lower": "grew"}, {"lower": "decreased"}, {"lower": "declined"}, {"lower": "fell"}]}
+  expression = {"any": [{"lemma": "increase"}, {"lemma": "rise"}, {"lemma": "grow"}, {"lemma": "decrease"}, {"lemma": "decline"}, {"lemma": "fall"}]}
 }
 
 var "PERCENT_CHANGE" {
@@ -24,7 +24,7 @@ var "TO_RELATION" {
 }
 
 var "CAUSAL_TRIGGER" {
-  expression = {"any": [{"lower": "affect"}, {"lower": "increased"}, {"lower": "driven by"}, {"lower": "due to"}]}
+  expression = {"any": [{"lemma": "affect"}, {"lemma": "increase"}, {"lower": "driven by"}, {"lower": "due to"}]}
 }
 
 # Frame schemas are stable contracts; many surface patterns may target one
@@ -54,9 +54,9 @@ text_rule "semantic.change_to" {
   ambiguity = "REVIEW"
   authority = "RESEARCH_EVIDENCE"
   priority = 10
-  pattern = [{"label": "metric", "var": "KPI_METRIC"}, {"label": "trigger", "var": "CHANGE_VERB"}, {"label": "change", "var": "PERCENT_CHANGE", "optional": true}, {"label": "relation", "var": "TO_RELATION", "optional": true}, {"label": "value", "var": "KPI_VALUE"}]
-  backends = ["PHRASE", "SEQUENCE"]
-  operations = ["normalize_money", "normalize_percent", "resolve_scope", "resolve_period", "assert_unique", "emit_frame"]
+  pattern = [{"label": "metric", "var": "KPI_METRIC"}, {"label": "trigger", "var": "CHANGE_VERB", "max_gap": 6}, {"label": "change", "var": "PERCENT_CHANGE", "optional": true, "max_gap": 4}, {"label": "relation", "var": "TO_RELATION", "optional": true, "max_gap": 2}, {"label": "value", "var": "KPI_VALUE", "max_gap": 4}]
+  backends = ["PHRASE", "SEQUENCE", "DEPENDENCY"]
+  operations = ["bind_labeled_roles", "require_same_clause", "require_dependency_path", "normalize_money", "normalize_percent", "resolve_scope", "resolve_period", "assert_unique", "emit_frame"]
 }
 
 text_rule "semantic.change_to_nominal" {
@@ -227,8 +227,8 @@ text_rule "semantic.cause_effect" {
   ambiguity = "REVIEW"
   authority = "RESEARCH_DIAGNOSTIC"
   priority = 100
-  pattern = [{"label": "cause", "var": "KPI_METRIC"}, {"label": "relation", "var": "CAUSAL_TRIGGER"}, {"label": "effect", "var": "KPI_METRIC"}]
+  pattern = [{"label": "cause", "var": "KPI_METRIC"}, {"label": "relation", "var": "CAUSAL_TRIGGER", "max_gap": 8}, {"label": "effect", "var": "KPI_METRIC", "max_gap": 8}]
   backends = ["SEQUENCE", "DEPENDENCY"]
-  operations = ["resolve_scope", "resolve_period", "assert_unique", "emit_frame", "emit_relation"]
+  operations = ["bind_labeled_roles", "require_same_clause", "require_dependency_path", "resolve_scope", "resolve_period", "assert_unique", "emit_frame", "emit_relation"]
   relation = "MANAGEMENT_CAUSAL_CLAIM"
 }

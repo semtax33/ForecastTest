@@ -84,7 +84,12 @@ def test_text_rule_dsl_is_typed_hashed_and_non_turing() -> None:
         "relation",
         "value",
     ]
-    assert {backend.value for backend in change_to.backends} == {"PHRASE", "SEQUENCE"}
+    assert {backend.value for backend in change_to.backends} == {
+        "PHRASE",
+        "SEQUENCE",
+        "DEPENDENCY",
+    }
+    assert change_to.pattern[-1].max_gap_tokens == 4
     with pytest.raises(TextDslCompileError, match="Unknown or forbidden"):
         compile_text_rules(
             'text_rule "bad" {\nversion = 1\nframe = "RATE"\n'

@@ -1,0 +1,2 @@
+version,evaluation_issuers,annotated_blocks,expected_frames,auto_precision,auto_recall,critical_precision,critical_recall,table_route_accuracy,duplicate_auto_emission,illegal_cross_clause_auto_binding,silent_miss,precision_gate_99,recall_gate_50,table_gate_95
+PLATFORM_V2_6_V251_DISCLOSED_DEVELOPMENT_SET,10,50,44,1.0,0.7954545454545454,1.0,0.813953488372093,1.0,0,0,0,True,True,True

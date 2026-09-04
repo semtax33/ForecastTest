@@ -1,0 +1,105 @@
+holdout_id = "V268_ELEVENTH_ISSUER_DOCUMENT_DISJOINT_2026_09_04"
+predeclared_at = "2026-09-04T22:11:56.9372923+09:00"
+evaluation_tickers = ["CRM", "AVGO", "MU", "AMGN", "BIIB", "APD", "SO", "SPGI", "ICE", "CME"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V268_ELEVENTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v268_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+
+[candidate_artifact]
+path = "output/platform_v2_6_8_spacy_semantic_ownership/eleventh_holdout_candidates.csv"
+rows = 100
+sha256 = "2cc6d096ff886fd5d829e8356f3a5ce1d73f5aed5ca9ddeb310c5927048174e0"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v268_eleventh_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 52
+table_blocks = 22
+sha256 = "89f39f93dfa7ebac907aec1cbabf4ba7316440a504dcd694643624809ebc2048"
+annotation_script_sha256 = "8f688a691da6867de040bfeeb0618a492fe0f77c12ab83b2ff558f539b3e0e41"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[selection_snapshot]
+generator_sha256 = "6fb33e665370ba3cd112b2e46cfb653830c36b191054334950ce596cb75a6842"
+
+[code_snapshot_sha256]
+compiler = "0104e36ad1d5d1ba2d41df60b68208a0ff39e42aa8ecdc023c704730cd211c03"
+runtime = "578f91af416222be8b55585647268449f375ac19469e035ed87c600ba6fe3766"
+spacy_backend = "0cb343ccd0d0ed34a2dbd3d2431bd38ac001abbb5bf7615ed2383f96487c60cb"
+ontology = "b5c01f51723ed1a7f1ca85baf82d300bc88f0cc8058e7689f4e195f24d637074"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+validation = "ac621c159ac628173bbd666742edc0915c1afc2171a391bd5cf925a4a7e75b32"
+v267_semantics = "e9c09078afa0dde5748016aa3b35c9a0da8b897d2b87ff96b6df70bff3378ff7"
+v267_runtime = "0ce7776598e43e045e489cea19cecdcca000245614edaa649167995d8d4bd9d8"
+v267_router = "e10500c4593bdde63c7b16b33bf9a00af34afc26363d1f021a3befade512f9be"
+v267_init = "2c7e12b774e377f50d95a88d6de7b633364b1cd6e0249a82f26151e2c9a18d00"
+v267_rules = "9df5b74d171690ef11fb1f8227264ee7a3670e5b6fac863492cef397456e6046"
+v268_semantics = "e2945bac11a6be06a63a2acf4f7c575f423392b21b86e5d48b25266f642a526f"
+v268_runtime = "e979bd82963436d4b6bbfb3bb52c861f287a413aef30682d435f7231dad7520f"
+v268_router = "a5bd43655721d57b37df5e72fcc584a81963c77d5c301714dfc421521595235e"
+v268_init = "50b0de3c2a21167b1448021b0408054e68787e20ef2157f8e4c79048cc5eeb88"
+v268_rules = "703b799cbb191dd1dea42b785d6d1f30dac95a2a5731a4e3d68f0449f544b280"
+
+[[sources]]
+ticker = "CRM"
+file_name = "2026-08-26_0001108524-26-000187_EX-99.1_crm-q2fy27xexhibit991.htm"
+sha256 = "1befdfef1f4a983e6bb1fd4cdc08811d9ddaf7e29a883cae89efb4d7c2c1f2f8"
+
+[[sources]]
+ticker = "AVGO"
+file_name = "2026-06-03_0001730168-26-000051_EX-99.1_avgo-05032026x8kxex99.htm"
+sha256 = "e6ffce399465c14e43281b9b98d20124d7285b8b422f79d03b09648fd8ae5a5d"
+
+[[sources]]
+ticker = "MU"
+file_name = "2026-06-24_0000723125-26-000013_EX-99.1_a2026q3ex991-pressrelease.htm"
+sha256 = "06b3dcc097f74afc1c4039869152ece28c42f335a0acbcf7a0bd3baa070e110d"
+
+[[sources]]
+ticker = "AMGN"
+file_name = "2026-08-04_0000318154-26-000124_EX-99.1_amgn-20260630earningsrelea.htm"
+sha256 = "350d4d4de8bc7f53ccf4e039302d2e3436ae5503a4b9ae5abd26418bbfdab211"
+
+[[sources]]
+ticker = "BIIB"
+file_name = "2026-07-29_0000875045-26-000073_EX-99.1_exhibit991-q22026pressrele.htm"
+sha256 = "4cb30acb8aaa96b4b3d9ac7b712ec9de78891d7140662f3c42e9cb5408f0ff44"
+
+[[sources]]
+ticker = "APD"
+file_name = "2026-07-30_0000002969-26-000034_EX-99.1_exhibit99130jun26.htm"
+sha256 = "485fdd6f1bef459dcd140e57b36037eb61a846760c6f5563a358d2a3ef262435"
+
+[[sources]]
+ticker = "SO"
+file_name = "2026-07-30_0000092122-26-000056_EX-99_ex99-pressreleaseq22026.htm"
+sha256 = "3102b728b9f90e5ded9133b9fb026e889ecf51c299cf89ba05cd7048081f5179"
+
+[[sources]]
+ticker = "SPGI"
+file_name = "2026-07-28_0000064040-26-000040_EX-99.1_spgi2q2026-earningsrelease.htm"
+sha256 = "8ee5571cf7b5d84821b1759a53d2b975816d7645b2e01ef3283ddc71964083bc"
+
+[[sources]]
+ticker = "ICE"
+file_name = "2026-07-30_0001104659-26-088462_EX-99.1_tm2621213d1_ex99-1.htm"
+sha256 = "36a863f790cdfdf775b3ab0c7c61b04875160c6bcec900605d9d42ea10c8fd0f"
+
+[[sources]]
+ticker = "CME"
+file_name = "2026-07-22_0001156375-26-000042_EX-99.1_exhibit9916302026.htm"
+sha256 = "7616e4ff99479785e84381bc7be9bdf44ed6f7e2b0d4c881ee40d6fb6b92a206"

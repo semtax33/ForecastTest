@@ -1,0 +1,36 @@
+{
+  "benchmark_id": "PLATFORM_V2_6_ROUTE_AWARE_RECALL_2026_09_04",
+  "status": "FOURTH_DISJOINT_HOLDOUT_FAILED",
+  "platform_status": "HOLD_RESEARCH_UNFROZEN",
+  "artifact_sha256": {
+    "configs/certification/platform_v26_fourth_holdout.toml": "5cfc4dc4690326fd89ae6eeb108cef326bee28d9995ab3b8b96eb193d6ed88b7",
+    "configs/certification/platform_v26_fourth_holdout_sources.csv": "709feb2e905771d291505fb895a03218ce6c5ed5dd49d40fa8200d6ae126d05c",
+    "equity_platform/text_ie/v26/model.py": "c76ec0dd3db26f6fb76657c691100f8a436d2565e8dded6b0bd845c14dba234c",
+    "equity_platform/text_ie/v26/router.py": "a706393ef294388db66baff4985f2801ce375e5a1a3da2299afbf0cb8784c9d9",
+    "equity_platform/text_ie/v26/semantics.py": "b3ab9e99548744360512f2cd01b193386ee8c2b244ad936af2fad0060912d325",
+    "equity_platform/text_ie/v26/runtime.py": "609630ff43a442a0a80cb78a4c92b4dd5e46ddc6dfed462c3be86fcc03803727",
+    "equity_platform/text_ie/v26/evidence.py": "7a5992af18795ee956351686cc0a3f727d12115aea4df67b320423f13f95b8f5",
+    "scripts/architecture/v26_fourth_holdout_candidates.py": "9ff4a5fdf0c976359ee72a7a28726cb8fe2f4dde3ba7938d208bde65d2678271",
+    "scripts/architecture/v26_fourth_holdout_annotations.py": "156926164e9b70dab14f44f209ade661596d85901b2e82caac6940c0afd5c71e",
+    "scripts/architecture/v26_fourth_holdout_evaluation.py": "760ef8f72c8855555871e4833b0ce4c63d9c751473a4c95232129a310c5d51b1",
+    "scripts/architecture/v26_route_evaluation.py": "3f53dfe80a9a8ba72a97ab77d1ef5c86cb598c9ab14de5253ebfcbd286368ada",
+    "scripts/architecture/v26_research_report.py": "0dcde50a34ae8d3e4cbfa388ff6689defb328cb0e4cae2df7b913859284eaef8",
+    "tests/test_route_aware_recall_v26.py": "b5d6f4110f6bf4ec8706175b307cfd1cb4ad91544b7b0bb5cb90df0a53888d19",
+    "tests/test_v26_evidence_sources.py": "8ec23a1e65816f5c2879d43a2c9ad3ee0e2ba6453891070d84eab789973a4ab9",
+    "tests/test_v26_fourth_holdout.py": "aad7a823bc5c3858a28c2cdf4b8d06bd31a7c650b9027af62c6e7a832dfbcde4",
+    "data-lake/gold/parser/text_ie/v26_fourth_holdout_annotations.jsonl": "ef0c40132f27c8099c90b3274332f65bc12f94bfe63534df2fe89dc6c3860301",
+    "output/platform_v2_6_route_aware_recall/fourth_holdout_candidates.csv": "d2388b85913c65b0d799db9df91efdea4b796a22e24ae13fa4191a06e7e78937",
+    "output/platform_v2_6_route_aware_recall/fourth_holdout_summary.csv": "1ef841b95e03f3c894f51b2f6274ca5e5247a86bc32dd25d863ff820da71bfa3",
+    "output/platform_v2_6_route_aware_recall/fourth_holdout_evaluation.csv": "f79a96522c38203c6e884deed3e903e02ef064df816a9bf77bb8ff21e011b6af",
+    "output/platform_v2_6_route_aware_recall/coverage_ladder.csv": "836ae96f81cacc2c0e410e923ac02b9a2b64a7313b54e0acf20e9db673853136",
+    "output/platform_v2_6_route_aware_recall/holdout_error_taxonomy.csv": "cf3b6c48aad5367f6dc865d24fa0729296fd98f2ace1bd9543110a0b0ce6f7e0",
+    "output/platform_v2_6_route_aware_recall/evidence_source_coverage.csv": "07073894805325b14132b887655355da1b45fb284bba8a9bef4bdb25ab695888",
+    "output/platform_v2_6_route_aware_recall/version_comparison.csv": "ca2721948ec294388977551b035a5ecb2bc25df27e86e63e19ca61057ce1eccb",
+    "output/platform_v2_6_route_aware_recall/report.md": "17fce9a3f4f6b22e2ff1642950747561fd99fddc3298c34dfc69cd04ec2dce80"
+  },
+  "policy": {
+    "future_use": "ERROR_ANALYSIS_ONLY_NOT_RETUNING_VALIDATION",
+    "forecast_dcf": "FROZEN_NOT_EXECUTED",
+    "production": "LOCKED"
+  }
+}

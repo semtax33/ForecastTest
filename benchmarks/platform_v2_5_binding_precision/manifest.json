@@ -1,0 +1,16 @@
+{
+  "benchmark_id": "PLATFORM_V2_5_BINDING_PRECISION_2026_09_04",
+  "status": "FAILED_DIAGNOSTIC_SNAPSHOT_FROZEN",
+  "platform_status": "HOLD_RESEARCH_UNFROZEN",
+  "artifact_sha256": {
+    "configs/certification/platform_v25_blind_set.toml": "a2bc3fba3e23cd57c8c186afb764f4630290d381692c074a623c776b8bde6e64",
+    "scripts/architecture/v25_blind_candidates.py": "292c2dd1b7d836fc536c4d265a01e862ebdca6d3415f19f0228eea6255f1bf84",
+    "scripts/architecture/v25_blind_evaluation.py": "5fd15f01d56ff3fc01674a67f8970c1d659a5af3a7fd46f3bb32824e84b2dcfe",
+    "output/platform_v2_5_binding_precision/blind_sentence_candidates.csv": "97ae68ead011890491bb58fcc741ca9a8266c7b3bfc08a296286cdf5dc0f5007",
+    "data-lake/gold/parser/text_ie/v25_unseen_sentence_annotations.jsonl": "f7d273fa0605d5c2303156249f3f71d096718d7adc927d4341530ee1056ee723",
+    "output/platform_v2_5_binding_precision/blind_sentence_evaluation.csv": "190bc61499d737775ff6df969a34480a742decdf8a4109915ac35459cd2d47db",
+    "output/platform_v2_5_binding_precision/blind_sentence_summary.csv": "44f4e3ad7516944abbfb976090d2f4f70d2921d7c7a1823073a2532f923c3abb",
+    "output/platform_v2_5_binding_precision/error_taxonomy.csv": "00cbcaf0cb960d0e74aa6b96c8ef6d5ce7467164f2978ab2b9053b941526119a"
+  },
+  "policy": {"future_use": "ERROR_ANALYSIS_ONLY", "candidate_generator": "V2.4_FROZEN", "forecast_dcf": "FROZEN_NOT_EXECUTED"}
+}

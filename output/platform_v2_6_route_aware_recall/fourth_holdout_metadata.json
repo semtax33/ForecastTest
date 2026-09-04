@@ -1,0 +1,9 @@
+{
+  "generated_at_utc": "2026-09-04T09:10:33.605162+00:00",
+  "holdout_config": "configs/certification/platform_v26_fourth_holdout.toml",
+  "candidate_sha256": "d2388b85913c65b0d799db9df91efdea4b796a22e24ae13fa4191a06e7e78937",
+  "annotation_sha256": "ef0c40132f27c8099c90b3274332f65bc12f94bfe63534df2fe89dc6c3860301",
+  "semantic_rule_changes_after_selection": false,
+  "forecast_dcf_layers_modified": false,
+  "llm_backend_used": false
+}

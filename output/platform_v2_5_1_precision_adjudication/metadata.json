@@ -1,0 +1,10 @@
+{
+  "generated_at_utc": "2026-09-04T05:35:39.896910+00:00",
+  "version": "PLATFORM_V2_5_1_PRECISION_ADJUDICATION",
+  "validation_sets_reused": false,
+  "candidate_generator": "V2.4_FROZEN",
+  "forecast_policy": "FROZEN_NO_RETUNING",
+  "dcf_policy": "FROZEN_NOT_EXECUTED_BEFORE_L3",
+  "terminal_input_allowed": false,
+  "production_promoted": false
+}

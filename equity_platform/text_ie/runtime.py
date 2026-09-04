@@ -32,6 +32,7 @@ from .model import (
     KPIFrame,
     KPIRelationIR,
     PeriodSemantics,
+    Polarity,
     QuantityKind,
     QuantityMention,
     ReviewItem,
@@ -65,15 +66,19 @@ def _source_span(block: TextBlock) -> SourceSpan:
 
 
 def _trigger_position(text: str, triggers: tuple[str, ...]) -> int | None:
-    positions = []
+    folded = text.casefold()
+    positions: list[int] = []
     for trigger in triggers:
-        match = re.search(
-            rf"(?<![A-Za-z0-9]){re.escape(trigger)}(?![A-Za-z0-9])",
-            text,
-            flags=re.IGNORECASE,
-        )
-        if match:
-            positions.append(match.start())
+        needle = trigger.casefold()
+        cursor = 0
+        while (position := folded.find(needle, cursor)) >= 0:
+            left_ok = position == 0 or not folded[position - 1].isalnum()
+            end = position + len(needle)
+            right_ok = end == len(folded) or not folded[end].isalnum()
+            if left_ok and right_ok:
+                positions.append(position)
+                break
+            cursor = position + 1
     return min(positions) if positions else None
 
 
@@ -209,6 +214,41 @@ def _frame(
         if suffix:
             base_concept = base_concept.removesuffix(suffix)
     tier = definition_for(base_concept).tier
+    selected_polarity = polarity(block.text)
+    if "resolve_polarity" in rule.operations and context_trace:
+        trigger_roles = dict(context_trace.get("semantic_roles", {})).get(
+            "trigger", []
+        )
+        if trigger_roles:
+            trigger_role = trigger_roles[0]
+            cue = str(trigger_role.get("value", ""))
+            folded_cue = cue.casefold()
+            negative = folded_cue.startswith(
+                (
+                    "contract",
+                    "decrease",
+                    "decline",
+                    "fall",
+                    "headwind",
+                    "lower",
+                    "negative",
+                    "reduce",
+                    "down",
+                )
+            )
+            selected_polarity = Polarity(
+                positive=not negative,
+                cue=cue,
+                cue_start=int(trigger_role["start"]),
+                cue_end=int(trigger_role["end"]),
+            )
+    if "resolve_parenthesized_sign" in rule.operations and value and value.value < 0:
+        selected_polarity = Polarity(
+            positive=False,
+            cue="PARENTHESIZED_NEGATIVE",
+            cue_start=value.char_start,
+            cue_end=value.char_end,
+        )
     proposed = KPIFrame(
         concept=concept + rule.output_metric_suffix,
         entity=block.entity,
@@ -221,7 +261,7 @@ def _frame(
         change=change.value if change else None,
         change_unit=change.unit if change else None,
         comparator=comparator,
-        polarity=polarity(block.text),
+        polarity=selected_polarity,
         qualifier=qualifiers,
         source=block.source,
         source_span=_source_span(block),
@@ -237,6 +277,68 @@ def _frame(
         tier=tier,
     )
     semantic = validate_kpi_frame(proposed, document)
+    trace_roles = dict((context_trace or {}).get("semantic_roles", {}))
+    trace_backends = tuple((context_trace or {}).get("matcher_trace", ()))
+    value_roles = tuple(
+        role
+        for label in (
+            "value",
+            "current",
+            "change",
+            "low",
+            "high",
+            "midpoint",
+            "tolerance",
+            "baseline",
+            "prior",
+        )
+        for role in trace_roles.get(label, ())
+    )
+    metric_roles = tuple(
+        role
+        for label in ("metric", "cause", "effect")
+        for role in trace_roles.get(label, ())
+    )
+    labeled_role_binding = bool(
+        value is not None
+        and value_roles
+        and metric_roles
+        and "bind_labeled_roles" in rule.operations
+        and "SPACY_MATCHER" in trace_backends
+        and (
+            any(
+                int(role["start"]) <= value.char_start
+                and value.char_end <= int(role["end"])
+                for role in value_roles
+            )
+            or (
+                min(int(role["start"]) for role in value_roles)
+                <= value.char_start
+                and value.char_end
+                <= max(int(role["end"]) for role in value_roles)
+            )
+        )
+    )
+    if labeled_role_binding:
+        dependency_proved = "SPACY_DEPENDENCY_MATCHER" in trace_backends
+        return replace(
+            semantic,
+            context_trace={
+                **semantic.context_trace,
+                "context_validation": {
+                    "reason": (
+                        "SPACY_DEPENDENCY_ROLE_BINDING"
+                        if dependency_proved
+                        else "SPACY_BOUNDED_LABELED_ROLE_BINDING"
+                    ),
+                    "metric_span": (
+                        int(metric_roles[0]["start"]),
+                        int(metric_roles[0]["end"]),
+                    ),
+                    "value_span": (value.char_start, value.char_end),
+                },
+            },
+        )
     decision = validate_context_binding(
         semantic,
         block,
@@ -273,6 +375,7 @@ def _match_rule(
     trigger = _trigger_position(block.text, rule.triggers)
     if trigger is None:
         return None
+    pattern_match = ()
     if rule.pattern:
         pattern_match = (
             backend.match_pattern(rule, block.text, concepts, quantities)
@@ -281,7 +384,40 @@ def _match_rule(
         )
         if pattern_match is None:
             return None
+    roles: dict[str, tuple[object, ...]] = {}
+    for label in dict.fromkeys(span.label for span in pattern_match):
+        roles[label] = tuple(span for span in pattern_match if span.label == label)
+    trigger_roles = roles.get("trigger", ())
+    trigger = (
+        int(trigger_roles[0].char_start)
+        if trigger_roles
+        else trigger
+    )
+
+    role_concepts = tuple(
+        dict.fromkeys(
+            str(span.value)
+            for label in ("metric", "cause", "effect")
+            for span in roles.get(label, ())
+        )
+    )
+    pattern_start = min(
+        (span.char_start for span in pattern_match),
+        default=0,
+    )
+    pattern_end = max(
+        (span.char_end for span in pattern_match),
+        default=len(block.text),
+    )
+    competing_concepts = tuple(
+        item
+        for item in concepts
+        if pattern_start <= getattr(item, "char_start") < pattern_end
+        and getattr(item, "concept") not in role_concepts
+    )
     names = tuple(dict.fromkeys(getattr(item, "concept") for item in concepts))
+    if role_concepts and not competing_concepts:
+        names = role_concepts
     if rule.concepts:
         names = tuple(name for name in names if name in rule.concepts)
     if not rule.qualitative:
@@ -289,20 +425,158 @@ def _match_rule(
     if rule.require_metric and not names:
         return None
     candidates = _quantity_candidates(quantities, rule)
+
+    number_words = {
+        "zero": 0.0,
+        "one": 1.0,
+        "two": 2.0,
+        "three": 3.0,
+        "four": 4.0,
+        "five": 5.0,
+        "six": 6.0,
+        "seven": 7.0,
+        "eight": 8.0,
+        "nine": 9.0,
+        "ten": 10.0,
+        "eleven": 11.0,
+        "twelve": 12.0,
+        "thirteen": 13.0,
+        "fourteen": 14.0,
+        "fifteen": 15.0,
+        "sixteen": 16.0,
+        "seventeen": 17.0,
+        "eighteen": 18.0,
+        "nineteen": 19.0,
+        "twenty": 20.0,
+    }
+
+    def materialize_quantity(span: object) -> QuantityMention | None:
+        if len(rule.quantity_kinds) == 1:
+            kind = rule.quantity_kinds[0]
+        elif "normalize_percent" in rule.operations:
+            kind = QuantityKind.PERCENT
+        elif "normalize_count" in rule.operations:
+            kind = QuantityKind.COUNT
+        elif "normalize_money" in rule.operations:
+            kind = QuantityKind.MONEY
+        else:
+            return None
+        raw = block.text[span.char_start : span.char_end]
+        folded = raw.casefold().strip()
+        normalized = (
+            folded.replace(",", "")
+            .replace("$", "")
+            .replace("%", "")
+            .replace("(", "")
+            .replace(")", "")
+            .strip()
+        )
+        value = number_words.get(normalized)
+        if value is None:
+            numeric = normalized.split()[0] if normalized.split() else ""
+            try:
+                value = float(numeric)
+            except ValueError:
+                return None
+        if "billion" in folded or folded.endswith("bn"):
+            value *= 1_000_000_000
+        elif "million" in folded or folded.endswith("mm"):
+            value *= 1_000_000
+        if "resolve_parenthesized_sign" in rule.operations:
+            left = block.text[max(0, span.char_start - 1) : span.char_start]
+            right = block.text[span.char_end : span.char_end + 1]
+            if left == "(" and right == ")":
+                value = -abs(value)
+        unit = {
+            QuantityKind.MONEY: "USD",
+            QuantityKind.PERCENT: "PERCENT",
+            QuantityKind.BASIS_POINTS: "BASIS_POINTS",
+            QuantityKind.COUNT: "COUNT",
+            QuantityKind.RATE: "RATE",
+            QuantityKind.PRICE: "USD",
+        }[kind]
+        return QuantityMention(
+            kind=kind,
+            value=value,
+            unit=unit,
+            raw=raw,
+            char_start=span.char_start,
+            char_end=span.char_end,
+        )
+
+    def role_quantities(*labels: str) -> tuple[QuantityMention, ...]:
+        spans = tuple(span for label in labels for span in roles.get(label, ()))
+        output: list[QuantityMention] = []
+        for span in spans:
+            matched = next(
+                (
+                    item
+                    for item in candidates
+                    if span.char_start <= item.char_start
+                    and item.char_end <= span.char_end
+                ),
+                None,
+            )
+            quantity = matched or materialize_quantity(span)
+            if quantity is not None and not any(
+                existing.char_start == quantity.char_start
+                and existing.char_end == quantity.char_end
+                for existing in output
+            ):
+                output.append(quantity)
+        return tuple(output)
+
+    semantic_trace = {
+        "semantic_roles": {
+            label: [
+                {
+                    "start": span.char_start,
+                    "end": span.char_end,
+                    "value": span.value,
+                }
+                for span in spans
+            ]
+            for label, spans in roles.items()
+        },
+        "matcher_trace": list(
+            getattr(backend, "last_match_trace", ())
+            if backend is not None and roles
+            else ()
+        ),
+    }
+    dependency_matched = "SPACY_DEPENDENCY_MATCHER" in semantic_trace["matcher_trace"]
+    semantic_method = (
+        ExtractionMethod.DEPENDENCY_RULE if dependency_matched else None
+    )
+
+    def traced(extra: dict[str, object] | None = None) -> dict[str, object]:
+        if not roles:
+            return extra or {}
+        return {**semantic_trace, **(extra or {})}
+
     period, semantics = resolve_period(block, rule.frame)
     if period == "UNRESOLVED":
         return None
 
     if rule.frame is SemanticFrame.CHANGE_TO:
-        relation = _relation_position(block.text, rule.relation_words)
+        relation_roles = roles.get("relation", ())
+        relation = (
+            int(relation_roles[0].char_start)
+            if relation_roles
+            else _relation_position(block.text, rule.relation_words)
+        )
+        if relation is None and roles.get("value") and roles.get("change"):
+            relation = trigger
         if relation is None:
             return None
-        values = _concept_value_candidates(names, tuple(
-            item
-            for item in candidates
-            if item.char_start > relation
-        ))
-        changes = tuple(
+        labeled_values = role_quantities("value")
+        values = _concept_value_candidates(
+            names,
+            labeled_values
+            or tuple(item for item in candidates if item.char_start > relation),
+        )
+        labeled_changes = role_quantities("change")
+        changes = labeled_changes or tuple(
             item
             for item in quantities
             if item.kind in {QuantityKind.PERCENT, QuantityKind.BASIS_POINTS}
@@ -323,15 +597,58 @@ def _match_rule(
                 change=changes[0] if changes else None,
                 comparator="PRIOR_YEAR" if changes else None,
                 inherited=inherited,
+                context_trace=traced(),
+                method_override=semantic_method,
             ),
         )
 
     if rule.frame is SemanticFrame.CHANGE_BY:
-        relation = _relation_position(block.text, rule.relation_words)
+        relation_roles = roles.get("relation", ())
+        relation = (
+            int(relation_roles[0].char_start)
+            if relation_roles
+            else _relation_position(block.text, rule.relation_words)
+        )
         if relation is None:
             # English commonly omits ``by``: "revenue grew 9 percent".
             relation = trigger
-        changes = tuple(item for item in candidates if relation is not None and item.char_start > relation)
+        change_labels = (
+            ("change", "value", "current", "prior")
+            if "emit_each_value" in rule.operations
+            else ("change", "value")
+        )
+        changes = role_quantities(*change_labels) or tuple(
+            item
+            for item in candidates
+            if relation is not None and item.char_start > relation
+        )
+        if (
+            "emit_each_value" in rule.operations
+            and relation is not None
+            and len(names) == 1
+            and changes
+        ):
+            return tuple(
+                _frame(
+                    document=document,
+                    block=block,
+                    rule=rule,
+                    concept=(
+                        names[0]
+                        if "emit_base_metric" in rule.operations
+                        else names[0] + "_CHANGE"
+                    ),
+                    scope=scope,
+                    period=period,
+                    period_semantics=semantics,
+                    value=change,
+                    comparator="PRIOR_PERIOD",
+                    inherited=inherited,
+                    context_trace=traced(),
+                    method_override=semantic_method,
+                )
+                for change in changes
+            )
         if relation is None or len(names) != 1 or len(changes) != 1:
             return None if not changes else ()
         return (
@@ -339,22 +656,84 @@ def _match_rule(
                 document=document,
                 block=block,
                 rule=rule,
-                concept=names[0] + "_CHANGE",
+                concept=(
+                    names[0]
+                    if "emit_base_metric" in rule.operations
+                    else names[0] + "_CHANGE"
+                ),
                 scope=scope,
                 period=period,
                 period_semantics=semantics,
                 value=changes[0],
                 comparator="PRIOR_PERIOD",
                 inherited=inherited,
+                context_trace=traced(),
+                method_override=semantic_method,
             ),
         )
 
     if rule.frame is SemanticFrame.RANGE_GUIDANCE:
-        relation = _relation_position(block.text, rule.relation_words)
-        if relation is None or len(candidates) < 2:
+        relation_roles = tuple(
+            role
+            for label in ("relation", "dash", "to", "between")
+            for role in roles.get(label, ())
+        )
+        relation = (
+            int(relation_roles[0].char_start)
+            if relation_roles
+            else _relation_position(block.text, rule.relation_words)
+        )
+        if "derive_relative_range" in rule.operations:
+            midpoint_roles = role_quantities("midpoint")
+            tolerance_roles = role_quantities("tolerance")
+            if (
+                len(names) != 1
+                or len(midpoint_roles) != 1
+                or len(tolerance_roles) != 1
+                or tolerance_roles[0].kind is not QuantityKind.PERCENT
+                or tolerance_roles[0].value < 0
+            ):
+                return ()
+            midpoint = midpoint_roles[0]
+            tolerance = tolerance_roles[0].value / 100.0
+            low = midpoint.value * (1.0 - tolerance)
+            high = midpoint.value * (1.0 + tolerance)
+            return (
+                _frame(
+                    document=document,
+                    block=block,
+                    rule=rule,
+                    concept=names[0] + "_GUIDANCE",
+                    scope=scope,
+                    period=period,
+                    period_semantics=PeriodSemantics.FORECAST,
+                    value=midpoint,
+                    inherited=inherited,
+                    lower_value=low,
+                    upper_value=high,
+                    context_trace=traced(
+                        {"relative_tolerance_percent": tolerance_roles[0].value}
+                    ),
+                    method_override=semantic_method,
+                ),
+            )
+        labeled_pair = role_quantities("low", "high")
+        if relation is None or (len(candidates) < 2 and len(labeled_pair) < 2):
             return None
-        candidates = _concept_value_candidates(names, candidates)
-        pair = _range_quantity_pair(block.text, candidates)
+        candidates = (
+            labeled_pair
+            if labeled_pair
+            and all(
+                item.kind in {QuantityKind.PERCENT, QuantityKind.BASIS_POINTS}
+                for item in labeled_pair
+            )
+            else _concept_value_candidates(names, labeled_pair or candidates)
+        )
+        pair = (
+            labeled_pair
+            if len(labeled_pair) == 2
+            else _range_quantity_pair(block.text, candidates)
+        )
         if len(names) != 1 or not pair:
             return ()
         low, high = sorted((pair[0].value, pair[1].value))
@@ -379,11 +758,16 @@ def _match_rule(
                 inherited=inherited,
                 lower_value=low,
                 upper_value=high,
+                context_trace=traced(),
+                method_override=semantic_method,
             ),
         )
 
     if rule.frame is SemanticFrame.NOT_EXPECTED:
-        candidates = _concept_value_candidates(names, candidates)
+        candidates = _concept_value_candidates(
+            names,
+            role_quantities("value") or candidates,
+        )
         if len(names) != 1 or len(candidates) != 1:
             return None if not candidates else ()
         return (
@@ -397,12 +781,87 @@ def _match_rule(
                 period_semantics=PeriodSemantics.FORECAST,
                 value=candidates[0],
                 inherited=inherited,
-                context_trace={"antecedent_concept": names[0] if inherited else None},
+                context_trace=traced(
+                    {"antecedent_concept": names[0] if inherited else None}
+                ),
+                method_override=semantic_method,
             ),
         )
 
     if rule.frame is SemanticFrame.COMPARATIVE:
         years = extract_years(block.text)
+        labeled_current = role_quantities("value", "current")
+        labeled_prior = role_quantities("prior", "comparator_value")
+        if (
+            "emit_each_value" in rule.operations
+            and len(names) == 1
+            and labeled_current
+            and len(labeled_current) == len(labeled_prior)
+            and all(
+                current.kind is prior.kind
+                for current, prior in zip(labeled_current, labeled_prior)
+            )
+        ):
+            return tuple(
+                frame
+                for prefix, values in (
+                    ("", labeled_current),
+                    ("PRIOR_YEAR_", labeled_prior),
+                )
+                for frame in (
+                    _frame(
+                        document=document,
+                        block=block,
+                        rule=rule,
+                        concept=prefix + names[0],
+                        scope=scope,
+                        period=period,
+                        period_semantics=semantics,
+                        value=value,
+                        comparator="PRIOR_YEAR" if not prefix else None,
+                        inherited=inherited,
+                        context_trace=traced(),
+                        method_override=semantic_method,
+                    )
+                    for value in values
+                )
+            )
+        if (
+            len(names) == 1
+            and len(labeled_current) == 1
+            and len(labeled_prior) == 1
+            and labeled_current[0].kind is labeled_prior[0].kind
+        ):
+            return (
+                _frame(
+                    document=document,
+                    block=block,
+                    rule=rule,
+                    concept=names[0],
+                    scope=scope,
+                    period=period,
+                    period_semantics=semantics,
+                    value=labeled_current[0],
+                    comparator="PRIOR_YEAR",
+                    inherited=inherited,
+                    context_trace=traced(),
+                    method_override=semantic_method,
+                ),
+                _frame(
+                    document=document,
+                    block=block,
+                    rule=rule,
+                    concept="PRIOR_YEAR_" + names[0],
+                    scope=scope,
+                    period=period,
+                    period_semantics=semantics,
+                    value=labeled_prior[0],
+                    comparator=None,
+                    inherited=inherited,
+                    context_trace=traced(),
+                    method_override=semantic_method,
+                ),
+            )
         explicit_comparator = any(
             cue in block.text.casefold()
             for cue in ("versus", "compared with", "compared to", "prior year")
@@ -467,7 +926,7 @@ def _match_rule(
         )
 
     if rule.frame is SemanticFrame.COMPOSITION:
-        percentages = tuple(
+        percentages = role_quantities("value") or tuple(
             item for item in quantities if item.kind is QuantityKind.PERCENT
         )
         if len(names) != 1 or len(percentages) != 1:
@@ -483,6 +942,8 @@ def _match_rule(
                 period_semantics=semantics,
                 value=percentages[0],
                 inherited=inherited,
+                context_trace=traced(),
+                method_override=semantic_method,
             ),
         )
 
@@ -496,7 +957,7 @@ def _match_rule(
             return None
         if rule.frame is SemanticFrame.CAUSE_EFFECT and len(names) > 2:
             return ()
-        dependency_validated = bool(
+        dependency_validated = dependency_matched or bool(
             backend is not None
             and rule.frame is SemanticFrame.CAUSE_EFFECT
             and backend.dependency_relation(block.text, concepts)
@@ -514,7 +975,7 @@ def _match_rule(
                 period_semantics=semantics,
                 value=None,
                 inherited=inherited,
-                context_trace={"related_concepts": list(names)},
+                context_trace=traced({"related_concepts": list(names)}),
                 method_override=(
                     ExtractionMethod.DEPENDENCY_RULE
                     if dependency_validated
@@ -524,7 +985,24 @@ def _match_rule(
             for name in names
         )
 
-    if rule.output_metric_suffix == "_GUIDANCE":
+    if rule.output_metric_suffix.endswith("_GUIDANCE"):
+        labeled_values = role_quantities("value")
+        if len(names) == 1 and len(labeled_values) == 1:
+            return (
+                _frame(
+                    document=document,
+                    block=block,
+                    rule=rule,
+                    concept=names[0],
+                    scope=scope,
+                    period=period,
+                    period_semantics=PeriodSemantics.FORECAST,
+                    value=labeled_values[0],
+                    inherited=inherited,
+                    context_trace=traced(),
+                    method_override=semantic_method,
+                ),
+            )
         bindings = bind_metric_values(
             block.text,
             tuple(item for item in concepts if getattr(item, "concept") in names),
@@ -543,7 +1021,7 @@ def _match_rule(
                     period_semantics=PeriodSemantics.FORECAST,
                     value=binding.value,
                     inherited=inherited,
-                    context_trace={"binding_order": binding.relation},
+                    context_trace=traced({"binding_order": binding.relation}),
                 )
                 for binding in bindings
             )
@@ -551,6 +1029,23 @@ def _match_rule(
         return None
 
     if rule.rule_id == "semantic.absolute":
+        labeled_values = role_quantities("value")
+        if len(names) == 1 and len(labeled_values) == 1:
+            return (
+                _frame(
+                    document=document,
+                    block=block,
+                    rule=rule,
+                    concept=names[0],
+                    scope=scope,
+                    period=period,
+                    period_semantics=semantics,
+                    value=labeled_values[0],
+                    inherited=inherited,
+                    context_trace=traced(),
+                    method_override=semantic_method,
+                ),
+            )
         bindings = bind_metric_values(
             block.text,
             tuple(item for item in concepts if getattr(item, "concept") in names),
@@ -568,12 +1063,41 @@ def _match_rule(
                     period_semantics=semantics,
                     value=binding.value,
                     inherited=inherited,
-                    context_trace={"binding_order": binding.relation},
+                    context_trace=traced({"binding_order": binding.relation}),
                 )
                 for binding in bindings
             )
 
-    candidates = _concept_value_candidates(names, candidates)
+    value_labels = (
+        ("value", "current", "prior")
+        if "emit_each_value" in rule.operations
+        else ("value",)
+    )
+    candidates = _concept_value_candidates(
+        names,
+        role_quantities(*value_labels) or candidates,
+    )
+    if (
+        "emit_each_value" in rule.operations
+        and len(names) == 1
+        and candidates
+    ):
+        return tuple(
+            _frame(
+                document=document,
+                block=block,
+                rule=rule,
+                concept=names[0],
+                scope=scope,
+                period=period,
+                period_semantics=semantics,
+                value=value,
+                inherited=inherited,
+                context_trace=traced(),
+                method_override=semantic_method,
+            )
+            for value in candidates
+        )
     if len(names) != 1 or len(candidates) != 1:
         return None if not candidates else ()
     return (
@@ -587,6 +1111,8 @@ def _match_rule(
             period_semantics=semantics,
             value=candidates[0],
             inherited=inherited,
+            context_trace=traced(),
+            method_override=semantic_method,
         ),
     )
 

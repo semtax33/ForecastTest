@@ -1,0 +1,90 @@
+holdout_id = "V264_SEVENTH_ISSUER_DOCUMENT_DISJOINT_2026_09_04"
+predeclared_at_utc = "2026-09-04T19:45:24+09:00"
+evaluation_tickers = ["XOM", "OXY", "MPC", "VLO", "KMI", "RTX", "LHX", "MMM", "UPS", "HON"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V264_SEVENTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v264_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+
+[candidate_artifact]
+path = "output/platform_v2_6_4_spacy_semantic_laws/seventh_holdout_candidates.csv"
+sha256 = "d65c016a1a786c29c3a4f61bbb7ba1f948e1ef7099538fc53bc9aece0b612a97"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v264_seventh_holdout_annotations.jsonl"
+sha256 = "97caf3747685f0f10335164fa4f36b2c381b80ae116ef32c05282c5fd6338766"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[code_snapshot_sha256]
+spacy_backend = "67521eebc31af6b537c712c9a50ce17a5b63531d0efacdf5badaf628a4b58bdd"
+runtime = "ac2d06798556329f8853c7c063ba406685d83413016f256737297adfe5d25e87"
+compiler = "8c7cd6c7fca95006b9abb3ad5ec99d7b82b97cdd1cc0d660f7ce95133803dece"
+semantics = "1bf7274d2853422328aed51a04372bc9fc35f45d7b6e94fb7692e558e9270518"
+v264_runtime = "46e71d5c80a3d2f1e81f246b2b0485d1e9d70142159f57f71087056844ccf76b"
+v264_init = "84715a69619ca52662b0d03ef02be3614690954ae343b57db839ebef01416455"
+router = "521ff2c89047a17fabe958a208c15e9da2f2a51b8b83c0857195a12d577dd6cf"
+rules = "094642928062288c5a040ebc3f0bbb2b9d219a062fcfeab21b017c48e6184832"
+validation = "dc1ab9f4f78a391e4160b8d2a6e66192754b9ff2f3ca490699bbf61f4685e832"
+
+[[sources]]
+ticker = "XOM"
+file_name = "2026-07-31_0002115436-26-000006_EX-99.1_livef8k2q26991.htm"
+sha256 = "e1c214954f9be07f62f4e45ac9483ce69292c8d4a5b9b1ea7aa179dd71bd2516"
+
+[[sources]]
+ticker = "OXY"
+file_name = "2026-08-05_0001628280-26-053377_EX-99.1_oxyex9916-30x26earningsrel.htm"
+sha256 = "ab66b52698498aac7171e8dd3fc0a377246de354181372925174b2b21ae2328b"
+
+[[sources]]
+ticker = "MPC"
+file_name = "2026-08-04_0001510295-26-000060_EX-99.1_mpcq22026earningsrelease.htm"
+sha256 = "b6de481d4e041c891b7d666e444fdec9f044f74ff12a0ad8a0c0220a002f2e52"
+
+[[sources]]
+ticker = "VLO"
+file_name = "2026-07-30_0001628280-26-050822_EX-99.01_a6302026exh9901earningsrel.htm"
+sha256 = "180d8c9fe47a238e3fce12846dd6c2f54f632ddf228b907b4a80e36817e7b0b7"
+
+[[sources]]
+ticker = "KMI"
+file_name = "2026-07-22_0001506307-26-000063_EX-99.1_kmi2026q28-kex991.htm"
+sha256 = "48f165a9f322dc33c5afd30166da31d85b032b97e65dbbce6db6ce10ffdcb3a6"
+
+[[sources]]
+ticker = "RTX"
+file_name = "2026-07-23_0000101829-26-000025_EX-99_a2026-07x238xkerexhibit99.htm"
+sha256 = "2da2d991da52af78bdc35cd67c8855bf441a26df6270c1e1f6c16758a761acdd"
+
+[[sources]]
+ticker = "LHX"
+file_name = "2026-07-29_0000202058-26-000054_EX-99.1_exhibit991q2cy26earnings.htm"
+sha256 = "dc6f48816398cdbd0ddcac4f4dda730fec517eb5179e14a1385121c5a004a842"
+
+[[sources]]
+ticker = "MMM"
+file_name = "2026-07-21_0000066740-26-000242_EX-99.1_q22026-8kerexx991.htm"
+sha256 = "0849f654c63f981092d64e60dbbe657606fc9168aa64acea4a876bedc769e781"
+
+[[sources]]
+ticker = "UPS"
+file_name = "2026-07-28_0001628280-26-049912_EX-99.1_exhibit991-earningspressre.htm"
+sha256 = "1cc4c7098f4c324c6d117a3b142f020a7c800602933ee885bb2247434522fb64"
+
+[[sources]]
+ticker = "HON"
+file_name = "2026-07-23_0000773840-26-000120_EX-99_exhibit99-q22026earningsre.htm"
+sha256 = "a1da4f327bbe6447d59f43ccb87a34a9bfeda3e4b3ddc9cd06f6243451575058"

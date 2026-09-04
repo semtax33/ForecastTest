@@ -11,6 +11,7 @@ from .model import ConceptMention, QuantityMention
 class SemanticMatcherBackend(Protocol):
     name: str
     model: str
+    last_match_trace: tuple[str, ...]
 
     def match_pattern(
         self,
@@ -37,6 +38,52 @@ class SpacySemanticBackend:
 
         self.model = model
         self._nlp = spacy.load(model)
+        self.last_match_trace: tuple[str, ...] = ()
+        self._phrase_matchers: dict[str, object] = {}
+        self._phrase_set_matchers: dict[tuple[str, ...], object] = {}
+        self._token_matchers: dict[tuple[tuple[tuple[str, object], ...], ...], object] = {}
+
+    @lru_cache(maxsize=1024)
+    def _parse(self, text: str) -> object:
+        return self._nlp(text)
+
+    def parse(self, text: str) -> object:
+        """Return the cached spaCy document used by all semantic consumers."""
+
+        return self._parse(text)
+
+    def phrase_mentions(
+        self,
+        text: str,
+        phrases: tuple[str, ...],
+    ) -> tuple[tuple[str, int, int], ...]:
+        """Locate an issuer-neutral phrase vocabulary with PhraseMatcher.
+
+        This is the shared replacement for modules compiling one regular
+        expression per alias or table cue.
+        """
+
+        from spacy.matcher import PhraseMatcher
+
+        normalized = tuple(dict.fromkeys(phrase.casefold() for phrase in phrases))
+        matcher = self._phrase_set_matchers.get(normalized)
+        if matcher is None:
+            matcher = PhraseMatcher(self._nlp.vocab, attr="LOWER")
+            for index, phrase in enumerate(normalized):
+                matcher.add(f"PHRASE_{index}", [self._nlp.make_doc(phrase)])
+            self._phrase_set_matchers[normalized] = matcher
+        doc = self._parse(text)
+        output = []
+        for match_id, start, end in matcher(doc):
+            span = doc[start:end]
+            output.append(
+                (
+                    str(span.text),
+                    int(span.start_char),
+                    int(span.end_char),
+                )
+            )
+        return tuple(sorted(output, key=lambda item: (item[1], item[2], item[0])))
 
     @staticmethod
     def _token_matches(expression: PatternExprIR, token: object) -> bool:
@@ -92,8 +139,11 @@ class SpacySemanticBackend:
         ):
             from spacy.matcher import PhraseMatcher
 
-            matcher = PhraseMatcher(self._nlp.vocab, attr="LOWER")
-            matcher.add("DSL_PHRASE", [self._nlp.make_doc(expression.value)])
+            matcher = self._phrase_matchers.get(expression.value)
+            if matcher is None:
+                matcher = PhraseMatcher(self._nlp.vocab, attr="LOWER")
+                matcher.add("DSL_PHRASE", [self._nlp.make_doc(expression.value)])
+                self._phrase_matchers[expression.value] = matcher
             return tuple(
                 (int(doc[start].idx), int(doc[end - 1].idx + len(doc[end - 1].text)), expression.value)
                 for _, start, end in matcher(doc)
@@ -102,8 +152,12 @@ class SpacySemanticBackend:
         if token_patterns:
             from spacy.matcher import Matcher
 
-            matcher = Matcher(self._nlp.vocab)
-            matcher.add("DSL_TOKEN", [[pattern] for pattern in token_patterns])
+            key = tuple(tuple(sorted(pattern.items())) for pattern in token_patterns)
+            matcher = self._token_matchers.get(key)
+            if matcher is None:
+                matcher = Matcher(self._nlp.vocab)
+                matcher.add("DSL_TOKEN", [[pattern] for pattern in token_patterns])
+                self._token_matchers[key] = matcher
             return tuple(
                 (int(doc[start].idx), int(doc[end - 1].idx + len(doc[end - 1].text)), str(doc[start:end]))
                 for _, start, end in matcher(doc)
@@ -149,25 +203,240 @@ class SpacySemanticBackend:
         concepts: tuple[ConceptMention, ...],
         quantities: tuple[QuantityMention, ...],
     ) -> tuple[LabeledSpan, ...] | None:
+        self.last_match_trace = ()
         if not rule.pattern:
             return ()
-        doc = self._nlp(text)
-        cursor = 0
-        result: list[LabeledSpan] = []
-        for step in rule.pattern:
-            candidates = tuple(
-                span
-                for span in self._spans(step.expression, doc, concepts, quantities)
-                if span[0] >= cursor
+        doc = self._parse(text)
+        candidates_by_step = tuple(
+            tuple(
+                sorted(
+                    set(self._spans(step.expression, doc, concepts, quantities)),
+                    key=lambda item: (item[0], item[1], item[2]),
+                )
             )
-            if not candidates:
-                if step.optional or step.minimum == 0:
-                    continue
+            for step in rule.pattern
+        )
+
+        def gap_tokens(left_end: int | None, right_start: int) -> int:
+            if left_end is None:
+                return 0
+            return sum(
+                1
+                for token in doc
+                if not token.is_space and left_end <= token.idx < right_start
+            )
+
+        require_same_clause = "require_same_clause" in rule.operations
+
+        def same_clause(spans: tuple[LabeledSpan, ...]) -> bool:
+            if not require_same_clause or len(spans) < 2:
+                return True
+            start = min(span.char_start for span in spans)
+            end = max(span.char_end for span in spans)
+            return not any(
+                (token.text == ";")
+                or (bool(token.is_sent_start) and token.idx > start)
+                for token in doc
+                if start < token.idx < end
+            )
+
+        def finish(spans: tuple[LabeledSpan, ...]) -> tuple[LabeledSpan, ...] | None:
+            if not same_clause(spans):
                 return None
-            start, end, value = min(candidates, key=lambda item: (item[0], item[1]))
-            result.append(LabeledSpan(step.label, start, end, value))
-            cursor = end
-        return tuple(result)
+            trace = ["SPACY_MATCHER"]
+            dependency_required = (
+                "require_dependency_path" in rule.operations
+                or any(backend.value == "DEPENDENCY" for backend in rule.backends)
+            )
+            if dependency_required:
+                if not self._dependency_match(doc, spans):
+                    return None
+                trace.append("SPACY_DEPENDENCY_MATCHER")
+            self.last_match_trace = tuple(trace)
+            return spans
+
+        def search(
+            step_index: int,
+            cursor: int,
+            previous_end: int | None,
+            bound: tuple[LabeledSpan, ...],
+        ) -> tuple[LabeledSpan, ...] | None:
+            if step_index == len(rule.pattern):
+                return finish(bound)
+            step = rule.pattern[step_index]
+            candidates = candidates_by_step[step_index]
+
+            def consume(
+                candidate_index: int,
+                local_cursor: int,
+                local_previous_end: int | None,
+                selected: tuple[LabeledSpan, ...],
+            ) -> tuple[LabeledSpan, ...] | None:
+                count = len(selected)
+                if count > 0 and count >= step.minimum:
+                    matched = search(
+                        step_index + 1,
+                        local_cursor,
+                        local_previous_end,
+                        bound + selected,
+                    )
+                    if matched is not None:
+                        return matched
+                if count >= step.maximum:
+                    return None
+                for index in range(candidate_index, len(candidates)):
+                    start, end, value = candidates[index]
+                    if start < local_cursor:
+                        continue
+                    if (
+                        step.max_gap_tokens is not None
+                        and gap_tokens(local_previous_end, start) > step.max_gap_tokens
+                    ):
+                        continue
+                    span = LabeledSpan(step.label, start, end, value)
+                    matched = consume(index + 1, end, end, selected + (span,))
+                    if matched is not None:
+                        return matched
+                if count == 0 and step.minimum == 0:
+                    return search(
+                        step_index + 1,
+                        local_cursor,
+                        local_previous_end,
+                        bound,
+                    )
+                return None
+
+            return consume(0, cursor, previous_end, ())
+
+        return search(0, 0, None, ())
+
+    @staticmethod
+    def _dependency_roles(
+        spans: tuple[LabeledSpan, ...],
+    ) -> tuple[LabeledSpan, LabeledSpan] | None:
+        by_label: dict[str, LabeledSpan] = {}
+        for span in spans:
+            by_label.setdefault(span.label, span)
+        for left, right in (
+            ("cause", "effect"),
+            ("metric", "value"),
+            ("metric", "change"),
+        ):
+            if left in by_label and right in by_label:
+                return by_label[left], by_label[right]
+        semantic = tuple(
+            span
+            for span in spans
+            if span.label not in {"trigger", "relation", "qualifier"}
+        )
+        if len(semantic) >= 2:
+            return semantic[0], semantic[-1]
+        return None
+
+    def _dependency_match(
+        self,
+        doc: object,
+        spans: tuple[LabeledSpan, ...],
+    ) -> bool:
+        roles = self._dependency_roles(spans)
+        if roles is None:
+            return False
+        left_span, right_span = roles
+        left_doc_span = doc.char_span(
+            left_span.char_start,
+            left_span.char_end,
+            alignment_mode="expand",
+        )
+        right_doc_span = doc.char_span(
+            right_span.char_start,
+            right_span.char_end,
+            alignment_mode="expand",
+        )
+        if left_doc_span is None or right_doc_span is None:
+            return False
+        left, right = left_doc_span.root, right_doc_span.root
+        left_chain = (left, *tuple(left.ancestors))
+        right_chain = (right, *tuple(right.ancestors))
+        common = set(left_chain) & set(right_chain)
+        if not common:
+            return False
+        bridge = min(
+            common,
+            key=lambda token: left_chain.index(token) + right_chain.index(token),
+        )
+        if left_chain.index(bridge) + right_chain.index(bridge) > 8:
+            return False
+
+        from spacy.matcher import DependencyMatcher
+
+        pattern_specs: list[
+            tuple[str, list[dict[str, object]], tuple[int, ...]]
+        ] = []
+        if left in right_chain[1:]:
+            pattern_specs.append(
+                (
+                    "DSL_LEFT_ANCESTOR",
+                    [
+                    {"RIGHT_ID": "left", "RIGHT_ATTRS": {"ORTH": left.text}},
+                    {
+                        "LEFT_ID": "left",
+                        "REL_OP": ">>",
+                        "RIGHT_ID": "right",
+                        "RIGHT_ATTRS": {"ORTH": right.text},
+                    },
+                    ],
+                    (left.i, right.i),
+                )
+            )
+        if right in left_chain[1:]:
+            pattern_specs.append(
+                (
+                    "DSL_RIGHT_ANCESTOR",
+                    [
+                    {"RIGHT_ID": "right", "RIGHT_ATTRS": {"ORTH": right.text}},
+                    {
+                        "LEFT_ID": "right",
+                        "REL_OP": ">>",
+                        "RIGHT_ID": "left",
+                        "RIGHT_ATTRS": {"ORTH": left.text},
+                    },
+                    ],
+                    (right.i, left.i),
+                )
+            )
+        if bridge is not left and bridge is not right:
+            pattern_specs.append(
+                (
+                    "DSL_SHARED_ANCESTOR",
+                    [
+                    {"RIGHT_ID": "bridge", "RIGHT_ATTRS": {"ORTH": bridge.text}},
+                    {
+                        "LEFT_ID": "bridge",
+                        "REL_OP": ">>",
+                        "RIGHT_ID": "left",
+                        "RIGHT_ATTRS": {"ORTH": left.text},
+                    },
+                    {
+                        "LEFT_ID": "bridge",
+                        "REL_OP": ">>",
+                        "RIGHT_ID": "right",
+                        "RIGHT_ATTRS": {"ORTH": right.text},
+                    },
+                    ],
+                    (bridge.i, left.i, right.i),
+                )
+            )
+        if not pattern_specs:
+            return False
+        matcher = DependencyMatcher(self._nlp.vocab, validate=True)
+        expected: dict[str, tuple[int, ...]] = {}
+        for name, pattern, token_ids in pattern_specs:
+            matcher.add(name, [pattern])
+            expected[name] = token_ids
+        return any(
+            tuple(token_ids) == expected[self._nlp.vocab.strings[match_id]]
+            for match_id, token_ids in matcher(doc)
+        )
 
     def dependency_relation(
         self,
@@ -176,26 +445,15 @@ class SpacySemanticBackend:
     ) -> bool:
         if len(concepts) < 2:
             return False
-        doc = self._nlp(text)
-        tokens = []
-        for mention in (concepts[0], concepts[-1]):
-            span = doc.char_span(mention.char_start, mention.char_end, alignment_mode="expand")
-            if span is None:
-                return False
-            tokens.append(span.root)
-        first, second = tokens
-        first_ancestors = {first, *first.ancestors}
-        second_ancestors = {second, *second.ancestors}
-        common = first_ancestors & second_ancestors
-        if not common:
-            return False
-        distance = min(
-            list(first.ancestors).index(node) + list(second.ancestors).index(node) + 2
-            if node is not first and node is not second
-            else 1
-            for node in common
+        doc = self._parse(text)
+        first, second = concepts[0], concepts[-1]
+        return self._dependency_match(
+            doc,
+            (
+                LabeledSpan("cause", first.char_start, first.char_end, first.concept),
+                LabeledSpan("effect", second.char_start, second.char_end, second.concept),
+            ),
         )
-        return distance <= 8
 
 
 @lru_cache(maxsize=1)
