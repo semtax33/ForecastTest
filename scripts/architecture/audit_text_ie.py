@@ -15,17 +15,21 @@ from equity_platform.sectors.industrials import (
     parse_cat_backlog_semantic_ir,
 )
 from equity_platform.text_ie import compile_text_program_file
-from equity_platform.text_ie.training import evaluate_gold_corpus
+from equity_platform.text_ie.training import corpus_metrics, evaluate_gold_corpus
 
 
 OUTPUT = PROJECT_ROOT / "output/platform_architecture_v2/text_ie"
 GOLD = PROJECT_ROOT / "data-lake/gold/parser/text_ie/semantic_frames.jsonl"
+CONTROLLED_GOLD = PROJECT_ROOT / "data-lake/gold/parser/text_ie/controlled_semantic_frames.jsonl"
 CAT_CATALOG = PROJECT_ROOT / "configs/industrials_v1_1_cat_10k_sources.csv"
 TEXT_RULES = PROJECT_ROOT / "configs/parser_rules/text_ie/semantic_frames.arc"
 
 
 def main() -> int:
     gold = pd.DataFrame(evaluate_gold_corpus(GOLD))
+    controlled_rows = evaluate_gold_corpus(CONTROLLED_GOLD)
+    controlled = pd.DataFrame(controlled_rows)
+    controlled_metrics = corpus_metrics(controlled_rows)
     program = compile_text_program_file(TEXT_RULES)
     sources = load_cat_10k_sources(
         PROJECT_ROOT,
@@ -113,6 +117,12 @@ def main() -> int:
             {
                 "gold_examples": len(gold),
                 "gold_passed": int(gold["passed"].sum()),
+                "controlled_examples": controlled_metrics["examples"],
+                "controlled_exact_passed": controlled_metrics["exact_passed"],
+                "frame_precision": controlled_metrics["frame_precision"],
+                "frame_recall": controlled_metrics["frame_recall"],
+                "review_precision": controlled_metrics["review_precision"],
+                "review_recall": controlled_metrics["review_recall"],
                 "semantic_variables": len(program.variables),
                 "frame_schemas": len(program.frames),
                 "compiled_text_rules": len(program.rules),
@@ -135,6 +145,7 @@ def main() -> int:
     )
     OUTPUT.mkdir(parents=True, exist_ok=True)
     gold.to_csv(OUTPUT / "gold_corpus_evaluation.csv", index=False)
+    controlled.to_csv(OUTPUT / "controlled_corpus_evaluation.csv", index=False)
     parity.to_csv(OUTPUT / "cat_five_year_golden_parity.csv", index=False)
     frames.to_csv(OUTPUT / "cat_required_kpi_frames.csv", index=False)
     summary.to_csv(OUTPUT / "gate.csv", index=False)

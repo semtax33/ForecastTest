@@ -161,3 +161,13 @@ output/energy_live_forward_v2/live_forward.sqlite
 !benchmarks/industrials_v5_4_hii_margin_mechanisms/manifest.json
 output/**
 data-lake/**
+
+# Reproducible semantic-IE evaluation assets are source-controlled gold data,
+# not generated runtime payloads.  Keep the rest of data-lake ignored here.
+!data-lake/
+!data-lake/gold/
+!data-lake/gold/parser/
+!data-lake/gold/parser/text_ie/
+!data-lake/gold/parser/text_ie/semantic_frames.jsonl
+!data-lake/gold/parser/text_ie/controlled_semantic_frames.jsonl
+!data-lake/gold/parser/text_ie/multisector_review_annotations.jsonl

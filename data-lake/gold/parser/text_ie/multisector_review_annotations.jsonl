@@ -1,0 +1,48 @@
+{"review_id":"fdc7fd5c2e5ef550dd2e","should_review":true,"category":"MULTI_METRIC_BULLET","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"236e40036a865072c364","should_review":true,"category":"MULTI_METRIC_NARRATIVE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"e04cb30392ea99586bbf","should_review":true,"category":"COMPOSITION_RELATION_REQUIRED","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"ffc9e50ab3e68a5c841d","should_review":true,"category":"MULTI_KPI_GUIDANCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"4fd916a3058d7a1a59f0","should_review":true,"category":"MULTI_METRIC_NARRATIVE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"f2fc2592aafcc7b09eed","should_review":true,"category":"COMPARATIVE_PERIOD_INFERENCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"d5997ccd319ecbfedcb1","should_review":true,"category":"COMPARATIVE_PERIOD_INFERENCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"9d49c5b032622cb75546","should_review":true,"category":"COMPARATIVE_PERIOD_INFERENCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"0a7f646f77b03581fbdd","should_review":true,"category":"MULTI_METRIC_BULLET","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"46d1404699aa17c4c107","should_review":true,"category":"COMPARATIVE_PERIOD_INFERENCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"f53768a8d06968287228","should_review":true,"category":"COMPARATIVE_PERIOD_INFERENCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"88d77bb77b18bb62ebde","should_review":true,"category":"COMPARATIVE_PERIOD_INFERENCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"388ea1d6f96375fc4367","should_review":true,"category":"MULTI_METRIC_NARRATIVE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"c217c9323f3fb3dc56e2","should_review":true,"category":"OUT_OF_ONTOLOGY_FREE_CASH_FLOW","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"5ab587c4223202f86bf5","should_review":true,"category":"MULTI_CAUSAL_ATTRIBUTION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"c1c9536e58499afbd6d9","should_review":true,"category":"CAUSAL_ATTRIBUTION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"855b78c9ad2cf35e4800","should_review":true,"category":"MULTI_CAUSAL_ATTRIBUTION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"ae2ff3e06bb9acde51a1","should_review":true,"category":"MULTI_CAUSAL_ATTRIBUTION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"54b0980c206efbe3f68f","should_review":true,"category":"MULTI_METRIC_BULLET","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"871767f438318b07139c","should_review":true,"category":"CAUSAL_RELATION_REQUIRED","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"b95d17c408625cc51d8f","should_review":true,"category":"MULTI_VALUE_COMPOSITION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"b390512eadd5f4056304","should_review":true,"category":"MULTI_CAUSAL_ATTRIBUTION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"b1274ca329fa0c3f8569","should_review":true,"category":"MULTI_CAUSAL_ATTRIBUTION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"8ea60355c04b660dd1c2","should_review":true,"category":"MULTI_METRIC_COMPARATIVE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"de17ddc334393c1b58f6","should_review":true,"category":"MULTI_SCOPE_COMPOSITION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"df31a0b28f407cd95742","should_review":true,"category":"PRICE_COMPARATIVE_PERIOD","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"8e83914f84ed943a1d8c","should_review":true,"category":"VALUE_AND_CHANGE_COMPARATIVE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"e195032f401b04e191a8","should_review":true,"category":"PRICE_COMPARATIVE_PERIOD","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"0a2fd2633f7c826c54b1","should_review":true,"category":"CROSS_COMMODITY_MULTI_PRICE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"e7f5f18a0ccf5a9612f8","should_review":true,"category":"ACCOUNTING_RECLASSIFICATION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"9cdec840f1c45929b544","should_review":true,"category":"ACCOUNTING_RECLASSIFICATION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"7e1f7e407fbaa57da408","should_review":true,"category":"MULTI_PERIOD_RANGE_GUIDANCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"2b36a9c31d9b04ec92eb","should_review":true,"category":"MULTI_METRIC_CHANGE_WITHOUT_TO","reviewer":"CODEX_REVIEW_2026_09_04","note":"Revenue growth is relevant, but the sentence contains three percentage changes and no absolute-value target."}
+{"review_id":"993c53e8af2e90fb7ca0","should_review":true,"category":"FLATTENED_GUIDANCE_TABLE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"f38497b0b97e0c918f50","should_review":false,"category":"LEXICAL_PRODUCTION_RAMP_FALSE_POSITIVE","reviewer":"CODEX_REVIEW_2026_09_04","note":"Production ramp-up describes program activity, not a production KPI with a money value."}
+{"review_id":"120662f14c7366330c3c","should_review":false,"category":"LEXICAL_PRODUCTION_COST_FALSE_POSITIVE","reviewer":"CODEX_REVIEW_2026_09_04","note":"The quantity is lease operating expense per BOE, not production volume."}
+{"review_id":"65de853a8fd5d2f8c559","should_review":true,"category":"MULTI_METRIC_PERCENT_CHANGE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"4d603f416bbb6c72ddfb","should_review":true,"category":"PRODUCTION_CHANGE_FORECAST","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"bbaa90a8887392d331b6","should_review":true,"category":"CROSS_METRIC_CHANGE_ATTRIBUTION","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"e5530e5bdd12edf11852","should_review":true,"category":"MISSING_UNIT_COST_CONCEPT","reviewer":"CODEX_REVIEW_2026_09_04","note":"Relevant production-expense guidance requires a separate unit-cost concept rather than PRODUCTION."}
+{"review_id":"0f50467aaeb744e6a960","should_review":true,"category":"CROSS_COMMODITY_PRICE_GUIDANCE_TABLE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"1529c51ef2b018aa8f13","should_review":true,"category":"CASH_FLOW_AND_UNIT_MARGIN","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"636f1132317f85f7427b","should_review":true,"category":"MISSING_UNIT_COST_COMPARATIVE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"a4813d2276eab5dd671d","should_review":true,"category":"CONTEXT_CONTAMINATION_AND_UNIT_COST","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"1ded7b4a67757a61355b","should_review":false,"category":"ACQUISITION_PARAGRAPH_FALSE_RANGE","reviewer":"CODEX_REVIEW_2026_09_04","note":"The production mention is contextual and the quantities belong to acreage, locations, and debt."}
+{"review_id":"f771990876a58e5f41bf","should_review":true,"category":"MULTI_PERIOD_PRODUCTION_GUIDANCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"efb4dcbdf36e02528538","should_review":true,"category":"MISSING_UNIT_COST_RANGE_GUIDANCE","reviewer":"CODEX_REVIEW_2026_09_04"}
+{"review_id":"7f41597e47da01ab45f1","should_review":true,"category":"MISSING_UNIT_COST_COMPARATIVE","reviewer":"CODEX_REVIEW_2026_09_04"}

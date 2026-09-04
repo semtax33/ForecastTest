@@ -10,6 +10,10 @@ MONEY = re.compile(
     rf"(?P<raw>\$\s*(?P<number>{NUMBER})\s*(?P<scale>billion|million|bn|mm|b|m)?)",
     re.IGNORECASE,
 )
+PRICE = re.compile(
+    rf"(?P<raw>\$\s*(?P<number>{NUMBER})\s*(?:per|/)\s*(?P<unit>mcf|mmcf|mcfe|boe|bbl|barrel|gallon))",
+    re.IGNORECASE,
+)
 PERCENT = re.compile(rf"(?P<raw>(?P<number>{NUMBER})\s*%)", re.IGNORECASE)
 BASIS_POINTS = re.compile(
     rf"(?P<raw>(?P<number>{NUMBER})\s*(?:basis\s+points?|bps?|bp))",
@@ -17,7 +21,7 @@ BASIS_POINTS = re.compile(
 )
 RATE = re.compile(rf"(?P<raw>(?P<number>{NUMBER})\s*x\b)", re.IGNORECASE)
 COUNT = re.compile(
-    rf"(?P<raw>(?P<number>{NUMBER})\s*(?P<unit>aircraft|units?|rigs?|wells?|boe(?:/d)?|mboe(?:/d)?))",
+    rf"(?P<raw>(?P<number>{NUMBER})\s*(?P<scale>billion|million|thousand)?\s*(?P<unit>aircraft|units?|rigs?|wells?|boe(?:/d)?|mboe(?:/d)?|mcf(?:/d)?|mmcf(?:e)?(?:/d)?|bcfe|barrels?|bpd|mbpd|dth))",
     re.IGNORECASE,
 )
 # A filing year is commonly followed by sentence punctuation (``2026.``).
@@ -55,7 +59,16 @@ def extract_quantities(text: str) -> tuple[QuantityMention, ...]:
                 value *= SCALES[scale]
                 resolved_unit = "USD"
             elif kind is QuantityKind.COUNT:
+                scale = str(match.groupdict().get("scale") or "").casefold()
+                value *= {
+                    "": 1.0,
+                    "thousand": 1e3,
+                    "million": 1e6,
+                    "billion": 1e9,
+                }[scale]
                 resolved_unit = str(match.group("unit")).upper().replace("/", "_PER_")
+            elif kind is QuantityKind.PRICE:
+                resolved_unit = f"USD_PER_{str(match.group('unit')).upper()}"
             mentions.append(
                 QuantityMention(
                     kind=kind,
@@ -68,6 +81,7 @@ def extract_quantities(text: str) -> tuple[QuantityMention, ...]:
             )
             occupied.append((match.start(), match.end()))
 
+    add(PRICE, QuantityKind.PRICE, "USD_PER_UNIT")
     add(MONEY, QuantityKind.MONEY, "USD")
     add(BASIS_POINTS, QuantityKind.BASIS_POINTS, "BASIS_POINTS")
     add(PERCENT, QuantityKind.PERCENT, "PERCENT")

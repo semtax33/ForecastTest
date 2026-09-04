@@ -30,12 +30,26 @@ from equity_platform.text_ie import (
     derive_difference,
     document_text_blocks,
     extract_text_kpis,
+    SpacySemanticBackend,
 )
 from equity_platform.text_ie.llm import verify_llm_frame
-from equity_platform.text_ie.training import evaluate_gold_corpus, weak_labels_from_result
+from equity_platform.text_ie.training import (
+    corpus_metrics,
+    evaluate_gold_corpus,
+    load_review_annotations,
+    review_precision,
+    weak_labels_from_result,
+)
 
 
 GOLD = PROJECT_ROOT / "data-lake/gold/parser/text_ie/semantic_frames.jsonl"
+CONTROLLED_GOLD = (
+    PROJECT_ROOT / "data-lake/gold/parser/text_ie/controlled_semantic_frames.jsonl"
+)
+REVIEW_GOLD = (
+    PROJECT_ROOT
+    / "data-lake/gold/parser/text_ie/multisector_review_annotations.jsonl"
+)
 
 
 def _document(text: str, *, heading: str | None = None):
@@ -95,10 +109,95 @@ def test_gold_corpus_and_weak_supervision_labels_are_deterministic() -> None:
     result = extract_text_kpis(
         _document("Revenue and backlog increased 12% to $4.2 billion.")
     )
+    assert result.backend_name == "SPACY"
     labels = weak_labels_from_result(result)
     assert len(labels) == 1
     assert labels[0].abstained
     assert labels[0].label == "REVIEW_AMBIGUOUS"
+
+
+def test_controlled_250_example_corpus_has_exact_precision_recall() -> None:
+    rows = evaluate_gold_corpus(CONTROLLED_GOLD)
+    metrics = corpus_metrics(rows)
+    assert metrics == {
+        "examples": 250,
+        "exact_passed": 250,
+        "exact_accuracy": 1.0,
+        "frame_precision": 1.0,
+        "frame_recall": 1.0,
+        "review_precision": 1.0,
+        "review_recall": 1.0,
+    }
+
+
+def test_multisector_review_annotations_are_complete_and_scored() -> None:
+    annotations = load_review_annotations(REVIEW_GOLD)
+    assert len(annotations) == 48
+    metrics = review_precision({row.review_id for row in annotations}, annotations)
+    assert metrics["annotation_coverage"] == 1.0
+    assert metrics["queue_annotation_coverage"] == 1.0
+    assert metrics["precision"] == 45 / 48
+    assert metrics["recall"] == 1.0
+
+    incomplete = review_precision(
+        {row.review_id for row in annotations} | {"unannotated-review"},
+        annotations,
+    )
+    assert incomplete["annotation_coverage"] == 1.0
+    assert incomplete["queue_annotation_coverage"] == 48 / 49
+
+
+def test_spacy_lemma_pos_and_dependency_backends_execute() -> None:
+    rules = compile_text_rules(
+        '''
+        var "METRIC" { expression = {"concept": "*"} }
+        var "VERB" { expression = {"all": [{"lemma": "increase"}, {"pos": "VERB"}]} }
+        var "VALUE" { expression = {"quantity": "MONEY"} }
+        text_rule "spacy.change" {
+          version = 1
+          frame = "CHANGE_TO"
+          triggers = ["increased"]
+          relation_words = ["to"]
+          quantity_kinds = ["MONEY"]
+          pattern = [{"label":"metric","var":"METRIC"},{"label":"trigger","var":"VERB"},{"label":"value","var":"VALUE"}]
+          backends = ["SEQUENCE", "DEPENDENCY"]
+        }
+        '''
+    )
+    backend = SpacySemanticBackend()
+    result = extract_text_kpis(
+        _document("Revenue increased to $4.2 billion."),
+        rules,
+        backend=backend,
+    )
+    assert len(result.frames) == 1
+    assert result.frames[0].value == 4_200_000_000.0
+    causal = extract_text_kpis(
+        _document("We do not expect supply constraints to materially affect deliveries."),
+        backend=backend,
+    )
+    assert causal.relations
+    assert all(
+        frame.extraction_method is ExtractionMethod.DEPENDENCY_RULE
+        for frame in causal.frames
+    )
+
+
+def test_energy_unit_prices_and_scaled_volumes_are_normalized() -> None:
+    price = extract_text_kpis(
+        _document("Average realized price was $3.25 per Mcf.")
+    )
+    assert len(price.facts) == 1
+    assert price.facts[0].metric == "REALIZED_PRICE"
+    assert price.facts[0].value == 3.25
+    assert price.facts[0].unit == "USD_PER_MCF"
+
+    production = extract_text_kpis(
+        _document("Production was 1.2 million barrels during the period.")
+    )
+    assert len(production.facts) == 1
+    assert production.facts[0].metric == "PRODUCTION"
+    assert production.facts[0].value == 1_200_000.0
 
 
 def test_context_resolution_and_identity_derivation_stay_separate() -> None:

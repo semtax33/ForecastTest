@@ -49,6 +49,7 @@ class AmbiguityPolicy(StrEnum):
 
 class QuantityKind(StrEnum):
     MONEY = "MONEY"
+    PRICE = "PRICE"
     PERCENT = "PERCENT"
     BASIS_POINTS = "BASIS_POINTS"
     COUNT = "COUNT"
@@ -196,3 +197,4 @@ class TextExtractionResult:
     evidence_claims: tuple[EvidenceClaimIR, ...]
     relations: tuple[KPIRelationIR, ...]
     reviews: tuple[ReviewItem, ...]
+    backend_name: str

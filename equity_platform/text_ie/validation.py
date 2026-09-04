@@ -24,6 +24,8 @@ def _quantity_kind(frame: KPIFrame) -> QuantityKind | None:
         return None
     if frame.unit == "USD":
         return QuantityKind.MONEY
+    if str(frame.unit).startswith("USD_PER_"):
+        return QuantityKind.PRICE
     if frame.unit == "PERCENT":
         return QuantityKind.PERCENT
     if frame.unit == "BASIS_POINTS":
@@ -65,4 +67,3 @@ def validate_kpi_frame(frame: KPIFrame, document: CanonicalDocument) -> KPIFrame
         verification_status=VerificationStatus.VERIFIED,
         verified_by="DETERMINISTIC_KPI_FRAME_VALIDATOR",
     )
-

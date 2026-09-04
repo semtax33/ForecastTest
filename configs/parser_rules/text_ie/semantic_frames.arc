@@ -16,7 +16,7 @@ var "PERCENT_CHANGE" {
 }
 
 var "KPI_VALUE" {
-  expression = {"any": [{"quantity": "MONEY"}, {"quantity": "COUNT"}, {"quantity": "RATE"}, {"quantity": "PERCENT"}]}
+  expression = {"any": [{"quantity": "MONEY"}, {"quantity": "PRICE"}, {"quantity": "COUNT"}, {"quantity": "RATE"}, {"quantity": "PERCENT"}]}
 }
 
 var "TO_RELATION" {
@@ -44,7 +44,7 @@ text_rule "semantic.change_to" {
   version = 1
   frame = "CHANGE_TO"
   triggers = ["increased", "rose", "grew", "decreased", "declined", "fell"]
-  quantity_kinds = ["MONEY", "COUNT", "RATE", "PERCENT"]
+  quantity_kinds = ["MONEY", "PRICE", "COUNT", "RATE", "PERCENT"]
   relation_words = ["to"]
   require_metric = true
   require_value = true
@@ -78,7 +78,7 @@ text_rule "semantic.range_guidance" {
   version = 1
   frame = "RANGE_GUIDANCE"
   triggers = ["expects", "expected", "guidance", "between", "range"]
-  quantity_kinds = ["MONEY", "COUNT", "PERCENT"]
+  quantity_kinds = ["MONEY", "PRICE", "COUNT", "PERCENT"]
   relation_words = ["between", "from"]
   require_metric = true
   require_value = true
@@ -111,7 +111,7 @@ text_rule "semantic.comparative" {
   version = 1
   frame = "COMPARATIVE"
   triggers = ["versus", "compared with", "compared to", "prior year", "and", "improved", "remained robust"]
-  quantity_kinds = ["MONEY", "COUNT", "PERCENT", "RATE"]
+  quantity_kinds = ["MONEY", "PRICE", "COUNT", "PERCENT", "RATE"]
   require_metric = true
   require_value = false
   require_unique_metric = false
@@ -170,7 +170,7 @@ text_rule "semantic.absolute" {
   version = 1
   frame = "ABSOLUTE_VALUE"
   triggers = ["was", "were", "is", "stood at", "totaled"]
-  quantity_kinds = ["MONEY", "COUNT", "PERCENT", "RATE"]
+  quantity_kinds = ["MONEY", "PRICE", "COUNT", "PERCENT", "RATE"]
   require_metric = true
   require_value = true
   require_unique_metric = true

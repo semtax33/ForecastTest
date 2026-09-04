@@ -83,6 +83,24 @@ CONCEPTS = (
         ClaimType.CAPITAL_ALLOCATION,
     ),
     ConceptDefinition(
+        "ADJUSTED_EBITDA",
+        ("segment adjusted ebitda", "adjusted ebitda"),
+        (QuantityKind.MONEY,),
+        ClaimType.GUIDANCE,
+    ),
+    ConceptDefinition(
+        "REALIZED_PRICE",
+        ("average realized price", "realized commodity price", "realized price"),
+        (QuantityKind.PRICE,),
+        ClaimType.PRICE_ACTION,
+    ),
+    ConceptDefinition(
+        "THROUGHPUT",
+        ("crude oil throughput", "refinery throughput", "throughput"),
+        (QuantityKind.COUNT,),
+        ClaimType.OPERATIONAL_EVENT,
+    ),
+    ConceptDefinition(
         "SUPPLY_CONSTRAINT",
         ("supply chain constraints", "supply constraints"),
         (),

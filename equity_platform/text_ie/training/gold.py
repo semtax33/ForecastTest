@@ -21,6 +21,8 @@ class GoldExample:
     expected_fact_count: int
     expected_claim_count: int
     expected_review_count: int
+    expected_relation_count: int
+    annotation_source: str
 
 
 def load_gold_corpus(path: Path) -> tuple[GoldExample, ...]:
@@ -41,6 +43,8 @@ def load_gold_corpus(path: Path) -> tuple[GoldExample, ...]:
                     expected_fact_count=int(row.get("expected_fact_count", 0)),
                     expected_claim_count=int(row.get("expected_claim_count", 0)),
                     expected_review_count=int(row.get("expected_review_count", 0)),
+                    expected_relation_count=int(row.get("expected_relation_count", 0)),
+                    annotation_source=str(row.get("annotation_source", "HUMAN_SEED")),
                 )
             )
         except (KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
@@ -92,24 +96,38 @@ def evaluate_gold_corpus(path: Path) -> tuple[dict[str, object], ...]:
             }
             for frame in result.frames
         ]
-        expected_match = all(
-            any(
-                all(
-                    (
-                        abs(float(candidate[key]) - float(value)) <= max(1e-9, abs(float(value)) * 1e-9)
-                        if key in {"value", "change"} and value is not None
-                        else candidate.get(key) == value
-                    )
-                    for key, value in expected.items()
+        def matches(expected: dict[str, object], candidate: dict[str, object]) -> bool:
+            return all(
+                (
+                    abs(float(candidate[key]) - float(value)) <= max(1e-9, abs(float(value)) * 1e-9)
+                    if key in {"value", "change"} and value is not None
+                    else candidate.get(key) == value
                 )
-                for candidate in actual
+                for key, value in expected.items()
             )
-            for expected in example.expected_frames
-        )
+
+        remaining = list(range(len(actual)))
+        true_positive = 0
+        for expected in example.expected_frames:
+            matched_index = next(
+                (
+                    index
+                    for index in remaining
+                    if matches(expected, actual[index])
+                ),
+                None,
+            )
+            if matched_index is not None:
+                true_positive += 1
+                remaining.remove(matched_index)
+        false_positive = len(actual) - true_positive
+        false_negative = len(example.expected_frames) - true_positive
+        expected_match = false_positive == 0 and false_negative == 0
         counts_match = (
             len(result.facts) == example.expected_fact_count
             and len(result.evidence_claims) == example.expected_claim_count
             and len(result.reviews) == example.expected_review_count
+            and len(result.relations) == example.expected_relation_count
         )
         rows.append(
             {
@@ -119,6 +137,14 @@ def evaluate_gold_corpus(path: Path) -> tuple[dict[str, object], ...]:
                 "actual_facts": len(result.facts),
                 "actual_claims": len(result.evidence_claims),
                 "actual_reviews": len(result.reviews),
+                "actual_relations": len(result.relations),
+                "frame_true_positive": true_positive,
+                "frame_false_positive": false_positive,
+                "frame_false_negative": false_negative,
+                "review_true_positive": min(len(result.reviews), example.expected_review_count),
+                "review_false_positive": max(0, len(result.reviews) - example.expected_review_count),
+                "review_false_negative": max(0, example.expected_review_count - len(result.reviews)),
+                "annotation_source": example.annotation_source,
                 "frame_match": expected_match,
                 "count_match": counts_match,
                 "passed": expected_match and counts_match,
@@ -126,3 +152,23 @@ def evaluate_gold_corpus(path: Path) -> tuple[dict[str, object], ...]:
         )
     return tuple(rows)
 
+
+def corpus_metrics(rows: tuple[dict[str, object], ...]) -> dict[str, object]:
+    def total(key: str) -> int:
+        return sum(int(row[key]) for row in rows)
+
+    frame_tp = total("frame_true_positive")
+    frame_fp = total("frame_false_positive")
+    frame_fn = total("frame_false_negative")
+    review_tp = total("review_true_positive")
+    review_fp = total("review_false_positive")
+    review_fn = total("review_false_negative")
+    return {
+        "examples": len(rows),
+        "exact_passed": sum(bool(row["passed"]) for row in rows),
+        "exact_accuracy": sum(bool(row["passed"]) for row in rows) / len(rows),
+        "frame_precision": frame_tp / (frame_tp + frame_fp) if frame_tp + frame_fp else 1.0,
+        "frame_recall": frame_tp / (frame_tp + frame_fn) if frame_tp + frame_fn else 1.0,
+        "review_precision": review_tp / (review_tp + review_fp) if review_tp + review_fp else 1.0,
+        "review_recall": review_tp / (review_tp + review_fn) if review_tp + review_fn else 1.0,
+    }

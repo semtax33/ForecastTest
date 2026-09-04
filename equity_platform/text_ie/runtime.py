@@ -39,6 +39,8 @@ from .model import (
 from .matcher import match_sequence_pattern
 from .ontology import definition_for, find_concepts
 from .quantities import extract_quantities, extract_years
+from .retrieval import narrative_candidate
+from .spacy_backend import SemanticMatcherBackend, default_spacy_backend
 from .validation import FrameValidationError, validate_kpi_frame
 
 
@@ -83,6 +85,36 @@ def _quantity_candidates(
     return tuple(item for item in quantities if item.kind in rule.quantity_kinds)
 
 
+def _concept_value_candidates(
+    names: tuple[str, ...],
+    candidates: tuple[QuantityMention, ...],
+    *,
+    fail_on_mismatch: bool = True,
+) -> tuple[QuantityMention, ...]:
+    """Apply the ontology unit contract to an actual metric-value role.
+
+    This must run only after a rule's structural relation has matched.  Running
+    it on a trigger alone (notably ``increased`` or ``and``) turns unrelated
+    quantities into false validation reviews.
+    """
+    if len(names) != 1 or not candidates:
+        return candidates
+    try:
+        allowed_kinds = definition_for(names[0]).quantity_kinds
+    except KeyError:
+        return candidates
+    if not allowed_kinds:
+        return candidates
+    compatible = tuple(item for item in candidates if item.kind in allowed_kinds)
+    if compatible or not fail_on_mismatch:
+        return compatible
+    supplied = ", ".join(sorted({item.kind.value for item in candidates}))
+    expected = ", ".join(item.value for item in allowed_kinds)
+    raise FrameValidationError(
+        f"{names[0]} does not accept {supplied}; expected {expected}"
+    )
+
+
 def _method(
     document: CanonicalDocument,
     block: TextBlock,
@@ -120,12 +152,16 @@ def _frame(
     lower_value: float | None = None,
     upper_value: float | None = None,
     context_trace: dict[str, object] | None = None,
+    method_override: ExtractionMethod | None = None,
 ) -> KPIFrame:
-    selected_method = _method(document, block, value, inherited=inherited)
+    selected_method = method_override or _method(
+        document, block, value, inherited=inherited
+    )
     confidence = {
         ExtractionMethod.INLINE_XBRL: 0.99,
         ExtractionMethod.CONTEXT_RULE: 0.90,
         ExtractionMethod.SPAN_RULE: 0.96,
+        ExtractionMethod.DEPENDENCY_RULE: 0.97,
     }[selected_method]
     qualifiers = qualifier(block.text)
     if qualifiers.approximation:
@@ -168,17 +204,19 @@ def _match_rule(
     *,
     inherited: bool,
     scope: str,
+    backend: SemanticMatcherBackend | None,
 ) -> tuple[KPIFrame, ...] | None:
-    if rule.pattern and match_sequence_pattern(
-        rule,
-        block.text,
-        concepts,
-        quantities,
-    ) is None:
-        return None
     trigger = _trigger_position(block.text, rule.triggers)
     if trigger is None:
         return None
+    if rule.pattern:
+        pattern_match = (
+            backend.match_pattern(rule, block.text, concepts, quantities)
+            if backend is not None
+            else match_sequence_pattern(rule, block.text, concepts, quantities)
+        )
+        if pattern_match is None:
+            return None
     names = tuple(dict.fromkeys(getattr(item, "concept") for item in concepts))
     if rule.concepts:
         names = tuple(name for name in names if name in rule.concepts)
@@ -193,11 +231,11 @@ def _match_rule(
         relation = _relation_position(block.text, rule.relation_words)
         if relation is None:
             return None
-        values = tuple(
+        values = _concept_value_candidates(names, tuple(
             item
             for item in candidates
             if item.char_start > relation
-        )
+        ))
         changes = tuple(
             item
             for item in quantities
@@ -246,6 +284,7 @@ def _match_rule(
         relation = _relation_position(block.text, rule.relation_words)
         if relation is None or len(candidates) < 2:
             return None
+        candidates = _concept_value_candidates(names, candidates)
         same_kind = tuple(item for item in candidates if item.kind is candidates[0].kind)
         if len(names) != 1 or len(same_kind) != 2:
             return ()
@@ -275,6 +314,7 @@ def _match_rule(
         )
 
     if rule.frame is SemanticFrame.NOT_EXPECTED:
+        candidates = _concept_value_candidates(names, candidates)
         if len(names) != 1 or len(candidates) != 1:
             return None if not candidates else ()
         return (
@@ -294,6 +334,15 @@ def _match_rule(
 
     if rule.frame is SemanticFrame.COMPARATIVE:
         years = extract_years(block.text)
+        explicit_comparator = any(
+            cue in block.text.casefold()
+            for cue in ("versus", "compared with", "compared to", "prior year")
+        ) or len(years) >= 2
+        candidates = _concept_value_candidates(
+            names,
+            candidates,
+            fail_on_mismatch=explicit_comparator,
+        )
         if not candidates:
             qualitative_cues = ("improved", "remained robust")
             if not any(cue in block.text.casefold() for cue in qualitative_cues):
@@ -351,6 +400,11 @@ def _match_rule(
     if rule.qualitative:
         if not names:
             return None
+        dependency_validated = bool(
+            backend is not None
+            and rule.frame is SemanticFrame.CAUSE_EFFECT
+            and backend.dependency_relation(block.text, concepts)
+        )
         return tuple(
             _frame(
                 document=document,
@@ -363,10 +417,16 @@ def _match_rule(
                 value=None,
                 inherited=inherited,
                 context_trace={"related_concepts": list(names)},
+                method_override=(
+                    ExtractionMethod.DEPENDENCY_RULE
+                    if dependency_validated
+                    else None
+                ),
             )
             for name in names
         )
 
+    candidates = _concept_value_candidates(names, candidates)
     if len(names) != 1 or len(candidates) != 1:
         return None if not candidates else ()
     return (
@@ -559,11 +619,16 @@ def _frame_relations(
 def extract_text_kpis(
     document: CanonicalDocument,
     rules: tuple[TextRuleIR, ...] = DEFAULT_TEXT_RULES,
+    backend: SemanticMatcherBackend | None = None,
 ) -> TextExtractionResult:
+    if backend is None:
+        backend = default_spacy_backend()
     stack = ContextStack()
     frames: list[KPIFrame] = []
     reviews: list[ReviewItem] = []
     for block in document_text_blocks(document):
+        if not narrative_candidate(block).accepted:
+            continue
         direct_mentions = find_concepts(block.text)
         quantities = extract_quantities(block.text)
         for rule in rules:
@@ -581,6 +646,7 @@ def extract_text_kpis(
                     quantities,
                     inherited=inherited,
                     scope=stack.resolve_scope(block),
+                    backend=backend,
                 )
             except FrameValidationError as exc:
                 reviews.append(
@@ -634,4 +700,11 @@ def extract_text_kpis(
         if (claim := _frame_claim(frame)) is not None
     )
     relations = _frame_relations(tuple(frames), rules)
-    return TextExtractionResult(tuple(frames), facts, claims, relations, tuple(reviews))
+    return TextExtractionResult(
+        tuple(frames),
+        facts,
+        claims,
+        relations,
+        tuple(reviews),
+        backend.name if backend is not None else "BUILTIN_SPAN_FALLBACK",
+    )

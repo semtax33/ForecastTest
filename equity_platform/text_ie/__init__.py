@@ -31,9 +31,16 @@ from .model import (
 from .runtime import DEFAULT_TEXT_RULES, extract_text_kpis
 from .matcher import LabeledSpan, match_sequence_pattern
 from .validation import FrameValidationError, validate_kpi_frame
+from .spacy_backend import (
+    SemanticMatcherBackend,
+    SpacySemanticBackend,
+    default_spacy_backend,
+)
+from .retrieval import CandidateDecision, narrative_candidate
 
 __all__ = [
     "AmbiguityPolicy",
+    "CandidateDecision",
     "DEFAULT_TEXT_RULES",
     "KPIFrame",
     "KPIRelationIR",
@@ -49,6 +56,8 @@ __all__ = [
     "QuantityMention",
     "ReviewItem",
     "SemanticFrame",
+    "SemanticMatcherBackend",
+    "SpacySemanticBackend",
     "TextBlock",
     "TextDslCompileError",
     "TextExtractionResult",
@@ -62,7 +71,9 @@ __all__ = [
     "compile_text_program_file",
     "derive_difference",
     "document_text_blocks",
+    "default_spacy_backend",
     "extract_text_kpis",
     "match_sequence_pattern",
+    "narrative_candidate",
     "validate_kpi_frame",
 ]
