@@ -16,7 +16,7 @@ from equity_platform.text_ie.evaluation import count_semantic_duplicate_frames
 from equity_platform.text_ie.staged_evaluation import (
     DEFAULT_STAGED_GATES,
     staged_gate_results,
-    summarize_staged_validation,
+    summarize_route_aware_staged_validation,
 )
 
 
@@ -96,6 +96,10 @@ def _historical_status(numeric_gates_pass: bool) -> str:
     )
 
 
+def _summarize_historical_rows(rows):
+    return summarize_route_aware_staged_validation(rows)
+
+
 def _rescore(
     path: Path,
     version: int,
@@ -127,7 +131,7 @@ def _rescore(
             "gold_route": str(item["gold_route"]),
             "predicted_table": _boolean(item["predicted_table"]),
         })
-    staged = summarize_staged_validation(rows)
+    staged = _summarize_historical_rows(rows)
     legacy = _legacy_summary(path)
     staged["duplicate_auto_emission"] = count_semantic_duplicate_frames(
         json.loads(str(payload)) for payload in detail["actual_frames_json"]
@@ -195,7 +199,7 @@ def main() -> int:
         "historical_staged_gate_matrix": gates,
     })
     metadata = {
-        "criteria_version": "PLATFORM_V2_9_1_STAGED_FAIL_CLOSED_VALIDATION",
+        "criteria_version": "PLATFORM_V2_9_1_2_ROUTE_AWARE_STAGED_FAIL_CLOSED_VALIDATION",
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "config": CONFIG.relative_to(PROJECT_ROOT).as_posix(),
         "config_sha256": sha256_file(CONFIG),
@@ -204,6 +208,8 @@ def main() -> int:
         "certification_passes": int(summary["certification_eligible"].sum()),
         "historical_artifacts_mutated": False,
         "historical_metric_mode": "retrospective_proxy_from_stored_detail_rows",
+        "route_aware_intermediate_scoring": True,
+        "table_expected_frames_status": "NOT_EVALUATED_BY_TEXT_IE",
         "native_candidate_graph_telemetry_available": False,
         "native_role_graph_telemetry_available": False,
         "accepted_only_precision": True,

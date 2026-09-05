@@ -6,8 +6,8 @@ import pytest
 
 from energy_nowcast.config import ModelConfig
 from energy_nowcast.data.cutoff import filter_available_as_of, quarter_cutoff_date
-from energy_nowcast.validation.intervals import pooled_residual_quantiles
-from energy_nowcast.validation.metrics import enrich_revenue_level_errors, mase
+from equity_platform.validation.intervals import pooled_residual_quantiles
+from equity_platform.validation.metrics import enrich_revenue_level_errors, mase
 from energy_nowcast.validation.walk_forward import shrink_weight, walk_forward_validation
 
 

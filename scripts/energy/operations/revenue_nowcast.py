@@ -18,7 +18,7 @@ from energy_nowcast.operations.store import (
     read_table,
     write_store_metadata,
 )
-from energy_nowcast.validation.promotion_gate import seven_condition_promotion_gate
+from equity_platform.validation.promotion_gate import seven_condition_promotion_gate
 
 
 from equity_platform.paths import PROJECT_ROOT

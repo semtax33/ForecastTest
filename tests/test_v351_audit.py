@@ -5,9 +5,11 @@ import json
 import numpy as np
 import pandas as pd
 
-from energy_nowcast.research.v35.adapters import _guidance_period_semantics
+from equity_platform.sectors.energy.research.revenue.v35.adapters import (
+    _guidance_period_semantics,
+)
 from energy_nowcast.research.v351.revenue import load_companyfacts_quarterly_revenue
-from energy_nowcast.validation.cross_section_metrics import ticker_scorecard
+from equity_platform.validation.cross_section_metrics import ticker_scorecard
 
 
 def _fact(start: str, end: str, value: float, filed: str, fy: int, fp: str, form: str, accn: str) -> dict[str, object]:

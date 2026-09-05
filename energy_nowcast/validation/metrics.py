@@ -1,3 +1,0 @@
-"""Compatibility import; implementation lives in equity_platform.validation.metrics."""
-
-from equity_platform.validation.metrics import *  # noqa: F401,F403

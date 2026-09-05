@@ -16,7 +16,7 @@ from energy_nowcast.research.v353.gas_prices import (
     merge_strict_gas_prices,
 )
 from energy_nowcast.research.v353.gas_validation import gas_research_gate
-from energy_nowcast.validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
 
 
 from equity_platform.data_catalog import DATA

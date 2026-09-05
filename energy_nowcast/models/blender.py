@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from ..validation.metrics import mean_absolute_error
+from equity_platform.validation.metrics import mean_absolute_error
 
 
 DEFAULT_WEIGHT_GRID = np.round(np.arange(0.0, 1.0001, 0.05), 2)

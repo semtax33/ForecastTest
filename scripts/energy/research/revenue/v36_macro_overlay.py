@@ -22,7 +22,7 @@ from energy_nowcast.research.v36.validation import (
     evaluate_macro_candidate,
     passing_pairwise_combinations,
 )
-from energy_nowcast.validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
 from scripts.energy.research.revenue.v353_grouped_component import _load_inputs
 
 

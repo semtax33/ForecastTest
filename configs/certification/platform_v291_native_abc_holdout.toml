@@ -1,7 +1,7 @@
 holdout_id = "V291_NATIVE_STAGE_GOLD_ABC_2026_09_05"
 predeclared_at = "2026-09-05T22:55:17.0956536+09:00"
 parser_version = "V2.9.1"
-status = "FROZEN_RESEARCH_ANNOTATION_PREDICTION_PENDING"
+status = "RESEARCH_REPLAY_COMPLETE_NOT_CERTIFICATION_ELIGIBLE"
 certification_eligible = false
 source_content_reviewed_before_predeclaration = false
 selection_used_file_names_sizes_hashes_and_prior_overlap_only = true
@@ -32,7 +32,7 @@ annotation_certification_limit = "single-agent research annotation; independent 
 ontology_scope = "frozen supported semantic concepts only; unsupported metrics are classified as explicit non-target decisions, never converted into new aliases after selection"
 quantity_scope = "numbers eligible for a supported KPI relation; dates, page numbers, durations, legal thresholds and unrelated table values are excluded"
 concept_scope = "issuer-relevant supported semantic mentions, including non-alias paraphrases; generic disclaimers and third-party KPIs do not become issuer facts"
-route_scoring_policy = "TABLE_DSL bypasses TEXT_IE candidate/binding/role metrics; table facts remain in end-to-end frame metrics; NO_FACT detections remain precision penalties"
+route_scoring_policy = "TABLE_DSL bypasses TEXT_IE candidate/binding/role/frame metrics until the downstream table parser is evaluated; NO_FACT detections remain precision penalties"
 note_classification_policy = "upper-context state from Notes-to-financial-statements marker until the next Item-2, Part-II, or Signatures boundary; annotation makes the final note label"
 
 [holdout_axes.A]
@@ -214,3 +214,35 @@ independent_human_adjudication = false
 certification_eligible = false
 parser_predictions_generated_before_freeze = false
 document_period_release_period_separated = true
+
+[post_prediction_scoring_bugfix]
+recorded_at = "2026-09-06T00:00:14.5769124+09:00"
+version = "V2.9.1.2_EVALUATOR_ONLY"
+parser_inference_changed = false
+gold_annotation_changed = false
+prediction_detail_changed = false
+reason = "V2.6 intentionally suppresses text frames inside TABLE_DSL routes; the first summary incorrectly counted 83 downstream table facts as text-parser false negatives"
+valid_prediction_detail = "output/platform_v2_9_1_staged_validation/native_abc_replay_detail.csv"
+valid_prediction_detail_sha256 = "721eba7ed505fddecc7daa0f41c9e03f05853af9b79fce22abcb2118ce8f32ca"
+aborted_summary = "output/platform_v2_9_1_staged_validation/native_abc_replay_summary_aborted_route_mixing.csv"
+aborted_summary_sha256 = "778e16854065f44d307af438843021baa2ca6cea75670614ef7a2575d9c8c7be"
+aborted_metadata = "output/platform_v2_9_1_staged_validation/native_abc_replay_metadata_aborted_route_mixing.json"
+aborted_metadata_sha256 = "c0d308a2f49d7e04af60a3b0cc8f5e4ace3f053ee2e218f73cab035f6075900d"
+staged_evaluation_sha256_before = "5dce4c8887da94ac9286c85b8d9cc2ed400d94d718cd38446c4d713643b0c74e"
+staged_evaluation_sha256_after = "8daa0e641b65e9acbc3dd7d8c5ace798f11bf72a21526926250917a3f93d81a0"
+regression_test = "tests/test_v291_route_aware_stage_gold.py"
+regression_test_sha256 = "3c88ac06d08fb64ca292a5a9d1a4770de904dcaae6b54cffc300d898dddc631d"
+table_expected_frames_status = "NOT_EVALUATED_BY_TEXT_IE"
+
+[replay_snapshot]
+completed_at = "2026-09-06T00:00:14.5769124+09:00"
+detail = "output/platform_v2_9_1_staged_validation/native_abc_replay_detail.csv"
+detail_sha256 = "721eba7ed505fddecc7daa0f41c9e03f05853af9b79fce22abcb2118ce8f32ca"
+summary = "output/platform_v2_9_1_staged_validation/native_abc_replay_summary.csv"
+summary_sha256 = "09e48401b2acb7fa6b970bdd4e22ff41cf06b032d454efe7abb0c5217c657abe"
+root_causes = "output/platform_v2_9_1_staged_validation/native_abc_replay_root_causes.csv"
+root_causes_sha256 = "1382b7ed092f52355399bbee776a1b04a9a6de633bb5550b958a6cc4712e0e25"
+parser_predictions_generated_after_annotation_freeze = true
+prediction_detail_reused_for_scoring_fix = true
+independent_human_adjudication = false
+certification_eligible = false

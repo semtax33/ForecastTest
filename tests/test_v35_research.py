@@ -5,23 +5,28 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from energy_nowcast.research.v35.adapters import (
+from equity_platform.sectors.energy.research.revenue.v35.adapters import (
     ACTUAL_COLUMNS,
     COMPANY_ADAPTERS,
     GUIDANCE_COLUMNS,
     PRICE_COLUMNS,
     StandardizedKPIBundle,
-    _guidance_scale_sanity,
-)
-from energy_nowcast.research.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
-from energy_nowcast.research.v35.taxonomy import E_AND_P_GROUPS, all_tickers, group_for_ticker
-from energy_nowcast.research.v35.validation import v35_promotion_gate
-from equity_platform.sectors.energy.research.revenue.v35.adapters import (
     _extract_actual_from_file,
     _extract_guidance_from_file,
+    _guidance_scale_sanity,
 )
-
-
+from equity_platform.sectors.energy.research.revenue.v35.strategy import (
+    KPIHierarchicalStrategy,
+    V35StrategyConfig,
+)
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import (
+    E_AND_P_GROUPS,
+    all_tickers,
+    group_for_ticker,
+)
+from equity_platform.sectors.energy.research.revenue.v35.validation import (
+    v35_promotion_gate,
+)
 ROOT = Path(__file__).resolve().parents[1]
 
 

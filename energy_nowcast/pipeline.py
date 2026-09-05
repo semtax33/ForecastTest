@@ -21,13 +21,13 @@ from .data.loaders import LegacyArtifacts, load_legacy_artifacts
 from .features.component_prices import build_component_candidates
 from .features.realized_basis import add_realized_basis_candidates
 from .models.blender import quality_adjusted_weight
-from .validation.baselines import attach_naive_baseline
+from equity_platform.validation.baselines import attach_naive_baseline
 from .validation.cutoff_audit import build_release_cutoff_audit
-from .validation.intervals import (
+from equity_platform.validation.intervals import (
     add_walk_forward_intervals,
     prediction_intervals_for_nowcast,
 )
-from .validation.metrics import (
+from equity_platform.validation.metrics import (
     build_metric_table,
     enrich_revenue_level_errors,
     mean_absolute_error,

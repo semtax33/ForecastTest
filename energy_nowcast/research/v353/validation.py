@@ -6,7 +6,7 @@ from math import ceil
 import numpy as np
 import pandas as pd
 
-from ...validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
 from ...validation.universe_backtest import LEGACY_FEATURES, PooledRidge
 from equity_platform.sectors.energy.research.revenue.v35.strategy import KPIHierarchicalStrategy
 from equity_platform.sectors.energy.research.revenue.v35.taxonomy import E_AND_P_GROUPS, group_for_ticker

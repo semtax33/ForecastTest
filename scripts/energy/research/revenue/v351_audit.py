@@ -27,7 +27,7 @@ from energy_nowcast.research.v351.revenue import (
     build_audited_revenue_panel,
     build_silver_alignment_audit,
 )
-from energy_nowcast.validation.cross_section_metrics import ticker_scorecard
+from equity_platform.validation.cross_section_metrics import ticker_scorecard
 
 
 from equity_platform.data_catalog import DATA

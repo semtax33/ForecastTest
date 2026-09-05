@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 
-from energy_nowcast.validation.cross_section_metrics import ticker_scorecard, universe_summary
-from energy_nowcast.validation.promotion_gate import (
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.promotion_gate import (
     seven_condition_promotion_gate,
     universe_promotion_gate,
 )
@@ -79,4 +79,3 @@ def test_universe_gate_requires_live_forward_and_loco_pass():
     gate = universe_promotion_gate(score, score, live_forward_not_worse=None)
     assert not gate["universe_promotion"].any()
     assert not bool(gate.loc[gate["condition"].eq("live_forward_not_worse"), "passed"].iloc[0])
-

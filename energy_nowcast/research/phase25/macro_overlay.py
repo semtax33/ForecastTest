@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 
 from ...core.company_kpi_platform import _fit_point_weights, _point_predictions
-from ...validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
 
 
 @dataclass(frozen=True)

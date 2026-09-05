@@ -199,6 +199,8 @@ def summarize_staged_validation(
         for name in ("quantity", "concept", "binding", "role")
     }
     frame_tp = frame_fp = frame_fn = 0
+    table_expected_frames_not_evaluated = 0
+    table_text_frame_emission_count = 0
     route_frame_counts = {
         "TEXT_IE": [0, 0, 0],
         "TABLE_DSL": [0, 0, 0],
@@ -275,14 +277,22 @@ def summarize_staged_validation(
                 stage_totals[name][0] += stage.true_positive
                 stage_totals[name][1] += stage.false_positive
                 stage_totals[name][2] += stage.false_negative
-        counts = _score_frames(expected, actual)
-        frame_tp += counts.true_positive
-        frame_fp += counts.false_positive
-        frame_fn += counts.false_negative
-        route_counts = route_frame_counts[str(row.get("gold_route", "NO_FACT"))]
-        route_counts[0] += counts.true_positive
-        route_counts[1] += counts.false_positive
-        route_counts[2] += counts.false_negative
+        table_bypass = (
+            exclude_table_intermediate and row.get("gold_route") == "TABLE_DSL"
+        )
+        if table_bypass:
+            table_expected_frames_not_evaluated += len(expected)
+            table_text_frame_emission_count += len(actual)
+            counts = StageCounts(0, 0, 0)
+        else:
+            counts = _score_frames(expected, actual)
+            frame_tp += counts.true_positive
+            frame_fp += counts.false_positive
+            frame_fn += counts.false_negative
+            route_counts = route_frame_counts[str(row.get("gold_route", "NO_FACT"))]
+            route_counts[0] += counts.true_positive
+            route_counts[1] += counts.false_positive
+            route_counts[2] += counts.false_negative
         observable = int(row.get("rejection_count", 0)) > 0 or int(row.get("review_count", 0)) > 0
         if counts.false_negative:
             if "observable_abstained_frames" in row:
@@ -350,10 +360,11 @@ def summarize_staged_validation(
         "frame_false_negative": frame.false_negative,
         "frame_precision": frame.precision,
         "frame_recall": frame.recall,
+        "evaluated_frame_opportunities": frame.true_positive + frame.false_negative,
         "text_ie_frame_precision": route_stage_counts["TEXT_IE"].precision,
         "text_ie_frame_recall": route_stage_counts["TEXT_IE"].recall,
-        "table_frame_precision": route_stage_counts["TABLE_DSL"].precision,
-        "table_frame_recall": route_stage_counts["TABLE_DSL"].recall,
+        "table_expected_frames_not_evaluated": table_expected_frames_not_evaluated,
+        "table_text_frame_emission_count": table_text_frame_emission_count,
         "no_fact_frame_false_positive": route_stage_counts["NO_FACT"].false_positive,
         "observable_abstained_frames": observable_abstained,
         "silent_frame_miss": silent,
@@ -371,9 +382,10 @@ def summarize_route_aware_staged_validation(
 ) -> dict[str, float | int]:
     """Score table routing separately from the TEXT_IE semantic graph.
 
-    TABLE_DSL is an intentional bypass of candidate/binding/role inference.
-    Its extracted facts still participate in end-to-end frame scores, while
-    its absent text-graph edges do not become artificial false negatives.
+    TABLE_DSL is an intentional bypass of candidate/binding/role inference and
+    this text parser does not execute the downstream structured-table parser.
+    Its annotated facts are therefore reported as not evaluated instead of
+    becoming artificial text-graph or frame false negatives.
     NO_FACT blocks remain in the intermediate scores so false-positive
     concepts, quantities, bindings, and roles still reduce precision.
     """

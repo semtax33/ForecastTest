@@ -5,7 +5,7 @@ from collections.abc import Mapping
 import numpy as np
 import pandas as pd
 
-from .engine import SCENARIO_VARIABLES
+from equity_platform.sectors.energy.valuation.v11.engine import SCENARIO_VARIABLES
 
 
 FINAL_COLUMNS = {

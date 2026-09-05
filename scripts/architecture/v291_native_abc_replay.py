@@ -5,6 +5,7 @@ from collections.abc import Iterable, Mapping
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+import sys
 import tomllib
 
 import pandas as pd
@@ -64,9 +65,10 @@ def verify_frozen_inputs() -> dict[str, object]:
         PROJECT_ROOT / "equity_platform/text_ie/training/staged_gold.py": (
             manifest["pre_annotation_schema_bugfix"]["staged_gold_sha256_after"]
         ),
-        PROJECT_ROOT / "equity_platform/text_ie/staged_evaluation.py": (
-            manifest["pre_annotation_schema_bugfix"]["staged_evaluation_sha256_after"]
-        ),
+        PROJECT_ROOT / "equity_platform/text_ie/staged_evaluation.py": manifest.get(
+            "post_prediction_scoring_bugfix",
+            manifest["pre_annotation_schema_bugfix"],
+        )["staged_evaluation_sha256_after"],
         PROJECT_ROOT / manifest["annotation_snapshot"]["builder"]: (
             manifest["annotation_snapshot"]["builder_sha256"]
         ),
@@ -150,9 +152,31 @@ def _cross_clause_violations(result) -> int:
     return violations
 
 
+def _restore_signature_tuples(value):
+    if isinstance(value, list):
+        return tuple(_restore_signature_tuples(item) for item in value)
+    if isinstance(value, dict):
+        return {key: _restore_signature_tuples(item) for key, item in value.items()}
+    return value
+
+
 def _payload(record: Mapping[str, object]) -> dict[str, object]:
     value = record["payload"]
-    return json.loads(value) if isinstance(value, str) else dict(value)
+    loaded = json.loads(value) if isinstance(value, str) else dict(value)
+    for field in (
+        "expected_quantities",
+        "detected_quantities",
+        "expected_concepts",
+        "detected_concepts",
+        "expected_bindings",
+        "detected_bindings",
+        "expected_roles",
+        "detected_roles",
+        "trace_root_causes",
+    ):
+        if field in loaded:
+            loaded[field] = _restore_signature_tuples(loaded[field])
+    return loaded
 
 
 def _grouped_summaries(records: Iterable[Mapping[str, object]]) -> pd.DataFrame:
@@ -209,6 +233,28 @@ def _grouped_summaries(records: Iterable[Mapping[str, object]]) -> pd.DataFrame:
     return pd.DataFrame(output)
 
 
+def _root_causes_from_detail(detail: pd.DataFrame) -> pd.DataFrame:
+    root_causes: Counter[tuple[str, str, str]] = Counter()
+    for item in detail.itertuples(index=False):
+        causes = tuple(
+            cause
+            for cause in str(item.trace_root_causes).split("|")
+            if cause and cause != "nan"
+        )
+        for cause in causes:
+            root_causes[(str(item.axis), str(item.source_kind), cause)] += 1
+    return pd.DataFrame(
+        {
+            "axis": axis,
+            "source_kind": source_kind,
+            "primary_root_cause": cause,
+            "observation_count": count,
+            "is_failure_signal": cause not in {"EMITTED", "NO_QUANTITY_IN_CLAUSE"},
+        }
+        for (axis, source_kind, cause), count in root_causes.most_common()
+    )
+
+
 def evaluate_native_abc() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     verify_frozen_inputs()
     examples = load_staged_gold(ANNOTATIONS)
@@ -221,7 +267,6 @@ def evaluate_native_abc() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         )
     }
     detail_rows = []
-    root_causes: Counter[tuple[str, str, str]] = Counter()
     for index, example in enumerate(examples):
         document = _canonical_document(example)
         result = extract_text_kpis_v291(document)
@@ -234,8 +279,6 @@ def evaluate_native_abc() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         )
         row["illegal_cross_clause_auto_binding"] = _cross_clause_violations(result)
         annotation = raw[example.example_id]
-        for cause in row["trace_root_causes"]:
-            root_causes[(example.holdout_axis.value, example.source_kind, cause)] += 1
         detail_rows.append(
             {
                 "selection_index": index,
@@ -274,21 +317,24 @@ def evaluate_native_abc() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         )
     detail = pd.DataFrame(detail_rows)
     summary = _grouped_summaries(detail.to_dict("records"))
-    roots = pd.DataFrame(
-        {
-            "axis": axis,
-            "source_kind": source_kind,
-            "primary_root_cause": cause,
-            "observation_count": count,
-            "is_failure_signal": cause not in {"EMITTED", "NO_QUANTITY_IN_CLAUSE"},
-        }
-        for (axis, source_kind, cause), count in root_causes.most_common()
-    )
+    roots = _root_causes_from_detail(detail)
     return detail, summary, roots
 
 
 def main() -> int:
-    detail, summary, roots = evaluate_native_abc()
+    reuse_detail = "--reuse-detail" in sys.argv[1:]
+    if reuse_detail:
+        manifest = verify_frozen_inputs()
+        expected_detail = manifest["post_prediction_scoring_bugfix"][
+            "valid_prediction_detail_sha256"
+        ]
+        if not DETAIL.exists() or sha256_file(DETAIL) != expected_detail:
+            raise ValueError("frozen native A/B/C prediction detail is unavailable or changed")
+        detail = pd.read_csv(DETAIL)
+        summary = _grouped_summaries(detail.to_dict("records"))
+        roots = _root_causes_from_detail(detail)
+    else:
+        detail, summary, roots = evaluate_native_abc()
     write_csv_artifacts(
         OUTPUT,
         {
@@ -307,8 +353,10 @@ def main() -> int:
         "replay_script_sha256": sha256_file(SCRIPT),
         "rows": len(detail),
         "parser_predictions_generated_after_annotation_freeze": True,
+        "prediction_detail_reused_without_parser_execution": reuse_detail,
         "parser_inference_snapshot_unchanged": True,
         "route_aware_intermediate_scoring": True,
+        "table_expected_frames_status": "NOT_EVALUATED_BY_TEXT_IE",
         "document_period_release_period_separated_in_gold": True,
         "annotation_independently_human_adjudicated": False,
         "certification_eligible": False,

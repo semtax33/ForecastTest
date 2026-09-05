@@ -42,7 +42,7 @@ from energy_nowcast.data.consensus import (
 from energy_nowcast.data.cutoff import quarter_cutoff_date
 from energy_nowcast.operations.champion import sha256_file, verify_champion
 from energy_nowcast.research.v36.benchmark import verify_research_champion
-from energy_nowcast.validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
 
 
 from equity_platform.data_catalog import DATA

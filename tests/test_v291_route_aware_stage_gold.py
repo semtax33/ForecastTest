@@ -42,9 +42,7 @@ def test_route_aware_summary_excludes_table_bypass_from_text_graph_metrics() -> 
             "expected_frames": [
                 {"concept": "CASH", "frame": "ABSOLUTE_VALUE", "value": 100.0}
             ],
-            "actual_frames": [
-                {"concept": "CASH", "frame": "ABSOLUTE_VALUE", "value": 100.0}
-            ],
+            "actual_frames": [],
             "candidate_expected": 1,
             "candidate_hits": 0,
             "expected_quantities": [("MONEY", 100.0, 5, 9)],
@@ -96,7 +94,9 @@ def test_route_aware_summary_excludes_table_bypass_from_text_graph_metrics() -> 
     assert summary["binding_recall"] == 1.0
     assert summary["role_recall"] == 1.0
     assert summary["frame_recall"] == 1.0
-    assert summary["table_frame_recall"] == 1.0
     assert summary["text_ie_frame_recall"] == 1.0
+    assert summary["evaluated_frame_opportunities"] == 1
+    assert summary["table_expected_frames_not_evaluated"] == 1
+    assert summary["table_text_frame_emission_count"] == 0
+    assert summary["silent_frame_miss"] == 0
     assert summary["table_route_accuracy"] == 1.0
-

@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 
 from energy_nowcast.research.v352.validation import clean_component_promotion_gate
-from energy_nowcast.validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
 
 
 def _scorecard() -> pd.DataFrame:

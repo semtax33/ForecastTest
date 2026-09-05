@@ -11,7 +11,7 @@ FROZEN_FILES = (
     "configs/energy_valuation_v1_1.toml",
     "energy_nowcast/valuation_v11/__init__.py",
     "energy_nowcast/valuation_v11/benchmark.py",
-    "energy_nowcast/valuation_v11/engine.py",
+    "equity_platform/sectors/energy/valuation/v11/engine.py",
     "energy_nowcast/valuation_v11/financial_adjustments.py",
     "energy_nowcast/valuation_v11/perimeter.py",
     "energy_nowcast/valuation_v11/sanity.py",

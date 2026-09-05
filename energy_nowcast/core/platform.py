@@ -13,7 +13,7 @@ from equity_platform.sectors.energy.forecasting import (
     predict_services,
 )
 from ..research.v351.revenue import load_companyfacts_quarterly_revenue
-from ..validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
 from .taxonomy import SUBINDUSTRY_TICKERS, phase_for_subindustry, subindustry_for_ticker
 
 

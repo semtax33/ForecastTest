@@ -33,18 +33,26 @@ def test_native_abc_replay_verifies_pre_prediction_freezes() -> None:
 
 def test_grouped_summary_preserves_axis_and_route_specific_rows() -> None:
     payload = {
-        "expected_frames": [],
-        "actual_frames": [],
-        "candidate_expected": 0,
-        "candidate_hits": 0,
-        "expected_quantities": (),
-        "detected_quantities": (),
-        "expected_concepts": (),
-        "detected_concepts": (),
-        "expected_bindings": (),
-        "detected_bindings": (),
-        "expected_roles": (),
-        "detected_roles": (),
+        "expected_frames": [
+            {"concept": "REVENUE", "frame": "ABSOLUTE_VALUE", "value": 50.0}
+        ],
+        "actual_frames": [
+            {"concept": "REVENUE", "frame": "ABSOLUTE_VALUE", "value": 50.0}
+        ],
+        "candidate_expected": 1,
+        "candidate_hits": 1,
+        "expected_quantities": (("MONEY", 50.0, 8, 11),),
+        "detected_quantities": (("MONEY", 50.0, 8, 11),),
+        "expected_concepts": (("REVENUE", 0, 7),),
+        "detected_concepts": (("REVENUE", 0, 7),),
+        "expected_bindings": (("REVENUE", 0, 7, "MONEY", 50.0, 8, 11),),
+        "detected_bindings": (("REVENUE", 0, 7, "MONEY", 50.0, 8, 11),),
+        "expected_roles": (
+            ("REVENUE", 0, 7, "VALUE_CURRENT", "MONEY", 50.0, 8, 11),
+        ),
+        "detected_roles": (
+            ("REVENUE", 0, 7, "VALUE_CURRENT", "MONEY", 50.0, 8, 11),
+        ),
         "rejection_count": 0,
         "review_count": 0,
         "observable_abstained_frames": 0,
@@ -60,4 +68,6 @@ def test_grouped_summary_preserves_axis_and_route_specific_rows() -> None:
 
     assert {"ALL", "AXIS", "SOURCE_KIND"} <= set(summary["group_type"])
     assert {"A", "C"} <= set(summary.loc[summary["group_type"] == "AXIS", "group"])
-
+    all_row = summary.loc[summary["group_type"] == "ALL"].iloc[0]
+    assert all_row.quantity_recall == 1.0
+    assert all_row.binding_precision == 1.0

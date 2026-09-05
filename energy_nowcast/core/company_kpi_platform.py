@@ -11,7 +11,7 @@ from equity_platform.sectors.energy.forecasting import (
     predict_refiner_company_kpi,
     predict_services_company_kpi,
 )
-from ..validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
 from .calibration import interval_score, pooled_conformal_interval
 from .platform import _fit_structural_weight, _test_rows
 from .taxonomy import SUBINDUSTRY_TICKERS, phase_for_subindustry

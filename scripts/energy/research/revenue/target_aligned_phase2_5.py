@@ -42,7 +42,7 @@ from energy_nowcast.research.v36.macro_data import (
     load_macro_snapshot,
     refresh_macro_snapshot,
 )
-from energy_nowcast.validation.cross_section_metrics import (
+from equity_platform.validation.cross_section_metrics import (
     ticker_scorecard,
     universe_summary,
 )

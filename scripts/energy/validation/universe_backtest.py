@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from energy_nowcast.validation.cross_section_metrics import ticker_scorecard, universe_summary
-from energy_nowcast.validation.promotion_gate import apply_combined_promotion, universe_promotion_gate
+from equity_platform.validation.cross_section_metrics import ticker_scorecard, universe_summary
+from equity_platform.validation.promotion_gate import apply_combined_promotion, universe_promotion_gate
 from energy_nowcast.validation.universe_backtest import (
     DEFAULT_E_AND_P_UNIVERSE,
     UniverseBacktester,
