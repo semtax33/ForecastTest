@@ -1,0 +1,111 @@
+holdout_id = "V273_SIXTEENTH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T02:01:11+09:00"
+evaluation_tickers = ["EBAY", "CSCO", "BDX", "BSX", "DECK", "DOW", "FCX", "APO", "BKR", "CCL"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V273_SIXTEENTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v273_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+source_substitution_reason = "Before candidate artifact creation and content review: COST latest IR had only 8 eligible blocks and was replaced by EBAY; CVS latest IR had 0 eligible blocks and was replaced by BSX"
+
+[candidate_artifact]
+path = "output/platform_v2_7_3_spacy_semantic_clause/sixteenth_holdout_candidates.csv"
+rows = 100
+sha256 = "0f60feaf215ada3e7f6eac9e05753af451323a91126f61cd3c6bf454fed59bb7"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v273_sixteenth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 37
+table_blocks = 16
+sha256 = "05f7e7484fe92c1237fe12ba22e0890a20e1cebd39ffb63ccf8859b6b8db8221"
+annotation_script_sha256 = "3384ee08fb9d1c170ad1aae73e870f150afdc896420860e0ad4a3e84a450d751"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[selection_snapshot]
+generator_sha256 = "50461589860209adf60c277725f85a1d700ef5e3341a70194871af86770be29e"
+
+[code_snapshot_sha256]
+compiler = "0104e36ad1d5d1ba2d41df60b68208a0ff39e42aa8ecdc023c704730cd211c03"
+runtime = "578f91af416222be8b55585647268449f375ac19469e035ed87c600ba6fe3766"
+spacy_backend = "0cb343ccd0d0ed34a2dbd3d2431bd38ac001abbb5bf7615ed2383f96487c60cb"
+ontology = "ec9f7c8632daead0593d1c7d5c57e3f04c4dd144a523dc73cf65a6c972f4ec70"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+validation = "ac621c159ac628173bbd666742edc0915c1afc2171a391bd5cf925a4a7e75b32"
+v271_semantics = "d1ea8a909abbcb77acbb355503fe686d6fa0610750e9066d6aae9c8f8a76f8c3"
+v271_runtime = "9e252ce18138b220c80472477461adc82d21a356f6f74e7a996bc15bc1867ab6"
+v271_router = "590071614d245b447d69ebb48975e5ae06d02f6e470b970d183b1edbfca261cc"
+v271_init = "585039843acd0ca71ecfc20b1e217d6f6cc24d2a6ed0fb9d1dc723fe2920ba9a"
+v271_rules = "82ef96d96f824396c2c04103036dfb70f2de10b92baaab3042f262c9e3c146bb"
+v272_semantics = "95c785e0f330e2a275e61bfe1dd8e2701a28bc8b9518165e5d9de396b4ae0598"
+v272_runtime = "9300524076a4d531c8eed96eb48339a034e36a743c7ec0ca832f510ea81e096f"
+v272_router = "8892f446476929ce88fc7538d52b68316cf917c05cef94c01e536362c9a28271"
+v272_init = "14743b327680d1ead22bdcabf5204131c0d005ca3bdf89edb931e0a8c68f40c4"
+v272_rules = "712305ba1b6ceaa2aed264f87b93c0ef1a5113cb6cf1364f30df4432836415da"
+v273_semantics = "5e75212df86346a1176fc93216d4e8192c5fd2f355877e743a45d09251002015"
+v273_runtime = "83e700e22396049fd47ed1447b2f51add29c89422b95edefc8f0527991fe329e"
+v273_router = "365f43c4625049ad60a915550931f0c92747dc5c135b9481647c53cf0c00c200"
+v273_init = "c3f99dbbab0591ae9c881957fc97f6b888bdc4c61888227f1333925e2577d8f3"
+v273_rules = "37b6aecffc0aac7b9da32e4b09e7f9386fe72ed5d1ec2ae024111f7d25e5d3f2"
+
+[[sources]]
+ticker = "EBAY"
+file_name = "2026-08-05_0001065088-26-000174_EX-99.1_exhibit991erebayq22026.htm"
+sha256 = "e7675cb5ef6ac8ca5170c51e10dd9f3a6b3e528d8f4a1948fbd3c85364faa486"
+
+[[sources]]
+ticker = "CSCO"
+file_name = "2026-08-12_0000858877-26-000106_EX-99.1_exhibit991pressrelease-q4f.htm"
+sha256 = "04cf167786161d0132e27b9717531a20125f21c6b84cec96140a0018b6da39b7"
+
+[[sources]]
+ticker = "BDX"
+file_name = "2026-08-06_0001628280-26-053790_EX-99.01_ex9916302026.htm"
+sha256 = "1d100ecc6eeacdf03bb710d999231c26ba0100e763e81183dffb08740fe14aa2"
+
+[[sources]]
+ticker = "BSX"
+file_name = "2026-07-29_0000885725-26-000051_EX-99.1_q22026earningsrelease.htm"
+sha256 = "08aae6715bcd22cef603e0388e2f40dee20f7439f21727f0902ed2bb94e47b6d"
+
+[[sources]]
+ticker = "DECK"
+file_name = "2026-07-23_0000910521-26-000015_EX-99.1_deckex991pressrelease-6302.htm"
+sha256 = "2325ca7d4081f5058f799e5995379d809412959086273f61c297d906d4850714"
+
+[[sources]]
+ticker = "DOW"
+file_name = "2026-07-23_0001751788-26-000144_EX-99.1_exhibit991enrschedules2q26.htm"
+sha256 = "2b5f265ba6a22430e13550651280f3f933a898955eeb9315d74ca424f96e352f"
+
+[[sources]]
+ticker = "FCX"
+file_name = "2026-07-23_0000831259-26-000033_EX-99.2_fcx2q26cc_final.htm"
+sha256 = "6268c420dd086529632cc25edb6700742bcdc16ed3d299340cee568c61d39fd1"
+
+[[sources]]
+ticker = "APO"
+file_name = "2026-08-04_0001858681-26-000036_EX-99.2_agmearningsrelease2q2026.htm"
+sha256 = "c9b25f36f07e7bb4e951b99a3dfb592b974c434755c4e77553b23e760ea3e6d8"
+
+[[sources]]
+ticker = "BKR"
+file_name = "2026-07-27_0001701605-26-000021_EX-99.1_earningsreleaseex991063020.htm"
+sha256 = "97c5692979509c020b1fa80d65b02f2429fbb3c354ac0b35dee91d8b1ea45982"
+
+[[sources]]
+ticker = "CCL"
+file_name = "2026-06-23_0000815097-26-000086_EX-99.1_a20262qearningsrelease8-k.htm"
+sha256 = "de9043fc33105e39b2ce38d3563daaa41eaef43112d46d86217d38a26252b39b"

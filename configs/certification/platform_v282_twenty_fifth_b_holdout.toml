@@ -1,0 +1,59 @@
+base_manifest = "configs/certification/platform_v282_twenty_fifth_holdout.toml"
+holdout_id = "V282_TWENTY_FIFTH_B_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T11:48:40.2592808+09:00"
+evaluation_tickers = ["BKH", "BALL", "ABG", "BRO", "BEN", "ADMA", "BBY", "BXP", "ACI", "AMKR"]
+prior_parser_benchmark_overlap = []
+sampling_hash_salt = "V282_TWENTY_FIFTH_B_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+status = "ABORTED_BEFORE_CANDIDATE_ARTIFACT_INSUFFICIENT_BKH_BLOCKS"
+candidate_artifact_generated = false
+abort_reason = "BKH produced 7 eligible blocks; protocol requires 10"
+
+[[sources]]
+ticker = "BKH"
+file_name = "2026-08-17_0001193125-26-354167_EX-99.2_bkh-ex99_2.htm"
+sha256 = "bebea8d8f53b75ca9c52318f60139f21922bf8f1ed881998380b06f4db8b869a"
+
+[[sources]]
+ticker = "BALL"
+file_name = "2026-08-04_0001104659-26-090074_EX-99.1_ball-20260804xex99d1.htm"
+sha256 = "97fd256791acbf3ba9f6321d47866a362831157d75251e07e095d18f95f2ec08"
+
+[[sources]]
+ticker = "ABG"
+file_name = "2026-07-28_0001144980-26-000089_EX-99.1_a2026q2ex991.htm"
+sha256 = "296aa755f89685499b288892af6b11f93db6a5bf993e4547e673e38dc6fabb80"
+
+[[sources]]
+ticker = "BRO"
+file_name = "2026-07-27_0001193125-26-318245_EX-99.1_bro-ex99_1.htm"
+sha256 = "3275b4ac51d0c0001824c990383f175868850c35bf672ff0b1535023612358c0"
+
+[[sources]]
+ticker = "BEN"
+file_name = "2026-07-31_0000038777-26-000215_EX-99.1_exhibit991q3fy26.htm"
+sha256 = "da6b5fac1234225a6768309846ee215738c73927d68435a3bf28239a7a8e3cc1"
+
+[[sources]]
+ticker = "ADMA"
+file_name = "2026-08-05_0001140361-26-031423_EX-99.1_ef20079311_ex99-1.htm"
+sha256 = "222fe7f6c21a02c524b45d9f6209c314aee906b7cdccdb0c5ce2fd99d856d900"
+
+[[sources]]
+ticker = "BBY"
+file_name = "2026-08-27_0000764478-26-000037_EX-99_bby-fy27q2xexx99.htm"
+sha256 = "a0c670f225ddbbd97ef5baaf095775f91abbbc8126a2511c39aa0ed7916d98cf"
+
+[[sources]]
+ticker = "BXP"
+file_name = "2026-07-28_0001037540-26-000031_EX-99.2_q22026pressrelease.htm"
+sha256 = "096873842364bd9e4c145306527c74d674a3abaac2a1849da795576356f2a0fe"
+
+[[sources]]
+ticker = "ACI"
+file_name = "2026-07-23_0001646972-26-000041_EX-99.1_aciq126earningsrelease.htm"
+sha256 = "2e93c490fd52043b36fccde9a7bfaef8d362e18f5deffa3e0c1f1e56d40f8510"
+
+[[sources]]
+ticker = "AMKR"
+file_name = "2026-07-27_0001047127-26-000043_EX-99.1_amkr6302026erex-991.htm"
+sha256 = "775c3ee38038b32cb136f37fcbb1949ea8e5d1f7f7919db4e4882e995a409f32"

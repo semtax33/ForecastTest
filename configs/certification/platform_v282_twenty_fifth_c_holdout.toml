@@ -1,0 +1,59 @@
+base_manifest = "configs/certification/platform_v282_twenty_fifth_b_holdout.toml"
+holdout_id = "V282_TWENTY_FIFTH_C_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T11:55:12.2678696+09:00"
+evaluation_tickers = ["CARR", "BALL", "ABG", "BRO", "BEN", "ADMA", "BBY", "BXP", "ACI", "AMKR"]
+prior_parser_benchmark_overlap = []
+sampling_hash_salt = "V282_TWENTY_FIFTH_C_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+replace_source_ticker = "BKH"
+status = "HOLD_RESEARCH_UNFROZEN_FROZEN_INDEPENDENT_FAILURE"
+
+[candidate_artifact]
+path = "output/platform_v2_8_2_upper_context/twenty_fifth_c_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "55035386bc71a7350972cd621c7ececbf2e1247e48c65451eae2295b16d36aeb"
+
+[selection_snapshot]
+generator = "scripts/architecture/v282_twenty_fifth_c_holdout_candidates.py"
+generator_sha256 = "6ebe6c1ed5d675ac1acef8ff045c3531a22f84d5df8408a5a6927ddd782c9ca9"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v282_twenty_fifth_c_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 43
+table_blocks = 19
+sha256 = "883b56b3b0b39067979f7bc8be909e2c960e1b2099f3d6f082487ad8b1c17baa"
+
+[annotation_snapshot]
+generator = "scripts/architecture/v282_twenty_fifth_c_holdout_annotations.py"
+generator_sha256 = "01f7069524f3a6bbf14c146a45a9d6847c8edf5dfd50a37f5aae462d48336d57"
+
+[evaluation_snapshot]
+evaluator = "scripts/architecture/v282_twenty_fifth_c_holdout_evaluation.py"
+evaluator_sha256 = "529e22a582219d7fd06aae99364b55b2b83b7eb8409bb18e07decc8c755ff0d9"
+
+[independent_result]
+evaluation_path = "output/platform_v2_8_2_upper_context/twenty_fifth_c_holdout_evaluation.csv"
+evaluation_sha256 = "a6c20f6f576f561bbdf645772bf435500db2e9911c3cab4bbc68a00eb3bc3277"
+summary_path = "output/platform_v2_8_2_upper_context/twenty_fifth_c_holdout_summary.csv"
+summary_sha256 = "3998d29221fbe64b632c85593615a5f27501d2065708efd9dc58eaf91c6bcbab"
+ladder_path = "output/platform_v2_8_2_upper_context/twenty_fifth_c_holdout_ladder.csv"
+ladder_sha256 = "dd5bc1558de87fad5538d192ec61aa623381a81449a2c8652d4c20ef510dfd24"
+rejection_path = "output/platform_v2_8_2_upper_context/twenty_fifth_c_holdout_rejection_taxonomy.csv"
+rejection_sha256 = "293cf27a0f23fe6b0c51b59a936bb2a4ccd7f12eb9bf02e66fefc747b1f7779a"
+metadata_path = "output/platform_v2_8_2_upper_context/twenty_fifth_c_holdout_metadata.json"
+metadata_sha256 = "c22bafa6637239ba0714c4ed3b134cf8593300ea4213805e110fc2c752d5f3c1"
+critical_precision = 0.5348837209302325
+critical_recall = 0.5348837209302325
+candidate_recall = 0.8837209302325582
+binding_recall = 0.5348837209302325
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 1
+passed = false
+
+[replacement_source]
+ticker = "CARR"
+file_name = "2026-07-28_0001783180-26-000030_EX-99_a99-q22026earningsexhibit.htm"
+sha256 = "601862a14b4a3e8ed16c0ab5819d50edded4757a5f407a78480030848c1986fa"

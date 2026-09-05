@@ -1,0 +1,11 @@
+holdout_id = "V277_TWENTIETH_A_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T06:07:42+09:00"
+status = "ABORTED_INSUFFICIENT_BLOCKS_BEFORE_ARTIFACT_OR_PREDICTION"
+evaluation_tickers = ["COST", "ORLY", "PM", "LIN", "MDLZ", "TFC", "CNC", "VRTX", "PGR", "RSG"]
+candidate_generator_sha256 = "30d98c47093c80ffa9592f1ab633d3245a75abf05bce5927b8f2800aa221a59e"
+candidate_artifact_created = false
+prediction_executed = false
+
+[insufficient_eligible_blocks]
+COST = 6
+PGR = 2

@@ -1,0 +1,119 @@
+base_manifest = "configs/certification/platform_v289_thirty_second_holdout.toml"
+holdout_id = "V290_THIRTY_THIRD_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T20:09:26+09:00"
+evaluation_tickers = ["AP", "APC", "APEI", "APGE", "APLD", "APP", "APPF", "APPN", "APPS", "APTV"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V290_THIRTY_THIRD_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v290_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+parent_numeric_inheritance = false
+hierarchical_context_numeric_inheritance = false
+selection_used_file_names_sizes_and_overlap_only = true
+status = "ABORTED_INSUFFICIENT_ELIGIBLE_BLOCKS"
+
+[selection_snapshot]
+generator = "scripts/architecture/v290_thirty_third_holdout_candidates.py"
+generator_sha256 = "d74c0498e8dd56c4914de31ec80570a784b4b18aa982ebe4e8d5c01d3cd8a7f9"
+
+[candidate_artifact]
+path = "output/platform_v2_9_0_semantic_role_graph/thirty_third_holdout_candidates.csv"
+rows = 100
+generated = false
+
+[candidate_generation_failure]
+ticker = "APGE"
+eligible_blocks = 5
+required_blocks = 10
+candidate_artifact_written = false
+elapsed_seconds = 315.347
+
+[v290_code_snapshot_sha256]
+semantics = "fb8fa014e67c2cc8e2a65067e748e8958cf65179da429d715a955f5772f4d02b"
+runtime = "9201832ee8be60a6bfbe04ef0a725f6edb0777798b7b3854e3e22eb5c7b06b1e"
+router = "57c3856d4436cdada8333e5a07d0a43b97898f5c6ac7065182dd7cf4ba39aa3b"
+init = "b62ca43aa3b4612ed6c202b5c73ded901744b27f23b03879e61951f21c20341d"
+rules = "2564afebce021da172ca1f9f1ac89899a3faf663858b5bc90a042feb7cb77eb1"
+test = "1dae6fafd42cc945385a7e9a7d1538b92be381f3d6221bcf720d0935638e3685"
+
+[public_regression_result]
+expected_frames = 51
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true
+evaluation_sha256 = "583e2a03c238b81ade2f651a2b2e60ab44474cc9b030368be86265eb38d84c03"
+summary_sha256 = "7783bd3d5c24bcf660691f2dca6ac67aaae2096c8bb498cfa2e3050f3eb7672e"
+
+[disclosed_remediation_result]
+expected_frames = 44
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true
+evaluation_sha256 = "b1a8016408be31116e570b46512c3395246f8f88e1d855c54f5f90efe94440ab"
+summary_sha256 = "ea07940916a4818c2dae802678171ac817dc3a126aa521312857a27e7f7fbc8d"
+
+[[sources]]
+ticker = "AP"
+file_name = "2026-08-11_0001193125-26-343343_EX-99.1_ap-ex99_1.htm"
+sha256 = "d3780629395ed79635fbb799505b96ad180a007a744856da726c7a10cb1035cf"
+
+[[sources]]
+ticker = "APC"
+file_name = "2026-08-06_0001193125-26-337979_EX-99.1_apc-ex99_1.htm"
+sha256 = "69c81b2cd1a0831faa2f0981d841a8a8be320bff402d009f5623665d591e7432"
+
+[[sources]]
+ticker = "APEI"
+file_name = "2026-08-10_0001104659-26-093372_EX-99.1_tm2622572d1_ex99-1.htm"
+sha256 = "4b9cfcb1596c59940732b14e061c154c805bd53a88f8a9199a35acc0dab89e5f"
+
+[[sources]]
+ticker = "APGE"
+file_name = "2026-08-10_0001193125-26-341239_EX-99.1_apge-ex99_1.htm"
+sha256 = "26cabb88997f1fc5afed07ec933d11588109f9eb6806d24382e8e07a7e3d3bc0"
+
+[[sources]]
+ticker = "APLD"
+file_name = "2026-07-27_0001144879-26-000044_EX-99.1_apldq426earningsreleaseasf.htm"
+sha256 = "df6ac2bc6487fa192fcc4d8493c11425c25fe1e8f7aa03220dc30f9a170eb5ef"
+
+[[sources]]
+ticker = "APP"
+file_name = "2026-08-05_0001751008-26-000057_EX-99.1_exhibit991-2q26earningspre.htm"
+sha256 = "895c3aed26ee91adad66110f0ee640651ed6b83a1e61e9409881c0d2df59781c"
+
+[[sources]]
+ticker = "APPF"
+file_name = "2026-07-23_0001433195-26-000056_EX-99.1_appfq22026exhibit991.htm"
+sha256 = "ab86015d159c46523c9ebf17a68dda1f04250afd30b36861f42abf206590a72e"
+
+[[sources]]
+ticker = "APPN"
+file_name = "2026-08-06_0001441683-26-000050_EX-99.1_appnex991earningsrelease-6.htm"
+sha256 = "d14f418b17bf0a0c83264f0a0f3a4915cb47d535b891d6fc19c398762b4f949d"
+
+[[sources]]
+ticker = "APPS"
+file_name = "2026-08-04_0001628280-26-052539_EX-99.1_form8-kxexhibit991q1fy2027.htm"
+sha256 = "e306d7bd7e222706db25002c823f263344217f1258dc6133913b112293e26d9d"
+
+[[sources]]
+ticker = "APTV"
+file_name = "2026-08-04_0001521332-26-000057_EX-99.1_aptvq22026ex991.htm"
+sha256 = "00b889bd9521717f2519480d66da8b5e495fd347b0ed36bb77025dac35286599"

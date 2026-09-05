@@ -1,0 +1,108 @@
+base_manifest = "configs/certification/platform_v283_twenty_sixth_holdout.toml"
+holdout_id = "V284_TWENTY_SEVENTH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T14:07:58.1576474+09:00"
+evaluation_tickers = ["ACA", "ACAD", "ACIW", "ACLS", "ACMR", "ACNB", "ACNT", "ACT", "ADT", "ADTN"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V284_TWENTY_SEVENTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v284_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+parent_numeric_inheritance = false
+status = "ABORTED_BEFORE_ARTIFACT_INSUFFICIENT_ELIGIBLE_BLOCKS"
+
+[abort_result]
+artifact_written = false
+insufficient_eligible_blocks = { ACIW = 0, ACNB = 4 }
+
+[selection_snapshot]
+generator = "scripts/architecture/v284_twenty_seventh_holdout_candidates.py"
+generator_sha256 = "7766446903e72287ed1a125e58c0cc096f266c9095728e88e792f486197ed7c1"
+
+[candidate_artifact]
+path = "output/platform_v2_8_4_economic_roles/twenty_seventh_holdout_candidates.csv"
+rows = 0
+generated = false
+sha256 = ""
+
+[v284_code_snapshot_sha256]
+semantics = "69989eb1898db2d8e8ae269995b4ea251f1907b3d863f95c2b1fbc44ac85f879"
+runtime = "179ad0037c66c4e3427597e1c3651f29b9fb5b2811a44e707363e6303575e936"
+router = "ec8ba911e2bc683a156f6a6f66ef443b4e116a7f15908efa2fa5823a77485b0c"
+init = "66d371b06ea397664445836c87305d2fad9fbed8120c41f467e0e4a06894a068"
+rules = "8e5b18aacee31e90535b893a7e65a81f4c3d363a9fa79aa65378edc25e636616"
+
+[[sources]]
+ticker = "ACA"
+file_name = "2026-08-05_0001739445-26-000124_EX-99.1_exh991earningsrelease63020.htm"
+sha256 = "f6001ba4cfc5f62e9c08a39e8d7c091f3df038905e6abecf9e5c08cd6f586e7d"
+
+[[sources]]
+ticker = "ACAD"
+file_name = "2026-08-04_0001193125-26-332858_EX-99.1_acad-ex99_1.htm"
+sha256 = "0e0f532926389440f5121ec0139a42821d513a6f225623ccd2478380dfd3d485"
+
+[[sources]]
+ticker = "ACIW"
+file_name = "2026-08-06_0000935036-26-000026_EX-99.2_aciw-20260806_ex992.htm"
+sha256 = "d23756d2ea2abcf11944900b29e49d79100a4a4181a93c43b0f591a292f9e0df"
+
+[[sources]]
+ticker = "ACLS"
+file_name = "2026-08-06_0001104659-26-091697_EX-99.1_tm2622315d1_ex99-1.htm"
+sha256 = "8701e273b18b034c96dfb87718899b298d5a4dceb35c61e6a3184bd52d964282"
+
+[[sources]]
+ticker = "ACMR"
+file_name = "2026-08-27_0001628280-26-059251_EX-99.1_recordsofinvestorrelatio.htm"
+sha256 = "184773530117f62a296dfbf9e2eb429d9cd24bf8d84815267b0dbcc726413739"
+
+[[sources]]
+ticker = "ACNB"
+file_name = "2026-07-29_0001628280-26-050410_EX-99.1_pressrelease2026-11third.htm"
+sha256 = "e4acaeeb64f18447a0cca155055e4d23d296020664b36f75c3a3511e3413dba2"
+
+[[sources]]
+ticker = "ACNT"
+file_name = "2026-08-26_0000095953-26-000111_EX-99.1_ir_acntxmidwestideasconf.htm"
+sha256 = "76a72434fe39f361abf8220c1691f0a6464a212e6c8ba44c421e1835423e2e0c"
+
+[[sources]]
+ticker = "ACT"
+file_name = "2026-08-05_0001823529-26-000186_EX-99.2_enactqfs2q26final.htm"
+sha256 = "bf47595515f9fd541b175a4f9ad4e915d58c781b7150e1b6588c8e893b90a278"
+
+[[sources]]
+ticker = "ADT"
+file_name = "2026-07-30_0001703056-26-000097_EX-99.1_q22026adtearningsrelease-e.htm"
+sha256 = "1050ac690c08c8aa9440ffb9459d8e9b7eb17721e0bbdde8d45637da3d027dd6"
+
+[[sources]]
+ticker = "ADTN"
+file_name = "2026-08-04_0001193125-26-331458_EX-99.2_adtn-ex99_2.htm"
+sha256 = "b7dad313cf1775b18e15e84a8da8a426b140c72f124f41df0e9b70586f8b6552"
+
+[disclosed_development_result]
+evaluation_path = "output/platform_v2_8_4_economic_roles/twenty_sixth_disclosed_evaluation.csv"
+evaluation_sha256 = "ea09ac7844fe6146e9c5c00acd831a0a75fb5fa989ea4e7f2fbf0ea7b180cfcb"
+summary_path = "output/platform_v2_8_4_economic_roles/twenty_sixth_disclosed_summary.csv"
+summary_sha256 = "9c7cb59ee596542c80adf424c6b38973f44806dc50b4b36b88d1de69b6eedfc6"
+ladder_path = "output/platform_v2_8_4_economic_roles/twenty_sixth_disclosed_ladder.csv"
+ladder_sha256 = "93dc642d566a2976cdf6990df703325c82791f1748765073ac36cc6c8665909e"
+rejection_path = "output/platform_v2_8_4_economic_roles/twenty_sixth_disclosed_rejection_taxonomy.csv"
+rejection_sha256 = "45fd697e60ee1353538b4a67595f914be74b228454ff646449e8cd1092f73b15"
+metadata_path = "output/platform_v2_8_4_economic_roles/twenty_sixth_disclosed_metadata.json"
+metadata_sha256 = "6c8ce1f8524aa2712054c6ee300d51fa04430a7c41b867ab618bf52bb6b321fc"
+expected_frames = 65
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 0.99
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true

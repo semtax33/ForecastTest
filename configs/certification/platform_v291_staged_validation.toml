@@ -1,0 +1,56 @@
+criteria_id = "PLATFORM_V2_9_1_STAGED_FAIL_CLOSED_VALIDATION"
+effective_at = "2026-09-05T20:36:15+09:00"
+objective = "Measure each information-extraction stage and prefer observable abstention over forced full recall"
+candidate_precision_is_gate = false
+quantity_precision_is_gate = false
+accepted_only_precision = true
+frame_recall_is_coverage_gate = true
+abstention_is_allowed = true
+silent_miss_is_allowed = false
+historical_scores_are_preserved = true
+historical_rescore_creates_new_artifacts = true
+native_stage_gold_required_for_certification = true
+native_pre_reducer_role_telemetry_required_for_certification = true
+post_disclosure_diagnostic_replay_is_certification_eligible = false
+
+[gates]
+candidate_recall = 0.99
+quantity_recall = 0.995
+concept_precision = 0.99
+binding_precision = 0.99
+role_precision = 0.99
+frame_precision = 0.99
+frame_recall = 0.97
+table_route_accuracy = 0.95
+abstention_coverage = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_frame_miss = 0
+
+[diagnostics]
+report_quantity_precision = true
+report_concept_recall = true
+report_binding_recall = true
+report_role_recall = true
+report_abstention_rate = true
+report_review_rate = true
+quantity_precision_interpretation = "diagnostic only because candidate generation is deliberately high-recall"
+abstention_coverage_interpretation = "share of unmatched gold frames in blocks with an explicit rejection or review signal"
+
+[holdout_axes.A]
+name = "TEMPORAL_GENERALIZATION"
+issuer_disjoint = false
+document_disjoint = true
+future_period = true
+
+[holdout_axes.B]
+name = "ISSUER_GENERALIZATION"
+issuer_disjoint = true
+document_disjoint = true
+same_industry = true
+
+[holdout_axes.C]
+name = "ONTOLOGY_GENERALIZATION"
+issuer_disjoint = true
+document_disjoint = true
+industry_disjoint = true

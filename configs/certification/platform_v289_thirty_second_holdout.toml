@@ -1,0 +1,147 @@
+base_manifest = "configs/certification/platform_v288_thirty_first_holdout.toml"
+holdout_id = "V289_THIRTY_SECOND_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T20:05:00+09:00"
+evaluation_tickers = ["AN", "ANAB", "ANDE", "ANDG", "ANGI", "ANGO", "ANGX", "ANIP", "APLE", "APH"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V289_THIRTY_SECOND_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v289_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+parent_numeric_inheritance = false
+hierarchical_context_numeric_inheritance = false
+selection_used_file_names_sizes_and_overlap_only = true
+annotations_frozen_at = "2026-09-05T18:18:33+09:00"
+status = "HOLD_RESEARCH_UNFROZEN_FROZEN_INDEPENDENT_FAILURE"
+
+[selection_snapshot]
+generator = "scripts/architecture/v289_thirty_second_holdout_candidates.py"
+generator_sha256 = "bb6bfbf81e7eb9678202781bbfe2c8296d9cd32ac14b4b340456b0fd23f5eeb8"
+
+[candidate_artifact]
+path = "output/platform_v2_8_9_clause_transducer/thirty_second_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "0ad00c0d3d80e74627eb5c4b04258bdeda4ddd4c84601b1789dc5df148ab00cc"
+
+[annotation_snapshot]
+generator = "scripts/architecture/v289_thirty_second_holdout_annotations.py"
+generator_sha256 = "a27c1ddd2fdef649b595f26d2fe81f2c1518da5b8ae31d7bf2d506c132c8a479"
+artifact = "data-lake/gold/parser/text_ie/v289_thirty_second_holdout_annotations.jsonl"
+artifact_sha256 = "165c3f60907009239a7b782858f18c4271ecd7300d247a3d49184d5af5c0240f"
+rows = 100
+expected_frames = 44
+table_blocks = 23
+frozen_before_prediction = true
+
+[evaluation_snapshot]
+evaluator = "scripts/architecture/v289_thirty_second_holdout_evaluation.py"
+evaluator_sha256 = "f073717c2cfedb4232595acc4534ebcdad4a1609fc8e7a341f23c07652b64491"
+frozen_before_prediction = true
+
+[independent_failure_result]
+evaluation_path = "output/platform_v2_8_9_clause_transducer/thirty_second_holdout_evaluation.csv"
+evaluation_sha256 = "12304f777318432a3042a5fd471e71dfa247ba03e40b05f00a7418f004f7b76a"
+summary_path = "output/platform_v2_8_9_clause_transducer/thirty_second_holdout_summary.csv"
+summary_sha256 = "741622aebfe9d11db543a55bf37bdcac3f6038bb6d6029ab505c48c3af500a3c"
+ladder_path = "output/platform_v2_8_9_clause_transducer/thirty_second_holdout_ladder.csv"
+ladder_sha256 = "9de2f3bf60a08ec90ce33f76b78355c2e1a84837147bbbf4b199a9cac02d84db"
+rejection_path = "output/platform_v2_8_9_clause_transducer/thirty_second_holdout_rejection_taxonomy.csv"
+rejection_sha256 = "8fc0c031a7d7a0c3c64b768f87b658ea0a77df28730fe6d5e259d803b2bce5d9"
+metadata_path = "output/platform_v2_8_9_clause_transducer/thirty_second_holdout_metadata.json"
+metadata_sha256 = "f80ee19d1ee0644f4a2b9716083630f1829e9da32e9873bf1f7dffd1c85466b5"
+expected_frames = 44
+critical_precision = 0.1956521739130435
+critical_recall = 0.2045454545454545
+candidate_recall = 0.8636363636363636
+binding_recall = 0.2045454545454545
+table_route_accuracy = 0.97
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 3
+passed = false
+
+[v289_code_snapshot_sha256]
+semantics = "ddac142d78c176fe3c218bba33818d84a77076aaa088e47b59efeb1ccde5ea8d"
+runtime = "398afe152ec7294c3daa2e5f81acc32e7aa49f269f579334e0f466720266d93d"
+router = "a72f3f02d89a013ec054beac02839e35d407d745d4aed446d9470ff33f32c0d3"
+init = "e5206c772e802533c84344a11fb19540319cc422d9cb302d5afb5cc3989d4b8a"
+rules = "7146df82b0e6eda5e537a2d17d30adc89994ed4f3b249299bab94b09600ae32d"
+test = "18f38005d021082ba582b3e506f233b5686ed08a3ab6be3861b495278bfa637c"
+
+[disclosed_development_result]
+evaluator = "scripts/architecture/v289_thirty_first_disclosed_evaluation.py"
+evaluator_sha256 = "bd0625b6f87ec31d0d895620a86a831d3564ffe38001d1f18072c52b34b3bd4a"
+evaluation_path = "output/platform_v2_8_9_clause_transducer/thirty_first_disclosed_evaluation.csv"
+evaluation_sha256 = "170f2b7dfbeb69f1f5899a8a1c54e72500b693d0bdf9cd3fc58477365069ddce"
+summary_path = "output/platform_v2_8_9_clause_transducer/thirty_first_disclosed_summary.csv"
+summary_sha256 = "9be35d48925781b5871915e95d5a9a28cebd923f92fa4bca3ae6d3f7a970122e"
+ladder_path = "output/platform_v2_8_9_clause_transducer/thirty_first_disclosed_ladder.csv"
+ladder_sha256 = "a17a1cece79658e739ef936dd2268b26640949167d18b8f5835800cb6e200294"
+rejection_path = "output/platform_v2_8_9_clause_transducer/thirty_first_disclosed_rejection_taxonomy.csv"
+rejection_sha256 = "61cbceda34e0bc39abfcd53988bfb4b87a649e4714c1c964ee7ea932a91a80b2"
+metadata_path = "output/platform_v2_8_9_clause_transducer/thirty_first_disclosed_metadata.json"
+metadata_sha256 = "59e9332a6af18000e663e105a7c6cc30e6d73510e24f0cf3bf537531fb52d5db"
+expected_frames = 51
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true
+
+[[sources]]
+ticker = "AN"
+file_name = "2026-07-31_0001628280-26-051209_EX-99.1_anearningsrelease63026ex991.htm"
+sha256 = "a19e7362919b67324e7ead19ea74aceb3878783604c3ddc1eee47a214cffd686"
+
+[[sources]]
+ticker = "ANAB"
+file_name = "2026-05-12_0001193125-26-219500_EX-99.1_anab-ex99_1.htm"
+sha256 = "e159485281831d452d9fb7eb9b61a14b2a4ec5eb6e447807ce79e6ae481af19a"
+
+[[sources]]
+ticker = "ANDE"
+file_name = "2026-08-03_0000821026-26-000120_EX-99.1_q22026ex-99pressrelease.htm"
+sha256 = "ec1ced43454ef06ada36c789aa62e1ec7bb06c15f1fa3878dfdeb2ce4897acf2"
+
+[[sources]]
+ticker = "ANDG"
+file_name = "2026-08-12_0001193125-26-346839_EX-99.1_d122909dex991.htm"
+sha256 = "84efee38390789ed537f8a368ee09d517c88a117be2f9e0f2c9431ddaad5f2c8"
+
+[[sources]]
+ticker = "ANGI"
+file_name = "2026-08-04_0001705110-26-000077_EX-99.1_q22026earningsrelease.htm"
+sha256 = "b44c273b8e0d09f4848a360cc70cd025ef53b8a66093226c76e4995244605eaf"
+
+[[sources]]
+ticker = "ANGO"
+file_name = "2026-07-14_0001140361-26-028368_EX-99.1_ef20077916_ex99-1.htm"
+sha256 = "969cc4feabac99f9a0270b08030540e288ed44bca73cf8c35b5404a9c18fda22"
+
+[[sources]]
+ticker = "ANGX"
+file_name = "2026-08-04_0001865200-26-000068_EX-99.1_angx-20260804xex99d1.htm"
+sha256 = "7108b19c464195251cc96b0d1fdd983427cba43d72bbc7230d70ad03c59c66ad"
+
+[[sources]]
+ticker = "ANIP"
+file_name = "2026-08-07_0001023024-26-000068_EX-99.1_anip-20260807xexx991.htm"
+sha256 = "7c3e9445d4c196a2b53f69232b6153d50c635f6baa93b4fb682e45f494adf970"
+
+[[sources]]
+ticker = "APLE"
+file_name = "2026-08-05_0001193125-26-335144_EX-99.1_aple-ex99_1.htm"
+sha256 = "283748831eae03f3ec56f808731e6ffd0eff089df28a1a503f728c99216059c7"
+
+[[sources]]
+ticker = "APH"
+file_name = "2026-07-29_0001104659-26-087904_EX-99.1_aph-20260729xex99d1.htm"
+sha256 = "babc6a92288972f3f83e436fa7cf46680b5e83fb08fab176d2b220516a3dd3c0"

@@ -1,0 +1,125 @@
+holdout_id = "V278_TWENTY_FIRST_B_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T07:16:20.3125719+09:00"
+parent_attempt = "V278_TWENTY_FIRST_A_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+evaluation_tickers = ["ABBV", "PEP", "NKE", "SBUX", "SLB", "DELL", "FDX", "GIS", "KDP", "MOH"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V278_TWENTY_FIRST_B_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v278_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+code_snapshot_source = "configs/certification/platform_v278_twenty_first_holdout.toml"
+
+[candidate_artifact]
+path = "output/platform_v2_7_8_spacy_semantic_roles/twenty_first_b_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "82fe89419a2eae79cbecd5b19cc244a0ef886a22dfcab3f4bd531bdf0cc743de"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v278_twenty_first_b_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 56
+table_blocks = 22
+generated = true
+sha256 = "e707a77472daaec94b149d6e524d1f5aba4ebe9178abdb083bbb16bb89a4cac0"
+annotator_sha256 = "f1f40fed9188244e26a9d942198ab4e53859e0f91a37c3d8b6fb27409e3acea6"
+
+[evaluation_artifacts]
+evaluator = "scripts/architecture/v278_twenty_first_b_holdout_evaluation.py"
+evaluator_sha256 = "b481ec118d87cbc487e6b9a99a4bee284b286f56e7dd44e30676f7bc35c14988"
+generated = true
+status = "HOLD_RESEARCH_UNFROZEN"
+expected_frames = 56
+critical_precision = 0.354167
+critical_recall = 0.303571
+candidate_recall = 1.0
+binding_recall = 0.303571
+table_route_accuracy = 0.97
+table_route_precision = 0.952381
+table_route_recall = 0.909091
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 2
+detail_sha256 = "78656113be2563a3d9182cd75dc22c5449753c4153455070ad8045654be45729"
+summary_sha256 = "a3ec3cdcb32f4156b8f97c4587b63912424ded6894eab2f2cef28b08408b6bcf"
+ladder_sha256 = "4e5abf24eaeb855a02041ed4a277eb9f7fe015bf33ea0e621b343218679d70e3"
+rejection_taxonomy_sha256 = "967f11a2b35632115c26e4d01378b10f5cb95d36a79b7fe857c860c45d3e0461"
+metadata_sha256 = "73a08a62a01ef65c1afc1fd68d016e3a45ce639cc1d8a6945d3dfa135d8d9e31"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[development_evidence]
+test_count = 704
+public_expected_frames = 52
+public_precision = 1.0
+public_recall = 1.0
+public_candidate_recall = 1.0
+public_table_route_accuracy = 1.0
+v278_tests_sha256 = "5d006039f036f5af97cd41a846aa165d80f9b1f17f3e60c9898212865fd0531e"
+public_summary_sha256 = "91dd24f17937d91c74f57be2fa32e8024cba57398a1227200c293ef66c689311"
+public_detail_sha256 = "655b0f3355e9e2eb5d3e0fc76795355e2922d8cb44e3bcd466470befb1168e83"
+
+[selection_snapshot]
+generator_sha256 = "08cb5cb2bd4a88410a3894f61648bd26c961e394be9c37bc3b32a90cbdcda389"
+inherited_generator_sha256 = "967244394c1dbb08f8663f1796c53a011301e2387123e2045ec763e708f571be"
+
+[[sources]]
+ticker = "ABBV"
+file_name = "2026-07-31_0001551152-26-000023_EX-99.1_abbv-20260630xexhibit991.htm"
+sha256 = "8baad40fc876e620dfa200400e0e9c03f73544293f516214e59aa9ab3912d1b1"
+
+[[sources]]
+ticker = "PEP"
+file_name = "2026-07-09_0000077476-26-000037_EX-99.1_q220268-kxexhibit991.htm"
+sha256 = "f98b17ea5be4d38649f7e881b7d1b8925447893fd6fead9ea4fee4b9079c08b8"
+
+[[sources]]
+ticker = "NKE"
+file_name = "2026-06-30_0000320187-26-000076_EX-99.1_q4fy26exhibit991er.htm"
+sha256 = "3b760b88ae3ec4fd921324cb0140c81967e6f1f8a076d4c52a57cc06af70ac0f"
+
+[[sources]]
+ticker = "SBUX"
+file_name = "2026-07-29_0000829224-26-000129_EX-99.1_sbux-06282026xearningsrele.htm"
+sha256 = "1c66c1551c6c0a05e57b4ecca723e98a003515e75f0475d22bc8337babc07319"
+
+[[sources]]
+ticker = "SLB"
+file_name = "2026-07-24_0001193125-26-315068_EX-99_d122193dex99.htm"
+sha256 = "f10798914225d182d6a7a39ed6317e2748f8bb6d256b3239d2f0034df93b1b85"
+
+[[sources]]
+ticker = "DELL"
+file_name = "2026-05-28_0001571996-26-000021_EX-99.1_exhibit991earnings8kq1fy27.htm"
+sha256 = "1a225609e0b69ad87218ec0eec1e85cf3a9f4fb1ba5f744df63dcdb2b3b71b12"
+
+[[sources]]
+ticker = "FDX"
+file_name = "2026-07-21_0001048911-26-000108_EX-99.1_fedexrecastexhibit991.htm"
+sha256 = "f2749febd69feba2ba7f409a7f6ca0bb3719860ab2168d4778e5ec34f8e42995"
+
+[[sources]]
+ticker = "GIS"
+file_name = "2026-07-01_0001628280-26-046337_EX-99_a20260701ex99.htm"
+sha256 = "57e940f4beb17a312dfc68b5dada996d6f62e28eb8d9e80963bd646a7dec281d"
+
+[[sources]]
+ticker = "KDP"
+file_name = "2026-08-06_0001418135-26-000048_EX-99.1_ex991-keurigdrpepperreport.htm"
+sha256 = "9a66e7a43bbd51024a58406642ee2c3b19874d460b261557df52981b075ebfa7"
+
+[[sources]]
+ticker = "MOH"
+file_name = "2026-07-22_0001179929-26-000036_EX-99.1_moh2q26_er.htm"
+sha256 = "5205e656e560602a388edd3bdbed24edf0215c399e49c01555dd3cf297185174"

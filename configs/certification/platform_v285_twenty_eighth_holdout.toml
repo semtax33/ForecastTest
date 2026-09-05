@@ -1,0 +1,140 @@
+base_manifest = "configs/certification/platform_v284_twenty_seventh_b_holdout.toml"
+holdout_id = "V285_TWENTY_EIGHTH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T14:45:42.4979225+09:00"
+evaluation_tickers = ["ADEA", "ADPT", "AEHR", "AESI", "AGL", "AGYS", "AHCO", "AI", "AIT", "ALAB"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V285_TWENTY_EIGHTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v285_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+parent_numeric_inheritance = false
+status = "HOLD_RESEARCH_UNFROZEN_FROZEN_INDEPENDENT_FAILURE"
+
+[selection_snapshot]
+generator = "scripts/architecture/v285_twenty_eighth_holdout_candidates.py"
+generator_sha256 = "d6dabb9b85940819fd365bb493c089eb9cbead70d268e46efb51929d22104e28"
+
+[candidate_artifact]
+path = "output/platform_v2_8_5_generalized_financial_roles/twenty_eighth_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "935249dc92fce369a2efe2fd269b38e866ea6215823dc613cadb02b9a3d607c4"
+
+[v285_code_snapshot_sha256]
+semantics = "00b7dfc945e628664c4ff70a331f47a1a17fed1c7c6115f6b0d9d45027e5f1c7"
+runtime = "9a661765f82ce1612897716d1fd108dd3ca9ed4e180df025ffda7047457f3bbd"
+router = "858652f6c8cde7c39a016c7a77d325616da82d22254ea74c581b41b1268d2f5b"
+init = "c288ecc6693a4cb96f6b868b6ccd7b85215968b55c25019a2931ee8a3fd5e930"
+rules = "a2452171acc0e6f8d9d01d14218ab7ab7d78d1893dd311f5bc1ba23ba87e2ba1"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v285_twenty_eighth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 58
+table_blocks = 23
+sha256 = "95582bb36d4af08f90e947557a0ff7ed96777e1c929b3ac4e2955941df171094"
+
+[annotation_snapshot]
+generator = "scripts/architecture/v285_twenty_eighth_holdout_annotations.py"
+generator_sha256 = "e8d412741090b03279e3f661a1a8f41a68522f9d4bf25ba2229571cad4afa3e8"
+
+[evaluation_snapshot]
+evaluator = "scripts/architecture/v285_twenty_eighth_holdout_evaluation.py"
+evaluator_sha256 = "45ae769e16c8bb242dbd3ebe2c35298363e3e82b6e9e5b5aaa05b2088e74b898"
+
+[independent_result]
+evaluation_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_eighth_holdout_evaluation.csv"
+evaluation_sha256 = "2df854692ac98309fbbbd35ea952fee03a544f9aedac17dad58a3ccc3c5a0c03"
+summary_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_eighth_holdout_summary.csv"
+summary_sha256 = "8a0a6a205e2533e2146fc707d5a9522be6ebd7ddda897914520eea1741f85394"
+ladder_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_eighth_holdout_ladder.csv"
+ladder_sha256 = "406d62230866fd831689246f2b975f0f4ec181ec8bc5a512501d89e5c3c45816"
+rejection_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_eighth_holdout_rejection_taxonomy.csv"
+rejection_sha256 = "4807374374c5d9c15ac554422de560cb4971e5df61010d4e3dfe51c24ab21671"
+metadata_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_eighth_holdout_metadata.json"
+metadata_sha256 = "c8a2c78d7ea7a2731e99c258e765fbba347a024176d16ec3d59aea28410df54f"
+critical_precision = 0.418182
+critical_recall = 0.396552
+candidate_recall = 0.948276
+binding_recall = 0.396552
+table_route_accuracy = 0.96
+duplicate_auto_emission = 1
+illegal_cross_clause_auto_binding = 0
+silent_miss = 1
+passed = false
+
+[[sources]]
+ticker = "ADEA"
+file_name = "2026-08-03_0001193125-26-330539_EX-99.1_adea-ex99_1.htm"
+sha256 = "9254daa07f2dcdb944cafe3ac44e0902bbc826f165b47f538c1e82e0974f6520"
+
+[[sources]]
+ticker = "ADPT"
+file_name = "2026-07-29_0001193125-26-323753_EX-99.1_adpt-ex99_1.htm"
+sha256 = "9341fa10137ce9e2f984085b87726fa4668bc973f48726fe0671d02cc6de9b76"
+
+[[sources]]
+ticker = "AEHR"
+file_name = "2026-07-14_0001654954-26-006655_EX-99.1_aehr_ex991.htm"
+sha256 = "e3792209655e2b527057e92f37ac43d83aacc36e981cb5156c312740e66e9bec"
+
+[[sources]]
+ticker = "AESI"
+file_name = "2026-08-03_0001193125-26-330740_EX-99.1_aesi-ex99_1.htm"
+sha256 = "14e03fbdf914eca624e6fb5b16ad6506cc2678328208d612f2a469bfca2f7340"
+
+[[sources]]
+ticker = "AGL"
+file_name = "2026-08-05_0001628280-26-053328_EX-99.1_agl-20260630xexx991.htm"
+sha256 = "615fe020ca678cc6b9e3431a8f27d18a4f78130529951e61075315e379ae95d2"
+
+[[sources]]
+ticker = "AGYS"
+file_name = "2026-07-27_0001193125-26-318055_EX-99.1_agys-ex99_1.htm"
+sha256 = "8bfbd26428eddd47a51a6187eb39da37bff1d746570173a67b160f192503019e"
+
+[[sources]]
+ticker = "AHCO"
+file_name = "2026-08-04_0001628280-26-052149_EX-99.1_ahco-20260804x8k_ex991.htm"
+sha256 = "5a2d8735439e6ea10308e6e0139197860463a95199bbfdfbc720c9ab827690b8"
+
+[[sources]]
+ticker = "AI"
+file_name = "2026-06-03_0001577526-26-000056_EX-99.1_ex991-fy26xq4earnings.htm"
+sha256 = "232649fefa4e8a9fb945e7443daddbbfc3e288489c4b28666e4a903aa9515381"
+
+[[sources]]
+ticker = "AIT"
+file_name = "2026-08-13_0000109563-26-000031_EX-99.1_a8k8132026releaseexhibit991.htm"
+sha256 = "8cc4b15525768566b9306456ef12b33dba680594ee84e5453f8a81aff66e5752"
+
+[[sources]]
+ticker = "ALAB"
+file_name = "2026-08-04_0001736297-26-000033_EX-99.1_q226exhibit991.htm"
+sha256 = "5d35cdccbea37a5570c7a660fb45592be31922805b93bdb2400fdbe4cadef6a3"
+
+[disclosed_development_result]
+evaluation_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_seventh_b_disclosed_evaluation.csv"
+evaluation_sha256 = "550316c43ce9d21c991a4577f19b2c8dc7dbe8fa3f5fa69e49f8d0b1b723f1c7"
+summary_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_seventh_b_disclosed_summary.csv"
+summary_sha256 = "1e0f1b2aaaff00a885e60b7c30aebd409b3317adf1fe366577d50c465287652b"
+ladder_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_seventh_b_disclosed_ladder.csv"
+ladder_sha256 = "9b06f1f9b2e5964b40e9cd34aafd5559e7492caf466ebb1ec797dd098ee68b99"
+rejection_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_seventh_b_disclosed_rejection_taxonomy.csv"
+rejection_sha256 = "618c153db510876da410ead4896f7ad47a79d26ad0edc04012e40dbd5054d2fe"
+metadata_path = "output/platform_v2_8_5_generalized_financial_roles/twenty_seventh_b_disclosed_metadata.json"
+metadata_sha256 = "7f77a9953f20d4c79a3a7da7446c05e59d4e80fc345e8bf568ada2d1ab2057c5"
+expected_frames = 37
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true

@@ -35,7 +35,7 @@ text_rule "v271.revenue_absolute_tolerance_guidance" {
   concepts = ["REVENUE"]
   quantity_kinds = ["MONEY"]
   output_metric_suffix = "_GUIDANCE"
-  pattern = [{"label":"metric","var":"REVENUE"},{"label":"value","var":"MONEY","max_gap":3},{"label":"plus","var":"PLUS_SIGN","max_gap":1},{"label":"minus","var":"SLASH_MINUS","max_gap":0},{"label":"tolerance","var":"MONEY","max_gap":0}]
+  pattern = [{"label":"metric","var":"REVENUE"},{"label":"value","var":"MONEY","max_gap":10},{"label":"plus","var":"PLUS_SIGN","max_gap":1},{"label":"minus","var":"SLASH_MINUS","max_gap":0},{"label":"tolerance","var":"MONEY","max_gap":0}]
   backends = ["SEQUENCE"]
   operations = ["bind_labeled_roles", "require_same_clause", "normalize_money", "resolve_period", "resolve_scope", "emit_frame"]
   ambiguity = "REVIEW"
@@ -225,4 +225,17 @@ text_rule "v271.cash_and_investments_total" {
   operations = ["bind_labeled_roles", "require_same_clause", "normalize_money", "resolve_period", "resolve_scope", "emit_frame"]
   ambiguity = "REVIEW"
   priority = 150
+}
+
+text_rule "v271.revenue_increase_percent_to_level" {
+  version = 1
+  frame = "CHANGE_TO"
+  triggers = ["increased"]
+  concepts = ["REVENUE"]
+  quantity_kinds = ["MONEY", "PERCENT"]
+  pattern = [{"label":"metric","var":"REVENUE"},{"label":"trigger","var":"INCREASE","max_gap":1},{"label":"change","var":"PERCENT","max_gap":0},{"label":"to","var":"TO","max_gap":0},{"label":"value","var":"MONEY","max_gap":10}]
+  backends = ["SEQUENCE", "DEPENDENCY"]
+  operations = ["bind_labeled_roles", "require_same_clause", "resolve_polarity", "normalize_money", "resolve_period", "resolve_scope", "emit_frame"]
+  ambiguity = "REVIEW"
+  priority = 160
 }

@@ -1,0 +1,147 @@
+holdout_id = "V278_TWENTY_FIRST_A_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T07:09:59.9572248+09:00"
+status = "ABORTED_INSUFFICIENT_BLOCKS_BEFORE_ARTIFACT_OR_PREDICTION"
+insufficient_blocks = ["AAPL:7", "AMZN:8", "MCD:1", "WCN:2", "CVS:0"]
+evaluation_tickers = ["AAPL", "ABBV", "AMZN", "PEP", "MCD", "NKE", "SBUX", "WCN", "CVS", "SLB"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V278_TWENTY_FIRST_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v278_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+
+[candidate_artifact]
+path = "output/platform_v2_7_8_spacy_semantic_roles/twenty_first_holdout_candidates.csv"
+rows = 100
+generated = false
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v278_twenty_first_holdout_annotations.jsonl"
+rows = 100
+generated = false
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[development_evidence]
+test_count = 704
+public_expected_frames = 52
+public_precision = 1.0
+public_recall = 1.0
+public_candidate_recall = 1.0
+public_table_route_accuracy = 1.0
+v278_tests_sha256 = "5d006039f036f5af97cd41a846aa165d80f9b1f17f3e60c9898212865fd0531e"
+public_summary_sha256 = "91dd24f17937d91c74f57be2fa32e8024cba57398a1227200c293ef66c689311"
+public_detail_sha256 = "655b0f3355e9e2eb5d3e0fc76795355e2922d8cb44e3bcd466470befb1168e83"
+
+[selection_snapshot]
+generator_sha256 = "967244394c1dbb08f8663f1796c53a011301e2387123e2045ec763e708f571be"
+
+[code_snapshot_sha256]
+compiler = "0104e36ad1d5d1ba2d41df60b68208a0ff39e42aa8ecdc023c704730cd211c03"
+runtime = "578f91af416222be8b55585647268449f375ac19469e035ed87c600ba6fe3766"
+spacy_backend = "0cb343ccd0d0ed34a2dbd3d2431bd38ac001abbb5bf7615ed2383f96487c60cb"
+ontology = "ec9f7c8632daead0593d1c7d5c57e3f04c4dd144a523dc73cf65a6c972f4ec70"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+validation = "ac621c159ac628173bbd666742edc0915c1afc2171a391bd5cf925a4a7e75b32"
+v271_semantics = "d1ea8a909abbcb77acbb355503fe686d6fa0610750e9066d6aae9c8f8a76f8c3"
+v271_runtime = "9e252ce18138b220c80472477461adc82d21a356f6f74e7a996bc15bc1867ab6"
+v271_router = "590071614d245b447d69ebb48975e5ae06d02f6e470b970d183b1edbfca261cc"
+v271_init = "585039843acd0ca71ecfc20b1e217d6f6cc24d2a6ed0fb9d1dc723fe2920ba9a"
+v271_rules = "82ef96d96f824396c2c04103036dfb70f2de10b92baaab3042f262c9e3c146bb"
+v272_semantics = "95c785e0f330e2a275e61bfe1dd8e2701a28bc8b9518165e5d9de396b4ae0598"
+v272_runtime = "9300524076a4d531c8eed96eb48339a034e36a743c7ec0ca832f510ea81e096f"
+v272_router = "8892f446476929ce88fc7538d52b68316cf917c05cef94c01e536362c9a28271"
+v272_init = "14743b327680d1ead22bdcabf5204131c0d005ca3bdf89edb931e0a8c68f40c4"
+v272_rules = "712305ba1b6ceaa2aed264f87b93c0ef1a5113cb6cf1364f30df4432836415da"
+v273_semantics = "5e75212df86346a1176fc93216d4e8192c5fd2f355877e743a45d09251002015"
+v273_runtime = "83e700e22396049fd47ed1447b2f51add29c89422b95edefc8f0527991fe329e"
+v273_router = "365f43c4625049ad60a915550931f0c92747dc5c135b9481647c53cf0c00c200"
+v273_init = "c3f99dbbab0591ae9c881957fc97f6b888bdc4c61888227f1333925e2577d8f3"
+v273_rules = "37b6aecffc0aac7b9da32e4b09e7f9386fe72ed5d1ec2ae024111f7d25e5d3f2"
+v274_semantics = "7e192cd6dc32268d8d316657fc823d82d395f3a37e07f6685b5113b0eab354b2"
+v274_runtime = "a620ddf13d6e562c83bf14f9410d58b810e801722ec66697305de80fbcf692b0"
+v274_router = "fffae8c8b0573f9aa1d7656d12cf4c2b312dec43b40f8fc52b974ef53be9e9eb"
+v274_context = "5bbc7bf8303da1f904473224ef589417c7eb6d2e3fb2c16c261969a4d4c76bd0"
+v274_init = "b995944ffdab8772bf5af29495dfaef1027c013d75d43941f9131dc36a2282e3"
+v274_rules = "6472b68f8fd53e2680f6b5f7f982a4bc6c2882ee3f62e91f5b0dae61bc12e686"
+v275_semantics = "d0597317ee29a9365673133a31c2f5badd068c8a73d3cfb91adbba1cca089cad"
+v275_runtime = "4b0fde76dd4497e0a89eca56db8dc2b922485063923d0c4fbec4e45e699ed895"
+v275_router = "f1c6e5b5a486ed2fc574d7f7a4c5b299c1b79bb8bf3366d5edcc1eeea3fbb470"
+v275_context = "c42e5e600fc134a6503cb741e85e26676508ebebf22eaa61c86bf0f5bebae8ee"
+v275_init = "945071ebf4d1612479b82751b0af39d3d4455562933ae3570fb1fd930576b851"
+v275_rules = "027bd750a80b91be36c84a3621426ff43abb99723ee70ec6f8022806fa9df3ea"
+v276_semantics = "12ff7af6c1006bc61fac0c2ad3a41adf7f0dfbecc7eaedc33a5ee42330b530c7"
+v276_runtime = "ea4809c9f7fa661fa909a0aa6e1f45249dcaca3da490d5e8312f3da7e67fc643"
+v276_router = "83d96ff06a5d603d7bdd337039ccefad48d5ccbae876e5544f21125784edf0fd"
+v276_init = "40f7e840fb526997bbfa2b846d2367788efcd37550ad742c2b7ce39b3c0a082b"
+v276_rules = "6268d7f9c34c7bf131a3493c9e012cf90b9124e67c31c8959505c62b72fb4bfc"
+v277_semantics = "d110e7da1b330fae7c4a59dce8776ce145ae37c05090d4998955380290c3b590"
+v277_runtime = "05dd3b9896bd33b7dbfa603f087a02bca27a41cce77055e16b7a6bd50c20b8a0"
+v277_router = "e13338e4430e4c68917c4ace885ed921cc5e525f341e018bfd4a6f9fcfe9be4c"
+v277_init = "b6a47a88ef754f41939fc28ddc10760467f278a28093a54b960febb31ef1c21a"
+v277_rules = "afa51abc9ccdc5bc87167a5a0e4ea8dd3681b60b387c151a0f172b5fd3288b60"
+v278_semantics = "3f9ccba2c539eab99936ea5b61b8e17463e8f923a1272cf04748e2669a836bee"
+v278_runtime = "ac4ed6630ba1220bbfb3336bb1f67e72b2da819245ad64f9a26182d0cc1122e6"
+v278_router = "a82ae557bb891c708bbf353a522352064a03aaa3ffa6cbc76b61167cc7477621"
+v278_init = "ded33b67c27a6e6d0bf0f9d5ac95adec28c9e43554bc8b1ecdf62718f27462b1"
+v278_rules = "280e88af5a5aec889e99be0369edbf5e5e19f6cf9a4ab342e97cdcf8ab8e9054"
+
+[[sources]]
+ticker = "AAPL"
+file_name = "2026-07-30_0000320193-26-000018_EX-99.1_a8-kex991q3202606272026.htm"
+sha256 = "3a48068e2ed1189b97c224385a194ef703e02f6c2cd7796899275cf130a2db49"
+
+[[sources]]
+ticker = "ABBV"
+file_name = "2026-07-31_0001551152-26-000023_EX-99.1_abbv-20260630xexhibit991.htm"
+sha256 = "8baad40fc876e620dfa200400e0e9c03f73544293f516214e59aa9ab3912d1b1"
+
+[[sources]]
+ticker = "AMZN"
+file_name = "2026-07-30_0001018724-26-000024_EX-99.2_amzn-20260630xex992.htm"
+sha256 = "4488242185ea1025608ee249050230b5f4df96ab801eb2da15814dcdd9a4f094"
+
+[[sources]]
+ticker = "PEP"
+file_name = "2026-07-09_0000077476-26-000037_EX-99.1_q220268-kxexhibit991.htm"
+sha256 = "f98b17ea5be4d38649f7e881b7d1b8925447893fd6fead9ea4fee4b9079c08b8"
+
+[[sources]]
+ticker = "MCD"
+file_name = "2026-08-04_0000063908-26-000069_EX-99.1_exhibitpressrelease.htm"
+sha256 = "ac7dd33c622eafa392185a1102fccc79f5dc3b252d66bebf203419452ddc16db"
+
+[[sources]]
+ticker = "NKE"
+file_name = "2026-06-30_0000320187-26-000076_EX-99.1_q4fy26exhibit991er.htm"
+sha256 = "3b760b88ae3ec4fd921324cb0140c81967e6f1f8a076d4c52a57cc06af70ac0f"
+
+[[sources]]
+ticker = "SBUX"
+file_name = "2026-07-29_0000829224-26-000129_EX-99.1_sbux-06282026xearningsrele.htm"
+sha256 = "1c66c1551c6c0a05e57b4ecca723e98a003515e75f0475d22bc8337babc07319"
+
+[[sources]]
+ticker = "WCN"
+file_name = "2026-08-07_0001104659-26-092680_EX-99.1_tm2622609d1_ex99-1.htm"
+sha256 = "443136b2c386598c9702261ad46279dd617011d28521b51a663d9bb91b3970cc"
+
+[[sources]]
+ticker = "CVS"
+file_name = "2026-08-17_0001193125-26-354096_EX-99.1_d129035dex991.htm"
+sha256 = "92534148c0ed85291ba37d1859561a016a842bb61c8387f4dd73afa57d89039f"
+
+[[sources]]
+ticker = "SLB"
+file_name = "2026-07-24_0001193125-26-315068_EX-99_d122193dex99.htm"
+sha256 = "f10798914225d182d6a7a39ed6317e2748f8bb6d256b3239d2f0034df93b1b85"

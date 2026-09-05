@@ -1,0 +1,112 @@
+base_manifest = "configs/certification/platform_v280_twenty_third_holdout.toml"
+holdout_id = "V281_TWENTY_FOURTH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T10:46:38.8099144+09:00"
+evaluation_tickers = ["AMH", "ALV", "AKAM", "AMCR", "AGNC", "ACM", "AMCX", "AMG", "ALNY", "AM"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V281_TWENTY_FOURTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v281_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+status = "FROZEN_INDEPENDENT_FAILURE_HOLD_RESEARCH_UNFROZEN"
+
+[candidate_artifact]
+path = "output/platform_v2_8_1_hierarchical_context_recovery/twenty_fourth_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "497ea98f378c99ec8ef91a68219b9070b09ba2b6a0df2bde395c6d9e43871a91"
+
+[selection_snapshot]
+generator = "scripts/architecture/v281_twenty_fourth_holdout_candidates.py"
+generator_sha256 = "3acaf1c69d5b29a7a85f4255f52447b4e37475b29b73f9fea7595885bf5a877a"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v281_twenty_fourth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 50
+table_blocks = 21
+generated = true
+sha256 = "278e1fe067079e65f4525b5780040cda4513beccc072fa1d13aedc9959d5b59b"
+annotator_sha256 = "d3275abd55a7dba3373502596270c92255cd68380383175010ee0317c70e817e"
+
+[evaluation_artifacts]
+evaluator = "scripts/architecture/v281_twenty_fourth_holdout_evaluation.py"
+evaluator_sha256 = "9b584d9936ad14d839d65252e1e565951b40611e7007393d73e83fa103356750"
+generated = true
+status = "HOLD_RESEARCH_UNFROZEN"
+expected_frames = 50
+critical_precision = 0.514286
+critical_recall = 0.36
+candidate_recall = 0.88
+binding_recall = 0.36
+table_route_accuracy = 0.97
+table_route_precision = 0.95
+table_route_recall = 0.904762
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 2
+detail_sha256 = "7e5e074cc3f2cebdded6833e3bb7d3c4d5952309c9225a7bd539cb73a91a323d"
+summary_sha256 = "39e9e5364be3ea0d2ffa46d3b2a2dea6d7a613b9950abb41d91312440e8c5368"
+ladder_sha256 = "ba6651129afb9b808ce8657cd8a5653e15dc982b2672bcbb0323c4bd493e94db"
+rejection_taxonomy_sha256 = "c5057970bec7b9d4e8243e99afe4789b2e5616f1f39aa0883f42a958ed27e3ee"
+metadata_sha256 = "58c5ce877e7eaff9d9b0725400a9edb6b5b40e2cf6a5f42c70dbce1f17ad7e2d"
+
+[v281_code_snapshot_sha256]
+semantics = "66da155a18d2985e1544f17e2ac3961e9bf19ef989ae4e31bda97ecf51384112"
+runtime = "06a75903c7ff7ff3ed12f40f519e00d5e80ec7c33abafba0d6bb5a6b417cd968"
+router = "c90e62efee3732c623f9d51a0b3539ff9294192c26953830f579fe5f7822f446"
+init = "91f47d0eb20f1ddce5e874e60430fc9baf690891d009f49ce73fc385e9edb59a"
+rules = "343da6f974cee2244e523224eafb34d2725feb086e2535d82d97c579b930ef5e"
+
+[[sources]]
+ticker = "AMH"
+file_name = "2026-07-30_0001562401-26-000043_EX-99.2_amh0630268kexhibit992.htm"
+sha256 = "0485ae3402871b96c8e93c8c35322243aeea0ece9519074cd7a818d04d865f04"
+
+[[sources]]
+ticker = "ALV"
+file_name = "2026-07-17_0001193125-26-306698_EX-99.1_alv-ex99_1.htm"
+sha256 = "96feada295c2a4c7cc8fab96f6525a69662fb723e2e34dbd158f3b0da217d0de"
+
+[[sources]]
+ticker = "AKAM"
+file_name = "2026-08-06_0001086222-26-000083_EX-99.1_exhibit991-q22026.htm"
+sha256 = "e8831df26dcaceb08cc5cd923393a9933bcc39bab4f5618e1f7b735250187142"
+
+[[sources]]
+ticker = "AMCR"
+file_name = "2026-08-12_0001748790-26-000020_EX-99.1_amcor4q2026ex991-june302026.htm"
+sha256 = "acdb26d7bf6c62ffc92256d272a9e2a4d7bbc81ce2ef7695e70465e051c5ac72"
+
+[[sources]]
+ticker = "AGNC"
+file_name = "2026-07-20_0001423689-26-000124_EX-99.1_agnc8kexhibit99163026.htm"
+sha256 = "3469c79a718154fa56ba2412af65faf910b6b6e9fbefb06829a0c26052ce71ad"
+
+[[sources]]
+ticker = "ACM"
+file_name = "2026-08-10_0001104659-26-093421_EX-99.1_tm2622489d1_ex99-1.htm"
+sha256 = "26457db906c33f3a3b6783c4e95e65f2b40b7b1240e6c48885d7c4f4e71c9e58"
+
+[[sources]]
+ticker = "AMCX"
+file_name = "2026-07-30_0001514991-26-000086_EX-99.1_amcx-73026ex991.htm"
+sha256 = "9d1b618ea31991ce99020c4f19d5f5e0797941a07c4e8f557c9b760c9bbc34a6"
+
+[[sources]]
+ticker = "AMG"
+file_name = "2026-07-30_0001628280-26-050793_EX-99.1_amgq22026ex991.htm"
+sha256 = "b141ebbe66f64a19096625756247bb68fd219b1733a1cf994a9d0e532ccb08de"
+
+[[sources]]
+ticker = "ALNY"
+file_name = "2026-07-30_0001178670-26-000060_EX-99.1_alny2026q2earningsrelease.htm"
+sha256 = "b05384f71f1329dcdf2487e1c4e0c5b1166bfc7a912487f2237ba7a143cafa75"
+
+[[sources]]
+ticker = "AM"
+file_name = "2026-07-29_0001104659-26-088210_EX-99.1_tm2621395d1_ex99-1.htm"
+sha256 = "2bae362a468dbe282ebe96b2268e16207fd03bdb1100eda3a8d7271504e1b358"

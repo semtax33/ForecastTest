@@ -1,0 +1,142 @@
+base_manifest = "configs/certification/platform_v285_twenty_eighth_holdout.toml"
+holdout_id = "V286_TWENTY_NINTH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T15:31:38.5247336+09:00"
+evaluation_tickers = ["ALCO", "ALGM", "ALGT", "ALHC", "ALIT", "ALKT", "ALRM", "ALGN", "ALKS", "ALLY"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V286_TWENTY_NINTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v286_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+parent_numeric_inheritance = false
+hierarchical_context_numeric_inheritance = false
+status = "HOLD_RESEARCH_UNFROZEN_FROZEN_INDEPENDENT_FAILURE"
+
+[selection_snapshot]
+generator = "scripts/architecture/v286_twenty_ninth_holdout_candidates.py"
+generator_sha256 = "7702f950dd4ff87cf1b33a8adcf26b69045621c4d525f6f2e10e4566615cd7dd"
+
+[candidate_artifact]
+path = "output/platform_v2_8_6_strict_adjudication/twenty_ninth_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "3031d0223e0cff88eb08bd84b20549d9793e0b303f6684dca0aae967bd179c7d"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v286_twenty_ninth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 42
+table_blocks = 21
+sha256 = "b9ca3826b026a438557a982bcf10ac6c56dd1b51056bd81f262344a9c5697548"
+
+[annotation_snapshot]
+generator = "scripts/architecture/v286_twenty_ninth_holdout_annotations.py"
+generator_sha256 = "36b337398c4b79870e0137872922b398f3a1e30b8c56c3f892cb7c9526807006"
+
+[evaluation_snapshot]
+evaluator = "scripts/architecture/v286_twenty_ninth_holdout_evaluation.py"
+evaluator_sha256 = "a38cf449848d305987c3809c68afb4f9708826da4cda6437e8154493cfdc1933"
+
+[independent_result]
+evaluation_path = "output/platform_v2_8_6_strict_adjudication/twenty_ninth_holdout_evaluation.csv"
+evaluation_sha256 = "68c6149fe674d4bd90337f0bff01dc00b21a23d22dfa46d7b29ac72a47934d3d"
+summary_path = "output/platform_v2_8_6_strict_adjudication/twenty_ninth_holdout_summary.csv"
+summary_sha256 = "0e9a8d9d66a863ad1362d9e89f1a9f6275b21c096892377b541d2c4f81625b95"
+ladder_path = "output/platform_v2_8_6_strict_adjudication/twenty_ninth_holdout_ladder.csv"
+ladder_sha256 = "adf3ad51005c9c77edd5a957d6fa16f21d07659119fe4ee934ae1e88d6e7007d"
+rejection_path = "output/platform_v2_8_6_strict_adjudication/twenty_ninth_holdout_rejection_taxonomy.csv"
+rejection_sha256 = "1f5aaf0dbdb184c10a71e2471bb17539aa20597abec9c2c2d37cc1a17d1f02a3"
+metadata_path = "output/platform_v2_8_6_strict_adjudication/twenty_ninth_holdout_metadata.json"
+metadata_sha256 = "9f8773bc598ed0f80cb966284aba91b17437ee1ff291f8a0ab1aeddd02816240"
+critical_precision = 0.555556
+critical_recall = 0.119048
+candidate_recall = 0.952381
+binding_recall = 0.119048
+table_route_accuracy = 0.97
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 12
+passed = false
+
+[v286_code_snapshot_sha256]
+semantics = "ddeae0ef3c7e7d7d03a6d2e228b503dbbca1e25b2b2db13777c56b75a3b44c45"
+runtime = "df4e576dd51d2cdec7458635f462a396942394009e00b5694965ae974ea95fbc"
+router = "e99f3223001be7fc96e40535a8156ccfd82ffc1c4ac2078b97c5e2fd6ff76d4f"
+init = "329ae866df9cc09806c4725903b42ea0b90038c8ddaa8d537b69259c5222412a"
+rules = "90d5d47dfe46436077fe0969543268e774c61eb46a4763c3a76a2d85aad18968"
+test = "337915891a9606f6ae3d9793a26aa455678a7e312533c8fb4ce21bda340fa8ef"
+
+[[sources]]
+ticker = "ALCO"
+file_name = "2026-08-10_0000003545-26-000041_EX-99.1_alco-3q2026xexx991xer.htm"
+sha256 = "337f4869c70a99a327aea58c0b4e1d7880bd7369b075eec61255df6044b70fdf"
+
+[[sources]]
+ticker = "ALGM"
+file_name = "2026-07-30_0001193125-26-324869_EX-99.1_algm-ex99_1.htm"
+sha256 = "88817a9f71395f641a18e2455f05bd2b42a8ccb14003f1d15e24e5f72a470314"
+
+[[sources]]
+ticker = "ALGT"
+file_name = "2026-08-04_0001362468-26-000047_EX-99.1_a2026q28-kex991.htm"
+sha256 = "c25b3dfd8b0db0e6899f07e20ade6e595c2b7d4aad5cf649978fe4326f6c5e93"
+
+[[sources]]
+ticker = "ALHC"
+file_name = "2026-07-30_0001171843-26-005078_EX-99.1_exh_991.htm"
+sha256 = "c8e1f2fe47ac319dd5fb68b221ce9ffddf0cf32257bf28e58769302d93afe86a"
+
+[[sources]]
+ticker = "ALIT"
+file_name = "2026-08-04_0001628280-26-052572_EX-99.1_alit-20260630xexx991.htm"
+sha256 = "df3205455ec11d0b6c2fc7718114536f4f001b97123cc4dea4b992b2e02ec9e1"
+
+[[sources]]
+ticker = "ALKT"
+file_name = "2026-07-29_0001529274-26-000049_EX-99.1_exhibit991-earningsrelease.htm"
+sha256 = "ed721aa763303ea76ef00b4973be399c0883ddcde97a8361400a76ada94962d8"
+
+[[sources]]
+ticker = "ALRM"
+file_name = "2026-08-06_0001459200-26-000014_EX-99.1_ex991earningsreleasejune30.htm"
+sha256 = "14e054450ba31fc9538eab4aaa7a1bccd358942b0a908405b2553756a5d514b2"
+
+[[sources]]
+ticker = "ALGN"
+file_name = "2026-07-29_0001097149-26-000054_EX-99.1_algn-q226earningspressrele.htm"
+sha256 = "a8cb08807d96cfb49c40cd18afcbe6babb7692560e7609d16bdf0420655876eb"
+
+[[sources]]
+ticker = "ALKS"
+file_name = "2026-07-28_0001193125-26-318844_EX-99.1_alks-ex99_1.htm"
+sha256 = "369adfeeaa1595304be5f63fd14c479e395820e7d01a4659ef411803e3c61e5d"
+
+[[sources]]
+ticker = "ALLY"
+file_name = "2026-07-21_0001193125-26-309539_EX-99.1_d40046dex991.htm"
+sha256 = "804a4d2c533ed7ed0b4b34418bdbabb3e9ab5e39ce73b65c9d37248276c4557c"
+
+[disclosed_development_result]
+evaluation_path = "output/platform_v2_8_6_strict_adjudication/twenty_eighth_disclosed_evaluation.csv"
+evaluation_sha256 = "e59c75f621392ac3b54dec937c0a57cea6e56fb15f5c945feb7099bf090eec1a"
+summary_path = "output/platform_v2_8_6_strict_adjudication/twenty_eighth_disclosed_summary.csv"
+summary_sha256 = "3f6a2a47abcd7c584bb423dc499a3d7b827f662f9375c600fcb2981709336279"
+ladder_path = "output/platform_v2_8_6_strict_adjudication/twenty_eighth_disclosed_ladder.csv"
+ladder_sha256 = "e8dfaacd18efc8cd8a454bca121d50fc114eb7ecd99178fcbd3422474d93913d"
+rejection_path = "output/platform_v2_8_6_strict_adjudication/twenty_eighth_disclosed_rejection_taxonomy.csv"
+rejection_sha256 = "0ca251067d9b335ac801ca6617df8e876bcdd7083c3b7646e1f058e9147cdc99"
+metadata_path = "output/platform_v2_8_6_strict_adjudication/twenty_eighth_disclosed_metadata.json"
+metadata_sha256 = "c60cd4eff9068a524dacdaf98ea4d884ef6bf95003d3bd7c50bc64fb44e0f9ee"
+expected_frames = 58
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true

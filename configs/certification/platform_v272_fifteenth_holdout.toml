@@ -1,0 +1,106 @@
+holdout_id = "V272_FIFTEENTH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T01:16:00+09:00"
+evaluation_tickers = ["PYPL", "ADBE", "AXON", "CRWD", "FTNT", "HD", "MSFT", "ORCL", "UNH", "WMT"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V272_FIFTEENTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v272_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+source_substitution_reason = "Before candidate artifact creation and content review: AAPL had only 6 eligible blocks and was replaced by PYPL"
+
+[candidate_artifact]
+path = "output/platform_v2_7_2_spacy_semantic_ownership/fifteenth_holdout_candidates.csv"
+rows = 100
+sha256 = "0fe5aec400d0fa14b3100acc5e698e5ea97563318e5360a3b44a5cff2a650046"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v272_fifteenth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 61
+table_blocks = 25
+sha256 = "a272e513e24bb492708ded593402543f2fed9ef8596e55a3e1e9bd2548cf46be"
+annotation_script_sha256 = "4f167a20447d179a1b1d2e6f199521b7e63beff620373f45553a8f72c883ef7d"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[selection_snapshot]
+generator_sha256 = "6a496377bb71e0b000bbb3b46745ab908980e1a79a1e742349581a546f590a37"
+
+[code_snapshot_sha256]
+compiler = "0104e36ad1d5d1ba2d41df60b68208a0ff39e42aa8ecdc023c704730cd211c03"
+runtime = "578f91af416222be8b55585647268449f375ac19469e035ed87c600ba6fe3766"
+spacy_backend = "0cb343ccd0d0ed34a2dbd3d2431bd38ac001abbb5bf7615ed2383f96487c60cb"
+ontology = "ec9f7c8632daead0593d1c7d5c57e3f04c4dd144a523dc73cf65a6c972f4ec70"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+validation = "ac621c159ac628173bbd666742edc0915c1afc2171a391bd5cf925a4a7e75b32"
+v271_semantics = "d1ea8a909abbcb77acbb355503fe686d6fa0610750e9066d6aae9c8f8a76f8c3"
+v271_runtime = "9e252ce18138b220c80472477461adc82d21a356f6f74e7a996bc15bc1867ab6"
+v271_router = "590071614d245b447d69ebb48975e5ae06d02f6e470b970d183b1edbfca261cc"
+v271_init = "585039843acd0ca71ecfc20b1e217d6f6cc24d2a6ed0fb9d1dc723fe2920ba9a"
+v271_rules = "82ef96d96f824396c2c04103036dfb70f2de10b92baaab3042f262c9e3c146bb"
+v272_semantics = "95c785e0f330e2a275e61bfe1dd8e2701a28bc8b9518165e5d9de396b4ae0598"
+v272_runtime = "9300524076a4d531c8eed96eb48339a034e36a743c7ec0ca832f510ea81e096f"
+v272_router = "8892f446476929ce88fc7538d52b68316cf917c05cef94c01e536362c9a28271"
+v272_init = "14743b327680d1ead22bdcabf5204131c0d005ca3bdf89edb931e0a8c68f40c4"
+v272_rules = "712305ba1b6ceaa2aed264f87b93c0ef1a5113cb6cf1364f30df4432836415da"
+
+[[sources]]
+ticker = "PYPL"
+file_name = "2026-07-28_0001633917-26-000080_EX-99.1_pypl2q-26earningsrelease.htm"
+sha256 = "3b9a9432ac8ad119afd57831c788ea18a3af3b767247c874cba34eea8093945a"
+
+[[sources]]
+ticker = "ADBE"
+file_name = "2026-06-11_0000796343-26-000109_EX-99.1_adbeex991q226.htm"
+sha256 = "c98c84aea05e473e353d25e9e7a877b6a94a8659071f01394b4eef7f6acf2d7b"
+
+[[sources]]
+ticker = "AXON"
+file_name = "2026-08-05_0001628280-26-053363_EX-99.1_axon-20260805xex991.htm"
+sha256 = "76463f126b6e2d03d4abf2e64b9aad9989d294f4a35a20e5ca28bcecdbfee460"
+
+[[sources]]
+ticker = "CRWD"
+file_name = "2026-08-26_0001535527-26-000029_EX-99.1_crwd-20260826xex991.htm"
+sha256 = "559afc9686673b177186ee8bdd3859763068a886adc5873d68c81b43b49fde8f"
+
+[[sources]]
+ticker = "FTNT"
+file_name = "2026-07-29_0001262039-26-000018_EX-99.1_ftntq2-2026ex991.htm"
+sha256 = "e9477752c32de043aac5e771fd77ee76642d133829a35e48c36e9d34cf3e6d94"
+
+[[sources]]
+ticker = "HD"
+file_name = "2026-08-18_0000354950-26-000145_EX-99.1_hd_exhibit991x08022026.htm"
+sha256 = "0b5028553f67f77233be3db8879976f6fb2ff1f87d0a9467844852240d77dcb7"
+
+[[sources]]
+ticker = "MSFT"
+file_name = "2026-07-29_0001193125-26-323632_EX-99.1_msft-ex99_1.htm"
+sha256 = "83f124ce1553e422123a6f8c27634ab2ac31da3191a905b683400a688d967c2b"
+
+[[sources]]
+ticker = "ORCL"
+file_name = "2026-06-10_0001193125-26-265848_EX-99.1_orcl-ex99_1.htm"
+sha256 = "253f9e026d60a9d37e9ba83c398163a2d51b2db2b3f52f001385177a20edd251"
+
+[[sources]]
+ticker = "UNH"
+file_name = "2026-07-16_0000731766-26-000191_EX-99.2_uhgearnings_q22026vpower.htm"
+sha256 = "a77fda91508238328eee49f36b44da4e91de7592d343adeecced53ab6de7f524"
+
+[[sources]]
+ticker = "WMT"
+file_name = "2026-08-20_0000104169-26-000145_EX-99.2_earningspresentationfy27.htm"
+sha256 = "064059dab973246205e2e4a62bf659c346071f12594d0de8a8d0f4642d059ca5"

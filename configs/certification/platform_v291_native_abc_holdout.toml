@@ -1,0 +1,216 @@
+holdout_id = "V291_NATIVE_STAGE_GOLD_ABC_2026_09_05"
+predeclared_at = "2026-09-05T22:55:17.0956536+09:00"
+parser_version = "V2.9.1"
+status = "FROZEN_RESEARCH_ANNOTATION_PREDICTION_PENDING"
+certification_eligible = false
+source_content_reviewed_before_predeclaration = false
+selection_used_file_names_sizes_hashes_and_prior_overlap_only = true
+prediction_forbidden_until_annotations_frozen = true
+llm_annotation_allowed = false
+llm_relation_rescue_allowed = false
+pdf_parsing_allowed = false
+candidate_generator_frozen = true
+selection_independent_of_candidate_generator_and_router = true
+blocks_per_corporate_source = 10
+note_blocks_per_filing_source = 2
+max_annotation_block_chars = 4000
+axis_a_target_blocks = 20
+axis_b_target_blocks = 40
+axis_c_corporate_target_blocks = 40
+axis_c_industry_negative_controls = 20
+target_annotated_blocks = 120
+sampling_hash_salt = "V291_NATIVE_ABC_FIXED_BEFORE_SOURCE_CONTENT_REVIEW"
+industry_series = [
+  "EIA_WTI_SPOT",
+  "EIA_REFINERY_UTILIZATION_PCT",
+  "DTWEXBGS",
+  "OVXCLS",
+]
+industry_rows_per_series = 5
+annotation_policy = "EXHAUSTIVE_STAGE_GRAPH_CODEX_MANUAL_TWO_PASS_RESEARCH_REVIEW"
+annotation_certification_limit = "single-agent research annotation; independent human adjudication is still required for certification"
+ontology_scope = "frozen supported semantic concepts only; unsupported metrics are classified as explicit non-target decisions, never converted into new aliases after selection"
+quantity_scope = "numbers eligible for a supported KPI relation; dates, page numbers, durations, legal thresholds and unrelated table values are excluded"
+concept_scope = "issuer-relevant supported semantic mentions, including non-alias paraphrases; generic disclaimers and third-party KPIs do not become issuer facts"
+route_scoring_policy = "TABLE_DSL bypasses TEXT_IE candidate/binding/role metrics; table facts remain in end-to-end frame metrics; NO_FACT detections remain precision penalties"
+note_classification_policy = "upper-context state from Notes-to-financial-statements marker until the next Item-2, Part-II, or Signatures boundary; annotation makes the final note label"
+
+[holdout_axes.A]
+name = "TEMPORAL_GENERALIZATION"
+issuer_disjoint = false
+document_disjoint = true
+future_period = true
+
+[holdout_axes.B]
+name = "ISSUER_GENERALIZATION"
+issuer_disjoint = true
+document_disjoint = true
+same_industry = false
+
+[holdout_axes.C]
+name = "ONTOLOGY_AND_INDUSTRY_GENERALIZATION"
+issuer_disjoint = true
+document_disjoint = true
+industry_disjoint = true
+includes_public_industry_data_negative_controls = true
+
+[parser_snapshot_sha256]
+role_graph = "b33a6987337c61cd4aa71da6e091fb4f52b3eedc6461f8e4866efb94fe960973"
+v290_semantics = "402d3255ff087336c1ac42e12773f7d134d76fb1f447e9e228a9bf4ef111df2b"
+v290_runtime = "b2e2cacdcc9beda5274b26a2b9ab8fe8efea9f899e44d369beaadf0dcd160deb"
+v290_router = "57c3856d4436cdada8333e5a07d0a43b97898f5c6ac7065182dd7cf4ba39aa3b"
+v291_model = "ea9b489297ecf790ff411574b9b1edb98b3d9704cdc16935ed2e6c7733f6e7ce"
+v291_runtime = "469b35b5d0386f48f9e977f644259e81e654f0b32a00f411c7683c85a66cb58e"
+v291_evaluation = "63f69b562f0a425703fea4c71ab66997088c00c3107a3d17bfd323a627f7d3fe"
+staged_evaluation = "f8c8a809dddf053655b2d089277a958d2e4dc353006a2bf85f115684303f7d6d"
+staged_gold = "2ae07bdd279249f68d243550a4f8adf92b6f5a37aa4e11d3b7bee1df14611c0b"
+v290_rules = "2564afebce021da172ca1f9f1ac89899a3faf663858b5bc90a042feb7cb77eb1"
+
+[test_snapshot_sha256]
+native_telemetry = "a8227bb920f87b8fba2615c285b8891ce4d87f5806f71a20eca0e9aaa0367dc6"
+staged_evaluation = "5a16ddbbfc89fcb1039b36828e512f1482ff560eec4edbbdc22679bb74db5956"
+staged_gold = "c2cbe615b567860248ff7ddd1bd991e93cd5d51666d0ec227ebfe69599156da9"
+
+[[sources]]
+axis = "A"
+entity = "AAL"
+source_kind = "10-Q"
+file_name = "2026-07-23_0000006201-26-000052_aal-20260630.htm"
+sha256 = "6bb5de8d9d9c48f37a4f62aae3518aaea9e910b594a91c4456b087fc07f30fc0"
+
+[[sources]]
+axis = "A"
+entity = "AAL"
+source_kind = "10-K"
+file_name = "2026-02-18_0000006201-26-000014_aal-20251231.htm"
+sha256 = "b5a3965b037b5897bce6559c6b5fabe1d8e82fb8bf2426783457486ef108746e"
+
+[[sources]]
+axis = "B"
+entity = "AAME"
+source_kind = "10-Q"
+file_name = "2025-11-14_0001140361-25-042275_ef20054956_10q.htm"
+sha256 = "fb44d13aea42822fe83efa2ac30a2f747c6b32566966389e4757628e94668fbb"
+
+[[sources]]
+axis = "B"
+entity = "AAME"
+source_kind = "10-K"
+file_name = "2025-03-25_0001140361-25-010239_ef20038925_10k.htm"
+sha256 = "27f42e30d58b398e3a474d55c0022ce2154c90687b8aaeae965c10680a502c54"
+
+[[sources]]
+axis = "B"
+entity = "AAMI"
+source_kind = "10-Q"
+file_name = "2026-08-06_0001628280-26-053869_aami-20260630.htm"
+sha256 = "5e18ef0a52031548735ef1b8dd8518f23e5d519903567d9403cb4e354fe7c16e"
+
+[[sources]]
+axis = "B"
+entity = "AAMI"
+source_kind = "10-K"
+file_name = "2026-02-27_0001628280-26-012856_aami-20251231.htm"
+sha256 = "a12d4285d9ee69f1854ff113fe3a241f95afa18204798a47b14cacb07bd99f85"
+
+[[sources]]
+axis = "C"
+entity = "DUK"
+source_kind = "IR"
+file_name = "2026-08-13_0001104659-26-095903_EX-99.1_tm2623082d1_ex99-1.htm"
+sha256 = "b65c3e164846e1b57f2f6619b8210b7af7121480da562ec3cd5c5433c9e32b18"
+
+[[sources]]
+axis = "C"
+entity = "PRU"
+source_kind = "IR"
+file_name = "2026-08-04_0001137774-26-000170_EX-99.2_exhibit992-2q26qfs.htm"
+sha256 = "f8b01fc31e913ad273dcd0b52b9ca035a3fda3f82e17080c346ea1f95233a7e2"
+
+[[sources]]
+axis = "C"
+entity = "SPG"
+source_kind = "IR"
+file_name = "2026-08-10_0001104659-26-093361_EX-99.1_tm2620726d2_ex99-1.htm"
+sha256 = "e8fb9d66ecd588d01a3536a11a7b84d4e12331a89a8b8fa0cef68b5118be8229"
+
+[[sources]]
+axis = "C"
+entity = "CL"
+source_kind = "IR"
+file_name = "2026-07-31_0000021665-26-000041_EX-99_q22026pressreleasetables.htm"
+sha256 = "930de78efb438ee37a1ffa893fbbbb14462c54e1bae07229ae236a604a7d86a9"
+
+[[industry_sources]]
+axis = "C"
+entity = "PUBLIC_INDUSTRY_DATA"
+source_kind = "INDUSTRY_DATA"
+path = "data-lake/bronze/snapshots/v3_6_macro/macro_series.csv"
+sha256 = "6067b180c5ab95171044aa4b268a0e599b7c2c8b2592e602e4094120e4e805b9"
+
+[aborted_selection_snapshot]
+frozen_at = "2026-09-05T23:26:58.820747+09:00"
+generator = "scripts/architecture/v291_native_abc_candidates.py"
+generator_sha256 = "42425a8012eff6872396ccf83300651a2b79c3f5d12dae72d6f039586ea4d8c2"
+artifact = "output/platform_v2_9_1_staged_validation/native_abc_candidate_blocks_aborted_oversized.csv"
+artifact_sha256 = "23f2df27574ae3662529b097e6e6cebb871d8076b5bd7d2dd4177d6678a5da13"
+metadata = "output/platform_v2_9_1_staged_validation/native_abc_candidate_metadata_aborted_oversized.json"
+metadata_sha256 = "2562cc0a38c9f229e9e1ea5d7685da67e3cbe8335c1d7a6b2935024fd54909f8"
+rows = 120
+axis_a_rows = 20
+axis_b_rows = 40
+axis_c_rows = 60
+parser_predictions_generated = false
+frozen_before_annotation = true
+status = "ABORTED_OVERSIZED_ANNOTATION_UNIT"
+reason = "two selected flattened blocks had 23423 and 14021 characters and would collapse hundreds of quantity opportunities into one annotation row"
+
+[selection_snapshot]
+frozen_at = "2026-09-05T23:30:20.285141+09:00"
+generator = "scripts/architecture/v291_native_abc_candidates.py"
+generator_sha256 = "3305b412c0738c64488b21d74fe29374364550220a383f9cd2e105ee00c6e33b"
+artifact = "output/platform_v2_9_1_staged_validation/native_abc_candidate_blocks.csv"
+artifact_sha256 = "ca4432bb655fb48cf360b395c2067d9d18d04e1786d1702eee57cf3c9f360d2e"
+metadata = "output/platform_v2_9_1_staged_validation/native_abc_candidate_metadata.json"
+rows = 120
+axis_a_rows = 20
+axis_b_rows = 40
+axis_c_rows = 60
+max_selected_block_chars = 2013
+parser_predictions_generated = false
+frozen_before_annotation = true
+status = "FROZEN_FOR_EXHAUSTIVE_STAGE_ANNOTATION"
+
+[pre_annotation_schema_bugfix]
+recorded_at = "2026-09-05T23:49:43.6030689+09:00"
+version = "V2.9.1.1_EVALUATOR_ONLY"
+parser_inference_changed = false
+parser_predictions_generated_before_fix = false
+reason = "represent target-free positional tables without synthetic KPI nodes and prevent intentional TABLE_DSL bypasses from becoming TEXT_IE binding/role false negatives"
+staged_gold_sha256_before = "2ae07bdd279249f68d243550a4f8adf92b6f5a37aa4e11d3b7bee1df14611c0b"
+staged_gold_sha256_after = "9d9c67a84535d22324444d6fb55e0b1db7da929fb7cdb3e97871b33ad8b0b81d"
+staged_evaluation_sha256_before = "f8c8a809dddf053655b2d089277a958d2e4dc353006a2bf85f115684303f7d6d"
+staged_evaluation_sha256_after = "5dce4c8887da94ac9286c85b8d9cc2ed400d94d718cd38446c4d713643b0c74e"
+regression_test = "tests/test_v291_route_aware_stage_gold.py"
+regression_test_sha256 = "0c2cbbe3ebd5279510c0afd4cf140546fcce5343780714e471271baa71290b2e"
+regression_tests_passed = 23
+
+[annotation_snapshot]
+frozen_at = "2026-09-05T23:49:43.6030689+09:00"
+artifact = "data-lake/gold/parser/text_ie/v291_native_abc_stage_gold.jsonl"
+artifact_sha256 = "641f70d9c12eb8a136de494fa557814eeaa045b4a1345828c24bb420e2f4f168"
+builder = "scripts/architecture/v291_native_abc_annotations.py"
+builder_sha256 = "f48e42bc932792b67fc741143e54f6c15203a758b1b401766eafdfb28c8e1c0a"
+test = "tests/test_v291_native_abc_annotations.py"
+test_sha256 = "4a48c577af06ae2c825f0f5dc1fa176bec2789ffccd98a0c07d45173640f1520"
+rows = 120
+expected_frames = 87
+text_ie_blocks = 2
+table_dsl_blocks = 15
+no_fact_blocks = 103
+positive_blocks = 6
+manual_review_passes = 2
+independent_human_adjudication = false
+certification_eligible = false
+parser_predictions_generated_before_freeze = false
+document_period_release_period_separated = true

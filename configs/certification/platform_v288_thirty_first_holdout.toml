@@ -1,0 +1,153 @@
+base_manifest = "configs/certification/platform_v287_thirtieth_holdout.toml"
+holdout_id = "V288_THIRTY_FIRST_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T18:25:00+09:00"
+evaluation_tickers = ["AMBO", "AMC", "AMTB", "AMPY", "AMRN", "AMS", "AMSC", "AMWL", "AMTM", "AMTX"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V288_THIRTY_FIRST_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v288_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+parent_numeric_inheritance = false
+hierarchical_context_numeric_inheritance = false
+selection_used_file_names_sizes_and_overlap_only = true
+status = "HOLD_RESEARCH_UNFROZEN_FROZEN_INDEPENDENT_FAILURE"
+
+[selection_amendment]
+reason = "Initial candidate generation failed closed before artifact write: AMLX had 5 and AMSF had 7 eligible blocks, below 10."
+model_outputs_reviewed_before_amendment = false
+candidate_text_reviewed_before_amendment = false
+replacement_basis = "issuer-disjointness, 2026 filing name, and file size only"
+replaced_tickers = ["AMLX", "AMSF"]
+replacement_tickers = ["AMTB", "AMWL"]
+
+[selection_snapshot]
+generator = "scripts/architecture/v288_thirty_first_holdout_candidates.py"
+generator_sha256 = "2cf4670ae788b9875e6b7c453dff8ba42260bdbc63ee7177b8c91228826ec41b"
+
+[candidate_artifact]
+path = "output/platform_v2_8_8_local_role_binder/thirty_first_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "2bd593634a8d91e21930b9266c7938adaca2b26345965bebf566486ed99e6194"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v288_thirty_first_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 51
+table_blocks = 14
+sha256 = "b3d48e76923b8646248a2d2aaf96ce54aec1dbd0c374690e9121eda0d650b291"
+
+[annotation_snapshot]
+generator = "scripts/architecture/v288_thirty_first_holdout_annotations.py"
+generator_sha256 = "c645de94e7cdb34c0b6389368044e90c4a3285d55e1811837b897e24f7d1ca8f"
+
+[evaluation_snapshot]
+evaluator = "scripts/architecture/v288_thirty_first_holdout_evaluation.py"
+evaluator_sha256 = "ddae75f08bc76aa0ca221bbe99881ec02ecac6128584bd4575eae6548be87c8b"
+
+[independent_result]
+evaluation_path = "output/platform_v2_8_8_local_role_binder/thirty_first_holdout_evaluation.csv"
+evaluation_sha256 = "3fc9cc077e48d9267f70ad139825f73fc9b48381f04eb20e2748675cd21e5002"
+summary_path = "output/platform_v2_8_8_local_role_binder/thirty_first_holdout_summary.csv"
+summary_sha256 = "d70685e831a81aea0bc7deb43bf5232f0606fa44019ce2bcd1d36d397e090add"
+ladder_path = "output/platform_v2_8_8_local_role_binder/thirty_first_holdout_ladder.csv"
+ladder_sha256 = "88a74e80c1cb791783b7b13abaa5428218f453895a06e4e8ad1586fe49f265d0"
+rejection_path = "output/platform_v2_8_8_local_role_binder/thirty_first_holdout_rejection_taxonomy.csv"
+rejection_sha256 = "61cbceda34e0bc39abfcd53988bfb4b87a649e4714c1c964ee7ea932a91a80b2"
+metadata_path = "output/platform_v2_8_8_local_role_binder/thirty_first_holdout_metadata.json"
+metadata_sha256 = "66eac2163e28d6a7c6aa37cbc1617eab5ec84550211fa01616ac00218c5510d5"
+critical_precision = 0.25
+critical_recall = 0.039216
+candidate_recall = 1.0
+binding_recall = 0.039216
+table_route_accuracy = 0.98
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 22
+passed = false
+
+[v288_code_snapshot_sha256]
+semantics = "8ac1d39d60e1f46923906520098771bfaa60ea1f9edc27c32d691218ea24eea2"
+runtime = "c9382b516385420c608f51e7ecc61f7a5bfdbd922368f64a57393d33d4821185"
+router = "51cf23658a36497a09594f4de8e9e0136b8a4eb2961c0ae9dd5ed7d8b6f99bdb"
+init = "4212f31bcca5ddbeb7e7c46bd2409beaf651bdd983f6391f335271eb1d163cc6"
+rules = "100cd8a9d6c89f1d1f582b62732c561b6267e3f528d0aba937276f67ef3df4eb"
+test = "951e7c03604c49d088b3e2f384827912c4976d25ac41219d445f3f10bb270210"
+
+[disclosed_development_result]
+evaluator = "scripts/architecture/v288_thirtieth_disclosed_evaluation.py"
+evaluator_sha256 = "308a4d91e5fe94241320f8e5e025f5427d0815dfa03f36c0b730bfe3fd301e64"
+evaluation_path = "output/platform_v2_8_8_local_role_binder/thirtieth_disclosed_evaluation.csv"
+evaluation_sha256 = "c763981339af44c7a57a685c907a8ba5b78f689ac8c593716f868d86ce96328f"
+summary_path = "output/platform_v2_8_8_local_role_binder/thirtieth_disclosed_summary.csv"
+summary_sha256 = "47c2c4049f0a7e478b65c3a942ec938c43361a94a681473bc61392488b739c9c"
+ladder_path = "output/platform_v2_8_8_local_role_binder/thirtieth_disclosed_ladder.csv"
+ladder_sha256 = "86d5bc0a42df904e506da6c4c2a7ed52314dcab91f49ee021af98b5c31ea4ee8"
+rejection_path = "output/platform_v2_8_8_local_role_binder/thirtieth_disclosed_rejection_taxonomy.csv"
+rejection_sha256 = "4bb699b59032818831f5b7bab4ff68cf01757f6008f0c9d24826fedb489132ac"
+metadata_path = "output/platform_v2_8_8_local_role_binder/thirtieth_disclosed_metadata.json"
+metadata_sha256 = "1952049ae2dcf563555ce0b5e9bab8ecd8e030a1cfd959d7bc06286e3725a623"
+expected_frames = 37
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true
+
+[[sources]]
+ticker = "AMBO"
+file_name = "2026-08-14_0001213900-26-090064_EX-99.1_ea030194601ex99-1.htm"
+sha256 = "582e2d0222562355c39be534bfb988594fbe76e55f5086f9af7c1f285ba6a97c"
+
+[[sources]]
+ticker = "AMC"
+file_name = "2026-07-20_0001411579-26-000055_EX-99.1_amc-20260720xex99d1.htm"
+sha256 = "09530ac8bbbd30eb01ee337b920a49de04e838016d2292cd1eecdc1ca38c6679"
+
+[[sources]]
+ticker = "AMTB"
+file_name = "2026-07-23_0001734342-26-000071_EX-99.1_amerant2q2026earningsreleaa.htm"
+sha256 = "651368429e7bf8891231a5ac4d2b6e1ffe0cf600b4fa971bee273ab4c0207940"
+
+[[sources]]
+ticker = "AMPY"
+file_name = "2026-08-10_0001104659-26-093400_EX-99.1_ampy-20260810xex99d1.htm"
+sha256 = "4ce7b4ba4e2c51d26690b350bbdd1afc66a2e296b73ebdc28d08e0240287348c"
+
+[[sources]]
+ticker = "AMRN"
+file_name = "2026-07-29_0001193125-26-323841_EX-99.1_amrn-ex99_1.htm"
+sha256 = "92cb57c41355fcc19e5e6c1ed0170090ff8c493c370384ab1a1693e5c95c7ea2"
+
+[[sources]]
+ticker = "AMS"
+file_name = "2026-08-13_0001437749-26-027549_EX-99.1_ex_1004185.htm"
+sha256 = "9f71a5f402d93fbeedde61213b7a04d40296ee006dec38480a8e534590c200c0"
+
+[[sources]]
+ticker = "AMSC"
+file_name = "2026-08-05_0001437749-26-025921_EX-99.1_ex_978081.htm"
+sha256 = "e1ba34df9cff64d895a8845574fbaf88c99fa970bd79da5d1429336f852d01b8"
+
+[[sources]]
+ticker = "AMWL"
+file_name = "2026-08-04_0001393584-26-000016_EX-99.1_amwl-ex99_1.htm"
+sha256 = "79d25c1480309b83b416c7ee6df98fa2fa1b61421e27436a7e249534a96553d3"
+
+[[sources]]
+ticker = "AMTM"
+file_name = "2026-08-10_0001628280-26-055294_EX-99.1_exhibit991-august102026.htm"
+sha256 = "48f3daf468401bf120192232bd6b6c9bf21b9b22798fea1eace12647b4f68854"
+
+[[sources]]
+ticker = "AMTX"
+file_name = "2026-08-06_0001437749-26-026051_EX-99.1_ex_998023.htm"
+sha256 = "c9565e503f2c9da4e9560cb436067142a83acd359ac7e5594f8fb5438d767a95"

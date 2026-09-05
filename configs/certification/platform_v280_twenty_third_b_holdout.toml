@@ -1,0 +1,107 @@
+base_manifest = "configs/certification/platform_v280_twenty_third_holdout.toml"
+holdout_id = "V280_TWENTY_THIRD_B_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T09:36:00+09:00"
+evaluation_tickers = ["A", "AA", "AAL", "ABT", "ABNB", "ACN", "ADP", "ALL", "AES", "ALB"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V280_TWENTY_THIRD_B_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v280_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+status = "FROZEN_READY_FOR_FIRST_PREDICTION"
+
+[candidate_artifact]
+path = "output/platform_v2_8_0_hierarchical_semantic_context/twenty_third_b_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "a66aa6d436548ebac75318bae8158c9fdc15b765e3c2f3f864aab995faed39db"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v280_twenty_third_b_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 56
+table_blocks = 22
+generated = true
+sha256 = "8e9900cf6597f1fec2e54e5f8904d09e4c5c141dcbb560fb19d4e941d66a51db"
+annotator_sha256 = "365e919df4376e352b15c7e7d21fc0ea5ca0419270809f6c342cfa04ea09334a"
+
+[evaluation_artifacts]
+evaluator = "scripts/architecture/v280_twenty_third_b_holdout_evaluation.py"
+evaluator_sha256 = "66d5c81c6a05a5ab62c18ca8e77242728912d67e3e41ceecb96c05afad2c0702"
+generated = true
+status = "HOLD_RESEARCH_UNFROZEN"
+expected_frames = 56
+critical_precision = 0.525
+critical_recall = 0.375
+candidate_recall = 0.857143
+binding_recall = 0.375
+table_route_accuracy = 0.95
+table_route_precision = 0.869565
+table_route_recall = 0.909091
+duplicate_auto_emission = 1
+illegal_cross_clause_auto_binding = 0
+silent_miss = 4
+detail_sha256 = "9ec2889d34bb685c131342d0902b3bf04710abbfaadf698145b6fe8eab693fa2"
+summary_sha256 = "5d9c5c356d5781685e7ad0370867925e80283004ee7bac648323598d1a6c5244"
+ladder_sha256 = "100cdb7630facd0bc6b570c239d2c8bbff8fd2cbac827b5863436ff20ec82ecd"
+rejection_taxonomy_sha256 = "130b893e21d0545d9ae3061a9fb269c6237853caba7008b05192b9274a6ba1f2"
+metadata_sha256 = "89cfb3615fc6f725535d0d98752eb872cbd525f406d26d1a85387cca3fcfd4a9"
+
+[selection_snapshot]
+generator_sha256 = "bff4ddbaeed7c42e0dad4129605202976f38d4920a93b6d115a1de971f484c5d"
+candidate_upper_bound_hits = 48
+candidate_upper_bound_opportunities = 56
+candidate_upper_bound_recall = 0.857143
+
+[[sources]]
+ticker = "A"
+file_name = "2026-08-26_0001090872-26-000062_EX-99.1_exhibit991-q326pressrelease.htm"
+sha256 = "7133bfab04cb268bdb9046a744532c541b49f87f431d636651cffafd574b194a"
+
+[[sources]]
+ticker = "AA"
+file_name = "2026-07-16_0001193125-26-306118_EX-99.1_aa-ex99_1.htm"
+sha256 = "5a1228ff02c6dd6849fce2a7153fa06548867f69ad2312d1c42da2c7f3f11b0c"
+
+[[sources]]
+ticker = "AAL"
+file_name = "2026-07-23_0000006201-26-000051_EX-99.1_a8kerexhibit991q2-26.htm"
+sha256 = "2b9ec06900ea6aaa0020d7fa1360c5338d08705c240f3b267b10c20fc65e6eee"
+
+[[sources]]
+ticker = "ABT"
+file_name = "2026-07-16_0001628280-26-048377_EX-99.1_abt-2026q2xexhibitx991.htm"
+sha256 = "b11abf8821d1132d3f902386540e8ada4a2bc86edad12b795f69510bd467417d"
+
+[[sources]]
+ticker = "ABNB"
+file_name = "2026-08-06_0001193125-26-337928_EX-99.1_d70413dex991.htm"
+sha256 = "df5cee22a7599c81b40f09655180d3292e434567f2a5f1c5abde4f041c833261"
+
+[[sources]]
+ticker = "ACN"
+file_name = "2026-06-18_0001467373-26-000031_EX-99_q3fy26earnings8-kexhibit.htm"
+sha256 = "4ddfafcef69cd0663d5c785238973a903c4c374ea2d1d75958a7d56eca7cd764"
+
+[[sources]]
+ticker = "ADP"
+file_name = "2026-07-29_0000008670-26-000025_EX-99_q4fy26exhibit99.htm"
+sha256 = "03ab607c10e6e1e5ae3767e297db3f10ad4e7880cd6fa7fb5be929ea97c150ec"
+
+[[sources]]
+ticker = "ALL"
+file_name = "2026-08-05_0000899051-26-000117_EX-99.1_allcorp63026earningsreleas.htm"
+sha256 = "628ce8949d6b5b904ba229f9df63ad11cbb924711f959e5a4d9cb3d7062dffdc"
+
+[[sources]]
+ticker = "AES"
+file_name = "2025-11-04_0000874761-25-000086_EX-99.1_q32025earningsreleaseexs.htm"
+sha256 = "cab1c1fddad68867e0cc3a4687a83788849203c95274d90afe4d5035dd73fe7a"
+
+[[sources]]
+ticker = "ALB"
+file_name = "2026-08-05_0000915913-26-000101_EX-99.1_a2q26earningsreleaseex991.htm"
+sha256 = "62e89324845f1d1732493896283d28e9df0179f3b62c85a29eee31fa10d58e8d"

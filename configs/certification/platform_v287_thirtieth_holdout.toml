@@ -1,0 +1,142 @@
+base_manifest = "configs/certification/platform_v286_twenty_ninth_holdout.toml"
+holdout_id = "V287_THIRTIETH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T16:16:33.0363280+09:00"
+evaluation_tickers = ["AMAL", "AMAN", "AMBA", "AMBQ", "AMD", "AMPH", "AMPL", "AMPX", "AMR", "AMRC"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V287_THIRTIETH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v287_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+parent_numeric_inheritance = false
+hierarchical_context_numeric_inheritance = false
+status = "HOLD_RESEARCH_UNFROZEN_FROZEN_INDEPENDENT_FAILURE"
+
+[selection_snapshot]
+generator = "scripts/architecture/v287_thirtieth_holdout_candidates.py"
+generator_sha256 = "725cb918f2f6233067904aa2f384ae21233f960569257a817b69ae9dd779c4d3"
+
+[candidate_artifact]
+path = "output/platform_v2_8_7_role_expansion/thirtieth_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "1c733e630f3e05df3c5e18cf0a376ca362509a8f5500620e4ebdfc61a8fce539"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v287_thirtieth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 37
+table_blocks = 22
+sha256 = "34f976297548f25d7eabf74e6aeb556cf764d02548e3c09e8d1c2ecf19501502"
+
+[annotation_snapshot]
+generator = "scripts/architecture/v287_thirtieth_holdout_annotations.py"
+generator_sha256 = "f597535bb9d0e0062dda8b354d76238326b2fa36fa4e809f4a0222cf44e55084"
+
+[evaluation_snapshot]
+evaluator = "scripts/architecture/v287_thirtieth_holdout_evaluation.py"
+evaluator_sha256 = "9ad2615796381cc9fbd1fbd813f2996278f78545d3e956deb9a2d53a8a8a00a4"
+
+[independent_result]
+evaluation_path = "output/platform_v2_8_7_role_expansion/thirtieth_holdout_evaluation.csv"
+evaluation_sha256 = "6ba7651d8bceb9a518810d72eccf1a41125cf85710947f4330dd28d944687a8e"
+summary_path = "output/platform_v2_8_7_role_expansion/thirtieth_holdout_summary.csv"
+summary_sha256 = "347e6f23e9a8cf5e53717f040ddd30768e65c9794c70be3d6411fbd6bfd70fa0"
+ladder_path = "output/platform_v2_8_7_role_expansion/thirtieth_holdout_ladder.csv"
+ladder_sha256 = "3e66965aa0fedb1eac1481137f272348274bd042253a3d70d0a2d9810828480e"
+rejection_path = "output/platform_v2_8_7_role_expansion/thirtieth_holdout_rejection_taxonomy.csv"
+rejection_sha256 = "4a1d39ab3d8223481e58741565f583aa766da29493f48bdf6e46982f94dbea1c"
+metadata_path = "output/platform_v2_8_7_role_expansion/thirtieth_holdout_metadata.json"
+metadata_sha256 = "c57c8dcc425af31063929a562e67a0b6c03ddf8761a657163fc99e9dd1a5d4f6"
+critical_precision = 0.555556
+critical_recall = 0.135135
+candidate_recall = 0.972973
+binding_recall = 0.135135
+table_route_accuracy = 0.96
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 12
+passed = false
+
+[v287_code_snapshot_sha256]
+semantics = "61a3de748e9d925883e00efc9482d89d03cbbfc6fa89e9a3e29529e131b18a44"
+runtime = "cbf3226deb5a199ea101164b1e397f467985b4b869d1c92ac195ad82e62b6aac"
+router = "58d449ccabcf49e9f032ddbec187d744c92da196982faed06397be35d310385b"
+init = "c649e81763fbf072a539bacbdcdfd47d2b3ecb2257eb3e58bb33196903a2907c"
+rules = "46e6606c23edf47f8e6ff9ce4a114e4c2832f0ceff05440b6dbf50093c859241"
+test = "e425c5a979ad619b52eaf8842bd87933435e6b36c007149d9655382b57c952c0"
+
+[[sources]]
+ticker = "AMAL"
+file_name = "2026-01-22_0001823608-26-000006_EX-99.1_amalgamated-earningsrele.htm"
+sha256 = "fe3313453292bd40ecbee5f6132d7883d5d79174d9093f7b92f3d3b745dd551f"
+
+[[sources]]
+ticker = "AMAN"
+file_name = "2026-05-27_0001213900-26-061615_EX-99.1_ea029211701ex99-1.htm"
+sha256 = "62eb302a18b67e5627ecf0bfc48616096cfa3d7d2b9a5cf01bafee597172e225"
+
+[[sources]]
+ticker = "AMBA"
+file_name = "2026-05-28_0001193125-26-245234_EX-99.1_d130687dex991.htm"
+sha256 = "e8a700ab11e408a70576b8c6e423133e83d24c3146aabf597e8b2921ce96ea73"
+
+[[sources]]
+ticker = "AMBQ"
+file_name = "2026-08-11_0001193125-26-343443_EX-99.1_ambq-ex99_1.htm"
+sha256 = "ba61304889536c191733590e15af75b8776a8fd65478d6441da5f89ca34c5020"
+
+[[sources]]
+ticker = "AMD"
+file_name = "2026-08-04_0000002488-26-000121_EX-99.1_q22026991.htm"
+sha256 = "9da67a95f09dc48cac0c7879b108f43f9fd07be34359de36a7e51b0f83f75513"
+
+[[sources]]
+ticker = "AMPH"
+file_name = "2026-08-06_0001297184-26-000045_EX-99.1_amph-20260806xex99d1.htm"
+sha256 = "cdab28b95c947bb968eddd850ba7ad1f4b334df3168ac6fd0fdf1c783f72cafc"
+
+[[sources]]
+ticker = "AMPL"
+file_name = "2026-08-05_0001193125-26-335305_EX-99.1_ampl-ex99_1.htm"
+sha256 = "cbf9323bbee7fe739f41834d15ee794d9750f9b1b994bb0ca109877398722904"
+
+[[sources]]
+ticker = "AMPX"
+file_name = "2026-08-04_0001899287-26-000056_EX-99.1_ampx-2026x08x04x8kex991.htm"
+sha256 = "5eaab068ed0df2f794fac75443442ad5edb36945b8a69abd9b737ededa50c196"
+
+[[sources]]
+ticker = "AMR"
+file_name = "2026-08-07_0001704715-26-000030_EX-99.1_pressrelease6302026.htm"
+sha256 = "3b2469bdfab338428951a4478868650d025c7ad7d9f9ee114aa4130504ef390d"
+
+[[sources]]
+ticker = "AMRC"
+file_name = "2026-08-03_0001628280-26-051825_EX-99.1_amrc_20260630x8-kxexx9911.htm"
+sha256 = "ac1b4032e0e140fe086e79afce032ca4119a4d8e0dba93fddb1780542cfe2279"
+
+[disclosed_development_result]
+evaluation_path = "output/platform_v2_8_7_role_expansion/twenty_ninth_disclosed_evaluation.csv"
+evaluation_sha256 = "c10cc9e42c23d746cab3188967429b72ebf46e2199b564b701e1647869b7d1f2"
+summary_path = "output/platform_v2_8_7_role_expansion/twenty_ninth_disclosed_summary.csv"
+summary_sha256 = "360e97c00768b48853c435e99d94893c1e9ea593429c0fcabf7fe9427889889f"
+ladder_path = "output/platform_v2_8_7_role_expansion/twenty_ninth_disclosed_ladder.csv"
+ladder_sha256 = "638e765d5249e88761ea8411f1af10831a8088a99c5f34f91d8cb1a091065d6d"
+rejection_path = "output/platform_v2_8_7_role_expansion/twenty_ninth_disclosed_rejection_taxonomy.csv"
+rejection_sha256 = "2af6e1fa191b47b0a35377f2758cabc4c0fe030f8d59e5028146e5bd6e07a7f8"
+metadata_path = "output/platform_v2_8_7_role_expansion/twenty_ninth_disclosed_metadata.json"
+metadata_sha256 = "b0425e8aace73b8f7f0e0b45da17d5bf7cec4d9d1178e104aaf1c4260e0ce9e4"
+expected_frames = 42
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true

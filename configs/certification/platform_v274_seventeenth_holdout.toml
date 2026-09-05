@@ -1,0 +1,117 @@
+holdout_id = "V274_SEVENTEENTH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T03:06:35+09:00"
+evaluation_tickers = ["CAH", "CB", "LULU", "F", "BMY", "MSI", "CAG", "CLX", "ETR", "FAST"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V274_SEVENTEENTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v274_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+source_substitution_reason = "Before candidate artifact creation and content review: DG latest IR had 0 eligible blocks; replacement FITB latest IR had 1 eligible block; replaced by LULU. BAX latest IR had 0 eligible blocks and was replaced by MSI"
+
+[candidate_artifact]
+path = "output/platform_v2_7_4_spacy_bounded_context/seventeenth_holdout_candidates.csv"
+rows = 100
+sha256 = "a3e3acd7c47b3df5f9fd61c8302167fa4603428ff779cfc29154d266babb2ff6"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v274_seventeenth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 52
+table_blocks = 20
+sha256 = "ca0caffd19ec297ff1cdca2a942903f3b0712cfe81c28f263d08d5a8b96a2a3e"
+annotation_script_sha256 = "62092fd04b50e366b2fdf32bc04ef5c5581429407696574ea2fdb1eb92b8465b"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[selection_snapshot]
+generator_sha256 = "cb899f649ff745596c370344a562ff8bfd4e4909b05cbc99e67f131bf820f9b9"
+
+[code_snapshot_sha256]
+compiler = "0104e36ad1d5d1ba2d41df60b68208a0ff39e42aa8ecdc023c704730cd211c03"
+runtime = "578f91af416222be8b55585647268449f375ac19469e035ed87c600ba6fe3766"
+spacy_backend = "0cb343ccd0d0ed34a2dbd3d2431bd38ac001abbb5bf7615ed2383f96487c60cb"
+ontology = "ec9f7c8632daead0593d1c7d5c57e3f04c4dd144a523dc73cf65a6c972f4ec70"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+validation = "ac621c159ac628173bbd666742edc0915c1afc2171a391bd5cf925a4a7e75b32"
+v271_semantics = "d1ea8a909abbcb77acbb355503fe686d6fa0610750e9066d6aae9c8f8a76f8c3"
+v271_runtime = "9e252ce18138b220c80472477461adc82d21a356f6f74e7a996bc15bc1867ab6"
+v271_router = "590071614d245b447d69ebb48975e5ae06d02f6e470b970d183b1edbfca261cc"
+v271_init = "585039843acd0ca71ecfc20b1e217d6f6cc24d2a6ed0fb9d1dc723fe2920ba9a"
+v271_rules = "82ef96d96f824396c2c04103036dfb70f2de10b92baaab3042f262c9e3c146bb"
+v272_semantics = "95c785e0f330e2a275e61bfe1dd8e2701a28bc8b9518165e5d9de396b4ae0598"
+v272_runtime = "9300524076a4d531c8eed96eb48339a034e36a743c7ec0ca832f510ea81e096f"
+v272_router = "8892f446476929ce88fc7538d52b68316cf917c05cef94c01e536362c9a28271"
+v272_init = "14743b327680d1ead22bdcabf5204131c0d005ca3bdf89edb931e0a8c68f40c4"
+v272_rules = "712305ba1b6ceaa2aed264f87b93c0ef1a5113cb6cf1364f30df4432836415da"
+v273_semantics = "5e75212df86346a1176fc93216d4e8192c5fd2f355877e743a45d09251002015"
+v273_runtime = "83e700e22396049fd47ed1447b2f51add29c89422b95edefc8f0527991fe329e"
+v273_router = "365f43c4625049ad60a915550931f0c92747dc5c135b9481647c53cf0c00c200"
+v273_init = "c3f99dbbab0591ae9c881957fc97f6b888bdc4c61888227f1333925e2577d8f3"
+v273_rules = "37b6aecffc0aac7b9da32e4b09e7f9386fe72ed5d1ec2ae024111f7d25e5d3f2"
+v274_semantics = "7e192cd6dc32268d8d316657fc823d82d395f3a37e07f6685b5113b0eab354b2"
+v274_runtime = "a620ddf13d6e562c83bf14f9410d58b810e801722ec66697305de80fbcf692b0"
+v274_router = "fffae8c8b0573f9aa1d7656d12cf4c2b312dec43b40f8fc52b974ef53be9e9eb"
+v274_context = "5bbc7bf8303da1f904473224ef589417c7eb6d2e3fb2c16c261969a4d4c76bd0"
+v274_init = "b995944ffdab8772bf5af29495dfaef1027c013d75d43941f9131dc36a2282e3"
+v274_rules = "6472b68f8fd53e2680f6b5f7f982a4bc6c2882ee3f62e91f5b0dae61bc12e686"
+
+[[sources]]
+ticker = "CAH"
+file_name = "2026-08-11_0000721371-26-000037_EX-99.1_a26q4_x063026xex991xnewsre.htm"
+sha256 = "fd54ec9dc6f240c6899a1047342fd50e894c3fa4e4ac02b4752dae5ee1346bfd"
+
+[[sources]]
+ticker = "CB"
+file_name = "2026-07-21_0001193125-26-310312_EX-99.2_d78544dex992.htm"
+sha256 = "d7851670d83b6bb05a401dce6a0b59e4cd2a54c551df1a840d99ece429b811fb"
+
+[[sources]]
+ticker = "LULU"
+file_name = "2026-06-04_0001397187-26-000077_EX-99.1_lulu-20260503xex991.htm"
+sha256 = "a4040827690691adcd42b9f485576b30b5a8776645bfad13bcc4d258299c3eb8"
+
+[[sources]]
+ticker = "F"
+file_name = "2026-07-28_0000037996-26-000155_EX-99_exhibit99tojuly282026for.htm"
+sha256 = "20c8e7703a4b5512b51a58cae9540e0cb424b516ce2e7a99b04c9bd2e57a421a"
+
+[[sources]]
+ticker = "BMY"
+file_name = "2026-07-30_0000014272-26-000018_EX-99.2_q22026earningspresentati.htm"
+sha256 = "7c09b337d6f7874746c12cfceff69f6ac328e283331d8de83e330f57f2a36a7a"
+
+[[sources]]
+ticker = "MSI"
+file_name = "2026-08-05_0000068505-26-000027_EX-99.1_msiq22026pressrelease.htm"
+sha256 = "36a6956eefce3e0771a550dacd25e4e09e7effdb2f5c17f666ad5223dfdd6723"
+
+[[sources]]
+ticker = "CAG"
+file_name = "2026-07-15_0000023217-26-000022_EX-99.1_tmb-20260715xex99d1.htm"
+sha256 = "6be424ba53613f5f78f8a5edcd51847c5bd16ce62eebc3e8fbb804b745ead13f"
+
+[[sources]]
+ticker = "CLX"
+file_name = "2026-08-03_0000021076-26-000028_EX-99.2_ex992-supplementalinformat.htm"
+sha256 = "adaff26c7d87d0d24ad3f2b0b79cfb3c81ba603f26c7757a2de3df3cd5f7a504"
+
+[[sources]]
+ticker = "ETR"
+file_name = "2026-07-29_0000065984-26-000279_EX-99.1_earningsrelease2q26_ex991.htm"
+sha256 = "6c9e513c8c45bb41d72ad67be95a05beb7a29603b2c222e79ab1ecde585437ea"
+
+[[sources]]
+ticker = "FAST"
+file_name = "2026-07-14_0000815556-26-000037_EX-99.1_ex_99106302026earningsrele.htm"
+sha256 = "fd28f6c28e4755b250c3545d061a2088b7c2a89eae2a15eece36c10a1a55fbdb"

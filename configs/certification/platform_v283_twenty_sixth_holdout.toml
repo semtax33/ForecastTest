@@ -1,0 +1,140 @@
+base_manifest = "configs/certification/platform_v282_twenty_fifth_c_holdout.toml"
+holdout_id = "V283_TWENTY_SIXTH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T13:16:19.7756587+09:00"
+evaluation_tickers = ["AON", "APA", "AMP", "AOS", "APG", "ACDC", "ACHC", "ADNT", "AEIS", "AIR"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V283_TWENTY_SIXTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v283_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+parent_numeric_inheritance = false
+status = "HOLD_RESEARCH_UNFROZEN_FROZEN_INDEPENDENT_FAILURE"
+
+[selection_snapshot]
+generator = "scripts/architecture/v283_twenty_sixth_holdout_candidates.py"
+generator_sha256 = "da4f78ad592f743891f507a764c5ed81118f673c40e4f4918fc7239c44bb7150"
+
+[candidate_artifact]
+path = "output/platform_v2_8_3_bounded_upper_context/twenty_sixth_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "74bd60f7676454c61a983fb8fab91dba9ba5abeb085d3cd74ec06543b4ec9396"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v283_twenty_sixth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 65
+table_blocks = 20
+sha256 = "b167e3f29f57cf8d32453a99d9c127641f88e0ad086b1ea6d5a99f4af3860a91"
+
+[annotation_snapshot]
+generator = "scripts/architecture/v283_twenty_sixth_holdout_annotations.py"
+generator_sha256 = "6a1893cfc3b0a22972a197525dece8e35e95c7bc40aa135183de0679376fda4b"
+
+[evaluation_snapshot]
+evaluator = "scripts/architecture/v283_twenty_sixth_holdout_evaluation.py"
+evaluator_sha256 = "49239ee31ac94cc221410cb3429c07add7a3c8c6002cf4a3edf329830af59b75"
+
+[independent_result]
+evaluation_path = "output/platform_v2_8_3_bounded_upper_context/twenty_sixth_holdout_evaluation.csv"
+evaluation_sha256 = "a961f39683cd377ed5051c351e9fe0ee9dc526fcf30a54464b0d735f4e2e664b"
+summary_path = "output/platform_v2_8_3_bounded_upper_context/twenty_sixth_holdout_summary.csv"
+summary_sha256 = "f225bac324d26acd0b4cc0b326882442c9fe8207e710fc7aa8c271f7819db00b"
+ladder_path = "output/platform_v2_8_3_bounded_upper_context/twenty_sixth_holdout_ladder.csv"
+ladder_sha256 = "96528dac2bdae5f52c68de439a1ca882b8a196e2806a0166c55ae790f71607aa"
+rejection_path = "output/platform_v2_8_3_bounded_upper_context/twenty_sixth_holdout_rejection_taxonomy.csv"
+rejection_sha256 = "03c8b920ebe26ff640c42de5e41b241d9f53a792235eb10c3166ce53bba9d4da"
+metadata_path = "output/platform_v2_8_3_bounded_upper_context/twenty_sixth_holdout_metadata.json"
+metadata_sha256 = "e3d3ca514388be5a6a95526bb3686d8b87f02ebe5884a115d0220cfa1c206f2e"
+critical_precision = 0.605263
+critical_recall = 0.353846
+candidate_recall = 0.8
+binding_recall = 0.353846
+table_route_accuracy = 0.97
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 2
+passed = false
+
+[v283_code_snapshot_sha256]
+semantics = "003b03dc297277aa881841fed9d614443d545b59a00e3456b72d63562c0be71e"
+runtime = "55c3b9975c7405170df1e3216836f9df2d32f3158262791ecb484d344c8d8436"
+router = "a58a0946c7e1c4062673f3b8bf7c08b3a8dbf8c0e3a55319c5e4a30793a55f74"
+init = "36e7c82dcffb5bdc017cefc3716ec3e4ab34e954f4305173d6c29df522d67cda"
+rules = "10b5fd5c377e99df19f94c1af7b3bc4d79b8ac0a0825defeb99984cc11e554d0"
+
+[disclosed_development_result]
+evaluation_path = "output/platform_v2_8_3_bounded_upper_context/twenty_fifth_c_disclosed_evaluation.csv"
+evaluation_sha256 = "a9099780723ea6777d307e75a112266333662848a7804c785e3022c2c3512abc"
+summary_path = "output/platform_v2_8_3_bounded_upper_context/twenty_fifth_c_disclosed_summary.csv"
+summary_sha256 = "5b45a65a94e9b19920e03d8d893a7d3f866e14b25d0b355ee841a55d98661026"
+ladder_path = "output/platform_v2_8_3_bounded_upper_context/twenty_fifth_c_disclosed_ladder.csv"
+ladder_sha256 = "f5279685db7043a022ec44189dc02da1b81ac5dafba7b27f03a4d21d3c1497d7"
+rejection_path = "output/platform_v2_8_3_bounded_upper_context/twenty_fifth_c_disclosed_rejection_taxonomy.csv"
+rejection_sha256 = "9169bbc7916b90a02f336c929317ef6b052b03674ae74b01def39133ff916403"
+metadata_path = "output/platform_v2_8_3_bounded_upper_context/twenty_fifth_c_disclosed_metadata.json"
+metadata_sha256 = "7e986d0fbc35b97752c468c51de90c66c98de5ec3f5427f94af2c5c268e58f80"
+expected_frames = 43
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true
+
+[[sources]]
+ticker = "AON"
+file_name = "2026-07-29_0001628280-26-050367_EX-99.1_ex991prq22026.htm"
+sha256 = "b486fdd2dc59ab01aa0e39d936b7139a3f0e16538d82d6a63ad56d9e0e144db8"
+
+[[sources]]
+ticker = "APA"
+file_name = "2026-08-05_0001841666-26-000050_EX-99.1_exhibit9912q26earningsrele.htm"
+sha256 = "f88388312bee73a5591e0e38322dd67fee0f9b94b775e69881dcb2077938b06b"
+
+[[sources]]
+ticker = "AMP"
+file_name = "2026-07-23_0000820027-26-000038_EX-99.1_q22026er.htm"
+sha256 = "f87a5b4dac87b3a4001482ad53347e1d624f66b12d12d0370d324acb9f8ca3bd"
+
+[[sources]]
+ticker = "AOS"
+file_name = "2026-07-30_0000091142-26-000096_EX-99.1_a6302026exhibit991.htm"
+sha256 = "e0832a52962b86dda3807b2c0ccc8b0accb93f5e9ea932a3844edbf394f24665"
+
+[[sources]]
+ticker = "APG"
+file_name = "2026-07-30_0001628280-26-050806_EX-99.1_apg-20260630xexx991.htm"
+sha256 = "8cef404c549bc534e67fbedebe0c520121f199ff37322f962b7589c414177ede"
+
+[[sources]]
+ticker = "ACDC"
+file_name = "2026-08-06_0001104659-26-091463_EX-99.1_tm2622356d1_ex99-1.htm"
+sha256 = "c40c355804ed745dc3fa2200a60149ca5797a8b2e35efd6abc7cb40c3d9bff1e"
+
+[[sources]]
+ticker = "ACHC"
+file_name = "2026-07-28_0001437749-26-024693_EX-99.1_ex_994474.htm"
+sha256 = "c519ecade3e66ce5c87b3b02ea21bbcd3a8f026ca35b3e99937e236cecf2b820"
+
+[[sources]]
+ticker = "ADNT"
+file_name = "2026-08-05_0001670541-26-000090_EX-99.1_a08052026adientexhibit991.htm"
+sha256 = "a67be991f371387630308fbc24ac390a5eb66ba4b496d0a2f4a45f56baf103e8"
+
+[[sources]]
+ticker = "AEIS"
+file_name = "2026-08-03_0000927003-26-000030_EX-99.1_aeis-20260803xex99d1.htm"
+sha256 = "73e78ecb737a3f2fc786b057b35422145d4213b21b43c66aef5c075f8496923a"
+
+[[sources]]
+ticker = "AIR"
+file_name = "2026-07-21_0001104659-26-085429_EX-99.1_tm2620584d1_ex99-1.htm"
+sha256 = "b5097d1c12cd6d55bc080b6e0b1ae3f32806e603135d95cb05987035eb7ec165"

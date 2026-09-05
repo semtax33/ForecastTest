@@ -27,7 +27,8 @@ def _repair(route: RoutedBlock, backend: SpacySemanticBackend) -> RoutedBlock:
     )
     narrative_continuation = (
         lexical_count >= 12
-        and numeric_count <= 3
+        and numeric_count <= 5
+        and numeric_count / max(lexical_count, 1) < 0.15
         and len(narrative_cues) >= 2
     )
     if short_result_bullet or narrative_continuation:

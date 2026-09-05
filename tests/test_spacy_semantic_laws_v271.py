@@ -27,7 +27,7 @@ def _signatures(text: str):
 
 
 def test_v271_laws_are_spacy_dsl_and_issuer_neutral() -> None:
-    assert len(V271_RULES) == 15
+    assert len(V271_RULES) == 16
     assert all(rule.pattern and rule.rule_id.startswith("v271.") for rule in V271_RULES)
     assert all("issuer_callback" not in rule.operations for rule in V271_RULES)
 
@@ -84,6 +84,10 @@ def test_v271_change_to_ownership() -> None:
     assert ("REVENUE", "CHANGE_TO", 49_800_000_000.0, 400_000_000.0, None, None) in money
     income = _signatures("Operating Income $665 million, a 35% increase over last year.")
     assert ("OPERATING_INCOME", "CHANGE_TO", 665_000_000.0, 35.0, None, None) in income
+    product = _signatures(
+        "Net sales increased 52% to a new all-time high of $596 million."
+    )
+    assert ("REVENUE", "CHANGE_TO", 596_000_000.0, 52.0, None, None) in product
 
 
 def test_v271_capex_between_range() -> None:

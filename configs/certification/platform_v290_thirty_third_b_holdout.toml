@@ -1,0 +1,139 @@
+base_manifest = "configs/certification/platform_v289_thirty_second_holdout.toml"
+aborted_selection_manifest = "configs/certification/platform_v290_thirty_third_holdout.toml"
+holdout_id = "V290_THIRTY_THIRD_B_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T20:16:40+09:00"
+evaluation_tickers = ["AP", "APC", "APEI", "APLD", "APP", "APPF", "APPN", "APPS", "APT", "APTV"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V290_THIRTY_THIRD_B_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v290_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+parent_numeric_inheritance = false
+hierarchical_context_numeric_inheritance = false
+selection_used_file_names_sizes_and_overlap_only = true
+replacement_reason = "APGE had only 5 eligible blocks; APT was selected from the prelisted unseen pool by file name and size only"
+candidate_artifact_frozen_at = "2026-09-05T20:22:45+09:00"
+annotations_frozen_at = "2026-09-05T20:27:52+09:00"
+evaluated_at = "2026-09-05T20:36:15+09:00"
+status = "HOLD_RESEARCH_UNFROZEN_FROZEN_INDEPENDENT_FAILURE"
+
+[selection_snapshot]
+generator = "scripts/architecture/v290_thirty_third_b_holdout_candidates.py"
+generator_sha256 = "d67b231339b944071bd6324a9604c3c99d9302b87bbacc7d34e7d75b394e15f8"
+
+[candidate_artifact]
+path = "output/platform_v2_9_0_semantic_role_graph/thirty_third_b_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "175d733909397240a22ef874329d027f2b503d2fc6f9c682e20136bca11a27a0"
+
+[annotation_snapshot]
+generator = "scripts/architecture/v290_thirty_third_b_holdout_annotations.py"
+generator_sha256 = "c6e18831948ccd9004289f4b7d461b5f816bf2063dca13d4c6babe5dfe8faee8"
+artifact = "data-lake/gold/parser/text_ie/v290_thirty_third_b_holdout_annotations.jsonl"
+artifact_sha256 = "bd87d712c2b8d2bdc3ab677f3bbcf65ee7e4fa746e28e6c1812adc19ff602a7d"
+rows = 100
+expected_frames = 63
+table_blocks = 16
+frozen_before_prediction = true
+
+[evaluation_snapshot]
+evaluator = "scripts/architecture/v290_thirty_third_b_holdout_evaluation.py"
+evaluator_sha256 = "d0ea50193df8a6760191ca19406f3c497de2cba59e0988b1ef8f0b466363e811"
+frozen_before_prediction = true
+
+[v290_code_snapshot_sha256]
+semantics = "fb8fa014e67c2cc8e2a65067e748e8958cf65179da429d715a955f5772f4d02b"
+runtime = "9201832ee8be60a6bfbe04ef0a725f6edb0777798b7b3854e3e22eb5c7b06b1e"
+router = "57c3856d4436cdada8333e5a07d0a43b97898f5c6ac7065182dd7cf4ba39aa3b"
+init = "b62ca43aa3b4612ed6c202b5c73ded901744b27f23b03879e61951f21c20341d"
+rules = "2564afebce021da172ca1f9f1ac89899a3faf663858b5bc90a042feb7cb77eb1"
+test = "1dae6fafd42cc945385a7e9a7d1538b92be381f3d6221bcf720d0935638e3685"
+
+[public_development_result]
+expected_frames = 95
+critical_precision = 1.0
+critical_recall = 1.0
+candidate_recall = 1.0
+binding_recall = 1.0
+table_route_accuracy = 1.0
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+passed = true
+
+[independent_failure_result]
+evaluation_path = "output/platform_v2_9_0_semantic_role_graph/thirty_third_b_holdout_evaluation.csv"
+evaluation_sha256 = "838b415edcfaaaab0936e4f1e297f337c2974e00f9434f2d281d80f9ac6122bd"
+summary_path = "output/platform_v2_9_0_semantic_role_graph/thirty_third_b_holdout_summary.csv"
+summary_sha256 = "f474d5bb34207ed40f7eb58e2d91859b19708498ebfb070d60f36c5d0d565927"
+ladder_path = "output/platform_v2_9_0_semantic_role_graph/thirty_third_b_holdout_ladder.csv"
+ladder_sha256 = "d263f4166ae265c606c444614d26fbb63555e4bbf27add35255694a7cd2cc572"
+rejection_path = "output/platform_v2_9_0_semantic_role_graph/thirty_third_b_holdout_rejection_taxonomy.csv"
+rejection_sha256 = "a9df9dd222708f2cd428c6d224df2686d5d195fcbe63e86bc66672afb6dfc043"
+metadata_path = "output/platform_v2_9_0_semantic_role_graph/thirty_third_b_holdout_metadata.json"
+metadata_sha256 = "58be30a76567a9af3420cc8ec1e66bef0a2ea35ac66cc4ccef19171ced4b0409"
+expected_frames = 63
+critical_precision = 0.6065573770491803
+critical_recall = 0.5873015873015873
+candidate_recall = 0.9365079365079365
+binding_recall = 0.5873015873015873
+table_route_accuracy = 0.97
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 3
+passed = false
+
+[[sources]]
+ticker = "AP"
+file_name = "2026-08-11_0001193125-26-343343_EX-99.1_ap-ex99_1.htm"
+sha256 = "d3780629395ed79635fbb799505b96ad180a007a744856da726c7a10cb1035cf"
+
+[[sources]]
+ticker = "APC"
+file_name = "2026-08-06_0001193125-26-337979_EX-99.1_apc-ex99_1.htm"
+sha256 = "69c81b2cd1a0831faa2f0981d841a8a8be320bff402d009f5623665d591e7432"
+
+[[sources]]
+ticker = "APEI"
+file_name = "2026-08-10_0001104659-26-093372_EX-99.1_tm2622572d1_ex99-1.htm"
+sha256 = "4b9cfcb1596c59940732b14e061c154c805bd53a88f8a9199a35acc0dab89e5f"
+
+[[sources]]
+ticker = "APLD"
+file_name = "2026-07-27_0001144879-26-000044_EX-99.1_apldq426earningsreleaseasf.htm"
+sha256 = "df6ac2bc6487fa192fcc4d8493c11425c25fe1e8f7aa03220dc30f9a170eb5ef"
+
+[[sources]]
+ticker = "APP"
+file_name = "2026-08-05_0001751008-26-000057_EX-99.1_exhibit991-2q26earningspre.htm"
+sha256 = "895c3aed26ee91adad66110f0ee640651ed6b83a1e61e9409881c0d2df59781c"
+
+[[sources]]
+ticker = "APPF"
+file_name = "2026-07-23_0001433195-26-000056_EX-99.1_appfq22026exhibit991.htm"
+sha256 = "ab86015d159c46523c9ebf17a68dda1f04250afd30b36861f42abf206590a72e"
+
+[[sources]]
+ticker = "APPN"
+file_name = "2026-08-06_0001441683-26-000050_EX-99.1_appnex991earningsrelease-6.htm"
+sha256 = "d14f418b17bf0a0c83264f0a0f3a4915cb47d535b891d6fc19c398762b4f949d"
+
+[[sources]]
+ticker = "APPS"
+file_name = "2026-08-04_0001628280-26-052539_EX-99.1_form8-kxexhibit991q1fy2027.htm"
+sha256 = "e306d7bd7e222706db25002c823f263344217f1258dc6133913b112293e26d9d"
+
+[[sources]]
+ticker = "APT"
+file_name = "2026-08-06_0001437749-26-026101_EX-99.1_ex_998472.htm"
+sha256 = "602d7f91ade7be2ec711169b078972fef9edeb552a80f927562cd579b6b07dac"
+
+[[sources]]
+ticker = "APTV"
+file_name = "2026-08-04_0001521332-26-000057_EX-99.1_aptvq22026ex991.htm"
+sha256 = "00b889bd9521717f2519480d66da8b5e495fd347b0ed36bb77025dac35286599"

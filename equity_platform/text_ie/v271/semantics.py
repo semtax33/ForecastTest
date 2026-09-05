@@ -349,7 +349,27 @@ def resolve_frame_conflicts_v271(
             return True
         return False
 
-    ordered = tuple(frame for frame in existing if not discard_prior(frame)) + recovered
+    def discard_recovered(frame: KPIFrame) -> bool:
+        peers = tuple(other for other in recovered if other is not frame and same_block(frame, other))
+        same_metric = tuple(
+            other for other in peers if _base(other.concept) == _base(frame.concept)
+        )
+        if (
+            frame.frame is SemanticFrame.ABSOLUTE_VALUE
+            and any(other.frame is SemanticFrame.RANGE_GUIDANCE for other in same_metric)
+            and any(values(frame) & values(other) for other in same_metric)
+        ):
+            return True
+        if frame.rule_id == "v271.revenue_was_money_change" and any(
+            other.rule_id == "v271.revenue_was_percent_change"
+            and other.value == frame.value
+            for other in same_metric
+        ):
+            return True
+        return False
+
+    accepted_recovered = tuple(frame for frame in recovered if not discard_recovered(frame))
+    ordered = tuple(frame for frame in existing if not discard_prior(frame)) + accepted_recovered
     selected: list[KPIFrame] = []
     for frame in ordered:
         signature = (

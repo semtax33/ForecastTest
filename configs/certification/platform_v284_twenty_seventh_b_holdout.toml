@@ -1,0 +1,110 @@
+base_manifest = "configs/certification/platform_v284_twenty_seventh_holdout.toml"
+holdout_id = "V284_TWENTY_SEVENTH_B_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T14:14:04.9498251+09:00"
+evaluation_tickers = ["ACA", "ACAD", "AADX", "ACLS", "ACMR", "ABM", "ACNT", "ACT", "ADT", "ADTN"]
+prior_parser_benchmark_overlap = []
+sampling_hash_salt = "V284_TWENTY_SEVENTH_B_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+status = "HOLD_RESEARCH_UNFROZEN_FROZEN_INDEPENDENT_FAILURE"
+
+[selection_snapshot]
+generator = "scripts/architecture/v284_twenty_seventh_b_holdout_candidates.py"
+generator_sha256 = "36efa8fb37f1e3206378062f5cd3a6991788fc4263cefeb8b4f535e5ab012548"
+
+[candidate_artifact]
+path = "output/platform_v2_8_4_economic_roles/twenty_seventh_b_holdout_candidates.csv"
+rows = 100
+generated = true
+sha256 = "845359ff77ad684d282edb58e9e55020effc836ee22820821a40c127b36514bc"
+
+[v284_code_snapshot_sha256]
+semantics = "69989eb1898db2d8e8ae269995b4ea251f1907b3d863f95c2b1fbc44ac85f879"
+runtime = "179ad0037c66c4e3427597e1c3651f29b9fb5b2811a44e707363e6303575e936"
+router = "ec8ba911e2bc683a156f6a6f66ef443b4e116a7f15908efa2fa5823a77485b0c"
+init = "66d371b06ea397664445836c87305d2fad9fbed8120c41f467e0e4a06894a068"
+rules = "8e5b18aacee31e90535b893a7e65a81f4c3d363a9fa79aa65378edc25e636616"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v284_twenty_seventh_b_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 37
+table_blocks = 20
+sha256 = "c621877bd51277ed86f064fd42413b5db95631194bd91ac5ac3283338a3131d7"
+
+[annotation_snapshot]
+generator = "scripts/architecture/v284_twenty_seventh_b_holdout_annotations.py"
+generator_sha256 = "662b8a0507e5bf66c09ade1e815dbc845039b219af28d9390b006cfea3bbad75"
+
+[evaluation_snapshot]
+evaluator = "scripts/architecture/v284_twenty_seventh_b_holdout_evaluation.py"
+evaluator_sha256 = "5db0a1e5fea7ca7184c04d8a0188fee56fbe1df61747880798237c7097341108"
+
+[independent_result]
+evaluation_path = "output/platform_v2_8_4_economic_roles/twenty_seventh_b_holdout_evaluation.csv"
+evaluation_sha256 = "6647aab26ea7518bdee4cdfdb97a841837f6cc91cd6643c01eee6d20465d64cc"
+summary_path = "output/platform_v2_8_4_economic_roles/twenty_seventh_b_holdout_summary.csv"
+summary_sha256 = "412648ae39c38b0da306d372c2f1d08d70f664fe3ce17ce4f877e6ae04fd1038"
+ladder_path = "output/platform_v2_8_4_economic_roles/twenty_seventh_b_holdout_ladder.csv"
+ladder_sha256 = "9cae91c0f65c096d7a17c9213ac4d823308cba6d9fa341b8e60caead58573d88"
+rejection_path = "output/platform_v2_8_4_economic_roles/twenty_seventh_b_holdout_rejection_taxonomy.csv"
+rejection_sha256 = "7415b28a793c13352c042f086af10cb761819b7b4871f93c8d54c988fbcdcc15"
+metadata_path = "output/platform_v2_8_4_economic_roles/twenty_seventh_b_holdout_metadata.json"
+metadata_sha256 = "a1a44911eb06a8a3adb08db990703b6fa8ebe9407b47dd30509522df77d2460e"
+critical_precision = 0.451613
+critical_recall = 0.378378
+candidate_recall = 0.891892
+binding_recall = 0.378378
+table_route_accuracy = 0.99
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 2
+passed = false
+
+[[sources]]
+ticker = "ACA"
+file_name = "2026-08-05_0001739445-26-000124_EX-99.1_exh991earningsrelease63020.htm"
+sha256 = "f6001ba4cfc5f62e9c08a39e8d7c091f3df038905e6abecf9e5c08cd6f586e7d"
+
+[[sources]]
+ticker = "ACAD"
+file_name = "2026-08-04_0001193125-26-332858_EX-99.1_acad-ex99_1.htm"
+sha256 = "0e0f532926389440f5121ec0139a42821d513a6f225623ccd2478380dfd3d485"
+
+[[sources]]
+ticker = "AADX"
+file_name = "2026-08-12_0001628280-26-055948_EX-99.1_appliedearningsrelease2q26.htm"
+sha256 = "628f428e4a6d169530273be02a1178eae1cbededde2b7d958f011e0d35a7c99c"
+
+[[sources]]
+ticker = "ACLS"
+file_name = "2026-08-06_0001104659-26-091697_EX-99.1_tm2622315d1_ex99-1.htm"
+sha256 = "8701e273b18b034c96dfb87718899b298d5a4dceb35c61e6a3184bd52d964282"
+
+[[sources]]
+ticker = "ACMR"
+file_name = "2026-08-27_0001628280-26-059251_EX-99.1_recordsofinvestorrelatio.htm"
+sha256 = "184773530117f62a296dfbf9e2eb429d9cd24bf8d84815267b0dbcc726413739"
+
+[[sources]]
+ticker = "ABM"
+file_name = "2026-06-05_0001193125-26-258367_EX-99.1_abm-ex99_1.htm"
+sha256 = "52c01ae36495ebef48537464fe38ccdbaf486614a3b4719c3a6eca997ad104f4"
+
+[[sources]]
+ticker = "ACNT"
+file_name = "2026-08-26_0000095953-26-000111_EX-99.1_ir_acntxmidwestideasconf.htm"
+sha256 = "76a72434fe39f361abf8220c1691f0a6464a212e6c8ba44c421e1835423e2e0c"
+
+[[sources]]
+ticker = "ACT"
+file_name = "2026-08-05_0001823529-26-000186_EX-99.2_enactqfs2q26final.htm"
+sha256 = "bf47595515f9fd541b175a4f9ad4e915d58c781b7150e1b6588c8e893b90a278"
+
+[[sources]]
+ticker = "ADT"
+file_name = "2026-07-30_0001703056-26-000097_EX-99.1_q22026adtearningsrelease-e.htm"
+sha256 = "1050ac690c08c8aa9440ffb9459d8e9b7eb17721e0bbdde8d45637da3d027dd6"
+
+[[sources]]
+ticker = "ADTN"
+file_name = "2026-08-04_0001193125-26-331458_EX-99.2_adtn-ex99_2.htm"
+sha256 = "b7dad313cf1775b18e15e84a8da8a426b140c72f124f41df0e9b70586f8b6552"

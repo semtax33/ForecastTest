@@ -1,0 +1,106 @@
+holdout_id = "V271_FOURTEENTH_ISSUER_DOCUMENT_DISJOINT_2026_09_05"
+predeclared_at = "2026-09-05T00:22:00+09:00"
+evaluation_tickers = ["BX", "WFC", "ROK", "TROW", "CBOE", "MCHP", "SNPS", "ANET", "VRT", "MCO"]
+prior_parser_benchmark_overlap = []
+document_kind = "IR"
+blocks_per_issuer = 10
+target_annotated_blocks = 100
+sampling_hash_salt = "V271_FOURTEENTH_DISJOINT_FIXED_BEFORE_CONTENT_REVIEW"
+candidate_generator_frozen = true
+v271_runtime_frozen = true
+llm_backend_allowed = false
+hmrb_runtime_dependency = false
+source_substitution_reason = "Before candidate artifact creation and content review: AXP had only 9 eligible blocks and was replaced by BX; USB had only 4 eligible blocks and was replaced by ROK"
+
+[candidate_artifact]
+path = "output/platform_v2_7_1_spacy_semantic_ownership/fourteenth_holdout_candidates.csv"
+rows = 100
+sha256 = "aa555fdd7e49e6d2222e34d8386d4d8af5432313d3da892f6fa37aef6eaea9c2"
+
+[annotation_artifact]
+path = "data-lake/gold/parser/text_ie/v271_fourteenth_holdout_annotations.jsonl"
+rows = 100
+expected_frames = 37
+table_blocks = 17
+sha256 = "e88483f81b73601ade5487ee87d85fd305cbeb2f67c14d4917c8f34c294e1b2e"
+annotation_script_sha256 = "330a216d1d2aec8a3bd1a09fd2379b283c014bb14659abd6013bd1090e756ab0"
+
+[gates]
+candidate_recall = 1.0
+critical_precision = 0.99
+critical_recall = 0.50
+table_route_accuracy = 0.95
+duplicate_auto_emission = 0
+illegal_cross_clause_auto_binding = 0
+silent_miss = 0
+
+[selection_snapshot]
+generator_sha256 = "9fe22364fdde84c6c9b441a4fdd48a4ff1e5b0f72c6b3fa56ed7822b565795c5"
+
+[code_snapshot_sha256]
+compiler = "0104e36ad1d5d1ba2d41df60b68208a0ff39e42aa8ecdc023c704730cd211c03"
+runtime = "578f91af416222be8b55585647268449f375ac19469e035ed87c600ba6fe3766"
+spacy_backend = "0cb343ccd0d0ed34a2dbd3d2431bd38ac001abbb5bf7615ed2383f96487c60cb"
+ontology = "ec9f7c8632daead0593d1c7d5c57e3f04c4dd144a523dc73cf65a6c972f4ec70"
+quantities = "b65be84e6672821b2ba553f4e1acfa51362037e3df53f0d2d62aeb6b34ca3a03"
+validation = "ac621c159ac628173bbd666742edc0915c1afc2171a391bd5cf925a4a7e75b32"
+v270_semantics = "27dfc4f798217b03c5c9a1ede8d688089d43cd33a12b199d581e725c25a0fdcf"
+v270_runtime = "c7be1acb2870b8bab31d10a5f487d61b339122ddbacf35ccebb7d80607bccf86"
+v270_router = "b6cdd38e3421ad92d5fb78b63a84b3d7693067325c34683b711e5bf6940dc54a"
+v270_init = "ab09b1d7d3a26cf470231cd92af1792825a35db775bed96f391be7239dcb8fd1"
+v270_rules = "43781e210e9610e05f8ac9db072c6434baa51d0a61a676edf5713245c7d2f232"
+v271_semantics = "d1ea8a909abbcb77acbb355503fe686d6fa0610750e9066d6aae9c8f8a76f8c3"
+v271_runtime = "9e252ce18138b220c80472477461adc82d21a356f6f74e7a996bc15bc1867ab6"
+v271_router = "590071614d245b447d69ebb48975e5ae06d02f6e470b970d183b1edbfca261cc"
+v271_init = "585039843acd0ca71ecfc20b1e217d6f6cc24d2a6ed0fb9d1dc723fe2920ba9a"
+v271_rules = "82ef96d96f824396c2c04103036dfb70f2de10b92baaab3042f262c9e3c146bb"
+
+[[sources]]
+ticker = "BX"
+file_name = "2026-07-23_0001193125-26-313250_EX-99.1_d153439dex991.htm"
+sha256 = "fa871410fcd120286281dfc20097b43911f5eb732e4b568b4a99e4ec3333365c"
+
+[[sources]]
+ticker = "WFC"
+file_name = "2026-07-14_0000072971-26-000288_EX-99.2_wfc2qer07-14x26ex992xsuppl.htm"
+sha256 = "42edd062276019191aa189c4a4efa7f918a0a352d9d380ea21aa020921bf4902"
+
+[[sources]]
+ticker = "ROK"
+file_name = "2026-08-04_0001024478-26-000028_EX-99_q3fy26ex99.htm"
+sha256 = "53adcbad7b93d2b697c9b47c0bd679e3b87e3573fbdd6f7f76f4e2358ca4078e"
+
+[[sources]]
+ticker = "TROW"
+file_name = "2026-07-31_0001628280-26-051211_EX-99_earningsreleaseq22026.htm"
+sha256 = "3c99674a306f2a3b1370dedf21cffbd5e9fd5cfe626f2b0680514c431936d76c"
+
+[[sources]]
+ticker = "CBOE"
+file_name = "2026-07-31_0001628280-26-051217_EX-99.1_cboe-20260731xex991.htm"
+sha256 = "530aa1fe21f8f7b6df7f43e8b98eb351639d5eef592928f3b04cd37d86b24e6f"
+
+[[sources]]
+ticker = "MCHP"
+file_name = "2026-08-06_0000827054-26-000037_EX-99.1_exhibit991q1fy27.htm"
+sha256 = "d1792383b735402576a471bce911ee5d8a0c2d2a8a27a210c2573957f212476d"
+
+[[sources]]
+ticker = "SNPS"
+file_name = "2026-08-26_0001193125-26-368620_EX-99.1_d157153dex991.htm"
+sha256 = "329b29f0a1e8ce32c92ca7d0b7ab28c462be7b28afae287accaf36dba108ab27"
+
+[[sources]]
+ticker = "ANET"
+file_name = "2026-08-04_0001596532-26-000174_EX-99.1_ex991q226-earningsrelease.htm"
+sha256 = "423a5f37b8da7ae6edb0a402fdec2e88136c1869f05e49fc13738e80236f72fa"
+
+[[sources]]
+ticker = "VRT"
+file_name = "2026-07-29_0001628280-26-050323_EX-99.1_q22026exhibit991vrt07292026.htm"
+sha256 = "edd139ed65bafa2a0b93ae419b3fd391b545a4c2d953da853ebdcb7951e4a62e"
+
+[[sources]]
+ticker = "MCO"
+file_name = "2026-07-22_0001628280-26-049104_EX-99.1_a2q26earningsrelease.htm"
+sha256 = "e511623e4d80880253960e248bc9713382faaf29bdfe8d9df58fab2e510f4f57"
