@@ -3,9 +3,18 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from energy_nowcast.research.v35.adapters import StandardizedKPIBundle
-from energy_nowcast.research.v35.strategy import KPIHierarchicalStrategy, V35StrategyConfig
-from energy_nowcast.research.v35.taxonomy import E_AND_P_GROUPS, all_tickers, group_for_ticker
+from equity_platform.sectors.energy.research.revenue.v35.adapters import (
+    StandardizedKPIBundle,
+)
+from equity_platform.sectors.energy.research.revenue.v35.strategy import (
+    KPIHierarchicalStrategy,
+    V35StrategyConfig,
+)
+from equity_platform.sectors.energy.research.revenue.v35.taxonomy import (
+    E_AND_P_GROUPS,
+    all_tickers,
+    group_for_ticker,
+)
 from energy_nowcast.research.v353.gas_prices import (
     classify_gas_price_label,
     merge_strict_gas_prices,
@@ -163,4 +172,3 @@ def test_failed_gas_research_retains_legacy_and_macro_lock() -> None:
     assert not gate["gas_research_gate"].any()
     assert gate["active_group_model"].eq("LEGACY").all()
     assert not gate["gas_macro_research_unlocked"].any()
-

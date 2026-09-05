@@ -40,6 +40,14 @@ from .spacy_backend import (
     default_spacy_backend,
 )
 from .retrieval import CandidateDecision, narrative_candidate
+from .semantic_challenger import (
+    SemanticChallenger,
+    SemanticChallengerUnavailableError,
+    SemanticPairRequest,
+    SemanticScore,
+    SemanticTask,
+)
+from .semantic_engine import HybridSemanticEngine, HybridSemanticResult
 
 __all__ = [
     "AmbiguityPolicy",
@@ -63,12 +71,19 @@ __all__ = [
     "ReviewItem",
     "SemanticFrame",
     "SemanticMatcherBackend",
+    "SemanticChallenger",
+    "SemanticChallengerUnavailableError",
+    "SemanticPairRequest",
+    "SemanticScore",
+    "SemanticTask",
     "SpacySemanticBackend",
     "TextBlock",
     "TextDslCompileError",
     "TextExtractionResult",
     "TextRuleProgramIR",
     "TextRuleIR",
+    "HybridSemanticEngine",
+    "HybridSemanticResult",
     "VerificationStatus",
     "FrameValidationError",
     "compile_text_rule_file",
