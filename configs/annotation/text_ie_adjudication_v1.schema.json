@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://forecasttest.local/schema/text-ie-adjudication-v1.json",
+  "title": "Text IE Annotation Review Item V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "queue_item_id", "candidate_id", "entity",
+    "source_path", "source_sha256", "source_slice",
+    "document_char_start", "document_char_end", "text", "proposal",
+    "legacy_route", "legacy_expected_frames", "legacy_annotation_files",
+    "adjudication_status", "quality_tier", "split", "human_annotations",
+    "adjudicator_id", "final_annotation"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "queue_item_id": {"type": "string", "minLength": 1},
+    "candidate_id": {"type": "string", "minLength": 1},
+    "entity": {"type": "string", "minLength": 1},
+    "source_path": {"type": "string", "minLength": 1},
+    "source_sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+    "source_slice": {
+      "enum": ["SEC_10K", "SEC_10Q", "IR_PREPARED_REMARKS", "IR_QA", "IR_UNSPECIFIED", "INDUSTRY_DATA", "UNKNOWN"]
+    },
+    "document_char_start": {"type": "integer", "minimum": 0},
+    "document_char_end": {"type": "integer", "minimum": 1},
+    "text": {"type": "string", "minLength": 1},
+    "proposal": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/proposal"}]},
+    "legacy_route": {"enum": ["TEXT_IE", "NO_FACT", "TABLE_DSL"]},
+    "legacy_expected_frames": {"type": "array", "items": {"type": "object"}},
+    "legacy_annotation_files": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "adjudication_status": {"enum": ["PENDING", "HUMAN_VERIFIED", "DISAGREEMENT", "ADJUDICATED", "ARCHIVE_ONLY"]},
+    "quality_tier": {"enum": ["WEAK", "SILVER", "GOLD_B", "GOLD_A"]},
+    "split": {"enum": ["UNASSIGNED", "TRAIN", "CALIBRATION", "CERTIFICATION"]},
+    "human_annotations": {"type": "array", "items": {"$ref": "#/$defs/human"}},
+    "adjudicator_id": {"type": ["string", "null"]},
+    "final_annotation": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/final"}]}
+  },
+  "$defs": {
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["char_start", "char_end", "literal"],
+      "properties": {
+        "char_start": {"type": "integer", "minimum": 0},
+        "char_end": {"type": "integer", "minimum": 1},
+        "literal": {"type": "string", "minLength": 1}
+      }
+    },
+    "proposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric_span", "quantity_span", "concept_label", "binding_hint", "role_hint", "generator", "quantity_kind"],
+      "properties": {
+        "metric_span": {"$ref": "#/$defs/span"},
+        "quantity_span": {"$ref": "#/$defs/span"},
+        "concept_label": {"type": "string", "minLength": 1},
+        "binding_hint": {"enum": ["UNREVIEWED", "BELONGS_TO", "NOT_RELATED"]},
+        "role_hint": {"type": ["string", "null"]},
+        "generator": {"type": "string", "minLength": 1},
+        "quantity_kind": {"type": "string", "minLength": 1}
+      }
+    },
+    "final": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric_span", "quantity_span", "concept_label", "binding_label", "role_label", "scope", "period", "quantity_kind"],
+      "properties": {
+        "metric_span": {"$ref": "#/$defs/span"},
+        "quantity_span": {"$ref": "#/$defs/span"},
+        "concept_label": {"type": "string", "minLength": 1},
+        "binding_label": {"enum": ["BELONGS_TO", "NOT_RELATED"]},
+        "role_label": {"type": ["string", "null"]},
+        "scope": {"type": "string", "minLength": 1},
+        "period": {"type": "string", "minLength": 1},
+        "quantity_kind": {"type": "string", "minLength": 1}
+      }
+    },
+    "human": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["annotator_id", "annotation"],
+      "properties": {
+        "annotator_id": {"type": "string", "minLength": 1},
+        "annotation": {"$ref": "#/$defs/final"}
+      }
+    }
+  }
+}

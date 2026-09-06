@@ -129,6 +129,12 @@ def translate_outline_title(title: str) -> str:
 def render_block(block: dict[str, Any]) -> str:
     kind = block.get("type", "p")
     if kind == "table":
+        # Manual translations use both structured tables and faithful,
+        # line-oriented table text. Preserve the latter instead of rendering
+        # an empty table when headers/rows are intentionally absent.
+        if "text" in block and not block.get("headers") and not block.get("rows"):
+            table_text = html.escape(str(block.get("text", "")))
+            return f'<div class="text-table">{table_text}</div>'
         headers = "".join(f"<th>{html.escape(str(value))}</th>" for value in block.get("headers", []))
         rows = "".join(
             "<tr>" + "".join(f"<td>{html.escape(str(value))}</td>" for value in row) + "</tr>"
@@ -204,6 +210,11 @@ def build_document(
     for number in range(1, total_pages + 1):
         translation_page = pages.get(number)
         source = reader.pages[number - 1].extract_text() or ""
+        original_button = (
+            f'<button onclick="showOriginal({number})">원본 면 보기</button>'
+            if embed_pdf
+            else ""
+        )
         if translation_page is None:
             body = '<p class="pending">직접 번역 대기 중</p>'
             state = "대기"
@@ -224,7 +235,7 @@ def build_document(
             )
         sections.append(
             f'''<section class="book-page" id="page-{number}" data-page="{number}">
-<header><span>PDF {number}쪽</span><i class="state state-{state}">{state}</i><button onclick="showOriginal({number})">원본 면 보기</button></header>
+<header><span>PDF {number}쪽</span><i class="state state-{state}">{state}</i>{original_button}</header>
 <article lang="ko">{body}</article>
 {warning_markup}
 <details class="source"><summary>추출 원문 텍스트</summary><pre>{html.escape(source)}</pre></details>
@@ -254,7 +265,7 @@ aside h2{{margin:0 0 .6rem;font-size:1.05rem}}.bar{{height:.55rem;border-radius:
 .cover,.book-page{{background:var(--paper);border:1px solid var(--line);border-radius:.75rem;box-shadow:0 8px 24px #3d463d14}}.cover{{min-height:78vh;display:grid;place-content:center;text-align:center;padding:3rem;margin-bottom:1.2rem}}.cover .tag{{color:var(--green);font-weight:700;letter-spacing:.12em}}.cover h1{{font:700 clamp(2.2rem,6vw,4.2rem)/1.2 "Noto Serif KR","Batang",serif;margin:.5rem 0}}.cover h2{{font-weight:400;color:var(--muted);margin:0 0 2rem}}
 .book-page{{min-height:64vh;margin-bottom:1.2rem;padding:clamp(1.2rem,4vw,3.2rem);scroll-margin-top:4.3rem}}.book-page>header{{display:flex;align-items:center;gap:.7rem;border-bottom:1px solid var(--line);padding-bottom:.7rem;margin-bottom:1.3rem;font-size:.82rem;color:var(--muted)}}.book-page>header button{{margin-left:auto;color:var(--ink);border-color:var(--line);background:white;cursor:pointer}}.state{{font-style:normal;border-radius:9rem;padding:.05rem .45rem}}.state-완료{{background:#dcefe7;color:var(--green)}}.state-대기{{background:#f7e9d5;color:var(--amber)}}
 article{{font-family:"Noto Serif KR","Batang",serif;font-size:1.03rem}}article p{{margin:0 0 1em;text-align:justify;word-break:keep-all}}article h1{{font-size:2.2rem;text-align:center}}article h2{{font-size:1.6rem;color:#114e3b}}article h3{{font-size:1.2rem;color:#1d604c;margin-top:1.5em}}.chapter-number{{font:700 .9rem/1 Pretendard,"Noto Sans KR",sans-serif;color:var(--green);letter-spacing:.08em;margin-bottom:.5rem}}.subtitle{{font-size:1.25rem;text-align:center}}.bullet{{padding-left:1.25rem;text-indent:-1.25rem}}.question{{padding-left:1.4rem;text-indent:-1.4rem}}.footnote{{font-size:.82rem;border-top:1px solid var(--line);padding-top:.7rem}}.caption{{font-weight:700}}.running{{font-size:.75rem;color:var(--muted);text-align:right}}.doi{{font-size:.78rem;overflow-wrap:anywhere}}.toc-entry{{display:flex;justify-content:space-between;gap:1rem;margin:.1em 0}}.toc-entry b{{font-family:inherit}}.blank,.pending{{color:var(--muted);font-style:italic}}
-.table-wrap{{overflow-x:auto;margin:1rem 0}}table{{width:100%;border-collapse:collapse;font-family:Pretendard,"Noto Sans KR",sans-serif;font-size:.82rem;line-height:1.45}}th,td{{padding:.45rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}}th{{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}}.source,.qa{{margin-top:1rem;font-size:.78rem;color:var(--muted)}}.source pre{{white-space:pre-wrap;overflow-wrap:anywhere;background:#f0eee6;padding:1rem;border-radius:.4rem;line-height:1.45}}.qa{{color:var(--amber)}}
+.table-wrap{{overflow-x:auto;margin:1rem 0}}table{{width:100%;border-collapse:collapse;font-family:Pretendard,"Noto Sans KR",sans-serif;font-size:.82rem;line-height:1.45}}th,td{{padding:.45rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}}th{{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}}.text-table{{margin:1.15rem 0;padding:1rem;border:1px solid var(--line);border-radius:.45rem;background:#f7f6ef;white-space:pre-wrap;overflow-wrap:anywhere;font-family:Pretendard,"Noto Sans KR",sans-serif;font-size:.88rem;line-height:1.65}}.source,.qa{{margin-top:1rem;font-size:.78rem;color:var(--muted)}}.source pre{{white-space:pre-wrap;overflow-wrap:anywhere;background:#f0eee6;padding:1rem;border-radius:.4rem;line-height:1.45}}.qa{{color:var(--amber)}}
 .viewer{{display:none;position:fixed;inset:0;z-index:40;background:#111d;padding:3vh 3vw;grid-template-rows:auto 1fr}}.viewer.open{{display:grid}}.viewer header{{display:flex;color:white;padding:.3rem;align-items:center}}.viewer button{{margin-left:auto}}.viewer iframe{{width:100%;height:100%;border:0;background:white}}
 @media(max-width:900px){{.layout{{grid-template-columns:1fr;padding:.65rem}}aside{{position:static;max-height:15rem}}.toolbar strong{{display:none}}}}@media print{{body{{background:white}}.toolbar,aside,.book-page>header button,.viewer,.source,.qa{{display:none!important}}.layout{{display:block;padding:0}}.cover,.book-page{{border:0;box-shadow:none;break-after:page;margin:0;min-height:0}}}}
 </style></head><body>

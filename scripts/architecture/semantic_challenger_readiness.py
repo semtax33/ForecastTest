@@ -13,8 +13,11 @@ from equity_platform.text_ie.llm import (
     build_encoder_benchmark_matrix,
 )
 from equity_platform.text_ie.training import (
+    AnnotationQualityTier,
+    assess_annotation_corpus,
     assess_semantic_training_readiness,
     build_semantic_training_dataset,
+    load_annotation_review_queue,
     load_staged_gold,
 )
 
@@ -24,6 +27,53 @@ STAGED_GOLD = (
 )
 GOLD_ROOT = PROJECT_ROOT / "data-lake/gold/parser/text_ie"
 OUTPUT = PROJECT_ROOT / "output/text_ie_semantic_challenger/readiness.json"
+REVIEW_QUEUE = (
+    PROJECT_ROOT
+    / "data-lake/silver/parser/text_ie/annotation_review_queue_active.jsonl"
+)
+GPU_COMPATIBILITY = (
+    PROJECT_ROOT
+    / "output/text_ie_semantic_challenger/encoder_gpu_compatibility.json"
+)
+
+
+def _gpu_compatibility_status(path: Path) -> dict[str, object]:
+    if not path.exists():
+        return {
+            "passed": False,
+            "performance_evaluated": False,
+            "reason": "ARTIFACT_MISSING",
+        }
+    try:
+        row = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as exc:
+        return {
+            "passed": False,
+            "performance_evaluated": False,
+            "reason": f"INVALID_ARTIFACT:{type(exc).__name__}",
+        }
+    correctly_scoped = (
+        row.get("evaluation_scope")
+        == "GPU_COMPATIBILITY_ONLY_NOT_PERFORMANCE"
+        and row.get("performance_benchmark_eligible") is False
+        and row.get("champion_selected") is False
+    )
+    models = row.get("models", ())
+    passed = bool(
+        row.get("status") == "PASS"
+        and correctly_scoped
+        and models
+        and all(model.get("status") == "PASS" for model in models)
+    )
+    return {
+        "passed": passed,
+        "performance_evaluated": False,
+        "reason": "PASS" if passed else "FAILED_OR_MISSCOPED",
+        "artifact": path.relative_to(PROJECT_ROOT).as_posix()
+        if path.is_relative_to(PROJECT_ROOT)
+        else str(path),
+        "model_count": len(models),
+    }
 
 
 def _gpu_inventory() -> tuple[dict[str, object], ...]:
@@ -68,6 +118,13 @@ def build_readiness_report() -> dict[str, object]:
         for package in ("torch", "transformers", "accelerate")
     }
     devices = _gpu_inventory()
+    review_items = (
+        load_annotation_review_queue(REVIEW_QUEUE) if REVIEW_QUEUE.exists() else ()
+    )
+    annotation_assessment = (
+        assess_annotation_corpus(review_items) if review_items else None
+    )
+    gpu_compatibility = _gpu_compatibility_status(GPU_COMPATIBILITY)
     legacy_files = tuple(
         path
         for path in GOLD_ROOT.glob("*.jsonl")
@@ -78,6 +135,8 @@ def build_readiness_report() -> dict[str, object]:
         blockers.append("NO_NVIDIA_GPU_VISIBLE")
     if not all(packages.values()):
         blockers.append("OPTIONAL_TRANSFORMER_DEPENDENCIES_MISSING")
+    if not gpu_compatibility["passed"]:
+        blockers.append("ENCODER_GPU_COMPATIBILITY_NOT_PASSED")
     blockers.append("NO_FINE_TUNED_TASK_CHECKPOINTS")
     blockers.append("ENCODER_SOURCE_SLICE_BENCHMARK_NOT_RUN")
     return {
@@ -87,6 +146,7 @@ def build_readiness_report() -> dict[str, object]:
         "cuda_policy": "CUDA_REQUIRED_NO_SILENT_CPU_FALLBACK",
         "gpu_inventory": devices,
         "python_packages": packages,
+        "encoder_gpu_compatibility": gpu_compatibility,
         "staged_training_corpus": {
             "source_examples": dataset.source_example_count,
             "text_contexts": training.text_context_count,
@@ -101,7 +161,29 @@ def build_readiness_report() -> dict[str, object]:
         "legacy_frame_only_corpora": {
             "files": len(legacy_files),
             "examples": sum(_line_count(path) for path in legacy_files),
-            "training_status": "EXCLUDED_UNTIL_EXACT_SPANS_AND_RELATIONS_ARE_ADJUDICATED",
+            "training_status": "CONVERTED_TO_WEAK_REVIEW_QUEUE_NOT_TRAINING_GOLD",
+        },
+        "annotation_factory": {
+            "queue_exists": REVIEW_QUEUE.exists(),
+            "queue_items": len(review_items),
+            "unique_contexts": (
+                annotation_assessment.unique_context_count
+                if annotation_assessment is not None
+                else 0
+            ),
+            "quality_tiers": (
+                {
+                    tier.value: annotation_assessment.quality_tier_counts[tier]
+                    for tier in AnnotationQualityTier
+                }
+                if annotation_assessment is not None
+                else {}
+            ),
+            "all_source_slices_ready": (
+                annotation_assessment.all_benchmark_slices_ready
+                if annotation_assessment is not None
+                else False
+            ),
         },
         "encoder_candidates": [
             {

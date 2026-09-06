@@ -186,6 +186,8 @@ data-lake/**
 !benchmarks/platform_v2_2_parser_generalization/
 !benchmarks/platform_v2_2_parser_generalization/manifest.json
 !configs/certification/platform_v23_blind_set.toml
+!configs/annotation/
+!configs/annotation/text_ie_adjudication_v1.schema.json
 !output/platform_v2_3_parser_calibration/
 !output/platform_v2_3_parser_calibration/**
 !benchmarks/platform_v2_3_parser_calibration/

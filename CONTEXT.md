@@ -31,3 +31,37 @@ _Avoid_: Candidate, model prediction
 **Promotion**:
 An explicit authority transition from evidence toward forecast or valuation use after the applicable validation gates pass.
 _Avoid_: Extraction, scoring
+
+**Annotation Review Item**:
+A source-bounded context and optional metric–quantity proposal awaiting explicit human judgment.
+_Avoid_: Gold example, accepted fact
+
+**Adjudication**:
+The resolution of independently produced annotations into one final semantic judgment.
+_Avoid_: Review, model agreement
+
+**GOLD_A**:
+A certification-eligible annotation independently labeled by two people and resolved by an adjudicator.
+_Avoid_: Gold, verified example
+
+**GOLD_B**:
+A single-human-verified annotation suitable for research training but not certification.
+_Avoid_: Gold, certified example
+
+**SILVER**:
+An annotation supported by independent automated signals but not verified by a person.
+_Avoid_: Verified, gold
+
+**WEAK**:
+A parser- or legacy-derived proposal that has not received human verification.
+_Avoid_: Label, ground truth
+
+**Transcript Source Slice**:
+A prepared-remarks, Q&A, or unspecified document region assigned only from
+structured speaker roles and explicit call-control boundaries.
+_Avoid_: Sentiment segment, model-inferred section
+
+**Archive Availability**:
+The timestamp at which an immutable source payload was retrieved and retained;
+it is a conservative PIT cutoff and is not the event or publication time.
+_Avoid_: Call date, earnings date

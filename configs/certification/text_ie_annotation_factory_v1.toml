@@ -1,0 +1,34 @@
+version = "TEXT_IE_ANNOTATION_FACTORY_V1"
+status = "SCHEMA_FROZEN_MODEL_UNTRAINED"
+model_training_allowed = false
+certification_allowed = false
+
+[artifacts]
+schema = "configs/annotation/text_ie_adjudication_v1.schema.json"
+schema_sha256 = "6bb42a470e30189ee1584c84f2aac21deb8c2c621aa4650aaa1be31de6b15a7b"
+guideline = "docs/text_ie/annotation-guideline-v1.md"
+guideline_sha256 = "6013bc473284d541b09dd6c27ac8e6d9d6f14d7074f3365acbd0a63f3c68267c"
+generated_queue_sha256 = "99117e0a77cc67b925acc86134c53ed10f081eccd5fd47b61d3c85bc0cc0ed87"
+
+[historical_replay]
+candidate_csvs = 35
+annotation_files = 38
+annotation_rows = 3525
+unique_contexts = 3190
+superseded_rows = 335
+queue_items = 7652
+pair_proposals = 5183
+context_recovery_items = 1805
+archived_table_contexts = 664
+selected_legacy_frames = 1550
+matched_legacy_frames = 1006
+unmatched_legacy_frames = 544
+verified_source_files = 341
+
+[source_slice_minimums]
+research_contexts = 50
+gold_a_contexts = 50
+positive_bindings = 30
+negative_bindings = 30
+role_examples = 30
+binding_agreement = 0.80

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from .annotation import AnnotationQualityTier, AnnotationReviewItem
 from .staged_gold import StagedGoldExample
 
 
@@ -293,6 +294,138 @@ def assess_semantic_training_readiness(
     )
 
 
+def build_semantic_training_dataset_from_review_queue(
+    items: tuple[AnnotationReviewItem, ...],
+    *,
+    minimum_quality: AnnotationQualityTier = AnnotationQualityTier.GOLD_B,
+) -> SemanticTrainingDataset:
+    """Build task datasets only from human-verified review-queue pairs."""
+
+    rank = {
+        AnnotationQualityTier.WEAK: 0,
+        AnnotationQualityTier.SILVER: 1,
+        AnnotationQualityTier.GOLD_B: 2,
+        AnnotationQualityTier.GOLD_A: 3,
+    }
+    selected = tuple(
+        item
+        for item in items
+        if rank[item.quality_tier] >= rank[minimum_quality]
+        and item.final_annotation is not None
+    )
+    concept_rows: dict[tuple[str, int, int], ConceptClassificationExample] = {}
+    concept_labels: dict[tuple[str, int, int], str] = {}
+    relations = []
+    roles = []
+    for item in selected:
+        final = item.final_annotation
+        annotation_source = (
+            "INDEPENDENT_HUMAN_GOLD_A"
+            if item.quality_tier is AnnotationQualityTier.GOLD_A
+            else "SINGLE_HUMAN_GOLD_B"
+        )
+        concept_key = (
+            item.source_sha256,
+            final.metric_span.char_start,
+            final.metric_span.char_end,
+        )
+        prior_label = concept_labels.setdefault(concept_key, final.concept_label)
+        if prior_label != final.concept_label:
+            raise ValueError("one metric span cannot receive conflicting concept labels")
+        concept_rows.setdefault(concept_key, ConceptClassificationExample(
+            example_id=item.candidate_id,
+            entity=item.entity,
+            source_kind=item.source_slice.value,
+            source_sha256=item.source_sha256,
+            holdout_axis=item.split,
+            gold_route="TEXT_IE",
+            context=item.text,
+            marked_context=_marked_text(item.text, ((
+                final.metric_span.char_start,
+                final.metric_span.char_end,
+                "[METRIC]",
+                "[/METRIC]",
+            ),)),
+            metric_literal=final.metric_span.literal,
+            metric_char_start=final.metric_span.char_start,
+            metric_char_end=final.metric_span.char_end,
+            concept_label=final.concept_label,
+            annotation_source=annotation_source,
+        ))
+        marked = _marked_text(item.text, (
+            (
+                final.metric_span.char_start,
+                final.metric_span.char_end,
+                "[METRIC]",
+                "[/METRIC]",
+            ),
+            (
+                final.quantity_span.char_start,
+                final.quantity_span.char_end,
+                "[QTY]",
+                "[/QTY]",
+            ),
+        ))
+        quantity_kind = final.quantity_kind
+        relation = RelationClassificationExample(
+            example_id=item.queue_item_id,
+            entity=item.entity,
+            source_kind=item.source_slice.value,
+            source_sha256=item.source_sha256,
+            holdout_axis=item.split,
+            gold_route="TEXT_IE",
+            context=item.text,
+            marked_context=marked,
+            metric_literal=final.metric_span.literal,
+            metric_char_start=final.metric_span.char_start,
+            metric_char_end=final.metric_span.char_end,
+            quantity_literal=final.quantity_span.literal,
+            quantity_char_start=final.quantity_span.char_start,
+            quantity_char_end=final.quantity_span.char_end,
+            quantity_kind=quantity_kind,
+            concept_label=final.concept_label,
+            binding_label=final.binding_label,
+            annotation_source=annotation_source,
+        )
+        relations.append(relation)
+        if final.binding_label == "BELONGS_TO":
+            roles.append(RoleClassificationExample(
+                example_id=relation.example_id,
+                entity=relation.entity,
+                source_kind=relation.source_kind,
+                source_sha256=relation.source_sha256,
+                holdout_axis=relation.holdout_axis,
+                gold_route=relation.gold_route,
+                context=relation.context,
+                marked_context=relation.marked_context,
+                metric_literal=relation.metric_literal,
+                metric_char_start=relation.metric_char_start,
+                metric_char_end=relation.metric_char_end,
+                quantity_literal=relation.quantity_literal,
+                quantity_char_start=relation.quantity_char_start,
+                quantity_char_end=relation.quantity_char_end,
+                quantity_kind=relation.quantity_kind,
+                concept_label=relation.concept_label,
+                role_label=str(final.role_label),
+                annotation_source=annotation_source,
+            ))
+    return SemanticTrainingDataset(
+        concepts=tuple(concept_rows.values()),
+        relations=tuple(relations),
+        roles=tuple(roles),
+        source_example_count=len({item.candidate_id for item in selected}),
+        certification_eligible=(
+            bool(selected)
+            and all(
+                item.quality_tier is AnnotationQualityTier.GOLD_A
+                and item.certification_eligible
+                and item.split == "CERTIFICATION"
+                for item in selected
+            )
+        ),
+    )
+
+
 __all__ = [
     "ConceptClassificationExample",
     "RelationClassificationExample",
@@ -301,4 +434,5 @@ __all__ = [
     "SemanticTrainingReadiness",
     "assess_semantic_training_readiness",
     "build_semantic_training_dataset",
+    "build_semantic_training_dataset_from_review_queue",
 ]
