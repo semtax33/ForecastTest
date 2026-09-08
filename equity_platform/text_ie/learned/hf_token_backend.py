@@ -34,6 +34,7 @@ class HfTokenSpanBackend:
     def __init__(
         self,
         *,
+        checkpoint: str | None = None,
         model_id: str = "AAU-NLP/BERT-SL1000",
         model_revision: str = "main",
         minimum_confidence: float = 0.50,
@@ -43,8 +44,10 @@ class HfTokenSpanBackend:
         torch_module=None,
         transformers_module=None,
     ) -> None:
-        if not model_id.strip() or not model_revision.strip():
+        checkpoint = checkpoint or model_id
+        if not checkpoint.strip() or not model_id.strip() or not model_revision.strip():
             raise ValueError("span checkpoint identity cannot be blank")
+        self.checkpoint = checkpoint
         if not 0.0 <= minimum_confidence <= 1.0:
             raise ValueError("minimum span confidence must be within [0, 1]")
         self.model_id = model_id
@@ -72,6 +75,7 @@ class HfTokenSpanBackend:
             if self._pipeline_factory is not None:
                 return self._pipeline_factory(
                     task="token-classification",
+                    checkpoint=self.checkpoint,
                     model_id=self.model_id,
                     revision=self.model_revision,
                     device=selected.device,
@@ -86,11 +90,11 @@ class HfTokenSpanBackend:
                 "local_files_only": self.local_files_only,
             }
             tokenizer = transformers.AutoTokenizer.from_pretrained(
-                self.model_id,
+                self.checkpoint,
                 **load_kwargs,
             )
             model = transformers.AutoModelForTokenClassification.from_pretrained(
-                self.model_id,
+                self.checkpoint,
                 **load_kwargs,
             )
             model.to(selected.device)

@@ -97,6 +97,30 @@ def test_hf_token_backend_accepts_no_bio_taxonomy_label_as_raw_span_only() -> No
     assert proposals[0].confidence == 0.93
 
 
+def test_local_checkpoint_path_is_separate_from_canonical_model_provenance() -> None:
+    calls = []
+
+    def factory(**kwargs):
+        calls.append(kwargs)
+        return _Pipeline([
+            {"entity": "custom:metric", "score": 0.95, "start": 0, "end": 7},
+        ])
+
+    backend = HfTokenSpanBackend(
+        checkpoint="D:/models/bert-sl1000/pinned-revision",
+        model_id="AAU-NLP/BERT-SL1000",
+        model_revision="abc123",
+        pipeline_factory=factory,
+        torch_module=_Torch(),
+    )
+
+    proposals = backend.propose(_block("Revenue increased."), EncoderSourceSlice.SEC_10Q)
+
+    assert calls[0]["checkpoint"] == "D:/models/bert-sl1000/pinned-revision"
+    assert proposals[0].model_id == "AAU-NLP/BERT-SL1000"
+    assert proposals[0].model_revision == "abc123"
+
+
 def test_sec_token_backend_refuses_ir_source_slice() -> None:
     backend = HfTokenSpanBackend(
         pipeline_factory=lambda **kwargs: _Pipeline([]),

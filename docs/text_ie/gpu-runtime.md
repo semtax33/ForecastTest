@@ -25,3 +25,15 @@ champion until independently adjudicated source-slice benchmarks exist.
 `nlpaueb/sec-bert-shape` receives its required numeric-shape preprocessing.
 spaCy supplies token boundaries; known model-vocabulary shapes are preserved and
 unknown numeric shapes become `[NUM]`.
+
+Download the pinned learned-span challengers into the project Bronze model
+store without placing large weights under source control:
+
+```powershell
+& 'D:\Programming\python_example\Arcana\.venv-llama\Scripts\python.exe' `
+  -m scripts.architecture.download_text_ie_span_models_v1
+```
+
+The generated manifest records immutable Hugging Face revisions and SHA-256
+digests. BERT-SL1000/Cal-BERT-SL1000 are SEC span candidates; GLiNER2 is an IR
+span candidate. None receives Fact or valuation authority from installation.

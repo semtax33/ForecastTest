@@ -50,6 +50,7 @@ from .semantic_challenger import (
 from .semantic_engine import HybridSemanticEngine, HybridSemanticResult
 from .learned import (
     HfTokenSpanBackend,
+    GLiNER2SpanBackend,
     LearnedCandidateGraphResult,
     LearnedSpanBackend,
     LearnedSpanProposal,
@@ -93,6 +94,7 @@ __all__ = [
     "HybridSemanticEngine",
     "HybridSemanticResult",
     "HfTokenSpanBackend",
+    "GLiNER2SpanBackend",
     "LearnedCandidateGraphResult",
     "LearnedSpanBackend",
     "LearnedSpanProposal",
