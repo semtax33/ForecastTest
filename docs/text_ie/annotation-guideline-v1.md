@@ -57,8 +57,26 @@ back to the fiscal quarter for PIT backtests.
 - `GOLD_B`: one human verifier; training/research only.
 - `GOLD_A`: two independent annotators plus adjudication; certification eligible.
 
+If either annotator marks the context candidate graph incomplete, no pair from
+that context is `GOLD_A`. Individually adjudicated existing pairs may be retained
+as pair-adjudicated `GOLD_B` for `TRAIN` only. Exclude every such pair whose
+issuer appears in calibration or certification. This salvage policy must never
+be used to calculate candidate-detection recall or source-slice certification.
+
 TABLE_DSL evidence stays on its positional-table route and must not be inserted into the narrative transformer corpus. Contexts whose exact source or mention spans cannot be recovered become `ARCHIVE_ONLY` and do not enter training.
 
 ## Dataset splits
 
 Assign `TRAIN`, `CALIBRATION`, and `CERTIFICATION` only after adjudication. Certification must be issuer-disjoint and document-disjoint from training. Thresholds are calibrated by model × source slice × task only after the calibration split is large enough; the queue must not encode a guessed threshold.
+
+The V1 training corpus target is 300 independently adjudicated contexts: 75
+from each of `SEC_10K`, `SEC_10Q`, `IR_PREPARED_REMARKS`, and `IR_QA`. The
+base assignment contributes 50 per slice and the non-overlapping supplement
+contributes 25 per slice. Do not lower this threshold merely because one batch
+has been completed.
+
+All three encoder initializations train concept, binding, and role heads on
+`TRAIN`. `CALIBRATION` alone sets abstention thresholds and chooses one
+champion. Only that frozen champion may open `CERTIFICATION`, once. A task-level
+certification pass is not production approval; the hybrid frame must still pass
+the deterministic reducer and end-to-end precision/recall gates.

@@ -17,11 +17,11 @@
   "live_matched_observations": "0/20",
   "files": {
     "configs/energy_valuation_v1_1.toml": "0b9a6be6878cb5e5c689d390a8a9dbb77d794a6eedcc905e2288f1e90d1a4edb",
-    "energy_nowcast/valuation_v11/__init__.py": "a11ed4768dc8fcc7d678914a1e7cf96c48ddbf3490cfb755536e98b3dac5ee4b",
-    "energy_nowcast/valuation_v11/benchmark.py": "745e572666f537d526d374369f226e2a46c4c92269c6f77a7a8029ea54759320",
+    "energy_nowcast/valuation_v11/__init__.py": "0f93b9d40cbf31516c4f6680f2f928f8c6750b9306acca21640c23940a6980fc",
+    "energy_nowcast/valuation_v11/benchmark.py": "360b9056d2276feef522219a87750eeab52054f0252ef039284fca4c49821303",
     "energy_nowcast/valuation_v11/financial_adjustments.py": "42abc2db8e10c4772798687f218193dafa09155cc6bfd5f8d92c33bc4b35813c",
     "energy_nowcast/valuation_v11/perimeter.py": "5ed4d2005172793d764bba70dea2fab0013c48c66818692a6e24f89f9673c9d0",
-    "energy_nowcast/valuation_v11/sanity.py": "3d0b242138c4fb736db7aecd3142db069c48ec67670c0b1da9f107bc00905bd9",
+    "energy_nowcast/valuation_v11/sanity.py": "fab3c2a7c62c12a5a195d98d60b22ad46fb13b534903cc26bbc535305be2aeed",
     "scripts/energy/research/valuation/v1_1.py": "2a44242bf6bd5dcbc8572c6d6ef9f70b74bec00493ba87206c03c6f3200fab36",
     "tests/test_energy_valuation_v1_1.py": "6cef06bd15dfabb5430555cae4eaf3b567e4c9c0f4b9b6a39a3dca1688e427b7",
     "output/energy_valuation_v1_1/capex_semantics_audit.csv": "afbc141add41f82a219577b0af21dc54aeea542a3353645d85ad60c0f8624568",
@@ -49,5 +49,13 @@
     "scope": "physical_paths_and_code_tests_only",
     "economic_outputs": "byte_preserved",
     "reason": "responsibility_packages_and_bronze_silver_gold_layout"
+  },
+  "canonical_import_rebaseline": {
+    "date": "2026-09-06",
+    "scope": "imports_and_frozen_file_registry_only",
+    "economic_outputs": "byte_preserved",
+    "reason": "remove_the_obsolete_energy_nowcast_valuation_v11_engine_facade",
+    "removed_path": "energy_nowcast/valuation_v11/engine.py",
+    "canonical_path": "equity_platform/sectors/energy/valuation/v11/engine.py"
   }
 }

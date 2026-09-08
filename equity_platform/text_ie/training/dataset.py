@@ -2,8 +2,35 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .annotation import AnnotationQualityTier, AnnotationReviewItem
+from .annotation import (
+    AdjudicationStatus,
+    AnnotationQualityTier,
+    AnnotationReviewItem,
+)
 from .staged_gold import StagedGoldExample
+
+
+@dataclass(frozen=True)
+class SpanClassificationExample:
+    """Source-grounded metric span supervision, independent of tokenization."""
+
+    example_id: str
+    entity: str
+    source_kind: str
+    source_sha256: str
+    holdout_axis: str
+    context: str
+    metric_literal: str
+    metric_char_start: int
+    metric_char_end: int
+    concept_label: str
+    annotation_source: str
+
+    def __post_init__(self) -> None:
+        if not 0 <= self.metric_char_start < self.metric_char_end <= len(self.context):
+            raise ValueError("span training coordinates must be inside the context")
+        if self.context[self.metric_char_start:self.metric_char_end] != self.metric_literal:
+            raise ValueError("span training literal must exactly match the source")
 
 
 @dataclass(frozen=True)
@@ -73,6 +100,7 @@ class SemanticTrainingDataset:
     relations: tuple[RelationClassificationExample, ...]
     roles: tuple[RoleClassificationExample, ...]
     source_example_count: int
+    spans: tuple[SpanClassificationExample, ...] = ()
     certification_eligible: bool = False
 
 
@@ -117,6 +145,7 @@ def build_semantic_training_dataset(
     TEXT_IE clause, never synthetic cross-document pairs.
     """
 
+    spans = []
     concepts = []
     relations = []
     roles = []
@@ -134,6 +163,19 @@ def build_semantic_training_dataset(
             for edge in example.role_edges
         }
         for concept in example.concepts:
+            spans.append(SpanClassificationExample(
+                example_id=example.example_id,
+                entity=example.entity,
+                source_kind=example.source_kind,
+                source_sha256=example.source_sha256,
+                holdout_axis=example.holdout_axis.value,
+                context=example.text,
+                metric_literal=example.text[concept.char_start:concept.char_end],
+                metric_char_start=concept.char_start,
+                metric_char_end=concept.char_end,
+                concept_label=concept.concept,
+                annotation_source=example.annotation_source,
+            ))
             concepts.append(ConceptClassificationExample(
                 example_id=example.example_id,
                 entity=example.entity,
@@ -238,6 +280,7 @@ def build_semantic_training_dataset(
         relations=tuple(relations),
         roles=tuple(roles),
         source_example_count=len(examples),
+        spans=tuple(spans),
     )
 
 
@@ -253,9 +296,6 @@ def assess_semantic_training_readiness(
 ) -> SemanticTrainingReadiness:
     """Fail closed before fine-tuning on a small or non-independent corpus."""
 
-    context_ids = {
-        item.example_id for item in (*dataset.concepts, *dataset.relations, *dataset.roles)
-    }
     annotations = {
         item.annotation_source for item in (*dataset.concepts, *dataset.relations, *dataset.roles)
     }
@@ -267,7 +307,7 @@ def assess_semantic_training_readiness(
     )
     negative = len(dataset.relations) - positive
     reasons = []
-    if len(context_ids) < minimum_text_contexts:
+    if dataset.source_example_count < minimum_text_contexts:
         reasons.append("INSUFFICIENT_TEXT_CONTEXTS")
     if len(dataset.concepts) < minimum_concept_examples:
         reasons.append("INSUFFICIENT_CONCEPT_EXAMPLES")
@@ -282,7 +322,7 @@ def assess_semantic_training_readiness(
     if not independent:
         reasons.append("NO_INDEPENDENT_HUMAN_ADJUDICATION")
     return SemanticTrainingReadiness(
-        text_context_count=len(context_ids),
+        text_context_count=dataset.source_example_count,
         concept_example_count=len(dataset.concepts),
         relation_pair_count=len(dataset.relations),
         role_example_count=len(dataset.roles),
@@ -319,15 +359,22 @@ def build_semantic_training_dataset_from_review_queue(
     roles = []
     for item in selected:
         final = item.final_annotation
-        annotation_source = (
-            "INDEPENDENT_HUMAN_GOLD_A"
-            if item.quality_tier is AnnotationQualityTier.GOLD_A
-            else "SINGLE_HUMAN_GOLD_B"
-        )
+        if item.quality_tier is AnnotationQualityTier.GOLD_A:
+            annotation_source = "INDEPENDENT_HUMAN_GOLD_A"
+        elif (
+            len({row.annotator_id for row in item.human_annotations}) >= 2
+            and item.adjudication_status is AdjudicationStatus.ADJUDICATED
+            and item.adjudicator_id is not None
+        ):
+            annotation_source = (
+                "INDEPENDENT_HUMAN_ADJUDICATED_GOLD_B_INCOMPLETE_GRAPH"
+            )
+        else:
+            annotation_source = "SINGLE_HUMAN_GOLD_B"
         concept_key = (
             item.source_sha256,
-            final.metric_span.char_start,
-            final.metric_span.char_end,
+            item.document_char_start + final.metric_span.char_start,
+            item.document_char_start + final.metric_span.char_end,
         )
         prior_label = concept_labels.setdefault(concept_key, final.concept_label)
         if prior_label != final.concept_label:
@@ -414,6 +461,22 @@ def build_semantic_training_dataset_from_review_queue(
         relations=tuple(relations),
         roles=tuple(roles),
         source_example_count=len({item.candidate_id for item in selected}),
+        spans=tuple(
+            SpanClassificationExample(
+                example_id=row.example_id,
+                entity=row.entity,
+                source_kind=row.source_kind,
+                source_sha256=row.source_sha256,
+                holdout_axis=row.holdout_axis,
+                context=row.context,
+                metric_literal=row.metric_literal,
+                metric_char_start=row.metric_char_start,
+                metric_char_end=row.metric_char_end,
+                concept_label=row.concept_label,
+                annotation_source=row.annotation_source,
+            )
+            for row in concept_rows.values()
+        ),
         certification_eligible=(
             bool(selected)
             and all(
@@ -430,6 +493,7 @@ __all__ = [
     "ConceptClassificationExample",
     "RelationClassificationExample",
     "RoleClassificationExample",
+    "SpanClassificationExample",
     "SemanticTrainingDataset",
     "SemanticTrainingReadiness",
     "assess_semantic_training_readiness",

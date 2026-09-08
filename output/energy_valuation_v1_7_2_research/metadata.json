@@ -1,8 +1,9 @@
 {
   "version": "E&P_ACQUIREE_NOPAT_CYCLE_NORMALIZED_COHORT_V1_7_2_RESEARCH",
   "generated_at_utc": "2026-09-03T20:59:05.592966+00:00",
-  "v1_6_1_manifest_sha256": "a15ac595313d93bbbebaa82f7f180b4a33e9777dced8877ad7f12cb57e622bdd",
-  "v1_7_1_parent_snapshot_sha256": "9cb798ad1fdbf178d63a22d868e142f13004a92db0efe0647452d8d4aa0d3466",
+  "v1_6_1_manifest_sha256": "a4d0b784328f04806b16de093d5f5996c3e806bf4096f90c1c37d995f27ed4c7",
+  "v1_7_1_parent_snapshot_sha256": "58a526499fc415f25018ae345055f7e18b6e433532713f0336213c8efa5b28e6",
+  "parent_refactor_rebaseline": "2026-09-06_CANONICAL_IMPORT_ONLY_NO_ECONOMIC_OUTPUT_CHANGE",
   "frozen_v1_6_1_mutated": false,
   "v1_7_1_parent_mutated": false,
   "direct_acquiree_nopat_events": 0,

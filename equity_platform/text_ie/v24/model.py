@@ -13,6 +13,7 @@ class CandidateOrigin(StrEnum):
     HEADING_INHERITANCE = "HEADING_INHERITANCE"
     INLINE_XBRL = "INLINE_XBRL"
     DEPENDENCY = "DEPENDENCY"
+    LEARNED_SPAN = "LEARNED_SPAN"
 
 
 @dataclass(frozen=True)

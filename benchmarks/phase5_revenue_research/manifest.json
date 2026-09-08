@@ -8,9 +8,9 @@
   "production_champion": "V3.4_FROZEN",
   "live_model_change_matches": "0/20",
   "files": {
-    "benchmarks/v3_4/manifest.json": "8dec69633f5530ba79a8b76d0728e52f504bdbd5a4f6afe9d9e1a09106ec7405",
-    "benchmarks/v3_5_3_research/manifest.json": "386200755e14a33b6e5c67706b06822242e38720000eee6ea90d3540bb0df546",
-    "benchmarks/phase2_4_structural_proxy/manifest.toml": "126a32386c9ae2ef1b698cd7e05f2cab144c6254a0a6bd99740aee9ac47c5003",
+    "benchmarks/v3_4/manifest.json": "2b29a82b706d88816df0390f103b23e0ec0627698840744b3f1d240184b79b12",
+    "benchmarks/v3_5_3_research/manifest.json": "160c36204677a14f7c0d53f799016a14e56623d024cac44ccfc2b131227b07ab",
+    "benchmarks/phase2_4_structural_proxy/manifest.toml": "1cccfe7189e58ea2dd2c0875fea7c99a616cb7534904cffdae47ce0c5ebab5c8",
     "benchmarks/phase2_1_refining_kpi/manifest.toml": "e9342608e32d7c8cb6a6868da405da94b3a63e27912dd7dc0150213500749411",
     "output/phase2_5_target_aligned_research/phase5_routing_table.csv": "2254e6cc261dd8fcd1e8132935318f3574d8890067b5658b882006cbc406aff4",
     "output/phase2_5_target_aligned_research/phase5_common_forecast_schema_time.csv": "521232b66118d37984ed329b770ceab3ba43635b7a1ebf203b58f1aaae15f573",
@@ -18,5 +18,10 @@
     "output/phase2_5_target_aligned_research/phase5_sector_scorecard.csv": "b9c4d00c17fccd05cfb6c782fe117377ff9dfb23cc72cc5b6d683c82af65917b",
     "output/phase2_5_target_aligned_research/macro_research_decisions.csv": "47c27140beb7e078f7e04f698c9abb077f707a58cff606dbf1f524b5b8b62cc0",
     "output/phase2_5_target_aligned_research/metadata.json": "32d91030a54a516af0ae8bbcccd363c7f1f830ef4e067329de64358a2079eeaf"
+  },
+  "lineage_rebaseline": {
+    "date": "2026-09-06",
+    "reason": "canonical validation imports",
+    "economic_outputs": "byte_preserved"
   }
 }

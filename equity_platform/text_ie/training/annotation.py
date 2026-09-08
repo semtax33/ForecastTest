@@ -84,8 +84,10 @@ class FinalPairAnnotation:
             raise ValueError("NOT_RELATED final pairs cannot receive a numeric role")
         if self.binding_label == "BELONGS_TO" and not self.role_label:
             raise ValueError("BELONGS_TO final pairs require a numeric role")
-        if not self.concept_label or not self.scope or not self.period:
+        if not self.concept_label:
             raise ValueError("final annotation identity cannot be blank")
+        if self.binding_label == "BELONGS_TO" and (not self.scope or not self.period):
+            raise ValueError("related final annotation scope and period cannot be blank")
 
 
 @dataclass(frozen=True)

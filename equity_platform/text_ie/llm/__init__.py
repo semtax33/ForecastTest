@@ -13,9 +13,19 @@ from .transformer_backend import (
     TransformerUnavailableError,
     resolve_transformer_device,
 )
+from .routing import (
+    LLMFallbackDecision,
+    LLMFallbackPolicy,
+    LLMFallbackSignals,
+    LLMFallbackTier,
+)
 
 __all__ = [
     "LLMTextIEBackend",
+    "LLMFallbackDecision",
+    "LLMFallbackPolicy",
+    "LLMFallbackSignals",
+    "LLMFallbackTier",
     "DEFAULT_ENCODER_CANDIDATES",
     "EncoderBenchmarkCell",
     "EncoderCandidate",

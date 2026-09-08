@@ -48,6 +48,14 @@ from .semantic_challenger import (
     SemanticTask,
 )
 from .semantic_engine import HybridSemanticEngine, HybridSemanticResult
+from .learned import (
+    HfTokenSpanBackend,
+    LearnedCandidateGraphResult,
+    LearnedSpanBackend,
+    LearnedSpanProposal,
+    LearnedSpanUnavailableError,
+    challenge_v292_span_candidates,
+)
 
 __all__ = [
     "AmbiguityPolicy",
@@ -84,6 +92,11 @@ __all__ = [
     "TextRuleIR",
     "HybridSemanticEngine",
     "HybridSemanticResult",
+    "HfTokenSpanBackend",
+    "LearnedCandidateGraphResult",
+    "LearnedSpanBackend",
+    "LearnedSpanProposal",
+    "LearnedSpanUnavailableError",
     "VerificationStatus",
     "FrameValidationError",
     "compile_text_rule_file",
@@ -91,6 +104,7 @@ __all__ = [
     "compile_text_program",
     "compile_text_program_file",
     "derive_difference",
+    "challenge_v292_span_candidates",
     "document_text_blocks",
     "default_spacy_backend",
     "extract_text_kpis",

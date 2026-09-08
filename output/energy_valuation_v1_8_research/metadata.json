@@ -1,7 +1,8 @@
 {
   "version": "E&P_THROUGH_CYCLE_ORGANIC_ROIC_DISTRIBUTION_V1_8_RESEARCH",
   "generated_at_utc": "2026-09-03T21:00:31.041790+00:00",
-  "v1_7_4_parent_manifest_sha256": "fbaa87567f9131da28dcbe1b367783536d3945d2af0591061316a21bc7c3a267",
+  "v1_7_4_parent_manifest_sha256": "6118d372d46be2ae7de3771b402f3c4561db598d41c1da09dc80ab89f40a4a21",
+  "parent_refactor_rebaseline": "2026-09-06_CANONICAL_IMPORT_ONLY_NO_ECONOMIC_OUTPUT_CHANGE",
   "v1_7_4_parent_mutated": false,
   "cohort_count": 3,
   "group_count": 3,

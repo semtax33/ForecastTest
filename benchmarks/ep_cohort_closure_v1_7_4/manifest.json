@@ -17,8 +17,8 @@
   "wacc_recalibrated": false,
   "production_promoted": false,
   "live_matched_observations": "0/20",
-  "parent_v1_6_1_manifest_sha256": "a15ac595313d93bbbebaa82f7f180b4a33e9777dced8877ad7f12cb57e622bdd",
-  "parent_v1_7_3_snapshot_sha256": "8d338281c4ddeaff0e11f137ed29ba448ab44012bc9ef67be685243cd5fb0de2",
+  "parent_v1_6_1_manifest_sha256": "a4d0b784328f04806b16de093d5f5996c3e806bf4096f90c1c37d995f27ed4c7",
+  "parent_v1_7_3_snapshot_sha256": "99f618f43ef7dc6cf4831ee80fcce040036b67c4c8a77db451a4f96c37866265",
   "files": {
     "energy_nowcast/research/ep_v174/__init__.py": "6e0b5695144335cd2ba390065db054bb4a0057868eb49acd51f772223f6f518e",
     "energy_nowcast/research/ep_v174/benchmark.py": "ebd69253335f523821614f4ddf080ebc870b3144af1f8c82adbcb5be52a4fdea",
@@ -36,7 +36,12 @@
     "output/energy_valuation_v1_7_4_research/closed_three_year_cohorts.csv": "7b4b4dcf26ae4f02dd1d43e66a9d5ea82bab069ed39ddc0dfcb570ba93b83577",
     "output/energy_valuation_v1_7_4_research/organic_roic_validation_ranges.csv": "b2f97af30abe333ce95556852c7468266ddfb3b9ef69e6c3110f09645477a0d7",
     "output/energy_valuation_v1_7_4_research/v1_7_4_gate.csv": "b5ae6052cd36736408b05a1a1498b60a42febde34077c7a73a98a2f934b4a641",
-    "output/energy_valuation_v1_7_4_research/metadata.json": "e2d78b53683932be9d90b6daecc8a67c1f1acaf60584f8bc81a8fb70cb30d750",
+    "output/energy_valuation_v1_7_4_research/metadata.json": "4373f2d800fc73dd8b6d0889befc8ecbd07cbc70a01039a85d8d19f7d365cab2",
     "output/energy_valuation_v1_7_4_research/report.md": "28a6161c15dd576a5cb97ce090f511e8fdccc5c2606dad5c900812897ed89e99"
+  },
+  "lineage_rebaseline": {
+    "date": "2026-09-06",
+    "reason": "V1.1 canonical import cleanup",
+    "economic_outputs": "byte_preserved"
   }
 }

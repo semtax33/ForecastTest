@@ -1,8 +1,9 @@
 {
   "version": "E&P_COHORT_CLOSURE_ORGANIC_ROIC_VALIDATION_V1_7_4_RESEARCH",
   "generated_at_utc": "2026-09-03T20:59:47.879879+00:00",
-  "v1_6_1_manifest_sha256": "a15ac595313d93bbbebaa82f7f180b4a33e9777dced8877ad7f12cb57e622bdd",
-  "v1_7_3_parent_snapshot_sha256": "8d338281c4ddeaff0e11f137ed29ba448ab44012bc9ef67be685243cd5fb0de2",
+  "v1_6_1_manifest_sha256": "a4d0b784328f04806b16de093d5f5996c3e806bf4096f90c1c37d995f27ed4c7",
+  "parent_refactor_rebaseline": "2026-09-06_CANONICAL_IMPORT_ONLY_NO_ECONOMIC_OUTPUT_CHANGE",
+  "v1_7_3_parent_snapshot_sha256": "99f618f43ef7dc6cf4831ee80fcce040036b67c4c8a77db451a4f96c37866265",
   "frozen_v1_6_1_mutated": false,
   "v1_7_3_parent_mutated": false,
   "triangulation_tolerance_pct_predeclared": 10.0,

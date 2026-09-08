@@ -7,7 +7,7 @@ certification_allowed = false
 schema = "configs/annotation/text_ie_adjudication_v1.schema.json"
 schema_sha256 = "6bb42a470e30189ee1584c84f2aac21deb8c2c621aa4650aaa1be31de6b15a7b"
 guideline = "docs/text_ie/annotation-guideline-v1.md"
-guideline_sha256 = "6013bc473284d541b09dd6c27ac8e6d9d6f14d7074f3365acbd0a63f3c68267c"
+guideline_sha256 = "7bbefb520ee124881a3c6c25987127f5d617ff645af788c20960df1fd17f2bb9"
 generated_queue_sha256 = "99117e0a77cc67b925acc86134c53ed10f081eccd5fd47b61d3c85bc0cc0ed87"
 
 [historical_replay]

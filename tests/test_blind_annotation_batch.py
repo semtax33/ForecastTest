@@ -8,6 +8,7 @@ from equity_platform.text_ie.training import (
     PairProposal,
     TextSpan,
     build_blind_annotation_batch,
+    build_blind_annotation_batch_for_contexts,
 )
 
 
@@ -121,3 +122,38 @@ def test_blind_batch_fails_closed_when_a_source_slice_is_too_small() -> None:
         assert "SEC_10K" in str(exc)
     else:
         raise AssertionError("insufficient source slice must fail closed")
+
+
+def test_blind_batch_can_exclude_contexts_used_by_an_earlier_batch() -> None:
+    excluded = {
+        f"{source_slice.value}-0"
+        for source_slice in (
+            AnnotationSourceSlice.SEC_10K,
+            AnnotationSourceSlice.SEC_10Q,
+            AnnotationSourceSlice.IR_PREPARED_REMARKS,
+            AnnotationSourceSlice.IR_QA,
+        )
+    }
+
+    batch = build_blind_annotation_batch(
+        _items(),
+        contexts_per_slice=2,
+        excluded_context_ids=frozenset(excluded),
+    )
+
+    assert len(batch.context_rows) == 8
+    assert not excluded.intersection(
+        str(row["context_id"]) for row in batch.context_rows
+    )
+
+
+def test_blind_batch_can_materialize_an_exact_unbalanced_context_set() -> None:
+    selected = frozenset({"SEC_10K-0", "IR_QA-1", "IR_QA-2"})
+
+    batch = build_blind_annotation_batch_for_contexts(
+        _items(), context_ids=selected
+    )
+
+    assert {row["context_id"] for row in batch.context_rows} == selected
+    assert len(batch.context_rows) == 3
+    assert len(batch.pair_rows) == 6

@@ -97,33 +97,40 @@ def _assignment_rows(
     )
 
 
-def build_blind_annotation_batch(
-    items: tuple[AnnotationReviewItem, ...],
-    *,
-    contexts_per_slice: int = 50,
+def _materialize_blind_batch(
+    selected_contexts: tuple[tuple[AnnotationReviewItem, ...], ...],
 ) -> BlindAnnotationBatch:
-    """Create two label-blind assignments from complete candidate graphs."""
-
-    if contexts_per_slice < 1:
-        raise ValueError("contexts_per_slice must be positive")
-    grouped: dict[AnnotationSourceSlice, dict[str, list[AnnotationReviewItem]]] = defaultdict(
-        lambda: defaultdict(list)
-    )
-    for item in items:
-        if item.source_slice in _BATCH_SOURCE_SLICES and item.proposal is not None:
-            grouped[item.source_slice][item.candidate_id].append(item)
-    selected_contexts = []
-    for source_slice in _BATCH_SOURCE_SLICES:
-        contexts = {
-            candidate_id: tuple(sorted(rows, key=lambda row: row.queue_item_id))
-            for candidate_id, rows in grouped[source_slice].items()
-        }
-        if len(contexts) < contexts_per_slice:
-            raise ValueError(
-                f"{source_slice.value} has {len(contexts)} pair contexts; "
-                f"requires {contexts_per_slice}"
+    if not selected_contexts or any(not rows for rows in selected_contexts):
+        raise ValueError("blind annotation batch requires non-empty contexts")
+    pair_ids = [item.queue_item_id for rows in selected_contexts for item in rows]
+    if len(pair_ids) != len(set(pair_ids)):
+        raise ValueError("blind annotation batch requires unique pair ids")
+    for rows in selected_contexts:
+        identity = (
+            rows[0].candidate_id,
+            rows[0].source_slice,
+            rows[0].entity,
+            rows[0].source_sha256,
+            rows[0].source_path,
+            rows[0].document_char_start,
+            rows[0].document_char_end,
+            rows[0].text,
+        )
+        if any(
+            (
+                item.candidate_id,
+                item.source_slice,
+                item.entity,
+                item.source_sha256,
+                item.source_path,
+                item.document_char_start,
+                item.document_char_end,
+                item.text,
             )
-        selected_contexts.extend(_balanced_contexts(contexts, contexts_per_slice))
+            != identity
+            for item in rows[1:]
+        ):
+            raise ValueError("candidate pairs within a context have source drift")
     context_rows = tuple({
         "context_id": rows[0].candidate_id,
         "source_slice": rows[0].source_slice.value,
@@ -154,4 +161,73 @@ def build_blind_annotation_batch(
     )
 
 
-__all__ = ["BlindAnnotationBatch", "build_blind_annotation_batch"]
+def build_blind_annotation_batch_for_contexts(
+    items: tuple[AnnotationReviewItem, ...],
+    *,
+    context_ids: frozenset[str],
+) -> BlindAnnotationBatch:
+    """Materialize an exact reviewed context set without balancing it again."""
+
+    if not context_ids or "" in context_ids:
+        raise ValueError("exact blind batch requires non-empty context ids")
+    grouped: dict[str, list[AnnotationReviewItem]] = defaultdict(list)
+    for item in items:
+        if item.candidate_id in context_ids and item.proposal is not None:
+            grouped[item.candidate_id].append(item)
+    if set(grouped) != set(context_ids):
+        missing = sorted(set(context_ids) - set(grouped))
+        raise ValueError(f"exact blind batch is missing pair contexts: {missing}")
+    selected = tuple(
+        tuple(sorted(grouped[context_id], key=lambda row: row.queue_item_id))
+        for context_id in sorted(
+            context_ids,
+            key=lambda value: (
+                grouped[value][0].source_slice.value,
+                grouped[value][0].entity,
+                value,
+            ),
+        )
+    )
+    return _materialize_blind_batch(selected)
+
+
+def build_blind_annotation_batch(
+    items: tuple[AnnotationReviewItem, ...],
+    *,
+    contexts_per_slice: int = 50,
+    excluded_context_ids: frozenset[str] = frozenset(),
+) -> BlindAnnotationBatch:
+    """Create two label-blind assignments from complete candidate graphs."""
+
+    if contexts_per_slice < 1:
+        raise ValueError("contexts_per_slice must be positive")
+    grouped: dict[AnnotationSourceSlice, dict[str, list[AnnotationReviewItem]]] = defaultdict(
+        lambda: defaultdict(list)
+    )
+    for item in items:
+        if (
+            item.source_slice in _BATCH_SOURCE_SLICES
+            and item.proposal is not None
+            and item.candidate_id not in excluded_context_ids
+        ):
+            grouped[item.source_slice][item.candidate_id].append(item)
+    selected_contexts = []
+    for source_slice in _BATCH_SOURCE_SLICES:
+        contexts = {
+            candidate_id: tuple(sorted(rows, key=lambda row: row.queue_item_id))
+            for candidate_id, rows in grouped[source_slice].items()
+        }
+        if len(contexts) < contexts_per_slice:
+            raise ValueError(
+                f"{source_slice.value} has {len(contexts)} pair contexts; "
+                f"requires {contexts_per_slice}"
+            )
+        selected_contexts.extend(_balanced_contexts(contexts, contexts_per_slice))
+    return _materialize_blind_batch(tuple(selected_contexts))
+
+
+__all__ = [
+    "BlindAnnotationBatch",
+    "build_blind_annotation_batch",
+    "build_blind_annotation_batch_for_contexts",
+]

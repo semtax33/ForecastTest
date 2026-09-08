@@ -17,8 +17,8 @@
     "live_matched_observations": "0/20"
   },
   "parents": {
-    "v1_8_snapshot_sha256": "c0b91a69d3f2b008a24b1c928235efdd270fe9b314df44fd73abfde7016e29dd",
-    "v1_7_4_manifest_sha256": "fbaa87567f9131da28dcbe1b367783536d3945d2af0591061316a21bc7c3a267"
+    "v1_8_snapshot_sha256": "d49d2710c1c6b547d620267c128b818e9c706dd46313e93092419bd9ca12e1b3",
+    "v1_7_4_manifest_sha256": "6118d372d46be2ae7de3771b402f3c4561db598d41c1da09dc80ab89f40a4a21"
   },
   "files": {
     "configs/ep_v19_rrc_sources.csv": "f7911d0d9531dcd980dc503eeca18de86ab994cff42c3919106cc55f3c9bdfe5",
@@ -35,7 +35,7 @@
     "output/energy_valuation_v1_9_research/expanded_company_organic_roic_ranges.csv": "c79f32243a56a2e3a9083d9e6fb9b3b09c56ff6632414202669e98fde5466f21",
     "output/energy_valuation_v1_9_research/expanded_leave_one_cohort_out_robustness.csv": "cc59656472230b2b070fe3f1500dc0dd9c4a41abeb996a1ce8294984c2084412",
     "output/energy_valuation_v1_9_research/expanded_through_cycle_roic_distribution.csv": "35c3d9940caa804a6afc6fb336d9e85892422035b44fc4b9b3bc57537705e7cc",
-    "output/energy_valuation_v1_9_research/metadata.json": "4c87c567d48a4ba663e05a320c4651bcbde4714b44d3bd1eb4e59fb7cb9afb4c",
+    "output/energy_valuation_v1_9_research/metadata.json": "b5b54a0add1e2243bee8f1d8a382d7e281cb650b98aa1992868c495adee8da99",
     "output/energy_valuation_v1_9_research/range_width_component_attribution.csv": "61382f8d5a0c8a526eae21f48d10adcb62679961329e41614a4e2d321aa6e26f",
     "output/energy_valuation_v1_9_research/report.md": "bcaa23fdf630e34261007623f1e325a12ed7f510485040d15a500a0fe9d1de9f",
     "output/energy_valuation_v1_9_research/rrc_annual_source_evidence.csv": "4b2b355c65dca7b2c49f0a893ffeaa0fa4e5bf7f894a782510189781868064f4",
@@ -48,5 +48,10 @@
     "scripts/energy/research/freeze/ep_v1_9.py": "2eb964e030b5b2fbaefa3c6c89e8155b21132aee93eb64b74635d69aca8c4bac",
     "tests/test_ep_sample_stability_uncertainty_decomposition_v1_9.py": "d78846315ad41b0de27ad32f4f0772c4c0a3a769f88ff7259a1f2266561ef756",
     "tests/test_ep_sample_stability_v1_9_freeze.py": "9f3fe4fc76d635d7564e85fe83771ebcb709d390ce05039037d331c8f0f3f41a"
+  },
+  "lineage_rebaseline": {
+    "date": "2026-09-06",
+    "reason": "V1.1 canonical import cleanup",
+    "economic_outputs": "byte_preserved"
   }
 }

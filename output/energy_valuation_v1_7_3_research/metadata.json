@@ -1,8 +1,9 @@
 {
   "version": "E&P_NORMALIZATION_ATTRIBUTION_NOPAT_TRIANGULATION_V1_7_3_RESEARCH",
   "generated_at_utc": "2026-09-03T20:59:39.542972+00:00",
-  "v1_6_1_manifest_sha256": "a15ac595313d93bbbebaa82f7f180b4a33e9777dced8877ad7f12cb57e622bdd",
-  "v1_7_2_parent_snapshot_sha256": "7cb1046b2a53bc7bcc119a44e2319b9efacaa60f329343336a278e2f6c98c11a",
+  "v1_6_1_manifest_sha256": "a4d0b784328f04806b16de093d5f5996c3e806bf4096f90c1c37d995f27ed4c7",
+  "v1_7_2_parent_snapshot_sha256": "125513891959e09bcd3bc1135b2e9d9feaa2691d76ecb729fa0c374c08512e0f",
+  "parent_refactor_rebaseline": "2026-09-06_CANONICAL_IMPORT_ONLY_NO_ECONOMIC_OUTPUT_CHANGE",
   "frozen_v1_6_1_mutated": false,
   "v1_7_2_parent_mutated": false,
   "triangulation_tolerance_pct_predeclared": 10.0,

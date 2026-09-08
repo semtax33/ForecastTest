@@ -114,6 +114,18 @@ def test_unrelated_final_pair_cannot_receive_a_numeric_role() -> None:
             period="2026Q2",
         )
 
+    unrelated = FinalPairAnnotation(
+        metric_span=pending.proposal.metric_span,
+        quantity_span=pending.proposal.quantity_span,
+        concept_label="REVENUE",
+        binding_label="NOT_RELATED",
+        role_label=None,
+        scope="",
+        period="",
+    )
+    assert unrelated.scope == ""
+    assert unrelated.period == ""
+
 
 def test_review_queue_jsonl_is_deterministic_and_validated_on_load(tmp_path) -> None:
     output = tmp_path / "review_queue.jsonl"

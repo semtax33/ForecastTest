@@ -1,0 +1,6 @@
+--extra-index-url https://download.pytorch.org/whl/cu126
+
+# Verified on Windows, Python 3.11, NVIDIA driver 560.94, GTX 1650 4 GiB.
+torch==2.7.0+cu126
+transformers==4.57.6
+accelerate==1.14.0

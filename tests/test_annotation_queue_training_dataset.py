@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from dataclasses import replace
+
 from equity_platform.text_ie.training import (
     AdjudicationStatus,
     AnnotationQualityTier,
@@ -9,6 +11,7 @@ from equity_platform.text_ie.training import (
     HumanPairAnnotation,
     PairProposal,
     TextSpan,
+    assess_semantic_training_readiness,
     build_semantic_training_dataset_from_review_queue,
 )
 
@@ -81,6 +84,9 @@ def test_adjudicated_queue_builds_deduplicated_three_head_training_data() -> Non
     dataset = build_semantic_training_dataset_from_review_queue(items)
 
     assert dataset.source_example_count == 1
+    assert len(dataset.spans) == 1
+    assert dataset.spans[0].metric_literal == "Revenue"
+    assert dataset.spans[0].concept_label == "REVENUE"
     assert len(dataset.concepts) == 1
     assert len(dataset.relations) == 2
     assert len(dataset.roles) == 1
@@ -90,3 +96,56 @@ def test_adjudicated_queue_builds_deduplicated_three_head_training_data() -> Non
     }
     assert dataset.roles[0].role_label == "VALUE_CURRENT"
     assert dataset.certification_eligible
+
+
+def test_same_local_span_in_two_document_contexts_is_not_collapsed() -> None:
+    first = _reviewed_pair(
+        "pair-one",
+        quantity=TextSpan(12, 23, "$10 million"),
+        binding="BELONGS_TO",
+    )
+    second = replace(
+        first,
+        queue_item_id="pair-two",
+        candidate_id="context-2",
+        document_char_start=100,
+        document_char_end=100 + len(first.text),
+    )
+
+    dataset = build_semantic_training_dataset_from_review_queue((first, second))
+
+    assert dataset.source_example_count == 2
+    assert len(dataset.concepts) == 2
+
+    readiness = assess_semantic_training_readiness(
+        dataset,
+        minimum_text_contexts=3,
+        minimum_concept_examples=1,
+        minimum_relation_pairs=1,
+        minimum_role_examples=1,
+        minimum_positive_bindings=1,
+        minimum_negative_bindings=1,
+    )
+    assert readiness.text_context_count == 2
+    assert "INSUFFICIENT_TEXT_CONTEXTS" in readiness.reasons
+
+
+def test_pair_adjudicated_in_incomplete_context_is_training_only_independent_gold_b() -> None:
+    item = replace(
+        _reviewed_pair(
+            "pair-training-only",
+            quantity=TextSpan(12, 23, "$10 million"),
+            binding="BELONGS_TO",
+        ),
+        quality_tier=AnnotationQualityTier.GOLD_B,
+        split="TRAIN",
+    )
+
+    dataset = build_semantic_training_dataset_from_review_queue(
+        (item,), minimum_quality=AnnotationQualityTier.GOLD_B
+    )
+
+    assert dataset.relations[0].annotation_source == (
+        "INDEPENDENT_HUMAN_ADJUDICATED_GOLD_B_INCOMPLETE_GRAPH"
+    )
+    assert not dataset.certification_eligible
